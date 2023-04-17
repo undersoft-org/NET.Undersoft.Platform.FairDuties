@@ -1,19 +1,19 @@
 version: '3.4'
 
 services:
-  nicmangroup.ais.admin:
+  undersoft.ais.admin:
     environment:
       - ASPNETCORE_ENVIRONMENT=develop
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
   
-  nicmangroup.ais.admin.api:
+  undersoft.ais.admin.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=develop
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
 
-  nicmangroup.ais.sts.identity:
+  undersoft.ais.sts.identity:
     environment:
       - ASPNETCORE_ENVIRONMENT=develop
     volumes:

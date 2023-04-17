@@ -454,8 +454,6 @@
 
         public bool EqualsContent(Ursn g)
         {
-            if (g == null)
-                return false;
             fixed (byte* gbyte = g.bytes)
             fixed (byte* pbyte = bytes)
             {

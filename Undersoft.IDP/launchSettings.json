@@ -7,9 +7,9 @@
         "adminer": "StartWithoutDebugging",
         "db": "StartWithoutDebugging",
         "nginx-proxy": "StartWithoutDebugging",
-        "nicmangroup.ais.admin": "StartDebugging",
-        "nicmangroup.ais.admin.api": "StartDebugging",
-        "nicmangroup.ais.sts.identity": "StartDebugging"
+        "undersoft.ais.admin": "StartDebugging",
+        "undersoft.ais.admin.api": "StartDebugging",
+        "undersoft.ais.sts.identity": "StartDebugging"
       }
     }
   }

@@ -1,15 +1,3 @@
-/*************************************************
-   Copyright (c) 2021 Undersoft
-
-   System.Instant.Tests.InstantFiguresTest.cs.Tests
-   
-   @project: Vegas.Sdk
-   @stage: Development
-   @author: Dariusz Hanc
-   @date: (05.06.2021) 
-   @licence MIT
- *************************************************/
-
 namespace System.Instant.Tests
 {
     using System.Collections.Generic;
@@ -17,32 +5,20 @@ namespace System.Instant.Tests
 
     using Xunit;
 
-    /// <summary>
-    /// Defines the <see cref="FiguresTest" />.
-    /// </summary>
     public class FiguresTest
     {
-        #region Fields
-
         private IFigure ifigure;
         private IFigures ifigures;
         private Figures figures;
         private Figure figure;
 
-        #endregion
-
-        #region Methods
-
-        /// <summary>
-        /// The Figures_Compile_Test.
-        /// </summary>
         [Fact]
         public void Figures_Compile_Test()
         {
             var figure2 = new Sleeve<FieldsAndPropertiesModel>();
 
             FieldsAndPropertiesModel fom = new FieldsAndPropertiesModel();
-            
+
             var ifigure2 = Sleeve_Compilation_Helper_Test(figure2, fom);
 
             var isleeve = new FieldsAndPropertiesModel().ToSleeve();
@@ -62,9 +38,6 @@ namespace System.Instant.Tests
             }
         }
 
-        /// <summary>
-        /// The Figures_MutatorAndAccessorById_Test.
-        /// </summary>
         [Fact]
         public void Figures_MutatorAndAccessorById_Test()
         {
@@ -82,9 +55,6 @@ namespace System.Instant.Tests
             Assert.Equal(ifigure[4], ifigures[0, 4]);
         }
 
-        /// <summary>
-        /// The Figures_MutatorAndAccessorByName_Test.
-        /// </summary>
         [Fact]
         public void Figures_MutatorAndAccessorByName_Test()
         {
@@ -102,9 +72,6 @@ namespace System.Instant.Tests
             Assert.Equal(ifigure[nameof(fom.Name)], ifigures[0, nameof(fom.Name)]);
         }
 
-        /// <summary>
-        /// The Figures_NewFigure_Test.
-        /// </summary>
         [Fact]
         public void Figures_NewFigure_Test()
         {
@@ -121,9 +88,6 @@ namespace System.Instant.Tests
             Assert.NotNull(rcst);
         }
 
-        /// <summary>
-        /// The Figures_SetRubrics_Test.
-        /// </summary>
         [Fact]
         public void Figures_SetRubrics_Test()
         {
@@ -138,12 +102,6 @@ namespace System.Instant.Tests
             Assert.Equal(rttab.Rubrics, figures.Rubrics);
         }
 
-        /// <summary>
-        /// The Figure_Compilation_Helper_Test.
-        /// </summary>
-        /// <param name="figure">The figure<see cref="Figure"/>.</param>
-        /// <param name="fom">The fom<see cref="FieldsAndPropertiesModel"/>.</param>
-        /// <returns>The <see cref="IFigure"/>.</returns>
         private IFigure Figure_Compilation_Helper_Test(Figure figure, FieldsAndPropertiesModel fom)
         {
             IFigure rts = figure.Combine();
@@ -169,25 +127,24 @@ namespace System.Instant.Tests
 
         private IFigure Sleeve_Compilation_Helper_Test(Sleeve figure2, FieldsAndPropertiesModel fom)
         {
-            ISleeve rts = null;
             List<ISleeve> list = new List<ISleeve>();
-            for(int y = 0; y < 300000; y++)
+            for (int y = 0; y < 300000; y++)
             {
                 var rts0 = figure2.Combine();
 
-                for(int i = 1; i < figure2.Rubrics.Count; i++)
+                for (int i = 1; i < figure2.Rubrics.Count; i++)
                 {
                     var r = figure2.Rubrics[i].RubricInfo;
-                    if(r.MemberType == MemberTypes.Field)
+                    if (r.MemberType == MemberTypes.Field)
                     {
                         var fi = fom.GetType().GetField(((FieldInfo)r).Name);
-                        if(fi != null)
+                        if (fi != null)
                             rts0[r.Name] = fi.GetValue(fom);
                     }
-                    if(r.MemberType == MemberTypes.Property)
+                    if (r.MemberType == MemberTypes.Property)
                     {
                         var pi = fom.GetType().GetProperty(((PropertyInfo)r).Name);
-                        if(pi != null)
+                        if (pi != null)
                             rts0[r.Name] = pi.GetValue(fom);
                     }
                 }
@@ -196,7 +153,5 @@ namespace System.Instant.Tests
             }
             return list[0];
         }
-
-        #endregion
     }
 }

@@ -1,15 +1,3 @@
-/*************************************************
-   Copyright (c) 2021 Undersoft
-
-   System.Instant.Tests.InstantSelectionTest.cs.Tests
-   
-   @project: Vegas.Sdk
-   @stage: Development
-   @author: Dariusz Hanc
-   @date: (05.06.2021) 
-   @licence MIT
- *************************************************/
-
 namespace System.Instant.Tests
 {
     using System;
@@ -18,24 +6,12 @@ namespace System.Instant.Tests
 
     using Xunit;
 
-    /// <summary>
-    /// Defines the <see cref="SleevesTest" />.
-    /// </summary>
     public class SleevesTest
     {
-        #region Fields
-
         private IFigure ifigure;
         private IFigures isleeves;
         private Figures sleeves;
 
-        #endregion
-
-        #region Methods
-
-        /// <summary>
-        /// The Sleeve_SelectionFromFiguresMultiNesting_Test.
-        /// </summary>
         [Fact]
         public void Sleeves_SelectionFromFiguresMultiNesting_Test()
         {
@@ -81,12 +57,6 @@ namespace System.Instant.Tests
             Assert.Equal(isel1.Count, isel2.Count);
         }
 
-        /// <summary>
-        /// The Sleeve_Compilation_Helper_Test.
-        /// </summary>
-        /// <param name="str">The str<see cref="IFigures"/>.</param>
-        /// <param name="fom">The fom<see cref="FieldsAndPropertiesModel"/>.</param>
-        /// <returns>The <see cref="IFigure"/>.</returns>
         private IFigure Sleeve_Compilation_Helper_Test(IFigures str, FieldsAndPropertiesModel fom)
         {
             ISleeve rts = str.NewSleeve();
@@ -110,7 +80,5 @@ namespace System.Instant.Tests
             }
             return rts;
         }
-
-        #endregion
     }
 }

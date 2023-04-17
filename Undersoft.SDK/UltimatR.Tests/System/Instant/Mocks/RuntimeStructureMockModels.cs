@@ -1,7 +1,5 @@
 namespace System.Instant.Tests
 {
-    using System.ComponentModel.DataAnnotations;
-    using System.Instant.Treatments;
     using System.Runtime.InteropServices;
     using System.Uniques;
 

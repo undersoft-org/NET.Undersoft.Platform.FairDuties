@@ -22,4 +22,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Undersoft.AEP\Undersoft.AEP.csproj" />
+  </ItemGroup>
+
 </Project>

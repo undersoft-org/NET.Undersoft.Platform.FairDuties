@@ -1,15 +1,12 @@
 ﻿namespace System.Deal
 {
-    using System.Instant;
     using System.IO;
     using System.Net;
-    using System.Threading;
     using System.Net.Sockets;
+    using System.Threading;
 
     public sealed class EthClient : IEthClient
     {
-        #region Fields
-
         private readonly ManualResetEvent connectNotice = new ManualResetEvent(false);
         public IPEndPoint EndPoint;
         private ITransferContext context;
@@ -20,10 +17,6 @@
         private Socket socket;
         private int timeout = 50;
 
-        #endregion
-
-        #region Constructors
-
         public EthClient(MemberIdentity ConnectionIdentity)
         {
             Identity = ConnectionIdentity;
@@ -32,17 +25,12 @@
                 Identity.Ip = "127.0.0.1";
             ip = IPAddress.Parse(Identity.Ip);
             port = Convert.ToUInt16(Identity.Port);
-            host = Dns.GetHostEntry((Identity.Ip != null &&
-                                     Identity.Ip != string.Empty)
-                ? Identity.Ip
-                : string.Empty);
+            host = Dns.GetHostEntry(
+                (Identity.Ip != null && Identity.Ip != string.Empty) ? Identity.Ip : string.Empty
+            );
 
             EndPoint = new IPEndPoint(ip, port);
         }
-
-        #endregion
-
-        #region Properties
 
         public IDeputy Connected { get; set; }
 
@@ -87,10 +75,6 @@
 
         public IDeputy MessageSent { get; set; }
 
-        #endregion
-
-        #region Methods
-
         public void Connect()
         {
             ushort _port = port;
@@ -100,7 +84,11 @@
 
             try
             {
-                socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                socket = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                );
                 context = new TransferContext(socket);
                 socket.BeginConnect(endpoint, OnConnectCallback, context);
                 connectNotice.WaitOne();
@@ -119,7 +107,9 @@
         public bool IsConnected()
         {
             if (socket != null && socket.Connected)
-                return !(socket.Poll(timeout * 1000, SelectMode.SelectRead) && socket.Available == 0);
+                return !(
+                    socket.Poll(timeout * 1000, SelectMode.SelectRead) && socket.Available == 0
+                );
             return true;
         }
 
@@ -130,12 +120,24 @@
             {
                 callback = MessageReceivedCallBack;
                 context.ObjectsLeft = context.Transfer.HeaderReceived.Context.ObjectsCount;
-                context.Listener.BeginReceive(context.MessageBuffer, 0, context.BufferSize, SocketFlags.None, callback,
-                    context);
+                context.Listener.BeginReceive(
+                    context.MessageBuffer,
+                    0,
+                    context.BufferSize,
+                    SocketFlags.None,
+                    callback,
+                    context
+                );
             }
             else
-                context.Listener.BeginReceive(context.HeaderBuffer, 0, context.BufferSize, SocketFlags.None, callback,
-                    context);
+                context.Listener.BeginReceive(
+                    context.HeaderBuffer,
+                    0,
+                    context.BufferSize,
+                    SocketFlags.None,
+                    callback,
+                    context
+                );
         }
 
         public void Send(MessagePart messagePart)
@@ -146,23 +148,35 @@
             if (messagePart == MessagePart.Header)
             {
                 callback = HeaderSentCallback;
-                TransferOperation request =
-                    new TransferOperation(Context.Transfer, MessagePart.Header, DirectionType.Send);
+                TransferOperation request = new TransferOperation(
+                    Context.Transfer,
+                    MessagePart.Header,
+                    DirectionType.Send
+                );
                 request.Resolve();
             }
             else if (Context.SendMessage)
             {
                 callback = MessageSentCallback;
                 context.SerialBlockId = 0;
-                TransferOperation request =
-                    new TransferOperation(context.Transfer, MessagePart.Message, DirectionType.Send);
+                TransferOperation request = new TransferOperation(
+                    context.Transfer,
+                    MessagePart.Message,
+                    DirectionType.Send
+                );
                 request.Resolve();
             }
             else
                 return;
 
-            context.Listener.BeginSend(context.SerialBlock, 0, context.SerialBlock.Length, SocketFlags.None, callback,
-                context);
+            context.Listener.BeginSend(
+                context.SerialBlock,
+                0,
+                context.SerialBlock.Length,
+                SocketFlags.None,
+                callback,
+                context
+            );
         }
 
         private void Close()
@@ -196,18 +210,29 @@
 
             if (context.BlockSize > 0)
             {
-                int buffersize = (context.BlockSize < context.BufferSize) ? (int)context.BlockSize : context.BufferSize;
-                context.Listener.BeginReceive(context.HeaderBuffer, 0, buffersize, SocketFlags.None,
-                    HeaderReceivedCallBack, context);
+                int buffersize =
+                    (context.BlockSize < context.BufferSize)
+                        ? (int)context.BlockSize
+                        : context.BufferSize;
+                context.Listener.BeginReceive(
+                    context.HeaderBuffer,
+                    0,
+                    buffersize,
+                    SocketFlags.None,
+                    HeaderReceivedCallBack,
+                    context
+                );
             }
             else
             {
-                TransferOperation request =
-                    new TransferOperation(context.Transfer, MessagePart.Header, DirectionType.Receive);
+                TransferOperation request = new TransferOperation(
+                    context.Transfer,
+                    MessagePart.Header,
+                    DirectionType.Receive
+                );
                 request.Resolve(context);
 
-                if (!context.ReceiveMessage &&
-                    !context.SendMessage)
+                if (!context.ReceiveMessage && !context.SendMessage)
                     context.Close = true;
 
                 context.HeaderReceivedNotice.Set();
@@ -241,29 +266,58 @@
 
             if (context.BlockSize > 0)
             {
-                int buffersize = (context.BlockSize < context.BufferSize) ? (int)context.BlockSize : context.BufferSize;
-                context.Listener.BeginReceive(context.MessageBuffer, 0, buffersize, SocketFlags.None,
-                    MessageReceivedCallBack, context);
+                int buffersize =
+                    (context.BlockSize < context.BufferSize)
+                        ? (int)context.BlockSize
+                        : context.BufferSize;
+                context.Listener.BeginReceive(
+                    context.MessageBuffer,
+                    0,
+                    buffersize,
+                    SocketFlags.None,
+                    MessageReceivedCallBack,
+                    context
+                );
             }
             else
             {
                 object readPosition = context.DeserialBlockId;
 
-                if (noiseKind == MarkupType.Block || (noiseKind == MarkupType.End &&
-                                                      (int)readPosition < (context.Transfer.HeaderReceived.Context
-                                                          .ObjectsCount - 1)))
-                    context.Listener.BeginReceive(context.MessageBuffer, 0, context.BufferSize, SocketFlags.None,
-                        MessageReceivedCallBack, context);
+                if (
+                    noiseKind == MarkupType.Block
+                    || (
+                        noiseKind == MarkupType.End
+                        && (int)readPosition
+                            < (context.Transfer.HeaderReceived.Context.ObjectsCount - 1)
+                    )
+                )
+                    context.Listener.BeginReceive(
+                        context.MessageBuffer,
+                        0,
+                        context.BufferSize,
+                        SocketFlags.None,
+                        MessageReceivedCallBack,
+                        context
+                    );
 
-                TransferOperation request =
-                    new TransferOperation(context.Transfer, MessagePart.Message, DirectionType.Receive);
+                TransferOperation request = new TransferOperation(
+                    context.Transfer,
+                    MessagePart.Message,
+                    DirectionType.Receive
+                );
                 request.Resolve(context);
 
-                if (context.ObjectsLeft <= 0 && !context.BatchesReceivedNotice.SafeWaitHandle.IsClosed)
+                if (
+                    context.ObjectsLeft <= 0
+                    && !context.BatchesReceivedNotice.SafeWaitHandle.IsClosed
+                )
                     context.BatchesReceivedNotice.Set();
 
-                if (noiseKind == MarkupType.End &&
-                    (int)readPosition >= (context.Transfer.HeaderReceived.Context.ObjectsCount - 1))
+                if (
+                    noiseKind == MarkupType.End
+                    && (int)readPosition
+                        >= (context.Transfer.HeaderReceived.Context.ObjectsCount - 1)
+                )
                 {
                     context.BatchesReceivedNotice.WaitOne();
 
@@ -290,11 +344,20 @@
 
             if (context.SerialBlockId >= 0)
             {
-                TransferOperation request =
-                    new TransferOperation(context.Transfer, MessagePart.Message, DirectionType.Send);
+                TransferOperation request = new TransferOperation(
+                    context.Transfer,
+                    MessagePart.Message,
+                    DirectionType.Send
+                );
                 request.Resolve();
-                context.Listener.BeginSend(context.SerialBlock, 0, context.SerialBlock.Length, SocketFlags.None,
-                    MessageSentCallback, context);
+                context.Listener.BeginSend(
+                    context.SerialBlock,
+                    0,
+                    context.SerialBlock.Length,
+                    SocketFlags.None,
+                    MessageSentCallback,
+                    context
+                );
             }
             else
             {
@@ -317,7 +380,5 @@
             }
             catch (SocketException ex) { }
         }
-
-        #endregion
     }
 }

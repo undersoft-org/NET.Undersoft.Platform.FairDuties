@@ -1,18 +1,13 @@
-using UltimatR;
-using System;
-using System.ComponentModel;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using UltimatR;
 
 namespace System.Instant.Tests
 {
     public class User : Entity
     {
-        //[Description("Identyfikator encji Użytkownik")]
-        ////[Key]
-        //public Guid Id { get; set; }
-
         [Description("Imię")]
         [StringLength(100)]
         public string Name { get; set; }
@@ -37,7 +32,9 @@ namespace System.Instant.Tests
         [StringLength(200)]
         public string SourceLabel { get; set; }
 
-        [Description("Identyfikator encji w systemie zewnętrznym (dotyczy użytkowników operacyjnych)")]
+        [Description(
+            "Identyfikator encji w systemie zewnętrznym (dotyczy użytkowników operacyjnych)"
+        )]
         public int? ExternalId { get; set; }
 
         [Description("Data ostatniej operacji")]
@@ -57,10 +54,7 @@ namespace System.Instant.Tests
         [NotMapped]
         public bool IsArchived
         {
-            get
-            {
-                return MigratedToUserId.HasValue;
-            }
+            get { return MigratedToUserId.HasValue; }
         }
 
         public Guid? PrimaryUserId { get; set; }

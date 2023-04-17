@@ -1,8 +1,6 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using UltimatR;
 
 namespace System.Instant.Tests
 {
@@ -10,10 +8,6 @@ namespace System.Instant.Tests
     [Table("UserDataSets", Schema = "Events")]
     public class UserProfileEvent
     {
-        //[Description("Klucz dodany w celach optymalizacyjnych, zamiast klucza glownego guid")]
-        //[Key]
-        //public long Id { get; set; }
-
         [Description("Identyfikator zdarzenia")]
         [Required]
         public Guid EventId { get; set; }
@@ -27,7 +21,6 @@ namespace System.Instant.Tests
         [Description("Nazwa typu zdarzenia")]
         [Required]
         public string TypeName { get; set; }
-
 
         [Description("Dane zdarzenia w formacie json")]
         [Required]
@@ -46,4 +39,3 @@ namespace System.Instant.Tests
         public int CalculationRetryAttempts { get; set; }
     }
 }
-

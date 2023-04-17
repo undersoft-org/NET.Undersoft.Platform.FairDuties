@@ -1,10 +1,7 @@
 ﻿using System.Collections;
-using System.Security.Permissions;
 
 namespace System.Instant.Stock.Utilities
 {
-    [SecurityPermission(SecurityAction.LinkDemand)]
-    [SecurityPermission(SecurityAction.InheritanceDemand)]
     public struct ArrayStockSlice : IList, ICollection
     {
         private readonly IList _list;

@@ -36,7 +36,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Undersoft.AEP\Undersoft.AEP.csproj" />
+    <ProjectReference Include="..\..\..\Undersoft.AEP\src\Undersoft.AEP\Undersoft.AEP.csproj" />
   </ItemGroup>
 
 </Project>

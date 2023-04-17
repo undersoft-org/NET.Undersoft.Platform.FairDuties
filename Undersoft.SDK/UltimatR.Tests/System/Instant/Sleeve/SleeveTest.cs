@@ -1,33 +1,19 @@
-/*************************************************
-   Copyright (c) 2021 Undersoft
-
-   System.Instant.Tests.InstantFigureTest.cs.Tests
-   
-   @project: Vegas.Sdk
-   @stage: Development
-   @author: Dariusz Hanc
-   @date: (05.06.2021) 
-   @licence MIT
- *************************************************/
-
-using System;
 using System.Collections.Generic;
-using System.Instant;
-using System.Uniques;
 using Xunit;
 
 namespace System.Instant.Tests
 {
     public class SleeveTest
     {
-        #region Methods
-
         [Fact]
         public void Sleeve_Test_For_Compilated_Type_With_GetByName()
         {
             var profile = new Agreement()
             {
-                Comments = "fdfdsgg", Created = DateTime.Now, Kind = AgreementKind.Agree, Creator = "sfssd",
+                Comments = "fdfdsgg",
+                Created = DateTime.Now,
+                Kind = AgreementKind.Agree,
+                Creator = "sfssd",
                 VersionId = 222
             };
 
@@ -38,15 +24,17 @@ namespace System.Instant.Tests
             var _sleeve0 = profile.ToSleeve();
             var _sleeve1 = sleeve.Combine(_sleeve0);
 
-            
             var _figures = new Figures(_sleeve1);
 
             var mock = new Agreement()
             {
-                Comments = "fdsfsf", Created = DateTime.Now, Kind = AgreementKind.Cancellation, Creator = "fsds",
+                Comments = "fdsfsf",
+                Created = DateTime.Now,
+                Kind = AgreementKind.Cancellation,
+                Creator = "fsds",
                 VersionId = 992
             };
-            
+
             var prop = sleeve.Rubrics;
             List<ISleeve> list = new();
             for (int i = 0; i < 300000; i++)
@@ -61,7 +49,6 @@ namespace System.Instant.Tests
 
             _sleeve1["TypeId"] = 1005UL;
             object o = _sleeve1[5];
-           
         }
 
         [Fact]
@@ -69,7 +56,10 @@ namespace System.Instant.Tests
         {
             var profile = new Agreement()
             {
-                Comments = "fdfdsgg", Created = DateTime.Now, Kind = AgreementKind.Agree, Creator = "sfssd",
+                Comments = "fdfdsgg",
+                Created = DateTime.Now,
+                Kind = AgreementKind.Agree,
+                Creator = "sfssd",
                 VersionId = 222
             };
 
@@ -83,10 +73,13 @@ namespace System.Instant.Tests
 
             var mock = new Agreement()
             {
-                Comments = "fdsfsf", Created = DateTime.Now, Kind = AgreementKind.Cancellation, Creator = "fsds",
+                Comments = "fdsfsf",
+                Created = DateTime.Now,
+                Kind = AgreementKind.Cancellation,
+                Creator = "fsds",
                 VersionId = 992
             };
-            
+
             var prop = sleeve.Rubrics;
             List<ISleeve> list = new();
             for (int i = 0; i < 300000; i++)
@@ -101,9 +94,6 @@ namespace System.Instant.Tests
 
             _sleeve1["TypeId"] = 1005UL;
             object o = _sleeve1[5];
-           
-        }     
-
-        #endregion
+        }
     }
 }

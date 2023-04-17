@@ -1,7 +1,7 @@
-using UltimatR;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using UltimatR;
 
 namespace System.Instant.Tests
 {
@@ -47,10 +47,6 @@ namespace System.Instant.Tests
 
         [StringLength(100)]
         public string PayrollNumber { get; set; }
-
-        [Required]
-        [StringLength(200)]
-        public string Label { get; set; }
 
         public int CustomerExternalId { get; set; }
 

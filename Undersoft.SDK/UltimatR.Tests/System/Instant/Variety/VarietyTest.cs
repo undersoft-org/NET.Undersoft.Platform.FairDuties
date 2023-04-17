@@ -7,8 +7,6 @@ namespace System.Instant.Tests
 {
     public class VarietyTest
     {
-        #region Methods
-
         [Fact]
         public void Variety_Integrated_Test()
         {
@@ -19,15 +17,54 @@ namespace System.Instant.Tests
                 Kind = AgreementKind.Agree,
                 Creator = "sfssd",
                 VersionId = 222,
-                Formats = new DboSet<AgreementFormat>() { new AgreementFormat() { Id = 10, Name = "telefon" },
-                    new AgreementFormat() { Id = 15, Name = "skan" } },
+                Formats = new DboSet<AgreementFormat>()
+                {
+                    new AgreementFormat() { Id = 10, Name = "telefon" },
+                    new AgreementFormat() { Id = 15, Name = "skan" }
+                },
                 Versions = new DboSet<AgreementVersion>()
-                { new AgreementVersion() { Id = 20, VersionNumber = 2, Texts = new DboSet<AgreementText>()
-                { new AgreementText() { VersionId = 2, Language = "en", Content = "dfsdgdsdfsgfd" }, new AgreementText()
-                { VersionId = 2, Language = "pl", Content = "telefon" } } }, new AgreementVersion()
-                { Id = 25, VersionNumber = 5, Texts = new DboSet<AgreementText>()
-                { new AgreementText() { VersionId = 5, Language = "en", Content = "dfsdgdsdfsgfd" }, new AgreementText()
-                { VersionId = 5, Language = "pl", Content = "telefon" } } } }
+                {
+                    new AgreementVersion()
+                    {
+                        Id = 20,
+                        VersionNumber = 2,
+                        Texts = new DboSet<AgreementText>()
+                        {
+                            new AgreementText()
+                            {
+                                VersionId = 2,
+                                Language = "en",
+                                Content = "dfsdgdsdfsgfd"
+                            },
+                            new AgreementText()
+                            {
+                                VersionId = 2,
+                                Language = "pl",
+                                Content = "telefon"
+                            }
+                        }
+                    },
+                    new AgreementVersion()
+                    {
+                        Id = 25,
+                        VersionNumber = 5,
+                        Texts = new DboSet<AgreementText>()
+                        {
+                            new AgreementText()
+                            {
+                                VersionId = 5,
+                                Language = "en",
+                                Content = "dfsdgdsdfsgfd"
+                            },
+                            new AgreementText()
+                            {
+                                VersionId = 5,
+                                Language = "pl",
+                                Content = "telefon"
+                            }
+                        }
+                    }
+                }
             };
 
             var variety6 = new Variety<Agreement>(profile);
@@ -95,9 +132,6 @@ namespace System.Instant.Tests
             variety0.Patch(profile);
             variety1.Put(_sleeve0);
 
-
-            //  variety0.Patch();
-
             variety3.Patch(variety6);
 
             var c = variety5.Preset;
@@ -105,8 +139,6 @@ namespace System.Instant.Tests
             c.FacebookId = "dfklsdfk";
 
             variety5.MapDevisor();
-
-
 
             ((Agreement)_sleeve0).TypeId = 1005L;
             var uk = _sleeve0.UniqueKey;
@@ -120,9 +152,6 @@ namespace System.Instant.Tests
             profile.Time = DateTime.Now;
 
             var serial = new Uscn(profile.UniqueCode);
-
         }
-
-        #endregion
     }
 }

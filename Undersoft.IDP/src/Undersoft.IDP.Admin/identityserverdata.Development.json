@@ -1,218 +1,90 @@
 ﻿{
-  "IdentityServerData": {
-    "IdentityResources": [
+  "IdentityData": {
+    "Roles": [
       {
-        "Name": "roles",
-        "Enabled": true,
-        "DisplayName": "Roles",
-        "UserClaims": [
-          "role"
-        ]
+        "Name": "Administrator"
       },
       {
-        "Name": "openid",
-        "Enabled": true,
-        "Required": true,
-        "DisplayName": "Your user identifier",
-        "UserClaims": [
-          "sub"
-        ]
+        "Name": "User"
       },
       {
-        "Name": "profile",
-        "Enabled": true,
-        "DisplayName": "User profile",
-        "Description": "Your user profile information (first name, last name, etc.)",
-        "Emphasize": true,
-        "UserClaims": [
-          "name",
-          "family_name",
-          "given_name",
-          "middle_name",
-          "nickname",
-          "preferred_username",
-          "profile",
-          "picture",
-          "website",
-          "gender",
-          "birthdate",
-          "zoneinfo",
-          "locale",
-          "updated_at"
-        ]
+        "Name": "Leader"
       },
       {
-        "Name": "email",
-        "Enabled": true,
-        "DisplayName": "Your email address",
-        "Emphasize": true,
-        "UserClaims": [
-          "email",
-          "email_verified"
-        ]
-      },
-      {
-        "Name": "address",
-        "Enabled": true,
-        "DisplayName": "Your address",
-        "Emphasize": true,
-        "UserClaims": [
-          "address"
-        ]
+        "Name": "Manager"
       }
     ],
-    "ApiScopes": [
+    "Users": [
       {
-        "Name": "aos_api_read",
-        "DisplayName": "aos_api_read",
-        "Required": false,
-        "UserClaims": [
-          "role",
-          "name"
-        ]
-      },
-      {
-        "Name": "aos_api_write",
-        "DisplayName": "aos_api_write",
-        "Required": false,
-        "UserClaims": [
-          "role",
-          "name"
-        ]
-      },
-      {
-        "Name": "ais_api_read",
-        "DisplayName": "ais_api_read",
-        "Required": false,
-        "UserClaims": [
-          "role",
-          "name"
-        ]
-      },
-      {
-        "Name": "ais_api_write",
-        "DisplayName": "ais_api_write",
-        "Required": false,
-        "UserClaims": [
-          "role",
-          "name"
-        ]
-      }
-    ],
-    "ApiResources": [
-      {
-        "Name": "aos_api",
-        "Scopes": [
-          "aos_api_read",
-          "aos_api_write"
-        ]
-      },
-      {
-        "Name": "ais_api",
-        "Scopes": [
-          "ais_api_read",
-          "ais_api_write"
-        ]
-      }
-    ],
-    "Clients": [
-      {
-        "ClientId": "ais_admin",
-        "ClientName": "ais_admin",
-        "ClientUri": "https://localhost:44303",
-        "AllowedGrantTypes": [
-          "authorization_code"
+        "Username": "admin",
+        "Password": "321Open$e$ame",
+        "Email": "dhanc@undersoft.com",
+        "Roles": [
+          "Administrator"
         ],
-        "RequirePkce": true,
-        "ClientSecrets": [
+        "Claims": [
           {
-            "Value": "ais_admin"
+            "Type": "name",
+            "Value": "admin"
           }
-        ],
-        "RedirectUris": [
-          "https://localhost:44303/signin-oidc"
-        ],
-        "FrontChannelLogoutUri": "https://localhost:44303/signout-oidc",
-        "PostLogoutRedirectUris": [
-          "https://localhost:44303/signout-callback-oidc"
-        ],
-        "AllowedCorsOrigins": [
-          "https://localhost:44303"
-        ],
-        "AllowedScopes": [
-          "openid",
-          "email",
-          "profile",
-          "roles"
         ]
       },
       {
-        "ClientId": "aos",
-        "ClientName": "aos",
-        "ClientUri": "https://localhost:44303",
-        "AllowedGrantTypes": [
-          "password"
+        "Username": "darhan",
+        "Password": "321Open$e$ame",
+        "Email": "dh@undersoft.pl",
+        "Roles": [
+          "Administrator"
         ],
-        "RequirePkce": false,
-        "ClientSecrets": [
+        "Claims": [
           {
-            "Value": "aos"
+            "Type": "name",
+            "Value": "admin"
           }
-        ],
-        "AllowedScopes": [
-          "openid",
-          "email",
-          "profile",
-          "roles"
         ]
       },
       {
-        "ClientId": "aos_api",
-        "ClientName": "aos_api",
-        "AllowedGrantTypes": [
-          "password"
+        "Username": "user",
+        "Password": "321Open$e$ame",
+        "Email": "user@undersoft.pl",
+        "Roles": [
+          "User"
         ],
-        "RequireClientSecret": true,
-        "RequirePkce": false,
-        "ClientSecrets": [
+        "Claims": [
           {
-            "Value": "aos_api"
+            "Type": "name",
+            "Value": "user"
           }
-        ],
-        "AllowedScopes": [
-          "aos_api_read",
-          "aos_api_write",
-          "openid",
-          "email",
-          "profile",
-          "roles"
         ]
       },
       {
-        "ClientId": "ais_api",
-        "ClientName": "ais_api",
-        "AllowedGrantTypes": [
-          "password"
+        "Username": "leader",
+        "Password": "321Open$e$ame",
+        "Email": "leader@undersoft.pl",
+        "Roles": [
+          "Leader"
         ],
-        "RequireClientSecret": true,
-        "RequirePkce": false,
-        "ClientSecrets": [
+        "Claims": [
           {
-            "Value": "ais_api"
+            "Type": "name",
+            "Value": "leader"
           }
+        ]
+      },
+      {
+        "Username": "manager",
+        "Password": "321Open$e$ame",
+        "Email": "manager@undersoft.pl",
+        "Roles": [
+          "Manager"
         ],
-        "AllowedScopes": [
-          "ais_api_read",
-          "ais_api_write",
-          "openid",
-          "email",
-          "profile",
-          "roles"
-        ],
-        "AllowedCorsOrigins": [
-          "https://localhost:44302"
+        "Claims": [
+          {
+            "Type": "name",
+            "Value": "manager"
+          }
         ]
       }
     ]
   }
-}                                                                                                                                                        
+}

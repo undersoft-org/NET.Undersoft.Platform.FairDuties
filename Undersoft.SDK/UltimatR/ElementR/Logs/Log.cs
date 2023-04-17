@@ -3,6 +3,7 @@
     using NLog;
     using System.Collections.Concurrent;
     using System.Text.Json;
+    using System.Text.Json.Serialization;
     using System.Threading;
 
     public static partial class Log
@@ -156,7 +157,8 @@
             var options = new JsonSerializerOptions();
             options.Converters.Add(new ExceptionConverter());
             options.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
-            options.IgnoreNullValues = true;
+            options.DefaultIgnoreCondition = Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull;
+            options.ReferenceHandler = ReferenceHandler.IgnoreCycles;
             return options;
         }
 

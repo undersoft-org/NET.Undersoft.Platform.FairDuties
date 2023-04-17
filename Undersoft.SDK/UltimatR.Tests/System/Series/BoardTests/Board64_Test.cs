@@ -1,15 +1,3 @@
-/*************************************************
-   Copyright (c) 2021 Undersoft
-
-   System.Series.Board64_Test.cs.Tests
-   
-   @project: Vegas.Sdk
-   @stage: Development
-   @author: Dariusz Hanc
-   @date: (05.06.2021) 
-   @licence MIT
- *************************************************/
-
 namespace System.Series.Tests
 {
     using System.Collections.Generic;
@@ -19,24 +7,12 @@ namespace System.Series.Tests
 
     using Xunit;
 
-    /// <summary>
-    /// Defines the <see cref="Board64_Test" />.
-    /// </summary>
     public class Board64_Test : SharedDeckTestHelper
     {
-        #region Fields
-
         public static int threadCount = 0;
         public object holder = new object();
         public Task[] s1 = new Task[6];
 
-        #endregion
-
-        #region Constructors
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Board64_Test"/> class.
-        /// </summary>
         public Board64_Test() : base()
         {
             registry = new Board64<string>();
@@ -46,14 +22,6 @@ namespace System.Series.Tests
             Logfile.LogFileName = $"Board64_{DateTime.Now.ToFileTime().ToString()}_Test.log";
         }
 
-        #endregion
-
-        #region Methods
-
-        /// <summary>
-        /// The Board64_Concurrent_IndentifierKeys_Test.
-        /// </summary>
-        /// <returns>The <see cref="Task"/>.</returns>
         [Fact]
         public async Task Board64_Concurrent_IndentifierKeys_Test()
         {
@@ -61,10 +29,6 @@ namespace System.Series.Tests
             await t.ConfigureAwait(true);
         }
 
-        /// <summary>
-        /// The Board64_Concurrent_IntKeys_Test.
-        /// </summary>
-        /// <returns>The <see cref="Task"/>.</returns>
         [Fact]
         public async Task Board64_Concurrent_IntKeys_Test()
         {
@@ -72,10 +36,6 @@ namespace System.Series.Tests
             await t.ConfigureAwait(true);
         }
 
-        /// <summary>
-        /// The Board64_Concurrent_LongKeys_Test.
-        /// </summary>
-        /// <returns>The <see cref="Task"/>.</returns>
         [Fact]
         public async Task Board64_Concurrent_LongKeys_Test()
         {
@@ -83,10 +43,6 @@ namespace System.Series.Tests
             await t.ConfigureAwait(true);
         }
 
-        /// <summary>
-        /// The Board64_Concurrent_StringKeys_Test.
-        /// </summary>
-        /// <returns>The <see cref="Task"/>.</returns>
         [Fact]
         public async Task Board64_Concurrent_StringKeys_Test()
         {
@@ -94,47 +50,30 @@ namespace System.Series.Tests
             await t.ConfigureAwait(true);
         }
 
-        /// <summary>
-        /// The Board64_IndentifierKeys_Test.
-        /// </summary>
         [Fact]
         public void Board64_IndentifierKeys_Test()
         {
             SharedDeck_ThreadIntegrated_Test(identifierKeyTestCollection.Take(100000).ToArray());
         }
 
-        /// <summary>
-        /// The Board64_IntKeys_Test.
-        /// </summary>
         [Fact]
         public void Board64_IntKeys_Test()
         {
             SharedDeck_ThreadIntegrated_Test(intKeyTestCollection.Take(100000).ToArray());
         }
 
-        /// <summary>
-        /// The Board64_LongKeys_Test.
-        /// </summary>
         [Fact]
         public void Board64_LongKeys_Test()
         {
             SharedDeck_ThreadIntegrated_Test(longKeyTestCollection.Take(100000).ToArray());
         }
 
-        /// <summary>
-        /// The Board64_StringKeys_Test.
-        /// </summary>
         [Fact]
         public void Board64_StringKeys_Test()
         {
             SharedDeck_ThreadIntegrated_Test(stringKeyTestCollection.Take(100000).ToArray());
         }
 
-        /// <summary>
-        /// The board64_MultiThread_Test.
-        /// </summary>
-        /// <param name="collection">The collection<see cref="IList{KeyValuePair{object, string}}"/>.</param>
-        /// <returns>The <see cref="Task"/>.</returns>
         private Task board64_MultiThread_Test(IList<KeyValuePair<object, string>> collection)
         {
             registry = new Board64<string>();
@@ -150,21 +89,20 @@ namespace System.Series.Tests
             for (int i = 0; i < 6; i++)
             {
                 s1[i] = Task.Factory.StartNew(publicTest);
-
             }
 
-            return Task.Factory.ContinueWhenAll(s1, new Action<Task[]>(a => { publicBoard_MultiThread_TCallback_Test(a); }));
+            return Task.Factory.ContinueWhenAll(
+                s1,
+                new Action<Task[]>(a =>
+                {
+                    publicBoard_MultiThread_TCallback_Test(a);
+                })
+            );
         }
 
-        /// <summary>
-        /// The publicBoard_MultiThread_TCallback_Test.
-        /// </summary>
-        /// <param name="t">The t<see cref="Task[]"/>.</param>
         private void publicBoard_MultiThread_TCallback_Test(Task[] t)
         {
             Debug.WriteLine($"Test Finished");
         }
-
-        #endregion
     }
 }

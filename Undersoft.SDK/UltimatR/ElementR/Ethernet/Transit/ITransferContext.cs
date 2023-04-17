@@ -63,8 +63,6 @@ namespace System.Deal
 
         void Append(string text);
 
-        void Dispose();
-
         void HandleDeniedRequest();
 
         void HandleGetRequest(string content_type = "text/html");

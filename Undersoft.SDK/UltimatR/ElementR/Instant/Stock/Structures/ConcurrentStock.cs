@@ -1,13 +1,10 @@
 ﻿namespace System.Instant.Stock
 {
-    using System;
     using Linq;
     using Runtime.InteropServices;
-    using Security.Permissions;
+    using System;
     using Threading;
 
-    [SecurityPermission(SecurityAction.LinkDemand)]
-    [SecurityPermission(SecurityAction.InheritanceDemand)]
     public unsafe class ConcurrentStock : Stock
     {
         [StructLayout(LayoutKind.Sequential)]
@@ -210,7 +207,7 @@
 
         protected virtual Node* GetNodeForWriting(int timeout)
         {
-            for (;;)
+            for (; ; )
             {
                 int blockIndex = _nodeHeader->WriteStart;
                 Node* node = this[blockIndex];
@@ -235,7 +232,7 @@
         {
             node->DoneWrite = 1;
 
-            for (;;)
+            for (; ; )
             {
                 int blockIndex = _nodeHeader->WriteEnd;
                 node = this[blockIndex];
@@ -340,7 +337,7 @@
 
         protected virtual Node* GetNodeForReading(int timeout)
         {
-            for (;;)
+            for (; ; )
             {
                 int blockIndex = _nodeHeader->ReadStart;
                 Node* node = this[blockIndex];
@@ -367,7 +364,7 @@
 
             node->AmountWritten = 0;
 
-            for (;;)
+            for (; ; )
             {
                 int blockIndex = _nodeHeader->ReadEnd;
                 node = this[blockIndex];

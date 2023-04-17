@@ -63,8 +63,8 @@
     ],
     "ApiScopes": [
       {
-        "Name": "aos.api.rw",
-        "DisplayName": "aos.api.read.write",
+        "Name": "odp.api.rw",
+        "DisplayName": "odp.api.read.write",
         "Required": false,
         "UserClaims": [
           "sub",
@@ -74,8 +74,8 @@
         ]
       },
       {
-        "Name": "aos.engine.rwx",
-        "DisplayName": "aos.engine.read.write.execute",
+        "Name": "aep.api.rwx",
+        "DisplayName": "aep.api.read.write.execute",
         "Required": false,
         "UserClaims": [
           "sub",
@@ -85,8 +85,8 @@
         ]
       },
       {
-        "Name": "ais.api.rw",
-        "DisplayName": "ais.api.read.write",
+        "Name": "idp.api.rw",
+        "DisplayName": "idp.api.read.write",
         "Required": false,
         "UserClaims": [
           "sub",
@@ -98,28 +98,28 @@
     ],
     "ApiResources": [
       {
-        "Name": "aos.engine",
+        "Name": "aep",
         "Scopes": [
-          "aos.engine.rwx"
+          "aep.api.rwx"
         ]
       },
       {
-        "Name": "aos.api",
+        "Name": "odp.api",
         "Scopes": [
-          "aos.api.rw"
+          "odp.api.rw"
         ]
       },
       {
-        "Name": "ais.api",
+        "Name": "idp.api",
         "Scopes": [
-          "ais.api.rw"
+          "idp.api.rw"
         ]
       }
     ],
     "Clients": [
       {
-        "ClientId": "ais.admin",
-        "ClientName": "ais.admin",
+        "ClientId": "idp.admin",
+        "ClientName": "idp.admin",
         "ClientUri": "https://localhost:44303",
         "AllowedGrantTypes": [
           "authorization.code"
@@ -127,7 +127,7 @@
         "RequirePkce": true,
         "ClientSecrets": [
           {
-            "Value": "ais.admin"
+            "Value": "idp.admin"
           }
         ],
         "RedirectUris": [
@@ -161,12 +161,12 @@
           }
         ],
         "AllowedScopes": [
-          "aos.api.rw"
+          "odp.api.rw"
         ]
       },
       {
-        "ClientId": "aos.admin",
-        "ClientName": "aos.admin",
+        "ClientId": "odp.admin",
+        "ClientName": "odp.admin",
         "AllowedGrantTypes": [
           "password"
         ],
@@ -174,18 +174,18 @@
         "RequirePkce": false,
         "ClientSecrets": [
           {
-            "Value": "aos.admin"
+            "Value": "odp.admin"
           }
         ],
         "AllowedScopes": [
-          "aos.api.rw",
-          "ais.api.rw",
-          "aos.engine.rwx"
+          "odp.api.rw",
+          "idp.api.rw",
+          "aep.api.rw"
         ]
       },
       {
-        "ClientId": "aos.api",
-        "ClientName": "aos.api",
+        "ClientId": "odp.api",
+        "ClientName": "odp.api",
         "AllowedGrantTypes": [
           "password"
         ],
@@ -193,21 +193,21 @@
         "RequirePkce": false,
         "ClientSecrets": [
           {
-            "Value": "aos.api"
+            "Value": "odp.api"
           }
         ],
         "AllowedScopes": [
-          "aos.api.rw",
-          "ais.api.rw",
-          "aos.engine.rwx"
+          "odp.api.rw",
+          "idp.api.rw",
+          "aep.api.rwx"
         ],
         "AllowedCorsOrigins": [
           "https://localhost:44302"
         ]
       },
       {
-        "ClientId": "aos.engine",
-        "ClientName": "aos.engine",
+        "ClientId": "aep.api",
+        "ClientName": "aep",
         "AllowedGrantTypes": [
           "password"
         ],
@@ -215,20 +215,20 @@
         "RequirePkce": false,
         "ClientSecrets": [
           {
-            "Value": "aos.engine"
+            "Value": "aep.api"
           }
         ],
         "AllowedScopes": [
-          "aos.api.rw",
-          "ais.api.rw"
+          "odp.api.rw",
+          "idp.api.rw"
         ],
         "AllowedCorsOrigins": [
           "https://localhost:44302"
         ]
       },
       {
-        "ClientId": "aos.openapi",
-        "ClientName": "aos.openapi",
+        "ClientId": "odp.openapi",
+        "ClientName": "odp.openapi",
         "AllowedGrantTypes": [
           "password"
         ],
@@ -236,19 +236,19 @@
         "RequirePkce": false,
         "ClientSecrets": [
           {
-            "Value": "aos.openapi"
+            "Value": "odp.openapi"
           }
         ],
         "AllowedScopes": [
-          "aos.api.rw"
+          "odp.api.rw"
         ],
         "AllowedCorsOrigins": [
           "https://localhost:44302"
         ]
       },
       {
-        "ClientId": "ais.openapi",
-        "ClientName": "ais.openapi",
+        "ClientId": "idp.openapi",
+        "ClientName": "idp.openapi",
         "AllowedGrantTypes": [
           "password"
         ],
@@ -256,11 +256,11 @@
         "RequirePkce": false,
         "ClientSecrets": [
           {
-            "Value": "ais.openapi"
+            "Value": "idp.openapi"
           }
         ],
         "AllowedScopes": [
-          "ais.api.rw"
+          "idp.api.rw"
         ],
         "AllowedCorsOrigins": [
           "https://localhost:44302"

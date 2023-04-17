@@ -7,9 +7,9 @@
 
     <StartupObject></StartupObject>
 
-    <AssemblyName>BenefitSystems.Benchmark</AssemblyName>
+    <AssemblyName>Undersoft.Benchmark</AssemblyName>
 
-    <RootNamespace>BenefitSystems.Benchmark</RootNamespace>
+    <RootNamespace>Undersoft.Benchmark</RootNamespace>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -37,7 +37,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\UltimatR\OpenSource.SDK.csproj" />
+    <ProjectReference Include="..\UltimatR\Undersoft.SDK.csproj" />
   </ItemGroup>
 
 </Project>

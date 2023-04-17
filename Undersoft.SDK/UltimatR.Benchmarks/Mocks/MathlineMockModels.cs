@@ -1,5 +1,5 @@
 /*************************************************
-   Copyright (c) 2021 Undersoft
+   Copyright (c) 2021 
 
    System.Instant.Mathset.MathlineMockModels.cs.Tests
    

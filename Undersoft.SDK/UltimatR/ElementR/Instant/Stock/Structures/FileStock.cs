@@ -1,10 +1,8 @@
 ﻿namespace System.Instant.Stock
 {
-    using System;
     using Extract;
-    using Security.Permissions;
+    using System;
 
-    [SecurityPermission(SecurityAction.LinkDemand)]
     public unsafe class FileStock : SharedStock, IStock
     {
         public Type type;

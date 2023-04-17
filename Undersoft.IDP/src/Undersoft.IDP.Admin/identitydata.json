@@ -18,7 +18,7 @@
       {
         "Username": "admin",
         "Password": "321Open$e$ame",
-        "Email": "dhanc@nicmangroup.com",
+        "Email": "dhanc@undersoft.com",
         "Roles": [
           "Administrator"
         ],
@@ -46,7 +46,7 @@
       {
         "Username": "user",
         "Password": "321Open$e$ame",
-        "Email": "user@nicmangroup.pl",
+        "Email": "user@undersoft.pl",
         "Roles": [
           "User"
         ],
@@ -60,7 +60,7 @@
       {
         "Username": "leader",
         "Password": "321Open$e$ame",
-        "Email": "leader@nicmangroup.pl",
+        "Email": "leader@undersoft.pl",
         "Roles": [
           "Leader"
         ],
@@ -74,7 +74,7 @@
       {
         "Username": "manager",
         "Password": "321Open$e$ame",
-        "Email": "manager@nicmangroup.pl",
+        "Email": "manager@undersoft.pl",
         "Roles": [
           "Manager"
         ],

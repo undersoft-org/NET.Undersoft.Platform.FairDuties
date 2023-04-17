@@ -6,7 +6,7 @@ namespace EstimatR
 
     public class HyperCluster
     {
-        private bool ValidHyperClusterItemList;
+        //private bool ValidHyperClusterItemList;
 
         public double[] HyperClusterVector { get; set; }
 
@@ -56,7 +56,7 @@ namespace EstimatR
                     //    }
                     //}
                 }
-                ValidHyperClusterItemList = false;
+                //ValidHyperClusterItemList = false;
             }
             return ClusterList.Count > 0;
         }
@@ -67,7 +67,7 @@ namespace EstimatR
             Clusterer.UpdateClusterIntersectionByLast(ClusterList, HyperClusterVector);
             Clusterer.UpdateClusterSummaryByLast(ClusterList, HyperClusterVectorSummary);
 
-            ValidHyperClusterItemList = false;
+            //ValidHyperClusterItemList = false;
             //TODO: rendutant analyse to remove it            
             //for (int i = 0; i < cluster.ClusterItemList.Count; i++)
             //{                

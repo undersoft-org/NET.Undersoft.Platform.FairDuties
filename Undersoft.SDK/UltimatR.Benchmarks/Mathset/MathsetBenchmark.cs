@@ -1,43 +1,20 @@
-/*************************************************
-   Copyright (c) 2021 Undersoft
-
-   System.Instant.Mathset.MathsetTest.cs.Tests
-   
-   @project: Vegas.Sdk
-   @stage: Development
-   @author: Dariusz Hanc
-   @date: (05.06.2021) 
-   @licence MIT
- *************************************************/
-
 namespace System.Instant.Mathset
 {
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Reflection;
-
-    using BenchmarkDotNet;
     using BenchmarkDotNet.Attributes;
+    using System.Linq;
 
-    [MemoryDiagnoser] 
+    [MemoryDiagnoser]
     [RankColumn]
     [Orderer(BenchmarkDotNet.Order.SummaryOrderPolicy.FastestToSlowest)]
-    [RPlotExporter]  
+    [RPlotExporter]
     public class MathsetBenchmark
     {
-        #region Fields
-
         private Figure figure;
         private Figures factory;
         private Computation cmp0;
         private Computation cmp1;
         private IFigures figures;
 
-        #endregion
-
-        #region Constructors
-
-  
         public MathsetBenchmark()
         {
             factory = new Figures(typeof(MathsetMockModel), "Figures_Mathset_Test");
@@ -45,18 +22,17 @@ namespace System.Instant.Mathset
             figures = factory.Combine();
 
             MathsetMockModel fom = new MathsetMockModel();
-           
 
             for (int i = 0; i < 2000 * 1000; i++)
             {
                 ISleeve f = figures.NewSleeve();
-                f.Devisor = new MathsetMockModel();               
+                f.Devisor = new MathsetMockModel();
 
                 f["NetPrice"] = (double)f["NetPrice"] + i;
                 f["SellFeeRate"] = (double)f["SellFeeRate"] / 2;
                 figures.Add(i, f);
             }
-            
+
             cmp1 = new Computation(figures);
 
             Mathset m0 = cmp1["SellNetPrice"];
@@ -67,16 +43,9 @@ namespace System.Instant.Mathset
 
             m1.Formula = m0 * m1["TaxRate"];
 
-            cmp1.Compute(); // first with formula compilation
+            cmp1.Compute();
         }
 
-        #endregion
-
-        #region Methods
-
-        /// <summary>
-        /// The Mathset_Computation_Formula_Test.
-        /// </summary>   
         public void Mathset_With_Compilation()
         {
             cmp0 = new Computation(figures);
@@ -88,28 +57,31 @@ namespace System.Instant.Mathset
             Mathset ms1 = cmp0["SellGrossPrice"];
 
             ms1.Formula = ms0 * ms1["TaxRate"];
-          
-            cmp0.Compute();                 
+
+            cmp0.Compute();
         }
 
         [Benchmark]
         public void Mathset_Without_Compilation()
-        { 
-            cmp1.Compute();   
+        {
+            cmp1.Compute();
         }
 
         [Benchmark]
         public void Parellel_ForEach_Loop()
-        {            
+        {
+            figures
+                .AsParallel()
+                .ForEach(
+                    (c) =>
+                    {
+                        c["SellNetPrice"] =
+                            ((double)c["NetPrice"] * ((double)c["SellFeeRate"] / 100D))
+                            + (double)c["NetPrice"];
 
-            figures.AsParallel().ForEach((c) => {
-
-                c["SellNetPrice"] = ((double)c["NetPrice"] * ((double)c["SellFeeRate"] / 100D)) + (double)c["NetPrice"];
-                
-                c["SellGrossPrice"] = (double)c["SellNetPrice"] * (double)c["TaxRate"];
-            });
-        }      
-
-        #endregion
+                        c["SellGrossPrice"] = (double)c["SellNetPrice"] * (double)c["TaxRate"];
+                    }
+                );
+        }
     }
 }

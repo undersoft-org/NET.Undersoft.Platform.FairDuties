@@ -19,11 +19,12 @@ namespace System.Logs
         public LogHandler(JsonSerializerOptions options, LogLevel level)
         {
             var nlogEnvironment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
-            factory = new LogFactory(
-                new XmlLoggingConfiguration(
-                    nlogEnvironment == ""
+
+            var config = new XmlLoggingConfiguration(nlogEnvironment == ""
                         ? "Properties/nlog.config"
-                        : $"Properties/nlog.{nlogEnvironment}.config"));
+                        : $"Properties/nlog.{nlogEnvironment}.config");
+            config.Reload();
+            factory = config.LogFactory;
 
             jsonOptions = options;
             this.level = level;
@@ -39,8 +40,8 @@ namespace System.Logs
 
         public bool Clean(DateTime olderThen)
         {
-            
-            return true; 
+
+            return true;
         }
 
         public bool IsEnabled(LogLevel logLevel)
@@ -66,7 +67,7 @@ namespace System.Logs
             if (log.Sender != sender)
             {
                 sender = log.Sender;
-                logger = loggerRegistry.GetOrAdd(sender, l => factory.GetLogger(sender));              
+                logger = loggerRegistry.GetOrAdd(sender, l => factory.GetLogger(sender));
             }
 
             return logger;

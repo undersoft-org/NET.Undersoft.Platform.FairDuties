@@ -1,36 +1,17 @@
-/*************************************************
-   Copyright (c) 2021 Undersoft
-
-   System.Series.Catalog64Test.cs.Tests
-   
-   @project: Vegas.Sdk
-   @stage: Development
-   @author: Dariusz Hanc
-   @date: (05.06.2021) 
-   @licence MIT
- *************************************************/
-
 namespace System.Series.Tests
 {
+    using BenchmarkDotNet.Attributes;
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
-    using System.Series;
     using System.Threading.Tasks;
-    using BenchmarkDotNet.Attributes;
 
     public class Catalog64Test : BenchmarkHelper
     {
-        #region Fields
-
         public static object holder = new object();
         public static int threadCount = 0;
         public Task[] s1 = new Task[10];
-
-        #endregion
-
-        #region Constructors
 
         public Catalog64Test() : base()
         {
@@ -40,10 +21,6 @@ namespace System.Series.Tests
             Trace.Listeners.Add(Logfile);
             Logfile.LogFileName = $"Catalog64_{DateTime.Now.ToFileTime().ToString()}_Test.log";
         }
-
-        #endregion
-
-        #region Methods
 
         [Benchmark]
         public async Task Catalog64_Concurrent_IndentifierKeys_TestAsync()
@@ -109,15 +86,18 @@ namespace System.Series.Tests
                 LogThreadIntegrated_Test(collection.Skip(c * 10000).Take(10000).ToArray());
             };
 
-
-            for(int i = 0; i < 10; i++)
+            for (int i = 0; i < 10; i++)
             {
                 s1[i] = Task.Factory.StartNew(publicTest);
             }
 
-            return Task.Factory.ContinueWhenAll(s1, new Action<Task[]>(a => { catalog64_MultiThread_TCallback_Test(a); }));
+            return Task.Factory.ContinueWhenAll(
+                s1,
+                new Action<Task[]>(a =>
+                {
+                    catalog64_MultiThread_TCallback_Test(a);
+                })
+            );
         }
-
-        #endregion
     }
 }
