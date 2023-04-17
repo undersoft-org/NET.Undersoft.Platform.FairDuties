@@ -1,0 +1,90 @@
+﻿{
+  "IdentityData": {
+    "Roles": [
+      {
+        "Name": "Administrator"
+      },
+      {
+        "Name": "User"
+      },
+      {
+        "Name": "Leader"
+      },
+      {
+        "Name": "Manager"
+      }
+    ],
+    "Users": [
+      {
+        "Username": "admin",
+        "Password": "321Open$e$ame",
+        "Email": "dhanc@nicmangroup.com",
+        "Roles": [
+          "Administrator"
+        ],
+        "Claims": [
+          {
+            "Type": "name",
+            "Value": "admin"
+          }
+        ]
+      },
+      {
+        "Username": "darhan",
+        "Password": "321Open$e$ame",
+        "Email": "dh@undersoft.pl",
+        "Roles": [
+          "Administrator"
+        ],
+        "Claims": [
+          {
+            "Type": "name",
+            "Value": "admin"
+          }
+        ]
+      },
+      {
+        "Username": "user",
+        "Password": "321Open$e$ame",
+        "Email": "user@nicmangroup.pl",
+        "Roles": [
+          "User"
+        ],
+        "Claims": [
+          {
+            "Type": "name",
+            "Value": "user"
+          }
+        ]
+      },
+      {
+        "Username": "leader",
+        "Password": "321Open$e$ame",
+        "Email": "leader@nicmangroup.pl",
+        "Roles": [
+          "Leader"
+        ],
+        "Claims": [
+          {
+            "Type": "name",
+            "Value": "leader"
+          }
+        ]
+      },
+      {
+        "Username": "manager",
+        "Password": "321Open$e$ame",
+        "Email": "manager@nicmangroup.pl",
+        "Roles": [
+          "Manager"
+        ],
+        "Claims": [
+          {
+            "Type": "name",
+            "Value": "manager"
+          }
+        ]
+      }
+    ]
+  }
+}

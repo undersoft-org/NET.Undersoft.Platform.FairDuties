@@ -1,0 +1,108 @@
+{
+	"info": {
+		"_postman_id": "b42a6bc2-36b1-46cf-97c2-b8172a2df287",
+		"name": "AIS_Authorization",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17088714"
+	},
+	"item": [
+		{
+			"name": "GenerateAuthorizationToken",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic YW9zOmFvcw==",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "321Open$e$ame",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "roles profile email openid",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://localhost:44310/connect/token",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44310",
+					"path": [
+						"connect",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAuthorizationTokenUserInfo",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IkJEQTFFRURDNjNDQkVDNDY4N0Q5MzdDNThCM0ZBQjYxIiwidHlwIjoiYXQrand0In0.eyJuYmYiOjE2Nzk0MjM2NjcsImV4cCI6MTY3OTQyNzI2NywiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NDQzMTAiLCJjbGllbnRfaWQiOiJhb3MiLCJzdWIiOiJlODM5MTUxMi04NjMxLTRkYTYtYWVhNS0zYWMyMDdmYmUyOTIiLCJhdXRoX3RpbWUiOjE2Nzk0MjM2NjcsImlkcCI6ImxvY2FsIiwiaWF0IjoxNjc5NDIzNjY3LCJzY29wZSI6WyJlbWFpbCIsIm9wZW5pZCIsInByb2ZpbGUiLCJyb2xlcyJdLCJhbXIiOlsicHdkIl19.rYqSjUM0Dzl1KTbgp_ux40r9PyOiZUEHbDBJd08jyHREfoWoZzs1-9ZIEEojdZT5AT1kDMY8Vtho8IpD3ssAjN9lQDBiBN74mwbhIjvuMcz9RvhwB5NM5OMuEVIGe-ACckSxPGP8M7hETHTW080Fhkt-p3FnfBFM0PDPbTMqGmxAmWdRQwmUFYmQ7FnRyUAao5D-8LTKo_gMHFQbK5iTokNwmdm1jooq36PpZ6-wR_B4DcOCwYCwaPOouXgpvKZxuMP3RJbXyWeMIhY8DMgNWseLU-dyQmb_Mo2lrJ47HPncnwa4DGqri-U42WCFL6el3OEGfmFZu5TdDXQnWGk5lA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44310/connect/userinfo",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44310",
+					"path": [
+						"connect",
+						"userinfo"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

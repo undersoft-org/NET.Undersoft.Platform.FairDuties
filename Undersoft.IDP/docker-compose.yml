@@ -1,0 +1,139 @@
+version: '3.4'
+services:
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    container_name: nginx
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - '/var/run/docker.sock:/tmp/docker.sock:ro'
+      - './shared/nginx/vhost.d:/etc/nginx/vhost.d'
+      - './shared/nginx/certs:/etc/nginx/certs:ro'
+    networks:
+      proxy: null
+      nicmangroup.ais:
+        aliases:
+          - sts.ais.nicmangroup.local
+          - admin.ais.nicmangroup.local
+          - admin-api.ais.nicmangroup.local
+    restart: always
+  nicmangroup.ais.admin:
+    image: '${DOCKER_REGISTRY-}nicmangroup-ais-admin'
+    build:
+      context: .
+      dockerfile: src/Undersoft.IDP.Admin/Dockerfile
+    container_name: nicmangroup-ais-admin
+    environment:
+      - VIRTUAL_HOST=admin.ais.nicmangroup.local
+      - 'ConnectionStrings__ConfigurationDbConnection=Host=db; Port=5432; Database=AIS.Identity; UserId=postgres;Password=321Open$e$ame; Pooling=true;'
+      - 'ConnectionStrings__PersistedGrantDbConnection=Host=db; Port=5432; Database=AIS.Identity; UserId=postgres;Password=321Open$e$ame; Pooling=true'
+      - 'ConnectionStrings__IdentityDbConnection=Host=db; Port=5432; Database=AIS.Identity; UserId=postgres;Password=321Open$e$ame; Pooling=true'
+      - 'ConnectionStrings__AdminLogDbConnection=Host=db; Port=5432; Database=AIS.Identity; UserId=postgres;Password=321Open$e$ame; Pooling=true'
+      - 'ConnectionStrings__AdminAuditLogDbConnection=Host=db; Port=5432; Database=AIS.Identity; UserId=postgres;Password=321Open$e$ame; Pooling=true'
+      - 'ConnectionStrings__DataProtectionDbConnection=Host=db; Port=5432; Database=AIS.Identity; UserId=postgres;Password=321Open$e$ame; Pooling=true'
+      - 'AdminConfiguration__IdentityAdminBaseUrl=https://admin.ais.nicmangroup.local'
+      - 'AdminConfiguration__IdentityAdminRedirectUri=https://admin.ais.nicmangroup.local/signin-oidc'
+      - 'AdminConfiguration__IdentityServerBaseUrl=https://sts.ais.nicmangroup.local'
+      - AdminConfiguration__RequireHttpsMetadata=false
+      - 'IdentityServerData__Clients__0__ClientUri=https://admin.ais.nicmangroup.local'
+      - 'IdentityServerData__Clients__0__RedirectUris__0=https://admin.ais.nicmangroup.local/signin-oidc'
+      - 'IdentityServerData__Clients__0__FrontChannelLogoutUri=https://admin.ais.nicmangroup.local/signin-oidc'
+      - 'IdentityServerData__Clients__0__PostLogoutRedirectUris__0=https://admin.ais.nicmangroup.local/signout-callback-oidc'
+      - 'IdentityServerData__Clients__0__AllowedCorsOrigins__0=https://admin.ais.nicmangroup.local'
+      - 'IdentityServerData__Clients__1__RedirectUris__0=https://admin-api.ais.nicmangroup.local/swagger/oauth2-redirect.html'
+      - 'Serilog__WriteTo__1__Args__connectionString=Host=db; Port=5432; Database=AIS.Identity; UserId=postgres;Password=321Open$e$ame; Pooling=true'
+      - DockerConfiguration__UpdateCaCertificate=true
+      - ASPNETCORE_ENVIRONMENT=Development
+    command: dotnet Undersoft.IDP.Admin.dll /seed
+    depends_on:
+      - db
+      - nicmangroup.ais.sts.identity
+    volumes:
+      - './shared/serilog.json:/app/serilog.json'
+      - './shared/identitydata.json:/app/identitydata.json'
+      - './shared/identityserverdata.json:/app/identityserverdata.json'
+      - './shared/nginx/certs/cacerts.crt:/usr/local/share/ca-certificates/cacerts.crt'
+    networks:
+      nicmangroup.ais: null
+  nicmangroup.ais.admin.api:
+    image: '${DOCKER_REGISTRY-}nicmangroup-ais-admin-api'
+    build:
+      context: .
+      dockerfile: src/Undersoft.IDP.Admin.Api/Dockerfile
+    container_name: nicmangroup-ais-admin-api
+    environment:
+      - VIRTUAL_HOST=admin-api.ais.nicmangroup.local
+      - AdminApiConfiguration__RequireHttpsMetadata=false
+      - 'AdminApiConfiguration__ApiBaseUrl=https://admin-api.ais.nicmangroup.local'
+      - 'AdminApiConfiguration__IdentityServerBaseUrl=https://sts.ais.nicmangroup.local'
+      - 'ConnectionStrings__ConfigurationDbConnection=Host=db; Port=5432; Database=AIS.Identity; UserId=postgres;Password=321Open$e$ame; Pooling=true;'
+      - 'ConnectionStrings__PersistedGrantDbConnection=Host=db; Port=5432; Database=AIS.Identity; UserId=postgres;Password=321Open$e$ame; Pooling=true'
+      - 'ConnectionStrings__IdentityDbConnection=Host=db; Port=5432; Database=AIS.Identity; UserId=postgres;Password=321Open$e$ame; Pooling=true'
+      - 'ConnectionStrings__AdminLogDbConnection=Host=db; Port=5432; Database=AIS.Identity; UserId=postgres;Password=321Open$e$ame; Pooling=true'
+      - 'ConnectionStrings__AdminAuditLogDbConnection=Host=db; Port=5432; Database=AIS.Identity; UserId=postgres;Password=321Open$e$ame; Pooling=true'
+      - 'ConnectionStrings__DataProtectionDbConnection=Host=db; Port=5432; Database=AIS.Identity; UserId=postgres;Password=321Open$e$ame; Pooling=true'
+      - DockerConfiguration__UpdateCaCertificate=true
+      - ASPNETCORE_ENVIRONMENT=Development
+    volumes:
+      - './shared/serilog.json:/app/serilog.json'
+      - './shared/nginx/certs/cacerts.crt:/usr/local/share/ca-certificates/cacerts.crt'
+    networks:
+      nicmangroup.ais: null
+  nicmangroup.ais.sts.identity:
+    image: '${DOCKER_REGISTRY-}nicmangroup-ais-sts-identity'
+    build:
+      context: .
+      dockerfile: src/Undersoft.IDP.STS.Identity/Dockerfile
+    container_name: nicmangroup-ais-sts-identity
+    environment:
+      - VIRTUAL_HOST=sts.ais.nicmangroup.local
+      - 'ConnectionStrings__ConfigurationDbConnection=Host=db; Port=5432; Database=AIS.Identity; UserId=postgres;Password=321Open$e$ame; Pooling=true;'
+      - 'ConnectionStrings__PersistedGrantDbConnection=Host=db; Port=5432; Database=AIS.Identity; UserId=postgres;Password=321Open$e$ame; Pooling=true'
+      - 'ConnectionStrings__IdentityDbConnection=Host=db; Port=5432; Database=AIS.Identity; UserId=postgres;Password=321Open$e$ame; Pooling=true'
+      - 'ConnectionStrings__DataProtectionDbConnection=Host=db; Port=5432; Database=AIS.Identity; UserId=postgres;Password=321Open$e$ame; Pooling=true'
+      - 'AdminConfiguration__IdentityAdminBaseUrl=https://admin.ais.nicmangroup.local'
+      - 'IdentityServerOptions__IssuerUri=https://sts.ais.nicmangroup.local'
+      - IdentityServerOptions__Events__RaiseErrorEvents=true
+      - IdentityServerOptions__Events__RaiseInformationEvents=true
+      - IdentityServerOptions__Events__RaiseFailureEvents=true
+      - IdentityServerOptions__Events__RaiseSuccessEvents=true
+      - DockerConfiguration__UpdateCaCertificate=true
+      - ASPNETCORE_ENVIRONMENT=Development
+    depends_on:
+      - db
+    volumes:
+      - './shared/serilog.json:/app/serilog.json'
+      - './shared/nginx/certs/cacerts.crt:/usr/local/share/ca-certificates/cacerts.crt'
+    networks:
+      nicmangroup.ais:
+        aliases:
+          - sts.ais.nicmangroup.local
+  db:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=321Open$e$ame
+    ports:
+      - '5432:5432'
+    container_name: nicmangroup-ais-db
+    volumes:
+      - 'db:/var/opt/pgsql/data'
+    networks:
+      nicmangroup.ais: null
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 5880:8080
+    networks:
+      nicmangroup.ais: null
+volumes:
+  db:
+    driver: local
+networks:
+  proxy:
+    driver: bridge
+  nicmangroup.ais:
+    driver: bridge

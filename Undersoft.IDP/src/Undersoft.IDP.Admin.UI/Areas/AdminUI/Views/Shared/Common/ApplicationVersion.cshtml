@@ -1,0 +1,12 @@
+﻿@using System.Reflection
+@using Undersoft.IDP.Admin
+@using Undersoft.IDP.Admin.UI.Configuration
+
+@{
+    var runtimeVersion = typeof(AdminConfiguration)
+        .GetTypeInfo()
+        .Assembly
+        .GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion;
+}
+
+@runtimeVersion

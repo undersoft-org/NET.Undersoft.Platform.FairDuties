@@ -1,0 +1,12 @@
+{
+  "solution": {
+    "path": "Undersoft.ODP.sln",
+    "projects": [
+      "..\\OpenSource.SDK\\UltimatR.Benchmarks\\OpenSource.SDK.Benchmarks.csproj",
+      "..\\OpenSource.SDK\\UltimatR.Tests\\OpenSource.SDK.Tests.csproj",
+      "..\\OpenSource.SDK\\UltimatR\\OpenSource.SDK.csproj",
+      "src\\Undersoft.ODP.Admin\\Undersoft.ODP.Admin.csproj",
+      "src\\Undersoft.ODP\\Undersoft.ODP.csproj"
+    ]
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Undersoft.IDP.AuditLogging.Host": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:61322;http://localhost:61323"
+    }
+  }
+}

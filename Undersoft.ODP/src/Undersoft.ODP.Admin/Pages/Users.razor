@@ -1,0 +1,64 @@
+﻿@page "/users"
+
+<PageTitle>Users</PageTitle>
+
+@using Undersoft.ODP.Domain
+@using Undersoft.ODP.Api
+@using UltimatR
+@using System.Instant
+@using System.Series
+@inject HttpClient Http
+@inject IUltimatr ultimatr
+@inject IRemoteRepository<IReportStore, User> userRepository
+
+<h1>Users</h1>
+
+<p>Users Grid.</p>
+
+@if (users == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <EditForm>
+
+    </EditForm>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>PhoneNumber</th>
+                <th>UserName</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in users)
+            {
+                <tr>
+                    <td>
+                        @user.Id
+                    </td>
+                    <td>@user.PhoneNumber</td>
+                    <td>@user.UserName</td>
+                    <td>@user.Email</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private IDeck<User>? users;
+    //private IRubrics rubrics;
+    //private UserBasicDto[] users;
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        users = await userRepository.Get();
+        //users = await Task.Run(() => ultimatr.Load<IEntryStore, User>());
+        //users = await Http.GetFromJsonAsync<UserBasicDto[]>("https://localhost:44510/Users");
+    }
+}

@@ -1,0 +1,30 @@
+﻿using UltimatR;
+
+namespace Undersoft.ODP.Api
+{
+    using Domain;
+    public class OrganizationValidator : DtoCommandSetValidator<OrganizationDto>
+    {
+        public OrganizationValidator(IUltimatr ultimatr) : base(ultimatr)
+        {
+            ValidationScope(CommandMode.Create | CommandMode.Upsert, () =>
+            {
+                ValidateRequired(p => p.Data.Name);
+                ValidateLength(2, 100, a => a.Data.Name);
+
+            });
+            ValidationScope(CommandMode.Update | CommandMode.Change, () =>
+            {
+                ValidateRequired(p => p.Data.Name);
+                ValidateLength(2, 100, a => a.Data.Name);
+                ValidateExist<IEntryStore, Organization>((cmd) => (e) => e.Id == cmd.Id);
+            });
+           
+            ValidationScope(CommandMode.Delete, () =>
+            {
+                ValidateRequired(a => a.Data.Id);
+                ValidateExist<IEntryStore, Organization>((cmd) => (e) => e.Id == cmd.Id);
+            });
+        }
+    }
+}

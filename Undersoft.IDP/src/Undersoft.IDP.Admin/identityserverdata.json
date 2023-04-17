@@ -1,0 +1,271 @@
+﻿{
+  "IdentityServerData": {
+    "IdentityResources": [
+      {
+        "Name": "roles",
+        "Enabled": true,
+        "DisplayName": "Roles",
+        "UserClaims": [
+          "role"
+        ]
+      },
+      {
+        "Name": "openid",
+        "Enabled": true,
+        "Required": true,
+        "DisplayName": "Your user identifier",
+        "UserClaims": [
+          "sub"
+        ]
+      },
+      {
+        "Name": "profile",
+        "Enabled": true,
+        "DisplayName": "User profile",
+        "Description": "Your user profile information (first name, last name, etc.)",
+        "Emphasize": true,
+        "UserClaims": [
+          "name",
+          "family.name",
+          "given.name",
+          "middle.name",
+          "nickname",
+          "preferred.username",
+          "profile",
+          "picture",
+          "website",
+          "gender",
+          "birthdate",
+          "zoneinfo",
+          "locale",
+          "updated.at"
+        ]
+      },
+      {
+        "Name": "email",
+        "Enabled": true,
+        "DisplayName": "Your email address",
+        "Emphasize": true,
+        "UserClaims": [
+          "email",
+          "email.verified"
+        ]
+      },
+      {
+        "Name": "address",
+        "Enabled": true,
+        "DisplayName": "Your address",
+        "Emphasize": true,
+        "UserClaims": [
+          "address"
+        ]
+      }
+    ],
+    "ApiScopes": [
+      {
+        "Name": "aos.api.rw",
+        "DisplayName": "aos.api.read.write",
+        "Required": false,
+        "UserClaims": [
+          "sub",
+          "role",
+          "name",
+          "email"
+        ]
+      },
+      {
+        "Name": "aos.engine.rwx",
+        "DisplayName": "aos.engine.read.write.execute",
+        "Required": false,
+        "UserClaims": [
+          "sub",
+          "role",
+          "name",
+          "email"
+        ]
+      },
+      {
+        "Name": "ais.api.rw",
+        "DisplayName": "ais.api.read.write",
+        "Required": false,
+        "UserClaims": [
+          "sub",
+          "role",
+          "name",
+          "email"
+        ]
+      }
+    ],
+    "ApiResources": [
+      {
+        "Name": "aos.engine",
+        "Scopes": [
+          "aos.engine.rwx"
+        ]
+      },
+      {
+        "Name": "aos.api",
+        "Scopes": [
+          "aos.api.rw"
+        ]
+      },
+      {
+        "Name": "ais.api",
+        "Scopes": [
+          "ais.api.rw"
+        ]
+      }
+    ],
+    "Clients": [
+      {
+        "ClientId": "ais.admin",
+        "ClientName": "ais.admin",
+        "ClientUri": "https://localhost:44303",
+        "AllowedGrantTypes": [
+          "authorization.code"
+        ],
+        "RequirePkce": true,
+        "ClientSecrets": [
+          {
+            "Value": "ais.admin"
+          }
+        ],
+        "RedirectUris": [
+          "https://localhost:44303/signin-oidc"
+        ],
+        "FrontChannelLogoutUri": "https://localhost:44303/signout-oidc",
+        "PostLogoutRedirectUris": [
+          "https://localhost:44303/signout-callback-oidc"
+        ],
+        "AllowedCorsOrigins": [
+          "https://localhost:44303"
+        ],
+        "AllowedScopes": [
+          "openid",
+          "email",
+          "profile",
+          "roles"
+        ]
+      },
+      {
+        "ClientId": "mda.ios",
+        "ClientName": "mda.ios",
+        "ClientUri": "https://localhost:44303",
+        "AllowedGrantTypes": [
+          "password"
+        ],
+        "RequirePkce": false,
+        "ClientSecrets": [
+          {
+            "Value": "mda.ios"
+          }
+        ],
+        "AllowedScopes": [
+          "aos.api.rw"
+        ]
+      },
+      {
+        "ClientId": "aos.admin",
+        "ClientName": "aos.admin",
+        "AllowedGrantTypes": [
+          "password"
+        ],
+        "RequireClientSecret": true,
+        "RequirePkce": false,
+        "ClientSecrets": [
+          {
+            "Value": "aos.admin"
+          }
+        ],
+        "AllowedScopes": [
+          "aos.api.rw",
+          "ais.api.rw",
+          "aos.engine.rwx"
+        ]
+      },
+      {
+        "ClientId": "aos.api",
+        "ClientName": "aos.api",
+        "AllowedGrantTypes": [
+          "password"
+        ],
+        "RequireClientSecret": true,
+        "RequirePkce": false,
+        "ClientSecrets": [
+          {
+            "Value": "aos.api"
+          }
+        ],
+        "AllowedScopes": [
+          "aos.api.rw",
+          "ais.api.rw",
+          "aos.engine.rwx"
+        ],
+        "AllowedCorsOrigins": [
+          "https://localhost:44302"
+        ]
+      },
+      {
+        "ClientId": "aos.engine",
+        "ClientName": "aos.engine",
+        "AllowedGrantTypes": [
+          "password"
+        ],
+        "RequireClientSecret": true,
+        "RequirePkce": false,
+        "ClientSecrets": [
+          {
+            "Value": "aos.engine"
+          }
+        ],
+        "AllowedScopes": [
+          "aos.api.rw",
+          "ais.api.rw"
+        ],
+        "AllowedCorsOrigins": [
+          "https://localhost:44302"
+        ]
+      },
+      {
+        "ClientId": "aos.openapi",
+        "ClientName": "aos.openapi",
+        "AllowedGrantTypes": [
+          "password"
+        ],
+        "RequireClientSecret": true,
+        "RequirePkce": false,
+        "ClientSecrets": [
+          {
+            "Value": "aos.openapi"
+          }
+        ],
+        "AllowedScopes": [
+          "aos.api.rw"
+        ],
+        "AllowedCorsOrigins": [
+          "https://localhost:44302"
+        ]
+      },
+      {
+        "ClientId": "ais.openapi",
+        "ClientName": "ais.openapi",
+        "AllowedGrantTypes": [
+          "password"
+        ],
+        "RequireClientSecret": true,
+        "RequirePkce": false,
+        "ClientSecrets": [
+          {
+            "Value": "ais.openapi"
+          }
+        ],
+        "AllowedScopes": [
+          "ais.api.rw"
+        ],
+        "AllowedCorsOrigins": [
+          "https://localhost:44302"
+        ]
+      }
+    ]
+  }
+}                                                                                                                                                        

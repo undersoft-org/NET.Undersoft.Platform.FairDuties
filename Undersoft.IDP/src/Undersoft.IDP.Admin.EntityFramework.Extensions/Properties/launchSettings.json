@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Undersoft.IDP.Admin.EntityFramework.Extensions": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:55769;http://localhost:55770"
+    }
+  }
+}

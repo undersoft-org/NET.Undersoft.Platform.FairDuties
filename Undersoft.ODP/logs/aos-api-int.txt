@@ -1,0 +1,241 @@
+2023-04-14 16:36:38.7073 Info Message Template Auto Format enabled
+2023-04-14 16:36:38.7295 Info Loading assembly: NLog.Web.AspNetCore
+2023-04-14 16:36:39.2457 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2023-04-14 16:36:39.2662 Info Registered target NLog.Targets.FileTarget(Name=ownfile)
+2023-04-14 16:36:39.2662 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2023-04-14 16:36:39.3347 Info Validating config: TargetNames=logconsole, allfile, ownfile, ConfigItems=70, FilePath=X:\DEVELOPMENT\PROJECTS\NET\Nicman\projs\Undersoft.ODP\src\Undersoft.ODP.Api\Properties\nlog.Development.config
+2023-04-14 16:37:14.0155 Info NLog Configuration has not been loaded.
+2023-04-14 20:20:05.4632 Info Message Template Auto Format enabled
+2023-04-14 20:20:05.5152 Info Loading assembly: NLog.Web.AspNetCore
+2023-04-14 20:20:06.3705 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2023-04-14 20:20:06.3866 Info Registered target NLog.Targets.FileTarget(Name=ownfile)
+2023-04-14 20:20:06.3923 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2023-04-14 20:20:06.5048 Info Validating config: TargetNames=logconsole, allfile, ownfile, ConfigItems=70, FilePath=X:\DEVELOPMENT\PROJECTS\NET\Nicman\projs\Undersoft.ODP\src\Undersoft.ODP.Api\Properties\nlog.Development.config
+2023-04-14 20:20:11.3667 Info NLog Configuration has not been loaded.
+2023-04-14 20:23:17.8086 Info Message Template Auto Format enabled
+2023-04-14 20:23:17.8280 Info Loading assembly: NLog.Web.AspNetCore
+2023-04-14 20:23:18.1813 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2023-04-14 20:23:18.1917 Info Registered target NLog.Targets.FileTarget(Name=ownfile)
+2023-04-14 20:23:18.2018 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2023-04-14 20:23:18.2448 Info Validating config: TargetNames=logconsole, allfile, ownfile, ConfigItems=70, FilePath=X:\DEVELOPMENT\PROJECTS\NET\Nicman\projs\Undersoft.ODP\src\Undersoft.ODP.Api\Properties\nlog.Development.config
+2023-04-14 20:25:35.7079 Info Message Template Auto Format enabled
+2023-04-14 20:25:35.7287 Info Loading assembly: NLog.Web.AspNetCore
+2023-04-14 20:25:36.0264 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2023-04-14 20:25:36.0378 Info Registered target NLog.Targets.FileTarget(Name=ownfile)
+2023-04-14 20:25:36.0481 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2023-04-14 20:25:36.0991 Info Validating config: TargetNames=logconsole, allfile, ownfile, ConfigItems=70, FilePath=X:\DEVELOPMENT\PROJECTS\NET\Nicman\projs\Undersoft.ODP\src\Undersoft.ODP.Api\Properties\nlog.Development.config
+2023-04-14 20:33:32.1230 Info Message Template Auto Format enabled
+2023-04-14 20:33:32.1450 Info Loading assembly: NLog.Web.AspNetCore
+2023-04-14 20:33:32.3868 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2023-04-14 20:33:32.3980 Info Registered target NLog.Targets.FileTarget(Name=ownfile)
+2023-04-14 20:33:32.4048 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2023-04-14 20:33:32.4537 Info Validating config: TargetNames=logconsole, allfile, ownfile, ConfigItems=70, FilePath=X:\DEVELOPMENT\PROJECTS\NET\Nicman\projs\Undersoft.ODP\src\Undersoft.ODP.Api\Properties\nlog.Development.config
+2023-04-14 20:36:47.9807 Info Message Template Auto Format enabled
+2023-04-14 20:36:48.0105 Info Loading assembly: NLog.Web.AspNetCore
+2023-04-14 20:36:48.3622 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2023-04-14 20:36:48.3802 Info Registered target NLog.Targets.FileTarget(Name=ownfile)
+2023-04-14 20:36:48.3973 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2023-04-14 20:36:48.4804 Info Validating config: TargetNames=logconsole, allfile, ownfile, ConfigItems=70, FilePath=X:\DEVELOPMENT\PROJECTS\NET\Nicman\projs\Undersoft.ODP\src\Undersoft.ODP.Api\Properties\nlog.Development.config
+2023-04-14 20:45:58.0689 Info Message Template Auto Format enabled
+2023-04-14 20:45:58.2221 Info Loading assembly: NLog.Web.AspNetCore
+2023-04-14 20:45:58.9832 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2023-04-14 20:45:59.0311 Info Registered target NLog.Targets.FileTarget(Name=ownfile)
+2023-04-14 20:45:59.0311 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2023-04-14 20:45:59.1660 Info Validating config: TargetNames=logconsole, allfile, ownfile, ConfigItems=70, FilePath=X:\DEVELOPMENT\PROJECTS\NET\Nicman\projs\Undersoft.ODP\src\Undersoft.ODP.Api\Properties\nlog.Development.config
+2023-04-14 20:53:26.5942 Info Message Template Auto Format enabled
+2023-04-14 20:53:27.2220 Info Loading assembly: NLog.Web.AspNetCore
+2023-04-14 20:53:28.5027 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2023-04-14 20:53:28.6537 Info Registered target NLog.Targets.FileTarget(Name=ownfile)
+2023-04-14 20:53:28.6594 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2023-04-14 20:53:28.7663 Info Validating config: TargetNames=logconsole, allfile, ownfile, ConfigItems=70, FilePath=X:\DEVELOPMENT\PROJECTS\NET\Nicman\projs\Undersoft.ODP\src\Undersoft.ODP.Api\Properties\nlog.Development.config
+2023-04-14 20:59:06.7660 Info Message Template Auto Format enabled
+2023-04-14 20:59:06.7850 Info Loading assembly: NLog.Web.AspNetCore
+2023-04-14 20:59:07.0799 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2023-04-14 20:59:07.1205 Info Registered target NLog.Targets.FileTarget(Name=ownfile)
+2023-04-14 20:59:07.1270 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2023-04-14 20:59:07.1977 Info Validating config: TargetNames=logconsole, allfile, ownfile, ConfigItems=70, FilePath=X:\DEVELOPMENT\PROJECTS\NET\Nicman\projs\Undersoft.ODP\src\Undersoft.ODP.Api\Properties\nlog.Development.config
+2023-04-14 21:24:46.6519 Info Message Template Auto Format enabled
+2023-04-14 21:24:46.6792 Info Loading assembly: NLog.Web.AspNetCore
+2023-04-14 21:24:46.9783 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2023-04-14 21:24:46.9916 Info Registered target NLog.Targets.FileTarget(Name=ownfile)
+2023-04-14 21:24:46.9972 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2023-04-14 21:24:47.0561 Info Validating config: TargetNames=logconsole, allfile, ownfile, ConfigItems=70, FilePath=X:\DEVELOPMENT\PROJECTS\NET\Nicman\projs\Undersoft.ODP\src\Undersoft.ODP.Api\Properties\nlog.Development.config
+2023-04-14 21:32:27.4615 Info Message Template Auto Format enabled
+2023-04-14 21:32:27.4864 Info Loading assembly: NLog.Web.AspNetCore
+2023-04-14 21:32:27.7957 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2023-04-14 21:32:27.8228 Info Registered target NLog.Targets.FileTarget(Name=ownfile)
+2023-04-14 21:32:27.8481 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2023-04-14 21:32:27.9413 Info Validating config: TargetNames=logconsole, allfile, ownfile, ConfigItems=70, FilePath=X:\DEVELOPMENT\PROJECTS\NET\Nicman\projs\Undersoft.ODP\src\Undersoft.ODP.Api\Properties\nlog.Development.config
+2023-04-14 21:37:08.0038 Info Message Template Auto Format enabled
+2023-04-14 21:37:08.0296 Info Loading assembly: NLog.Web.AspNetCore
+2023-04-14 21:37:08.3328 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2023-04-14 21:37:08.3426 Info Registered target NLog.Targets.FileTarget(Name=ownfile)
+2023-04-14 21:37:08.3426 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2023-04-14 21:37:08.4180 Info Validating config: TargetNames=logconsole, allfile, ownfile, ConfigItems=70, FilePath=X:\DEVELOPMENT\PROJECTS\NET\Nicman\projs\Undersoft.ODP\src\Undersoft.ODP.Api\Properties\nlog.Development.config
+2023-04-14 21:45:21.5200 Info Message Template Auto Format enabled
+2023-04-14 21:45:21.5448 Info Loading assembly: NLog.Web.AspNetCore
+2023-04-14 21:45:21.8652 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2023-04-14 21:45:21.8946 Info Registered target NLog.Targets.FileTarget(Name=ownfile)
+2023-04-14 21:45:21.8946 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2023-04-14 21:45:21.9893 Info Validating config: TargetNames=logconsole, allfile, ownfile, ConfigItems=70, FilePath=X:\DEVELOPMENT\PROJECTS\NET\Nicman\projs\Undersoft.ODP\src\Undersoft.ODP.Api\Properties\nlog.Development.config
+2023-04-14 21:48:38.7981 Info Message Template Auto Format enabled
+2023-04-14 21:48:39.1793 Info Loading assembly: NLog.Web.AspNetCore
+2023-04-14 21:48:39.6470 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2023-04-14 21:48:39.6628 Info Registered target NLog.Targets.FileTarget(Name=ownfile)
+2023-04-14 21:48:39.6706 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2023-04-14 21:48:39.7429 Info Validating config: TargetNames=logconsole, allfile, ownfile, ConfigItems=70, FilePath=X:\DEVELOPMENT\PROJECTS\NET\Nicman\projs\Undersoft.ODP\src\Undersoft.ODP.Api\Properties\nlog.Development.config
+2023-04-14 21:51:34.1716 Info Message Template Auto Format enabled
+2023-04-14 21:51:34.1950 Info Loading assembly: NLog.Web.AspNetCore
+2023-04-14 21:51:34.5179 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2023-04-14 21:51:34.5399 Info Registered target NLog.Targets.FileTarget(Name=ownfile)
+2023-04-14 21:51:34.5455 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2023-04-14 21:51:34.6240 Info Validating config: TargetNames=logconsole, allfile, ownfile, ConfigItems=70, FilePath=X:\DEVELOPMENT\PROJECTS\NET\Nicman\projs\Undersoft.ODP\src\Undersoft.ODP.Api\Properties\nlog.Development.config
+2023-04-14 21:53:44.0756 Info Message Template Auto Format enabled
+2023-04-14 21:53:44.1064 Info Loading assembly: NLog.Web.AspNetCore
+2023-04-14 21:53:44.5022 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2023-04-14 21:53:44.5154 Info Registered target NLog.Targets.FileTarget(Name=ownfile)
+2023-04-14 21:53:44.5154 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2023-04-14 21:53:44.5924 Info Validating config: TargetNames=logconsole, allfile, ownfile, ConfigItems=70, FilePath=X:\DEVELOPMENT\PROJECTS\NET\Nicman\projs\Undersoft.ODP\src\Undersoft.ODP.Api\Properties\nlog.Development.config
+2023-04-14 21:57:12.0784 Info Message Template Auto Format enabled
+2023-04-14 21:57:12.1067 Info Loading assembly: NLog.Web.AspNetCore
+2023-04-14 21:57:12.4199 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2023-04-14 21:57:12.4498 Info Registered target NLog.Targets.FileTarget(Name=ownfile)
+2023-04-14 21:57:12.4553 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2023-04-14 21:57:12.5424 Info Validating config: TargetNames=logconsole, allfile, ownfile, ConfigItems=70, FilePath=X:\DEVELOPMENT\PROJECTS\NET\Nicman\projs\Undersoft.ODP\src\Undersoft.ODP.Api\Properties\nlog.Development.config
+2023-04-14 21:58:42.4911 Info NLog Configuration has not been loaded.
+2023-04-14 22:08:40.0781 Info Message Template Auto Format enabled
+2023-04-14 22:08:40.0990 Info Loading assembly: NLog.Web.AspNetCore
+2023-04-14 22:08:40.4207 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2023-04-14 22:08:40.4554 Info Registered target NLog.Targets.FileTarget(Name=ownfile)
+2023-04-14 22:08:40.4554 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2023-04-14 22:08:40.5471 Info Validating config: TargetNames=logconsole, allfile, ownfile, ConfigItems=70, FilePath=X:\DEVELOPMENT\PROJECTS\NET\Nicman\projs\Undersoft.ODP\src\Undersoft.ODP.Api\Properties\nlog.Development.config
+2023-04-14 22:09:06.0015 Info NLog Configuration has not been loaded.
+2023-04-15 02:34:35.7761 Info Message Template Auto Format enabled
+2023-04-15 02:34:35.8296 Info Loading assembly: NLog.Web.AspNetCore
+2023-04-15 02:34:36.1986 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2023-04-15 02:34:36.2115 Info Registered target NLog.Targets.FileTarget(Name=ownfile)
+2023-04-15 02:34:36.2188 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2023-04-15 02:34:36.3020 Info Validating config: TargetNames=logconsole, allfile, ownfile, ConfigItems=70, FilePath=X:\DEVELOPMENT\PROJECTS\NET\Nicman\projs\Undersoft.ODP\src\Undersoft.ODP.Api\Properties\nlog.Development.config
+2023-04-15 02:35:01.3885 Info NLog Configuration has not been loaded.
+2023-04-15 02:35:24.8754 Info AppDomain Shutting down. LogFactory closing...
+2023-04-15 02:35:26.4005 Warn Flush completed with errors Exception: System.TimeoutException: Timeout when flushing all targets, after waiting 1,5 seconds.
+2023-04-15 02:35:26.4005 Warn Target flush timeout. One or more targets did not complete flush operation, skipping target close.
+2023-04-15 02:35:26.4005 Info LogFactory has been closed.
+2023-04-15 02:35:34.9487 Info Message Template Auto Format enabled
+2023-04-15 02:35:34.9682 Info Loading assembly: NLog.Web.AspNetCore
+2023-04-15 02:35:35.3473 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2023-04-15 02:35:35.3641 Info Registered target NLog.Targets.FileTarget(Name=ownfile)
+2023-04-15 02:35:35.3641 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2023-04-15 02:35:35.5113 Info Validating config: TargetNames=logconsole, allfile, ownfile, ConfigItems=70, FilePath=X:\DEVELOPMENT\PROJECTS\NET\Nicman\projs\Undersoft.ODP\src\Undersoft.ODP.Api\Properties\nlog.Development.config
+2023-04-15 02:36:04.1168 Info NLog Configuration has not been loaded.
+2023-04-15 02:51:23.3473 Info Message Template Auto Format enabled
+2023-04-15 02:51:23.3778 Info Loading assembly: NLog.Web.AspNetCore
+2023-04-15 02:51:23.7866 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2023-04-15 02:51:23.8161 Info Registered target NLog.Targets.FileTarget(Name=ownfile)
+2023-04-15 02:51:23.8287 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2023-04-15 02:51:23.9243 Info Validating config: TargetNames=logconsole, allfile, ownfile, ConfigItems=70, FilePath=X:\DEVELOPMENT\PROJECTS\NET\Nicman\projs\Undersoft.ODP\src\Undersoft.ODP.Api\Properties\nlog.Development.config
+2023-04-15 02:51:48.7202 Info NLog Configuration has not been loaded.
+2023-04-15 02:53:03.7216 Info Message Template Auto Format enabled
+2023-04-15 02:53:03.7425 Info Loading assembly: NLog.Web.AspNetCore
+2023-04-15 02:53:04.0760 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2023-04-15 02:53:04.1069 Info Registered target NLog.Targets.FileTarget(Name=ownfile)
+2023-04-15 02:53:04.1129 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2023-04-15 02:53:04.2077 Info Validating config: TargetNames=logconsole, allfile, ownfile, ConfigItems=70, FilePath=X:\DEVELOPMENT\PROJECTS\NET\Nicman\projs\Undersoft.ODP\src\Undersoft.ODP.Api\Properties\nlog.Development.config
+2023-04-15 02:53:28.5335 Info NLog Configuration has not been loaded.
+2023-04-15 03:00:49.5052 Info Message Template Auto Format enabled
+2023-04-15 03:00:49.5339 Info Loading assembly: NLog.Web.AspNetCore
+2023-04-15 03:00:49.8890 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2023-04-15 03:00:49.9066 Info Registered target NLog.Targets.FileTarget(Name=ownfile)
+2023-04-15 03:00:49.9066 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2023-04-15 03:00:50.0031 Info Validating config: TargetNames=logconsole, allfile, ownfile, ConfigItems=70, FilePath=X:\DEVELOPMENT\PROJECTS\NET\Nicman\projs\Undersoft.ODP\src\Undersoft.ODP.Api\Properties\nlog.Development.config
+2023-04-15 03:01:14.9781 Info NLog Configuration has not been loaded.
+2023-04-15 03:18:44.3968 Info Message Template Auto Format enabled
+2023-04-15 03:18:44.5012 Info Loading assembly: NLog.Web.AspNetCore
+2023-04-15 03:18:45.1073 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2023-04-15 03:18:45.1468 Info Registered target NLog.Targets.FileTarget(Name=ownfile)
+2023-04-15 03:18:45.1570 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2023-04-15 03:18:45.2814 Info Validating config: TargetNames=logconsole, allfile, ownfile, ConfigItems=70, FilePath=X:\DEVELOPMENT\PROJECTS\NET\Nicman\projs\Undersoft.ODP\src\Undersoft.ODP.Api\Properties\nlog.Development.config
+2023-04-15 03:19:12.2240 Info NLog Configuration has not been loaded.
+2023-04-15 03:29:19.3050 Info Message Template Auto Format enabled
+2023-04-15 03:29:19.3279 Info Loading assembly: NLog.Web.AspNetCore
+2023-04-15 03:29:19.6154 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2023-04-15 03:29:19.6664 Info Registered target NLog.Targets.FileTarget(Name=ownfile)
+2023-04-15 03:29:19.7018 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2023-04-15 03:29:19.8060 Info Validating config: TargetNames=logconsole, allfile, ownfile, ConfigItems=70, FilePath=X:\DEVELOPMENT\PROJECTS\NET\Nicman\projs\Undersoft.ODP\src\Undersoft.ODP.Api\Properties\nlog.Development.config
+2023-04-15 03:29:45.4082 Info NLog Configuration has not been loaded.
+2023-04-15 06:07:18.9579 Info Message Template Auto Format enabled
+2023-04-15 06:07:18.9880 Info Loading assembly: NLog.Web.AspNetCore
+2023-04-15 06:07:19.2896 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2023-04-15 06:07:19.3014 Info Registered target NLog.Targets.FileTarget(Name=ownfile)
+2023-04-15 06:07:19.3142 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2023-04-15 06:07:19.3946 Info Validating config: TargetNames=logconsole, allfile, ownfile, ConfigItems=70, FilePath=X:\DEVELOPMENT\PROJECTS\NET\Nicman\projs\Undersoft.ODP\src\Undersoft.ODP.Api\Properties\nlog.Development.config
+2023-04-15 06:07:47.6384 Info NLog Configuration has not been loaded.
+2023-04-15 06:32:08.0980 Info Message Template Auto Format enabled
+2023-04-15 06:32:08.1227 Info Loading assembly: NLog.Web.AspNetCore
+2023-04-15 06:32:08.5031 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2023-04-15 06:32:08.5932 Info Registered target NLog.Targets.FileTarget(Name=ownfile)
+2023-04-15 06:32:08.5932 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2023-04-15 06:32:08.6628 Info Validating config: TargetNames=logconsole, allfile, ownfile, ConfigItems=70, FilePath=X:\DEVELOPMENT\PROJECTS\NET\Nicman\projs\Undersoft.ODP\src\Undersoft.ODP.Api\Properties\nlog.Development.config
+2023-04-15 06:32:36.2922 Info NLog Configuration has not been loaded.
+2023-04-15 06:57:46.6679 Info Message Template Auto Format enabled
+2023-04-15 06:57:46.6934 Info Loading assembly: NLog.Web.AspNetCore
+2023-04-15 06:57:46.9591 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2023-04-15 06:57:46.9836 Info Registered target NLog.Targets.FileTarget(Name=ownfile)
+2023-04-15 06:57:46.9836 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2023-04-15 06:57:47.0766 Info Validating config: TargetNames=logconsole, allfile, ownfile, ConfigItems=70, FilePath=X:\DEVELOPMENT\PROJECTS\NET\Nicman\projs\Undersoft.ODP\src\Undersoft.ODP.Api\Properties\nlog.Development.config
+2023-04-15 06:58:15.3930 Info NLog Configuration has not been loaded.
+2023-04-15 08:16:56.2117 Info Message Template Auto Format enabled
+2023-04-15 08:16:56.2383 Info Loading assembly: NLog.Web.AspNetCore
+2023-04-15 08:16:56.8322 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2023-04-15 08:16:56.8458 Info Registered target NLog.Targets.FileTarget(Name=ownfile)
+2023-04-15 08:16:56.8576 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2023-04-15 08:16:56.9230 Info Validating config: TargetNames=logconsole, allfile, ownfile, ConfigItems=70, FilePath=X:\DEVELOPMENT\PROJECTS\NET\Nicman\projs\Undersoft.ODP\src\Undersoft.ODP.Api\Properties\nlog.Development.config
+2023-04-15 08:17:31.1163 Info NLog Configuration has not been loaded.
+2023-04-15 14:55:49.1262 Info Message Template Auto Format enabled
+2023-04-15 14:55:49.1531 Info Loading assembly: NLog.Web.AspNetCore
+2023-04-15 14:55:49.6499 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2023-04-15 14:55:49.6690 Info Registered target NLog.Targets.FileTarget(Name=ownfile)
+2023-04-15 14:55:49.6760 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2023-04-15 14:55:49.7552 Info Validating config: TargetNames=logconsole, allfile, ownfile, ConfigItems=70, FilePath=X:\DEVELOPMENT\PROJECTS\NET\Nicman\projs\Undersoft.ODP\src\Undersoft.ODP.Api\Properties\nlog.Development.config
+2023-04-15 14:59:36.2732 Info Message Template Auto Format enabled
+2023-04-15 14:59:36.2941 Info Loading assembly: NLog.Web.AspNetCore
+2023-04-15 14:59:36.5479 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2023-04-15 14:59:36.5615 Info Registered target NLog.Targets.FileTarget(Name=ownfile)
+2023-04-15 14:59:36.5680 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2023-04-15 14:59:36.6237 Info Validating config: TargetNames=logconsole, allfile, ownfile, ConfigItems=70, FilePath=X:\DEVELOPMENT\PROJECTS\NET\Nicman\projs\Undersoft.ODP\src\Undersoft.ODP.Api\Properties\nlog.Development.config
+2023-04-15 15:07:19.2230 Info Message Template Auto Format enabled
+2023-04-15 15:07:19.2527 Info Loading assembly: NLog.Web.AspNetCore
+2023-04-15 15:07:19.6154 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2023-04-15 15:07:19.6297 Info Registered target NLog.Targets.FileTarget(Name=ownfile)
+2023-04-15 15:07:19.6297 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2023-04-15 15:07:19.6937 Info Validating config: TargetNames=logconsole, allfile, ownfile, ConfigItems=70, FilePath=X:\DEVELOPMENT\PROJECTS\NET\Nicman\projs\Undersoft.ODP\src\Undersoft.ODP.Api\Properties\nlog.Development.config
+2023-04-15 15:10:34.4747 Info Message Template Auto Format enabled
+2023-04-15 15:10:34.5022 Info Loading assembly: NLog.Web.AspNetCore
+2023-04-15 15:10:34.7827 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2023-04-15 15:10:34.7952 Info Registered target NLog.Targets.FileTarget(Name=ownfile)
+2023-04-15 15:10:34.7952 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2023-04-15 15:10:34.8580 Info Validating config: TargetNames=logconsole, allfile, ownfile, ConfigItems=70, FilePath=X:\DEVELOPMENT\PROJECTS\NET\Nicman\projs\Undersoft.ODP\src\Undersoft.ODP.Api\Properties\nlog.Development.config
+2023-04-15 15:23:20.8338 Info Message Template Auto Format enabled
+2023-04-15 15:23:20.8557 Info Loading assembly: NLog.Web.AspNetCore
+2023-04-15 15:23:21.1826 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2023-04-15 15:23:21.1982 Info Registered target NLog.Targets.FileTarget(Name=ownfile)
+2023-04-15 15:23:21.2088 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2023-04-15 15:23:21.2603 Info Validating config: TargetNames=logconsole, allfile, ownfile, ConfigItems=70, FilePath=X:\DEVELOPMENT\PROJECTS\NET\Nicman\projs\Undersoft.ODP\src\Undersoft.ODP.Api\Properties\nlog.Development.config
+2023-04-15 15:33:20.5512 Info Message Template Auto Format enabled
+2023-04-15 15:33:20.5794 Info Loading assembly: NLog.Web.AspNetCore
+2023-04-15 15:33:20.9580 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2023-04-15 15:33:20.9737 Info Registered target NLog.Targets.FileTarget(Name=ownfile)
+2023-04-15 15:33:20.9737 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2023-04-15 15:33:21.0413 Info Validating config: TargetNames=logconsole, allfile, ownfile, ConfigItems=70, FilePath=X:\DEVELOPMENT\PROJECTS\NET\Nicman\projs\Undersoft.ODP\src\Undersoft.ODP.Api\Properties\nlog.Development.config
+2023-04-16 08:25:39.6489 Info Message Template Auto Format enabled
+2023-04-16 08:25:39.6706 Info Loading assembly: NLog.Web.AspNetCore
+2023-04-16 08:25:40.0828 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2023-04-16 08:25:40.0972 Info Registered target NLog.Targets.FileTarget(Name=ownfile)
+2023-04-16 08:25:40.1075 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2023-04-16 08:25:40.1620 Info Validating config: TargetNames=logconsole, allfile, ownfile, ConfigItems=70, FilePath=X:\DEVELOPMENT\PROJECTS\NET\Undersoft\Universe\Undersoft.ODP\src\Undersoft.ODP.Api\Properties\nlog.Development.config
+2023-04-16 10:27:50.6374 Info Message Template Auto Format enabled
+2023-04-16 10:27:50.6631 Info Loading assembly: NLog.Web.AspNetCore
+2023-04-16 10:27:51.2340 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2023-04-16 10:27:51.2546 Info Registered target NLog.Targets.FileTarget(Name=ownfile)
+2023-04-16 10:27:51.2667 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2023-04-16 10:27:51.3484 Info Validating config: TargetNames=logconsole, allfile, ownfile, ConfigItems=70, FilePath=X:\DEVELOPMENT\PROJECTS\NET\Undersoft\Universe\Undersoft.ODP\src\Undersoft.ODP.Api\Properties\nlog.Development.config

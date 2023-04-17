@@ -1,0 +1,28 @@
+
+using System;
+
+namespace UltimatR
+{
+    public class FileContainer : BlobContainer
+    {
+        public FileContainer(string containerName) 
+            : this(containerName, 
+            new BlobContainerConfiguration(), 
+            new FileSystemBlobProvider(
+                new DefaultBlobFilePathCalculator())) 
+        {            
+        }
+
+        public FileContainer(
+            string containerName,
+            BlobContainerConfiguration configuration,
+            IBlobProvider provider,
+            IBlobNormalizeNamingService blobNormalizeNamingService = null) 
+            : base(containerName, configuration, provider, blobNormalizeNamingService)
+        {
+            configuration.UseFileSystem((c) => { c.BasePath = "../.data"; c.AppendContainerNameToBasePath = true; } );
+        }
+
+        public DataFile Get(string filename) => new DataFile(this, filename);
+    }
+}

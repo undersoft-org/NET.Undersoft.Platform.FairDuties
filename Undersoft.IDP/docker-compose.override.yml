@@ -1,0 +1,20 @@
+version: '3.4'
+
+services:
+  nicmangroup.ais.admin:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=develop
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+  
+  nicmangroup.ais.admin.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=develop
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+
+  nicmangroup.ais.sts.identity:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=develop
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro

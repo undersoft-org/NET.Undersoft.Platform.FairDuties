@@ -1,0 +1,35 @@
+﻿using UltimatR;
+
+namespace Undersoft.ODP.Api
+{
+    using Domain;
+    public class PersonalValidator : DtoCommandSetValidator<PersonalDto>
+    {
+        public PersonalValidator(IUltimatr ultimatr) : base(ultimatr)
+        {
+            ValidationScope(CommandMode.Create | CommandMode.Upsert, () =>
+            {
+                ValidateRequired(p => p.Data.FirstName);
+                ValidateRequired(p => p.Data.LastName);
+            });
+            ValidationScope(CommandMode.Update | CommandMode.Change, () =>
+            {
+                ValidateRequired(p => p.Data.FirstName);
+                ValidateRequired(p => p.Data.LastName);
+                ValidateExist<IEntryStore, Personal>((cmd) => (e) => e.Id == cmd.Id);
+            });
+            ValidationScope(CommandMode.Create, () =>
+            {
+                ValidateNotExist<IEntryStore, Personal>((cmd) =>
+                (e) => e.Email == cmd.Email
+                || e.PhoneNumber == cmd.PhoneNumber, "same Email or PhoneNumber");
+            });
+            ValidationScope(CommandMode.Any, () => ValidateEmail(p => p.Data.Email));
+            ValidationScope(CommandMode.Delete, () =>
+            {
+                ValidateRequired(a => a.Data.Id);
+                ValidateExist<IEntryStore, Personal>((cmd) => (e) => e.Id == cmd.Id);
+            });
+        }
+    }
+}
