@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Undersoft.SDK\src\Undersoft.SDK.UltimatR\Undersoft.SDK.UltimatR.csproj" />
+    <ProjectReference Include="..\Undersoft.SDK.EstimatR\Undersoft.SDK.EstimatR.csproj" />
   </ItemGroup>
 
 </Project>

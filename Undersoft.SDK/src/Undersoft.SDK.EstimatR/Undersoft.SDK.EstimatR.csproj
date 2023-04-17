@@ -3,11 +3,11 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>disable</Nullable>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Undersoft.SDK\src\Undersoft.SDK.UltimatR\Undersoft.SDK.UltimatR.csproj" />
+    <ProjectReference Include="..\Undersoft.SDK\Undersoft.SDK.csproj" />
   </ItemGroup>
 
 </Project>
