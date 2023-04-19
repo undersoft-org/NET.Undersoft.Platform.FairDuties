@@ -1,7 +1,7 @@
 # =====M==U==L==T==I==V==E==R==S==E======
 # =======I=N=T=E=R=P=R=O=J=E=C=T=========
-# ==W=O=R=K==T=E=A=M==B=A=L=A=N=C=I=N=G==
-# ===========P=L=A=T=F=O=R=M==============
+# ==W=O=R=K==T=I=M=E==B=A=L=A=N=C=I=N=G==
+# ===========P=L=A=T=F=O=R=M=============
 
 MODULES
 - Undersoft.IDP ---- Identity Provider
