@@ -1,32 +1,40 @@
-﻿using Undersoft.ODP.Infra.Data.Base.Contexts;
-using UltimatR;
+﻿using UltimatR;
+using Undersoft.ODP.Infra.Data.Base.Contexts;
 
 namespace Undersoft.ODP.Api
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services
+                .AddServiceSetup()
+                .ConfigureServices()
+                .AddOperationalServices<ICqrsStore>(
+                    DataServiceTypes.All,
+                    builder =>
+                        builder.AddDataService<EntryDbContext>()
+                               .AddDataService<ReportDbContext>()
+                )
+                .AddOperationalServices<IEventStore>(
+                    DataServiceTypes.All,
+                    builder =>
+                        builder.AddDataService<EventDbContext>()
+                );
+        }
+
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseAppSetup(env)
-                .UseInternalProvider()
-                .UseDataMigrations();
+               .UseInternalProvider()
+               .UseDataMigrations();
         }
-
-        public void ConfigureServices(IServiceCollection services)
-        {
-            var setup = services.AddServiceSetup()
-                    .ConfigureServices()
-                    .AddDataService<EntryDbContext>()
-                    .AddDataService<EventDbContext>()
-                    .AddDataService<ReportDbContext>()
-                    .MergeServices();
-        }
-
-        public IConfiguration Configuration { get; }
     }
 }

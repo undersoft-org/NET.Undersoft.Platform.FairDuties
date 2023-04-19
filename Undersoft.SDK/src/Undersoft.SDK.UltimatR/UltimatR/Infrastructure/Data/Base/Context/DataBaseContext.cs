@@ -2,11 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.OData.ModelBuilder;
-using System;
-using System.Linq;
 using System.Logs;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace UltimatR
 {
@@ -42,22 +38,22 @@ namespace UltimatR
             return this.Set<TEntity>();
         }
 
-        public object DataSet<TEntity>() where TEntity : class, IIdentifiable
+        public object EntitySet<TEntity>() where TEntity : class, IIdentifiable
         {
             return this.Set<TEntity>();
         }
 
-        public object DataSet(Type type)
+        public object EntitySet(Type type)
         {
             return this.GetDbSet(type);
         }
 
-        public TModel GetModel<TModel>()
+        public TModel GetEdm<TModel>()
         {
-            return BuildEdmModel<TModel>();
+            return BuildEdm<TModel>();
         }
 
-        private TModel BuildEdmModel<TModel>()
+        private TModel BuildEdm<TModel>()
         {
             var entityTypes = this.Model.GetEntityTypes();
             var odataBuilder = new ODataConventionModelBuilder();

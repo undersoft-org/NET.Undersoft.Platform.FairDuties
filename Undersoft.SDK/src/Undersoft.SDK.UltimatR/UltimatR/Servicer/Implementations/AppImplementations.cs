@@ -48,9 +48,9 @@ namespace UltimatR
                                 if (entityType.IsGenericType &&
                                     entityType.IsAssignableTo(typeof(Identifier)) &&
                                     dto.Name.Contains($"{entityType.GetGenericArguments().FirstOrDefault().Name}Dto"))
-                                    dto = typeof(DtoIdentifier<>).MakeGenericType(_dto);
+                                    dto = typeof(IdentifierDto<>).MakeGenericType(_dto);
                                 else if (entityType == typeof(Event) && dto.Name.Contains("DtoEvent"))
-                                    dto = typeof(DtoEvent);
+                                    dto = typeof(EventDto);
                                 else
                                     continue;
                             service.AddTransient(
@@ -66,22 +66,22 @@ namespace UltimatR
                                     typeof(IRequestHandler<,>).MakeGenericType(
                                         new[]
                                     {
-                                        typeof(FilterDto<,,>).MakeGenericType(store, entityType, dto),
+                                        typeof(FilterData<,,>).MakeGenericType(store, entityType, dto),
                                         typeof(IDeck<>).MakeGenericType(dto)
                                     }),
-                                    typeof(FilterDtoHandler<,,>).MakeGenericType(store, entityType, dto));
+                                    typeof(FilterDataHandler<,,>).MakeGenericType(store, entityType, dto));
 
                                 service.AddTransient(
                                     typeof(IRequestHandler<,>).MakeGenericType(
-                                        typeof(FindDto<,,>).MakeGenericType(store, entityType, dto),
+                                        typeof(FindOne<,,>).MakeGenericType(store, entityType, dto),
                                         dto),
-                                    typeof(FindDtoHandler<,,>).MakeGenericType(store, entityType, dto));
+                                    typeof(FindOneHandler<,,>).MakeGenericType(store, entityType, dto));
 
                                 service.AddTransient(
                                     typeof(IRequestHandler<,>).MakeGenericType(
-                                        typeof(GetDto<,,>).MakeGenericType(store, entityType, dto),
+                                        typeof(GetAll<,,>).MakeGenericType(store, entityType, dto),
                                         typeof(IDeck<>).MakeGenericType(dto)),
-                                    typeof(GetDtoHandler<,,>).MakeGenericType(store, entityType, dto));
+                                    typeof(GetAllHandler<,,>).MakeGenericType(store, entityType, dto));
                                 service.AddTransient(
                                     typeof(IRequestHandler<,>).MakeGenericType(
                                         new[]

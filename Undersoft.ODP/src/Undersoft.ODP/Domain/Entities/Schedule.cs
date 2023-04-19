@@ -34,12 +34,12 @@ namespace Undersoft.ODP.Domain
         [IgnoreClientProperty]
         public virtual Team TeamView { get; set; }
 
-        public virtual DboToSet<Shift> Shifts { get; set; }
+        public virtual EntityOnSet<Shift> Shifts { get; set; }
 
         [JsonIgnore]
         [IgnoreDataMember]
         [IgnoreClientProperty]
-        public virtual DboToSets<Shift> ShiftViews { get; set; }
+        public virtual EntityOnSets<Shift> ShiftViews { get; set; }
 
         [JsonIgnore]
         [IgnoreDataMember]

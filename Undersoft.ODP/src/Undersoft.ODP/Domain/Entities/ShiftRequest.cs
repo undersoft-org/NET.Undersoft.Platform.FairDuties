@@ -27,6 +27,6 @@ namespace Undersoft.ODP.Domain
 
         [JsonIgnore]
         [IgnoreDataMember]
-        public virtual DboToSets<Shift> Shifts { get; set; }
+        public virtual EntityOnSets<Shift> Shifts { get; set; }
     }
 }

@@ -18,6 +18,6 @@ namespace Undersoft.ODP.Api
 
         public DtoSet<BasicDeviceSessionDto> Sessions { get; set; }
 
-        public DtoSet<DtoIdentifier<DeviceDto>> Identifiers { get; set; }
+        public DtoSet<IdentifierDto<DeviceDto>> Identifiers { get; set; }
     }
 }

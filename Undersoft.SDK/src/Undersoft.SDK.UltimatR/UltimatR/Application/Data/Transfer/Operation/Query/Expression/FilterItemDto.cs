@@ -1,18 +1,15 @@
-﻿using System;
-using System.Instant;
-using System.Linq.Expressions;
-using System.Text.Json.Serialization;
-
-namespace UltimatR
+﻿namespace UltimatR
 {
     [Serializable]
     public class FilterItem
-    {    
+    {
         #region Properties
 
         public string Property { get; set; }
-            
+
         public string Operand { get; set; }
+
+        public string Data { get; set; }
 
         public object Value { get; set; }
 
@@ -21,6 +18,6 @@ namespace UltimatR
         public string Logic { get; set; } = "And";
 
         #endregion
-     
+
     }
 }

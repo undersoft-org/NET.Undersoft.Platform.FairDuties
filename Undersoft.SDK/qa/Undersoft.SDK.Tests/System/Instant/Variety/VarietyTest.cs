@@ -17,18 +17,18 @@ namespace System.Instant.Tests
                 Kind = AgreementKind.Agree,
                 Creator = "sfssd",
                 VersionId = 222,
-                Formats = new DboSet<AgreementFormat>()
+                Formats = new EntitySet<AgreementFormat>()
                 {
                     new AgreementFormat() { Id = 10, Name = "telefon" },
                     new AgreementFormat() { Id = 15, Name = "skan" }
                 },
-                Versions = new DboSet<AgreementVersion>()
+                Versions = new EntitySet<AgreementVersion>()
                 {
                     new AgreementVersion()
                     {
                         Id = 20,
                         VersionNumber = 2,
-                        Texts = new DboSet<AgreementText>()
+                        Texts = new EntitySet<AgreementText>()
                         {
                             new AgreementText()
                             {
@@ -48,7 +48,7 @@ namespace System.Instant.Tests
                     {
                         Id = 25,
                         VersionNumber = 5,
-                        Texts = new DboSet<AgreementText>()
+                        Texts = new EntitySet<AgreementText>()
                         {
                             new AgreementText()
                             {

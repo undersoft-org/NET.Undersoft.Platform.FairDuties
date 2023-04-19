@@ -14,8 +14,8 @@ namespace System.Instant.Tests
         public int OriginId { get; set; }
 
         public virtual AgreementType Type { get; set; }
-        public virtual DboSet<Agreement> Agreements { get; set; }
-        public virtual DboSet<AgreementText> Texts { get; set; } 
+        public virtual EntitySet<Agreement> Agreements { get; set; }
+        public virtual EntitySet<AgreementText> Texts { get; set; } 
     }
 
     public class AgreementVersions : KeyedCollection<long, AgreementVersion>

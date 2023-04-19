@@ -20,11 +20,11 @@ namespace Undersoft.ODP.Domain
 
         public virtual string Notices { get; set; }
 
-        public virtual DboToSet<Address> Addresses { get; set; }
+        public virtual EntityOnSet<Address> Addresses { get; set; }
 
         [IgnoreMap]
         [JsonIgnore]
-        public virtual DboSet<Personal> Personals { get; set; }
+        public virtual EntitySet<Personal> Personals { get; set; }
     }
 
 }

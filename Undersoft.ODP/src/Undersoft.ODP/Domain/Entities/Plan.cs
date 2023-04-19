@@ -15,16 +15,16 @@ namespace Undersoft.ODP.Domain
 
         public DateTime EndTime { get; set; }
 
-        public virtual DboToSet<Organization> Organizations { get; set; }
+        public virtual EntityOnSet<Organization> Organizations { get; set; }
 
-        public virtual DboToSet<User> Users { get; set; }
+        public virtual EntityOnSet<User> Users { get; set; }
 
-        public virtual DboToSet<Team> Teams { get; set; }
+        public virtual EntityOnSet<Team> Teams { get; set; }
 
-        public virtual DboToSet<ShiftType> ShiftTypes { get; set; }
+        public virtual EntityOnSet<ShiftType> ShiftTypes { get; set; }
 
         [NotMapped]
         [IgnoreDataMember]
-        public DboSet<Shift> Shifts { get; set; }
+        public EntitySet<Shift> Shifts { get; set; }
     }
 }

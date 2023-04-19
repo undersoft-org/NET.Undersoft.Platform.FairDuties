@@ -1,21 +1,10 @@
-﻿//-----------------------------------------------------------------------
-// <copyright file="HostRepository.cs" company="Undersoft">
-//     Author: Dariusz Hanc
-//     Copyright (c) Undersoft. All rights reserved.
-// </copyright>
-//-----------------------------------------------------------------------
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Storage;
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Instant;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Logs;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Uniques;
 
 namespace UltimatR
@@ -83,14 +72,7 @@ namespace UltimatR
 
         public override TEntity this[params object[] keys]
         {
-            get
-            {
-                //OnFinding.Publish(this);
-
-                return lookup(keys);
-
-                //OnFindComplete.Publish(this, item);
-            }
+            get { return lookup(keys); }
             set
             {
                 object current = null;
@@ -103,7 +85,9 @@ namespace UltimatR
             }
         }
 
-        public override TEntity this[object[] keys, params Expression<Func<TEntity, object>>[] expanders]
+        public override TEntity this[object[] keys, params Expression<
+            Func<TEntity, object>
+        >[] expanders]
         {
             get
             {
@@ -276,9 +260,12 @@ namespace UltimatR
             }
         }
 
-        public override object TracePatching(object item, string propertyName = null, Type type = null)
+        public override object TracePatching(
+            object item,
+            string propertyName = null,
+            Type type = null
+        )
         {
-
             if (type == null)
             {
                 dbContext.Attach(item);

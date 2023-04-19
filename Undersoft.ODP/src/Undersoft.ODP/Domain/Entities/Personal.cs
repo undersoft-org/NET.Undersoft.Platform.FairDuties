@@ -32,10 +32,10 @@ namespace Undersoft.ODP.Domain
         [IgnoreDataMember]
         public virtual User User { get; set; }
 
-        public virtual DboToSets<Attribute> Attributes { get; set; }
+        public virtual EntityOnSets<Attribute> Attributes { get; set; }
 
-        public virtual DboToSets<Contact> Contacts { get; set; }
+        public virtual EntityOnSets<Contact> Contacts { get; set; }
 
-        public virtual DboToSets<Device> Devices { get; set; }
+        public virtual EntityOnSets<Device> Devices { get; set; }
     }
 }

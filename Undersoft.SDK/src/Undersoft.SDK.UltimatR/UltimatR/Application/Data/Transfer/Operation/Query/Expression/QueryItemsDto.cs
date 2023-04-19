@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace UltimatR
+﻿namespace UltimatR
 {
     [Serializable]
     public class QueryItems
@@ -10,7 +7,7 @@ namespace UltimatR
 
         public List<FilterItem> Filter { get; set; } = new();
 
-        public List<SortItem> Sort { get; set; } = new(); 
+        public List<SortItem> Sort { get; set; } = new();
 
         #endregion
 

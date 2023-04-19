@@ -21,8 +21,8 @@ namespace System.Instant.Tests
         public string Email { get; set; } = "fdfds";
         public string PhoneNumber { get; set; } = "3453453";
 
-        public virtual DboSet<AgreementFormat> Formats { get; set; } = null;
-        public virtual DboSet<AgreementVersion> Versions { get; set; } = null;
+        public virtual EntitySet<AgreementFormat> Formats { get; set; } = null;
+        public virtual EntitySet<AgreementVersion> Versions { get; set; } = null;
         public virtual AgreementType Type { get; set; } = null;
     }
 

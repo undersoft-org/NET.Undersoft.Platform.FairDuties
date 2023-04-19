@@ -2,7 +2,7 @@
 
 namespace Undersoft.AEP
 {
-    public interface IAlloc : IUniqueEntry
+    public interface IAlloc : IUniqueObject
     {
         long CurrentId { get; }
     }

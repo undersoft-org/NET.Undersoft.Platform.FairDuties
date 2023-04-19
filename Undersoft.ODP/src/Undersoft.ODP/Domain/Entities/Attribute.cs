@@ -11,32 +11,32 @@ namespace Undersoft.ODP.Domain
 
         public string Value { get; set; }
 
-        public virtual DboToSets<Attribute> RelatedFrom { get; set; }
+        public virtual EntityOnSets<Attribute> RelatedFrom { get; set; }
 
-        public virtual DboToSets<Attribute> RelatedTo { get; set; }
-
-        [JsonIgnore]
-        [IgnoreDataMember]
-        public virtual DboSet<User> Users { get; set; }
+        public virtual EntityOnSets<Attribute> RelatedTo { get; set; }
 
         [JsonIgnore]
         [IgnoreDataMember]
-        public virtual DboSet<Team> Teams { get; set; }
+        public virtual EntitySet<User> Users { get; set; }
 
         [JsonIgnore]
         [IgnoreDataMember]
-        public virtual DboSet<ShiftType> ShiftTypes { get; set; }
+        public virtual EntitySet<Team> Teams { get; set; }
 
         [JsonIgnore]
         [IgnoreDataMember]
-        public virtual DboSet<Organization> Organizations { get; set; }
+        public virtual EntitySet<ShiftType> ShiftTypes { get; set; }
 
         [JsonIgnore]
         [IgnoreDataMember]
-        public virtual DboSet<Configuration> Configurations { get; set; }
+        public virtual EntitySet<Organization> Organizations { get; set; }
 
         [JsonIgnore]
         [IgnoreDataMember]
-        public virtual DboSet<Personal> Personals { get; set; }
+        public virtual EntitySet<Configuration> Configurations { get; set; }
+
+        [JsonIgnore]
+        [IgnoreDataMember]
+        public virtual EntitySet<Personal> Personals { get; set; }
     }
 }

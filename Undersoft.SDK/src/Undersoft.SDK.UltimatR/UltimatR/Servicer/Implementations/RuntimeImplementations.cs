@@ -17,11 +17,11 @@ namespace UltimatR
             Type[] stores = new Type[] { typeof(IEntryStore), typeof(IReportStore) };
 
             /**************************************** DataService Entity Type Routines ***************************************/
-            foreach (IDeck<IEdmEntityType> contextEntityTypes in DsRegistry.Entities)
+            foreach (IDeck<IEdmEntityType> contextEntityTypes in OpenDataServiceRegistry.Entities)
             {
                 foreach (IEdmEntityType _entityType in contextEntityTypes)
                 {
-                    Type entityType = DsRegistry.Mappings[_entityType.Name];
+                    Type entityType = OpenDataServiceRegistry.Mappings[_entityType.Name];
 
                     if (duplicateCheck.Add(entityType))
                     {
@@ -30,7 +30,7 @@ namespace UltimatR
                         /*****************************************************************************************/
                         foreach (Type store in stores)
                         {
-                            if ((entityType != null) && (DsRegistry.GetContext(store, entityType) != null))
+                            if ((entityType != null) && (OpenDataServiceRegistry.GetContext(store, entityType) != null))
                             {
                                 /*****************************************************************************************/
                                 service.AddScoped(
@@ -42,19 +42,19 @@ namespace UltimatR
                                     typeof(EntityCache<,>).MakeGenericType(store, entityType));
                                 /*****************************************************************************************/
                                 service.AddScoped(
-                                    typeof(IDso<,>).MakeGenericType(store, entityType),
-                                    typeof(DsoSet<,>).MakeGenericType(store, entityType));
+                                    typeof(IRemote<,>).MakeGenericType(store, entityType),
+                                    typeof(RemoteSet<,>).MakeGenericType(store, entityType));
                                 /*****************************************************************************************/
                                 if (callerType != null)
                                 {
                                     /*********************************************************************************************/
                                     service.AddScoped(
-                                        typeof(IRemoteLink<,,>).MakeGenericType(store, callerType, entityType),
-                                        typeof(RemoteLink<,,>).MakeGenericType(store, callerType, entityType));
+                                        typeof(IRemoteRepositoryLink<,,>).MakeGenericType(store, callerType, entityType),
+                                        typeof(RemoteRepositoryLink<,,>).MakeGenericType(store, callerType, entityType));
 
                                     service.AddScoped(
                                         typeof(ILinkedObject<,>).MakeGenericType(store, callerType),
-                                        typeof(RemoteLink<,,>).MakeGenericType(store, callerType, entityType));
+                                        typeof(RemoteRepositoryLink<,,>).MakeGenericType(store, callerType, entityType));
                                     /*********************************************************************************************/
                                 }
                             }

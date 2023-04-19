@@ -20,6 +20,6 @@ namespace Undersoft.ODP.Domain
 
         [JsonIgnore]
         [IgnoreDataMember]
-        public virtual DboToSets<Configuration> Configurations { get; set; }
+        public virtual EntityOnSets<Configuration> Configurations { get; set; }
     }
 }

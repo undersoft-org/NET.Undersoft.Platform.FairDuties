@@ -62,7 +62,7 @@ namespace UltimatR
             where TLeft : Entity
             where TRight : Entity
         {
-            return new DboSetToSetRelation<TLeft, TRight>(
+            return new EntityLinkOnSets<TLeft, TRight>(
                 builder,
                 expandSite,
                 dbSchema
@@ -80,7 +80,7 @@ namespace UltimatR
             where TLeft : Entity
             where TRight : Entity
         {
-            return new DboSetToSetRelation<TLeft, TRight>(
+            return new EntityLinkOnSets<TLeft, TRight>(
                 builder,
                 leftName,
                 rightName,
@@ -103,7 +103,7 @@ namespace UltimatR
             where TLeft : Entity
             where TRight : Entity
         {
-            return new DboSetToSetRelation<TLeft, TRight>(
+            return new EntityLinkOnSets<TLeft, TRight>(
                 builder,
                 leftName,
                 leftTableName,
@@ -123,7 +123,7 @@ namespace UltimatR
             where TLeft : Entity
             where TRight : Entity
         {
-            return new DboSetToDsoSetRelation<TLeft, TRight>(
+            return new EnetityLinkOnRemoteSets<TLeft, TRight>(
                 builder,
                 expandSite,
                 dbSchema
@@ -140,7 +140,7 @@ namespace UltimatR
             where TLeft : Entity
             where TRight : Entity
         {
-            return new DboSetToDsoSetRelation<TLeft, TRight>(
+            return new EnetityLinkOnRemoteSets<TLeft, TRight>(
                 builder,
                 leftName,
                 rightName,
@@ -162,7 +162,7 @@ namespace UltimatR
             where TLeft : Entity
             where TRight : Entity
         {
-            return new DboSetToDsoSetRelation<TLeft, TRight>(
+            return new EnetityLinkOnRemoteSets<TLeft, TRight>(
                 builder,
                 leftName,
                 leftTableName,
@@ -183,7 +183,7 @@ namespace UltimatR
             where TLeft : Entity
             where TRight : Entity
         {
-            return new DboToSetRelation<TLeft, TRight>(builder, expandSite).Configure(autoinclude);
+            return new EntityLinkOnSet<TLeft, TRight>(builder, expandSite).Configure(autoinclude);
         }
 
         public static ModelBuilder LinkToSet<TLeft, TRight>(
@@ -197,7 +197,7 @@ namespace UltimatR
             where TLeft : Entity
             where TRight : Entity
         {
-            return new DboToSetRelation<TLeft, TRight>(
+            return new EntityLinkOnSet<TLeft, TRight>(
                 builder,
                 leftName,
                 rightName,
@@ -220,7 +220,7 @@ namespace UltimatR
             where TLeft : Entity
             where TRight : Entity
         {
-            return new DboToSetRelation<TLeft, TRight>(
+            return new EntityLinkOnSet<TLeft, TRight>(
                 builder,
                 leftName,
                 leftTableName,
@@ -239,7 +239,7 @@ namespace UltimatR
             where TLeft : Entity
             where TRight : Entity
         {
-            return new DboToSingleRelation<TLeft, TRight>(
+            return new EntityLinkOnSingle<TLeft, TRight>(
                 builder,
                 expandSite,
                 dbSchema
@@ -257,7 +257,7 @@ namespace UltimatR
             where TLeft : Entity
             where TRight : Entity
         {
-            return new DboToSingleRelation<TLeft, TRight>(
+            return new EntityLinkOnSingle<TLeft, TRight>(
                 builder,
                 leftName,
                 rightName,
@@ -280,7 +280,7 @@ namespace UltimatR
             where TLeft : Entity
             where TRight : Entity
         {
-            return new DboToSingleRelation<TLeft, TRight>(
+            return new EntityLinkOnSingle<TLeft, TRight>(
                 builder,
                 leftName,
                 leftTableName,

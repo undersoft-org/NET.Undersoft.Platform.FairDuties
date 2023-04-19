@@ -3,9 +3,9 @@
     using System.Uniques;
 
     [Serializable]
-    public class Link : IUnique
+    public class Link : IUniqueCode
     {
-        private Uscn serialcode;
+        private Uscn uniquecode;
 
         public Link() { }
 
@@ -91,10 +91,10 @@
             set { Origin.Rubrics = value; }
         }
 
-        public Uscn SerialCode
+        public Uscn UniqueCode
         {
-            get => serialcode;
-            set => serialcode = value;
+            get => uniquecode;
+            set => uniquecode = value;
         }
 
         public LinkNode Node { get; set; }
@@ -157,34 +157,34 @@
 
         public ulong UniqueKey
         {
-            get => serialcode.UniqueKey;
-            set => serialcode.UniqueKey = value;
+            get => uniquecode.UniqueKey;
+            set => uniquecode.UniqueKey = value;
         }
 
         public ulong UniqueType
         {
-            get => serialcode.UniqueType;
-            set => serialcode.UniqueType = value;
+            get => uniquecode.UniqueType;
+            set => uniquecode.UniqueType = value;
         }
 
         public int CompareTo(IUnique other)
         {
-            return serialcode.CompareTo(other);
+            return uniquecode.CompareTo(other);
         }
 
         public bool Equals(IUnique other)
         {
-            return serialcode.Equals(other);
+            return uniquecode.Equals(other);
         }
 
         public byte[] GetBytes()
         {
-            return serialcode.GetBytes();
+            return uniquecode.GetBytes();
         }
 
         public byte[] GetUniqueBytes()
         {
-            return serialcode.GetUniqueBytes();
+            return uniquecode.GetUniqueBytes();
         }
 
         public Link SetLink(ISleeve origin, ISleeve target, IRubrics parentKeys, IRubrics childKeys)

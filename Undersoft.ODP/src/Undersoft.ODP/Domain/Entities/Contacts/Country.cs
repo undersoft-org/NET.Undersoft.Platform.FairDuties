@@ -21,9 +21,9 @@ namespace Undersoft.ODP.Domain
         public long? LanguageId { get; set; }
         public virtual CountryLanguage Language { get; set; }
 
-        public virtual DboToSet<CountryState> States { get; set; }
+        public virtual EntityOnSet<CountryState> States { get; set; }
         [JsonIgnore]
         [IgnoreDataMember]
-        public virtual DboToSet<Address> Addresses { get; set; }
+        public virtual EntityOnSet<Address> Addresses { get; set; }
     }
 }

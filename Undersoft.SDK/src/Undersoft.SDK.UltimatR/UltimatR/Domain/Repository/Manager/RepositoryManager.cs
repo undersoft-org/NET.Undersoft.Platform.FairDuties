@@ -74,13 +74,13 @@ namespace UltimatR
 
         public IRemoteRepository<TEntity> Load<TEntity>() where TEntity : Entity
         {
-            return Load<TEntity>(DsRegistry.GetContexts<TEntity>().FirstOrDefault());
+            return Load<TEntity>(OpenDataServiceRegistry.GetContexts<TEntity>().FirstOrDefault());
         }
         public IRemoteRepository<TEntity> Load<TEntity>(Type contextType)
            where TEntity : Entity
         {
             return (IRemoteRepository<TEntity>)Services.GetService(typeof(IRemoteRepository<,>)
-                                                     .MakeGenericType(DsRegistry
+                                                     .MakeGenericType(OpenDataServiceRegistry
                                                      .Stores[contextType],
                                                       typeof(TEntity)));
         }
@@ -100,7 +100,7 @@ namespace UltimatR
         public IRepositoryClient GetClient<TStore, TEntity>()
         where TEntity : Entity
         {
-            var contextType = DsRegistry.GetContext<TStore, TEntity>();
+            var contextType = OpenDataServiceRegistry.GetContext<TStore, TEntity>();
 
             return Clients.Get(contextType);
         }

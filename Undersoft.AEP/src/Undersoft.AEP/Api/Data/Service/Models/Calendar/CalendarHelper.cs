@@ -85,7 +85,7 @@ namespace Undersoft.AEP
 
     }
 
-    public class CalendarItem : UniqueBase
+    public class CalendarItem : UniqueObject
     {
         public int Era { get; set; }
         public int FourDigitYear { get; set; }

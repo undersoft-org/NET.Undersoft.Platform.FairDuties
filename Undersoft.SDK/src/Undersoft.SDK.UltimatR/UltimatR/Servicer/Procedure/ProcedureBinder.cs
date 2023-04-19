@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using ProtoBuf.Grpc.Configuration;
 using System.Reflection;
-using Microsoft.Extensions.DependencyInjection;
-using ProtoBuf.Grpc.Configuration;
 
 namespace UltimatR
 {

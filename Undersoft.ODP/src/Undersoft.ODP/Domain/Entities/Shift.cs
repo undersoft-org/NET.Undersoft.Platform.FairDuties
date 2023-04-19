@@ -1,8 +1,8 @@
 ﻿using Microsoft.OData.Client;
-using Undersoft.AEP;
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 using UltimatR;
+using Undersoft.AEP;
 
 namespace Undersoft.ODP.Domain
 {
@@ -55,11 +55,11 @@ namespace Undersoft.ODP.Domain
 
         [JsonIgnore]
         [IgnoreDataMember]
-        public virtual DboToSets<ShiftRequest> Requests { get; set; }
+        public virtual EntityOnSets<ShiftRequest> Requests { get; set; }
 
         [JsonIgnore]
         [IgnoreDataMember]
-        public virtual DboToSets<Schedule> ScheduleViews { get; set; }
+        public virtual EntityOnSets<Schedule> ScheduleViews { get; set; }
 
         [JsonIgnore]
         [IgnoreDataMember]

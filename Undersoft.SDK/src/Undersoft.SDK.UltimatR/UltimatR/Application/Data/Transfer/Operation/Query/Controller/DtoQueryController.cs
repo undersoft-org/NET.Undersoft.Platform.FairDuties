@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace UltimatR
 {
@@ -35,7 +32,7 @@ namespace UltimatR
         public virtual async Task<IActionResult> Get()
         {
             return Ok(
-                await _ultimatr.Send(new GetDto<TStore, TEntity, TDto>(0, 0)).ConfigureAwait(true)
+                await _ultimatr.Send(new GetAll<TStore, TEntity, TDto>(0, 0)).ConfigureAwait(true)
             );
         }
 
@@ -50,8 +47,8 @@ namespace UltimatR
         {
             Task<TDto> query =
                 (_keymatcher == null)
-                    ? _ultimatr.Send(new FindDto<TStore, TEntity, TDto>(key))
-                    : _ultimatr.Send(new FindDto<TStore, TEntity, TDto>(_keymatcher(key)));
+                    ? _ultimatr.Send(new FindOne<TStore, TEntity, TDto>(key))
+                    : _ultimatr.Send(new FindOne<TStore, TEntity, TDto>(_keymatcher(key)));
 
             return Ok(await query.ConfigureAwait(false));
         }
@@ -61,12 +58,12 @@ namespace UltimatR
         {
             return Ok(
                 await _ultimatr
-                    .Send(new GetDto<TStore, TEntity, TDto>(offset, limit))
+                    .Send(new GetAll<TStore, TEntity, TDto>(offset, limit))
                     .ConfigureAwait(true)
             );
         }
 
-        [HttpPost("Query/{offset}/{limit}")]
+        [HttpPost("query/{offset}/{limit}")]
         public virtual async Task<IActionResult> Post(int offset, int limit, QueryItems query)
         {
             query.Filter.ForEach(
@@ -80,7 +77,7 @@ namespace UltimatR
             return Ok(
                 await _ultimatr
                     .Send(
-                        new FilterDto<TStore, TEntity, TDto>(offset, limit,
+                        new FilterData<TStore, TEntity, TDto>(offset, limit,
                             new FilterExpression<TEntity>(query.Filter).Create(),
                             new SortExpression<TEntity>(query.Sort)
                         )

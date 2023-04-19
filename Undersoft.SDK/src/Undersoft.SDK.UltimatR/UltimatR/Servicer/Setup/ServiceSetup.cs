@@ -4,21 +4,14 @@ using IdentityModel;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Formatters;
-using Microsoft.AspNetCore.OData;
-using Microsoft.AspNetCore.OData.Routing.Attributes;
-using Microsoft.AspNetCore.OData.Routing.Controllers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Net.Http.Headers;
-using Microsoft.OData.Edm;
 using Microsoft.OpenApi.Models;
 using ProtoBuf.Grpc.Configuration;
 using ProtoBuf.Grpc.Server;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -76,7 +69,7 @@ namespace UltimatR
 
         string AddDsClientPrefix(Type contextType, string routePrefix = null)
         {
-            Type iface = DsRegistry.GetDsStore(contextType);
+            Type iface = OpenDataServiceRegistry.GetDsStore(contextType);
             return GetStoreRoutes(iface, routePrefix);
         }
 
@@ -84,52 +77,6 @@ namespace UltimatR
         {
             Type iface = DbRegistry.GetDbStore(contextType);
             return GetStoreRoutes(iface, routePrefix);
-        }
-
-        IRepositoryEndpoint<TContext> AddEntitySets<TContext>() where TContext : DbContext
-        {
-            return (IRepositoryEndpoint<TContext>)AddEntitySets(typeof(TContext));
-        }
-
-        IRepositoryEndpoint AddEntitySets(Type contextType)
-        {
-            if (!RepositoryManager.TryGetEndpoint(contextType, out IRepositoryEndpoint endpoint))
-            {
-                return endpoint;
-            }
-
-            Assembly[] asm = Assemblies;
-
-            Type[] otypes = asm.SelectMany(
-                    a =>
-                        a.GetTypes()
-                            .Where(
-                                type =>
-                                    typeof(ODataController).IsAssignableFrom(type)
-                                    || type.GetCustomAttribute<ODataAttributeRoutingAttribute>()
-                                        != null
-                            )
-                            .ToArray()
-                )
-                .Where(
-                    b =>
-                        !b.IsAbstract
-                        && b.BaseType.IsGenericType
-                        && b.BaseType.GenericTypeArguments.Length == 3
-                )
-                .Select(a => a.BaseType)
-                .ToArray();
-
-            foreach (Type types in otypes)
-            {
-                Type[] genTypes = types.GenericTypeArguments;
-                if (DsRegistry.GetDsStore(contextType) == genTypes[1])
-                {
-                    endpoint.DsSet(genTypes[2]);
-                }
-            }
-
-            return endpoint;
         }
 
         public IServiceSetup AddMvcDsSupport()
@@ -182,17 +129,17 @@ namespace UltimatR
                     ? (StoreRoutes.ReportStore = routePrefix)
                     : StoreRoutes.ReportStore;
             }
-            else if (iface == typeof(IConfigStore))
+            else if (iface == typeof(ICqrsStore))
             {
                 return (routePrefix != null)
-                    ? (StoreRoutes.ConfigStore = routePrefix)
-                    : StoreRoutes.ConfigStore;
+                    ? (StoreRoutes.CqrsStore = routePrefix)
+                    : StoreRoutes.CqrsStore;
             }
             else
             {
                 return (routePrefix != null)
-                    ? (StoreRoutes.StateStore = routePrefix)
-                    : StoreRoutes.StateStore;
+                  ? (StoreRoutes.CqrsStore = routePrefix)
+                  : StoreRoutes.CqrsStore;
             }
         }
 
@@ -236,49 +183,36 @@ namespace UltimatR
             return this;
         }
 
-        public IServiceSetup AddDataService<TContext>(
-            string routePrefix,
-            int? pageLimit = null
-        ) where TContext : DbContext
+        public IServiceSetup AddOperationalServices<TServiceStore>(DataServiceTypes dataServiceTypes, Action<DataServiceBuilder> builder) where TServiceStore : IDataServiceStore
         {
-            IRepositoryEndpoint<TContext> endpoint = AddEntitySets<TContext>();
-
-            routePrefix = AddDsEndpointPrefix(typeof(TContext), routePrefix);
-
-            return AddODataOptions(mvc ??= Services.AddControllers(), endpoint, routePrefix, pageLimit);
-        }
-
-        public IServiceSetup AddDataService(
-            Type contextType,
-            string routePrefix,
-            int? pageLimit = null
-        )
-        {
-            IRepositoryEndpoint endpoint = AddEntitySets(contextType);
-
-            routePrefix = AddDsEndpointPrefix(contextType, routePrefix);
-
-            return AddODataOptions(mvc ??= Services.AddControllers(), endpoint, routePrefix, pageLimit);
-        }
-
-        public IServiceSetup AddODataOptions(
-            IMvcBuilder mvcBuilder,
-            IRepositoryEndpoint endpoint,
-            string routePrefix,
-            int? pageLimit = null)
-        {
-            mvcBuilder.AddOData(
-               (opt) =>
-               {
-                   opt.RouteOptions.EnableQualifiedOperationCall = true;
-                   opt.RouteOptions.EnableUnqualifiedOperationCall = true;
-                   opt.RouteOptions.EnableKeyInParenthesis = true;
-                   opt.RouteOptions.EnableKeyAsSegment = false;
-                   opt.RouteOptions.EnableControllerNameCaseInsensitive = true;
-                   opt.EnableQueryFeatures(pageLimit);
-                   opt.AddRouteComponents(routePrefix, endpoint.GetDsModel<IEdmModel>());
-               }
-            );
+            DataServiceBuilder.ServiceTypes = dataServiceTypes;
+            if ((dataServiceTypes & DataServiceTypes.OData) > 0)
+            {
+                Task.Run(() =>
+                {
+                    var ds = new OpenDataServiceBuilder<TServiceStore>();
+                    builder.Invoke(ds);
+                    ds.Build();
+                });
+            }
+            if ((dataServiceTypes & DataServiceTypes.Grpc) > 0)
+            {
+                Task.Run(() =>
+                {
+                    var ds = new GrpcDataServiceBuilder<TServiceStore>();
+                    builder.Invoke(ds);
+                    ds.Build();
+                });
+            }
+            if ((dataServiceTypes & DataServiceTypes.WebAPI) > 0)
+            {
+                Task.Run(() =>
+                {
+                    var ds = new RestDataServiceBuilder<TServiceStore>();
+                    builder.Invoke(ds);
+                    ds.Build();
+                });
+            }
             return this;
         }
 
@@ -317,11 +251,13 @@ namespace UltimatR
             return this;
         }
 
-        public IServiceSetup AddProcedureBinder()
+        public IServiceSetup AddGrpcServicer()
         {
-            registry.TryAddSingleton(
-                BinderConfiguration.Create(binder: new ProcedureBinder(registry))
-            );
+            registry.AddCodeFirstGrpc(config =>
+            {
+                config.ResponseCompressionLevel = System.IO.Compression.CompressionLevel.NoCompression;
+            });
+            registry.TryAddSingleton(BinderConfiguration.Create(binder: new ProcedureBinder(registry)));
             registry.AddCodeFirstGrpcReflection();
             return this;
         }
@@ -360,22 +296,22 @@ namespace UltimatR
 
         public IServiceSetup AddPolicies()
         {
-            var ao = configuration.Identity;
+            var ic = configuration.Identity;
 
             registry.AddAuthorization(
                 options =>
                 {
-                    ao.Scopes
+                    ic.Scopes
                         .ForEach(s => options.AddPolicy(s, policy => policy.RequireScope(s)));
 
-                    ao.Roles
+                    ic.Roles
                         .ForEach(s => options.AddPolicy(s, policy => policy.RequireRole(s)));
 
                     options.AddPolicy("RequireAdministratorRole",
                         policy =>
                             policy.RequireAssertion(context => context.User.HasClaim(c =>
-                                    ((c.Type == JwtClaimTypes.Role && c.Value == ao.AdministrationRole) ||
-                                    (c.Type == $"client_{JwtClaimTypes.Role}" && c.Value == ao.AdministrationRole)))
+                                    ((c.Type == JwtClaimTypes.Role && c.Value == ic.AdministrationRole) ||
+                                    (c.Type == $"client_{JwtClaimTypes.Role}" && c.Value == ic.AdministrationRole)))
                             ));
                 }
             );
@@ -417,7 +353,7 @@ namespace UltimatR
             return this;
         }
 
-        public IServiceSetup ConfigureClients(Assembly[] assemblies = null)
+        public IServiceSetup AddRepositoryClients(Assembly[] assemblies = null)
         {
             IServiceConfiguration config = configuration;
             assemblies ??= AppDomain.CurrentDomain.GetAssemblies();
@@ -472,8 +408,8 @@ namespace UltimatR
                     IRepositoryClient repoClient = (IRepositoryClient)
                         repoType.New(provider, _connectionString);
 
-                    Type storeDbType = typeof(DsContext<>).MakeGenericType(
-                        DsRegistry.GetDsStore(contextType)
+                    Type storeDbType = typeof(DataClientContext<>).MakeGenericType(
+                        OpenDataServiceRegistry.GetDsStore(contextType)
                     );
                     Type storeRepoType = typeof(RepositoryClient<>).MakeGenericType(storeDbType);
 
@@ -509,26 +445,10 @@ namespace UltimatR
             return this;
         }
 
-        public IServiceSetup ConfigureDataServices(int? pageLimit = null)
-        {
-            IEnumerable<IRepositoryEndpoint> endpoints = manager.GetEndpoints();
-
-            mvc ??= Services.AddControllers();
-
-            foreach (IRepositoryEndpoint endpoint in endpoints)
-            {
-                AddDataService(endpoint.ContextType, null, pageLimit);
-            }
-
-            AddMvcDsSupport();
-
-            return this;
-        }
-
-        public IServiceSetup ConfigureEndpoints(Assembly[] assemblies = null)
+        public IServiceSetup AddRepositoryEndpoints(Assembly[] assemblies = null)
         {
             IServiceConfiguration config = configuration;
-            assemblies ??= AppDomain.CurrentDomain.GetAssemblies();
+            assemblies ??= Assemblies ??= AppDomain.CurrentDomain.GetAssemblies();
             TypeInfo[] definedTypes = assemblies.SelectMany(a => a.DefinedTypes).ToArray();
             IEnumerable<IConfigurationSection> endpoints = config.Endpoints();
 
@@ -605,7 +525,7 @@ namespace UltimatR
 
         public IServiceSetup ConfigureServices(Assembly[] assemblies = null)
         {
-            Assemblies ??= AppDomain.CurrentDomain.GetAssemblies();
+            Assemblies ??= assemblies ??= AppDomain.CurrentDomain.GetAssemblies();
 
             AddMapper(new DataMapper());
 
@@ -615,11 +535,11 @@ namespace UltimatR
 
             AddJsonSerializerDefaults();
 
-            AddProcedureBinder();
+            AddGrpcServicer();
 
-            ConfigureEndpoints(Assemblies);
+            AddRepositoryEndpoints(Assemblies);
 
-            ConfigureClients(Assemblies);
+            AddRepositoryClients(Assemblies);
 
             AddImplementations(Assemblies);
 
@@ -632,7 +552,7 @@ namespace UltimatR
 
         public IServiceSetup ConfigureServices(bool includeSwagger, Assembly[] assemblies = null)
         {
-            Assemblies ??= AppDomain.CurrentDomain.GetAssemblies();
+            Assemblies ??= assemblies ??= AppDomain.CurrentDomain.GetAssemblies();
 
             AddMapper(new DataMapper());
 
@@ -642,11 +562,11 @@ namespace UltimatR
 
             AddJsonSerializerDefaults();
 
-            AddProcedureBinder();
+            AddGrpcServicer();
 
-            ConfigureEndpoints(Assemblies);
+            AddRepositoryEndpoints(Assemblies);
 
-            ConfigureClients(Assemblies);
+            AddRepositoryClients(Assemblies);
 
             AddImplementations(Assemblies);
 
@@ -662,7 +582,7 @@ namespace UltimatR
 
         public IServiceSetup ConfigureCoreServices(Assembly[] assemblies = null)
         {
-            Assemblies ??= AppDomain.CurrentDomain.GetAssemblies();
+            Assemblies ??= assemblies ??= AppDomain.CurrentDomain.GetAssemblies();
 
             AddMapper(new DataMapper());
 
@@ -670,9 +590,9 @@ namespace UltimatR
 
             AddJsonSerializerDefaults();
 
-            ConfigureEndpoints(Assemblies);
+            AddRepositoryEndpoints(Assemblies);
 
-            ConfigureClients(Assemblies);
+            AddRepositoryClients(Assemblies);
 
             AddImplementations(Assemblies);
 

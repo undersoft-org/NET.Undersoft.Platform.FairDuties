@@ -1,4 +1,5 @@
-﻿using System.Series;
+﻿using System.Instant.Linking;
+using System.Series;
 using UltimatR;
 
 namespace Undersoft.AEP

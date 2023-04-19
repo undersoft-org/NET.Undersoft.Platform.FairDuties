@@ -11,7 +11,7 @@ namespace UltimatR
             while (type.IsAssignableTo(typeof(IProxyTargetAccessor)))
                 type = type.UnderlyingSystemType.BaseType;
             if (type == typeof(IEdmEntityType))
-                return DsRegistry.Mappings[((IEdmEntityType)type).FullTypeName()];
+                return OpenDataServiceRegistry.Mappings[((IEdmEntityType)type).FullTypeName()];
             return type;
         }
 

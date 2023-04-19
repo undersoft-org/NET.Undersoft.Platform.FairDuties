@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Collections;
-using System.Linq;
+﻿using System.Collections;
 
 namespace EstimatR
 {
@@ -19,20 +15,21 @@ namespace EstimatR
 
         public EstimatorObject(object item)
         {
-            if (item is ValueType)
+            var type = item.GetType();
+            if (type.IsValueType)
             {
                 //sprawdzcz czy numeric
                 Item = new double[] { Convert.ToDouble(item) };
                 Mode = EstimatorObjectMode.Single;
             }
-            else if (item.GetType().IsArray)  //analogicznie int[], decimal[], etc. wszystkie liczbowe rzutowac
+            else if (type.IsArray)  //analogicznie int[], decimal[], etc. wszystkie liczbowe rzutowac
             {
                 //sprawdzcz czy numeric                                
                 //Item = (double[]) item; //czy jeszcze inaczej? kopiowac pola?
                 Item = ((Array)item).Cast<object>().Select(o => Convert.ToDouble(o)).ToArray();
                 Mode = EstimatorObjectMode.Multi;
             }
-            else if (item.GetType().GetInterfaces().Where(i => i.Name == "IList").Any()) //is IList nie dziala !!!!
+            else if (type.IsAssignableTo(typeof(IList))) //is IList nie dziala !!!!
             {
                 if (((IList)item).Count > 0 && ((IList)item)[0] is ValueType)
                 {

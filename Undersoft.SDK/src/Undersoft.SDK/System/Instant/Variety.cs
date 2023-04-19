@@ -214,16 +214,13 @@ namespace System.Instant
         {
             var _target = target;
             var _changes = changes;
-
+            Vary vary;
             for (int i = 0; i < count; i++)
             {
-                var vary = _changes[i];
-                var ti = vary.TargetIndex;
-                var ov = vary.OriginValue;
-
+                vary = _changes[i];
                 if (vary.TargetType.IsAssignableTo(vary.OriginType))
                 {
-                    _target[ti] = ov;
+                    _target[vary.TargetIndex] = vary.OriginValue;
                 }
             }
         }
@@ -232,10 +229,10 @@ namespace System.Instant
         {
             var _target = target;
             var _changes = changes;
-
+            Vary vary;
             for (int i = 0; i < count; i++)
             {
-                var vary = _changes[i];
+                vary = _changes[i];
                 _target[vary.TargetIndex] = vary.OriginValue;
             }
         }
@@ -890,9 +887,8 @@ namespace System.Instant
 
         public void WritePresets()
         {
-            foreach (int id in trackset)
-                entry[id] = preset[id];
-            trackset = null;
+            trackset.ForEach((id) => entry[id] = preset[id]).Commit();
+            trackset.Clear();
         }
 
         public bool HavePresets => trackset != null;

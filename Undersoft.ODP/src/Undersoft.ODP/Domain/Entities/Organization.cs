@@ -1,9 +1,9 @@
 using Microsoft.OData.Client;
-using Undersoft.AEP;
 using System.Runtime.Serialization;
 using System.Series;
 using System.Text.Json.Serialization;
 using UltimatR;
+using Undersoft.AEP;
 
 namespace Undersoft.ODP.Domain
 {
@@ -18,21 +18,21 @@ namespace Undersoft.ODP.Domain
 
         public string Notices { get; set; }
 
-        public virtual DboSet<Attribute> Attributes { get; set; }
+        public virtual EntitySet<Attribute> Attributes { get; set; }
 
         [JsonIgnore]
         [IgnoreDataMember]
-        public virtual DboSet<ShiftType> ShiftTypes { get; set; }
+        public virtual EntitySet<ShiftType> ShiftTypes { get; set; }
 
-        private DboToSet<ShiftRate> shiftRates;
-        public virtual DboToSet<ShiftRate> ShiftRates
+        private EntityOnSet<ShiftRate> shiftRates;
+        public virtual EntityOnSet<ShiftRate> ShiftRates
         {
             get
             {
                 if (LastRateOrdinal == 0 && ShiftTypes.Count > 0)
                 {
                     if (shiftRates == null)
-                        shiftRates = new DboToSet<ShiftRate>();
+                        shiftRates = new EntityOnSet<ShiftRate>();
 
                     if (shiftRates.Count != ShiftTypes.Count)
                     {
@@ -45,7 +45,7 @@ namespace Undersoft.ODP.Domain
                             .ExceptIn(st => st.Id, rateIds)
                             .ForEach(
                                 st =>
-                                    ShiftRates.Add(new ShiftRate() { Ordinal = LastRateOrdinal++, ShiftTypeId = st.Id, ShiftType = st })
+                                    shiftRates.Add(new ShiftRate() { Ordinal = LastRateOrdinal++, ShiftTypeId = st.Id, ShiftType = st })
                             );
                     }
                 }
@@ -58,19 +58,19 @@ namespace Undersoft.ODP.Domain
 
         [JsonIgnore]
         [IgnoreDataMember]
-        public virtual DboSet<User> Users { get; set; }
+        public virtual EntitySet<User> Users { get; set; }
 
         [JsonIgnore]
         [IgnoreDataMember]
-        public virtual DboToSet<Plan> Plans { get; set; }
+        public virtual EntityOnSet<Plan> Plans { get; set; }
 
         [JsonIgnore]
         [IgnoreDataMember]
-        public virtual DboToSet<Team> Teams { get; set; }
+        public virtual EntityOnSet<Team> Teams { get; set; }
 
         [JsonIgnore]
         [IgnoreDataMember]
-        public virtual DboToSet<Shift> Shifts { get; set; }
+        public virtual EntityOnSet<Shift> Shifts { get; set; }
 
         public long? ConfigurationId { get; set; }
         public virtual Configuration Configuration { get; set; }

@@ -18,6 +18,6 @@ namespace Undersoft.ODP.Domain
 
         [JsonIgnore]
         [IgnoreDataMember]
-        public virtual DboToSet<Address> Addresses { get; set; }
+        public virtual EntityOnSet<Address> Addresses { get; set; }
     }
 }

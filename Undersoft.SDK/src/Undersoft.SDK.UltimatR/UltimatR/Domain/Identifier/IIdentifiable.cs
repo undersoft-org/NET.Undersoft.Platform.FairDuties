@@ -4,7 +4,7 @@ using System.Uniques;
 
 namespace UltimatR
 {
-    public interface IIdentifiable : IUniqueEntry, IEquatable<IIdentifiable>, IComparable<IIdentifiable>, IEquatable<BitVector32>,
+    public interface IIdentifiable : IUniqueObject, IEquatable<IIdentifiable>, IComparable<IIdentifiable>, IEquatable<BitVector32>,
                                      IEquatable<DateTime>, IEquatable<ISerialNumber>, IValueProxy, IOrigin
     {
         bool Obsolete { get; set; }

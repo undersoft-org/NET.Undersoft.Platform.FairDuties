@@ -13,7 +13,7 @@ namespace Undersoft.ODP.Domain
 
         [JsonIgnore]
         [IgnoreDataMember]
-        public virtual DboToSet<Country> Countries { get; set; }
+        public virtual EntityOnSet<Country> Countries { get; set; }
 
         public double Rate { get; set; }
     }

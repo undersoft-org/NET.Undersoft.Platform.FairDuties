@@ -1,14 +1,5 @@
-﻿//-----------------------------------------------------------------------
-// <copyright file="Repository.cs" company="Undersoft">
-//     Author: Dariusz Hanc
-//     Copyright (c) Undersoft. All rights reserved.
-// </copyright>
-//-----------------------------------------------------------------------
-using Microsoft.EntityFrameworkCore.ChangeTracking;
-using System;
+﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 
 namespace UltimatR
@@ -56,12 +47,17 @@ namespace UltimatR
             Expression = expression;
         }
 
-        IEnumerator IEnumerable.GetEnumerator() { return GetEnumerator(); }
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
 
         public abstract IQueryable<TEntity> AsQueryable();
 
         public IEnumerator<TEntity> GetEnumerator()
-        { return Provider.Execute<IQueryable<TEntity>>(Expression).GetEnumerator(); }
+        {
+            return Provider.Execute<IQueryable<TEntity>>(Expression).GetEnumerator();
+        }
 
         public override void LinkTrigger(object sender, EntityEntryEventArgs e)
         {
@@ -90,7 +86,6 @@ namespace UltimatR
         }
 
         public abstract IQueryable<TEntity> Query { get; }
-
     }
 
     public enum RelatedType

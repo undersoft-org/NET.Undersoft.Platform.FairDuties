@@ -1,18 +1,16 @@
-﻿using System.Threading.Tasks;
-
-using Microsoft.EntityFrameworkCore.ChangeTracking;
+﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace UltimatR
 {
     public interface ILinkedObject<TStore, TOrigin> : ILinkedObject<TOrigin> where TOrigin : Entity where TStore : IDataStore
-    {   
-    }
-
-    public interface ILinkedObject<TOrigin> : ILinkedObject where TOrigin : Entity 
     {
     }
 
-    public interface ILinkedObject : IRepository, IDsoRelation 
+    public interface ILinkedObject<TOrigin> : ILinkedObject where TOrigin : Entity
+    {
+    }
+
+    public interface ILinkedObject : IRepository, IRemoteLink
     {
         bool IsLinked { get; set; }
 

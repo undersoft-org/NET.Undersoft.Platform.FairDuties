@@ -1,9 +1,10 @@
 using Microsoft.OData.Client;
-using Undersoft.AEP;
+using System.Instant.Linking;
 using System.Runtime.Serialization;
 using System.Series;
 using System.Text.Json.Serialization;
 using UltimatR;
+using Undersoft.AEP;
 
 namespace Undersoft.ODP.Domain
 {
@@ -16,7 +17,7 @@ namespace Undersoft.ODP.Domain
 
         public string PhoneNumber { get; set; }
 
-        public virtual DboToSet<UserRole> Roles { get; set; }
+        public virtual EntityOnSet<UserRole> Roles { get; set; }
 
         public long? PersonalId { get; set; }
         public virtual Personal Personal { get; set; }
@@ -26,31 +27,31 @@ namespace Undersoft.ODP.Domain
 
         public virtual Identifiers<User> Identifiers { get; set; }
 
-        public virtual DboToSets<Attribute> Attributes { get; set; }
+        public virtual EntityOnSets<Attribute> Attributes { get; set; }
 
         [JsonIgnore]
         [IgnoreDataMember]
-        public virtual DboToSets<Organization> Organizations { get; set; }
+        public virtual EntityOnSets<Organization> Organizations { get; set; }
 
         [JsonIgnore]
         [IgnoreDataMember]
-        public virtual DboToSets<Team> Teams { get; set; }
+        public virtual EntityOnSets<Team> Teams { get; set; }
 
-        public virtual DboToSets<ShiftType> ShiftTypes { get; set; }
+        public virtual EntityOnSets<ShiftType> ShiftTypes { get; set; }
 
         [JsonIgnore]
         [IgnoreDataMember]
-        public virtual DboToSets<Plan> Plans { get; set; }
+        public virtual EntityOnSets<Plan> Plans { get; set; }
 
-        private DboToSet<ShiftRate> shiftRates;
-        public virtual DboToSet<ShiftRate> ShiftRates
+        private EntityOnSet<ShiftRate> shiftRates;
+        public virtual EntityOnSet<ShiftRate> ShiftRates
         {
             get
             {
                 if (LastRateOrdinal == 0 && ShiftTypes.Count > 0)
                 {
                     if (shiftRates == null)
-                        shiftRates = new DboToSet<ShiftRate>();
+                        shiftRates = new EntityOnSet<ShiftRate>();
 
                     if (shiftRates.Count != ShiftTypes.Count)
                     {
@@ -63,7 +64,7 @@ namespace Undersoft.ODP.Domain
                             .ExceptIn(st => st.Id, rateIds)
                             .ForEach(
                                 st =>
-                                    ShiftRates.Add(new ShiftRate() { Ordinal = LastRateOrdinal++, ShiftTypeId = st.Id, ShiftType = st }
+                                    shiftRates.Add(new ShiftRate() { Ordinal = LastRateOrdinal++, ShiftTypeId = st.Id, ShiftType = st }
                             ));
                     }
                 }
@@ -74,11 +75,11 @@ namespace Undersoft.ODP.Domain
 
         public int LastRateOrdinal { get; set; }
 
-        public virtual DboSet<Shift> Shifts { get; set; }
+        public virtual EntitySet<Shift> Shifts { get; set; }
 
-        public virtual DboSet<ShiftRequest> ShiftRequests { get; set; }
+        public virtual EntitySet<ShiftRequest> ShiftRequests { get; set; }
 
-        public virtual DboSet<Team> Leaderships { get; set; }
+        public virtual EntitySet<Team> Leaderships { get; set; }
 
         [JsonIgnore]
         [IgnoreDataMember]

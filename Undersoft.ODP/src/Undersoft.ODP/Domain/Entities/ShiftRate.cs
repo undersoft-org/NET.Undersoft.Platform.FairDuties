@@ -1,9 +1,10 @@
 ﻿using Microsoft.OData.Client;
-using Undersoft.AEP;
 using System.Instant;
+using System.Instant.Linking;
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 using UltimatR;
+using Undersoft.AEP;
 
 namespace Undersoft.ODP.Domain
 {
@@ -74,15 +75,15 @@ namespace Undersoft.ODP.Domain
 
         [JsonIgnore]
         [IgnoreDataMember]
-        public virtual DboToSets<ShiftRate> DependentBy { get; set; }
+        public virtual EntityOnSets<ShiftRate> DependentBy { get; set; }
 
-        public virtual DboToSets<ShiftRate> DependentOn { get; set; }
+        public virtual EntityOnSets<ShiftRate> DependentOn { get; set; }
 
         [JsonIgnore]
         [IgnoreDataMember]
-        public virtual DboToSets<ShiftRate> OptionalFrom { get; set; }
+        public virtual EntityOnSets<ShiftRate> OptionalFrom { get; set; }
 
-        public virtual DboToSets<ShiftRate> OptionalTo { get; set; }
+        public virtual EntityOnSets<ShiftRate> OptionalTo { get; set; }
 
         [JsonIgnore]
         [IgnoreDataMember]

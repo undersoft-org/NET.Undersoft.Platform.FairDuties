@@ -22,9 +22,9 @@ namespace Undersoft.ODP.Domain
 
         [JsonIgnore]
         [IgnoreDataMember]
-        public virtual DboSet<Personal> Personals { get; set; }
+        public virtual EntitySet<Personal> Personals { get; set; }
 
-        public virtual DboToSet<DeviceSession> Sessions { get; set; }
+        public virtual EntityOnSet<DeviceSession> Sessions { get; set; }
 
         public virtual Identifiers<Device> Identifiers { get; set; }
     }

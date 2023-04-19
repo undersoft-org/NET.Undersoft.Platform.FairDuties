@@ -17,7 +17,7 @@ namespace Undersoft.ODP.Infra.Data.Service.Contexts
         }
     }
 
-    public class EntityDsContext<TStore> : DsContext<TStore> where TStore : IDataStore
+    public class EntityDsContext<TStore> : DataClientContext<TStore> where TStore : IDataStore
     {
         public EntityDsContext(Uri serviceUri) : base(serviceUri)
         {

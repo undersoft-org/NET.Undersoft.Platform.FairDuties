@@ -1,18 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.OData.Edm;
 using Microsoft.OData.Edm.Csdl;
-using System;
-using System.Linq;
 using System.Logs;
-using System.Net.Http;
 using System.Series;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Xml;
 
 namespace UltimatR
 {
-    public static class ODataClientRegistry
+    public static class OpenDataClientRegistry
     {
         const int DS_TRYOUTS = 60;
 
@@ -21,23 +16,23 @@ namespace UltimatR
         public static IDeck<IDeck<Type>> Contexts = new Catalog<IDeck<Type>>();
         public static IDeck<IEdmModel> EdmModels = new Catalog<IEdmModel>();
         public static IDeck<Type> Stores = new Catalog<Type>();
-        public static IDeck<DsoRelation> Relations = new Catalog<DsoRelation>(true);
+        public static IDeck<RemoteLink> Relations = new Catalog<RemoteLink>(true);
 
-        public static IEdmModel GetEdmModel(this ODataClientContext context)
+        public static IEdmModel GetEdmModel(this OpenDcContext context)
         {
             Task<IEdmModel> model = GetEdmModelAsync(context);
             model.Wait();
             return model.Result;
         }
 
-        public static async Task<IEdmModel> GetEdmModelAsync(this ODataClientContext context)
+        public static async Task<IEdmModel> GetEdmModelAsync(this OpenDcContext context)
         {
             // Get the service metadata's Uri
             var metadataUri = context.GetMetadataUri();
             // Create a HTTP request to the metadata's Uri 
             // in order to get a representation for the data model
             HttpClientHandler clientHandler = new HttpClientHandler();
-            using (DsHttpClient client = new DsHttpClient(clientHandler))
+            using (HttpClient client = new HttpClient(clientHandler))
             {
                 if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
                 {
@@ -91,7 +86,7 @@ namespace UltimatR
             return null;
         }
 
-        public static IDeck<IEdmEntityType> GetDsEntityTypes(this ODataClientContext context)
+        public static IDeck<IEdmEntityType> GetDsEntityTypes(this OpenDcContext context)
         {
             var contextType = context.GetType();
 
@@ -126,7 +121,7 @@ namespace UltimatR
             return dsEntities;
         }
 
-        public static Type GetDsStore(this ODataClientContext context)
+        public static Type GetDsStore(this OpenDcContext context)
         {
             return GetDsStore(context.GetType());
         }
@@ -152,7 +147,7 @@ namespace UltimatR
             return iface;
         }
 
-        public static Type GetMappedType(this ODataClientContext context, string name)
+        public static Type GetMappedType(this OpenDcContext context, string name)
         {
             string sn = name.Split('.').Last();
             if (Mappings.TryGet(name, out Type t) ||
@@ -160,7 +155,7 @@ namespace UltimatR
                 return t;
             return Assemblies.FindType(sn);
         }
-        public static string GetMappedName(this ODataClientContext context, Type type)
+        public static string GetMappedName(this OpenDcContext context, Type type)
         {
             string n = type.FullName;
             if (Entities.TryGet(context.GetType(), out IDeck<IEdmEntityType> deck))

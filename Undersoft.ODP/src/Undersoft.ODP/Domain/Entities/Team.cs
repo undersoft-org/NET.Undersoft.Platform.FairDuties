@@ -1,9 +1,10 @@
 using Microsoft.OData.Client;
-using Undersoft.AEP;
+using System.Instant.Linking;
 using System.Runtime.Serialization;
 using System.Series;
 using System.Text.Json.Serialization;
 using UltimatR;
+using Undersoft.AEP;
 
 namespace Undersoft.ODP.Domain
 {
@@ -40,21 +41,21 @@ namespace Undersoft.ODP.Domain
         public long? ScheduleId { get; set; }
         public virtual Schedule Schedule { get; set; }
 
-        public virtual DboToSets<User> Users { get; set; }
+        public virtual EntityOnSets<User> Users { get; set; }
 
         [JsonIgnore]
         [IgnoreDataMember]
-        public virtual DboToSet<ShiftRequest> ShiftRequests { get; set; }
+        public virtual EntityOnSet<ShiftRequest> ShiftRequests { get; set; }
 
-        private DboToSet<ShiftRate> shiftRates;
-        public virtual DboToSet<ShiftRate> ShiftRates
+        private EntityOnSet<ShiftRate> shiftRates;
+        public virtual EntityOnSet<ShiftRate> ShiftRates
         {
             get
             {
                 if (LastRateOrdinal == 0 && ShiftTypes.Count > 0)
                 {
                     if (shiftRates == null)
-                        shiftRates = new DboToSet<ShiftRate>();
+                        shiftRates = new EntityOnSet<ShiftRate>();
 
                     if (shiftRates.Count != ShiftTypes.Count)
                     {
@@ -67,7 +68,7 @@ namespace Undersoft.ODP.Domain
                             .ExceptIn(st => st.Id, rateIds)
                             .ForEach(
                                 st =>
-                                    ShiftRates.Add(new ShiftRate() { Ordinal = LastRateOrdinal++, ShiftTypeId = st.Id, ShiftType = st })
+                                    shiftRates.Add(new ShiftRate() { Ordinal = LastRateOrdinal++, ShiftTypeId = st.Id, ShiftType = st })
                             );
                     }
                 }
@@ -78,19 +79,19 @@ namespace Undersoft.ODP.Domain
 
         public int LastRateOrdinal { get; set; }
 
-        public virtual DboSet<ShiftType> ShiftTypes { get; set; }
+        public virtual EntitySet<ShiftType> ShiftTypes { get; set; }
 
         [JsonIgnore]
         [IgnoreDataMember]
-        public virtual DboSet<Plan> Plans { get; set; }
+        public virtual EntitySet<Plan> Plans { get; set; }
 
-        public virtual DboSet<Schedule> ScheduleViews { get; set; }
+        public virtual EntitySet<Schedule> ScheduleViews { get; set; }
 
         [JsonIgnore]
         [IgnoreDataMember]
-        public virtual DboSet<Shift> Shifts { get; set; }
+        public virtual EntitySet<Shift> Shifts { get; set; }
 
-        public virtual DboSet<Attribute> Attributes { get; set; }
+        public virtual EntitySet<Attribute> Attributes { get; set; }
 
         public long? ConfigurationId { get; set; }
         public virtual Configuration Configuration { get; set; }

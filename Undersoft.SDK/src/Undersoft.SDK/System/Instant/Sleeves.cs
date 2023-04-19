@@ -1,8 +1,6 @@
-﻿
-namespace System.Instant
+﻿namespace System.Instant
 {
     using System.Uniques;
-
 
     public class Sleeves : IInstant
     {
@@ -15,13 +13,14 @@ namespace System.Instant
 
         #region Constructors
 
-        public Sleeves(IFigures figuresObject) : this(figuresObject, null)
-        {
-        }
+        public Sleeves(IFigures figuresObject) : this(figuresObject, null) { }
 
         public Sleeves(IFigures figuresObject, string sleeveTypeName)
         {
-            Name = (sleeveTypeName != null && sleeveTypeName != "") ? sleeveTypeName : figuresObject.Type.Name + "_S";
+            Name =
+                (sleeveTypeName != null && sleeveTypeName != "")
+                    ? sleeveTypeName
+                    : figuresObject.Type.Name + "_S";
             figures = figuresObject;
         }
 
@@ -33,9 +32,15 @@ namespace System.Instant
 
         public string Name { get; set; }
 
-        public IRubrics Rubrics { get => figures.Rubrics; }
+        public IRubrics Rubrics
+        {
+            get => figures.Rubrics;
+        }
 
-        public int Size { get => figures.FigureSize; }
+        public int Size
+        {
+            get => figures.FigureSize;
+        }
 
         public Type Type { get; set; }
 

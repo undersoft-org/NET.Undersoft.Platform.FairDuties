@@ -1,10 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Metadata;
-using System;
-using System.Collections.Generic;
 using System.Instant;
-using System.Linq;
 using System.Reflection;
 using System.Series;
 
@@ -66,7 +63,7 @@ namespace UltimatR
             {
                 dbEntityTypes = new Catalog<IEntityType>();
 
-                var entityTypes = context.Model.GetEntityTypes();
+                var entityTypes = ((DbContext)context).Model.GetEntityTypes();
 
                 var iface = GetDbStore(contextType);
 
@@ -162,7 +159,7 @@ namespace UltimatR
         {
             if (!Properties.ContainsKey(context.GetType()))
             {
-                var entityTypes = context.Model.GetEntityTypes();
+                var entityTypes = ((DbContext)context).Model.GetEntityTypes();
                 foreach (var entityType in entityTypes)
                 {
                     var dbSetKeys = new Catalog<PropertyInfo[]>();
@@ -320,7 +317,7 @@ namespace UltimatR
         {
             var entityType = GetEntityType<TEntity>(context);
             if (entityType != null)
-                return (DbSet<TEntity>)context.DataSet<TEntity>();
+                return (DbSet<TEntity>)context.EntitySet<TEntity>();
             return null;
         }
 

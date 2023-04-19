@@ -1,24 +1,13 @@
-//-----------------------------------------------------------------------
-// <copyright file="IRepositoryEndpoint.cs" company="Undersoft">
-//     Author: Dariusz Hanc
-//     Copyright (c) Undersoft. All rights reserved.
-// </copyright>
-//-----------------------------------------------------------------------
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
-using Microsoft.OData.ModelBuilder;
-using System;
-using System.Linq;
 
 namespace UltimatR
 {
-    public interface IRepositoryEndpoint<TStore, TEntity> : IRepositoryEndpoint where TEntity : Entity
+    public interface IRepositoryEndpoint<TStore, TEntity> : IRepositoryEndpoint where TEntity : class, IIdentifiable
     {
-        EntitySetConfiguration<TEntity> EntitySet();
-
         IQueryable<TEntity> FromSql(string sql, params object[] parameters);
 
-        DbSet<TEntity> GetDbSet();
+        DbSet<TEntity> EntitySet();
     }
 
     public interface IRepositoryEndpoint : IRepositoryContextPool
@@ -27,13 +16,9 @@ namespace UltimatR
 
         IDataBaseContext CreateContext(Type contextType, DbContextOptions options);
 
-        TModel BuildDsModel<TModel>();
+        object EntitySet<TEntity>() where TEntity : class, IIdentifiable;
 
-        TModel GetDsModel<TModel>();
-
-        object DsSet<TEntity>() where TEntity : class, IIdentifiable;
-
-        object DsSet(Type entityType);
+        object EntitySet(Type entityType);
 
         IDataBaseContext Context { get; }
 

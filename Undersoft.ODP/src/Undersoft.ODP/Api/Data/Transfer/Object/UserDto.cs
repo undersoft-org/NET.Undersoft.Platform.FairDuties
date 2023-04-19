@@ -18,7 +18,7 @@ namespace Undersoft.ODP.Api
         public long? ConfigurationId { get; set; }
         public ConfigurationDto Configuration { get; set; }
 
-        public DtoSet<DtoIdentifier<UserDto>> Identifiers { get; set; }
+        public DtoSet<IdentifierDto<UserDto>> Identifiers { get; set; }
 
         public virtual DtoSet<AttributeDto> Attributes { get; set; }
 

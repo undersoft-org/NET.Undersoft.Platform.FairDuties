@@ -6,5 +6,4 @@ namespace Undersoft.ODP.Domain
         Exchange,
         Assignment
     }
-
 }

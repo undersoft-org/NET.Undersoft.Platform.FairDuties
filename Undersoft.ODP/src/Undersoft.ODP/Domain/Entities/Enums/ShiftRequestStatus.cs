@@ -1,6 +1,3 @@
-using System;
-using System.Collections.ObjectModel;
-
 namespace Undersoft.ODP.Domain
 {
     public enum ShiftRequestStatus
@@ -10,5 +7,4 @@ namespace Undersoft.ODP.Domain
         Accepted,
         Confirmed
     }
-
 }

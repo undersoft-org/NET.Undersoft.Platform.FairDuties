@@ -25,10 +25,7 @@ namespace Undersoft.AEP
             UniqueKey = (ulong)allocSet.Id;
             LastFrameId = BlockOffset;
             LastSlotId = (int)(BlockOffset * AllocSet.FrameCapacity);
-            var frames = (FrameCount + BlockOffset);
-            var remind = frames % AllocSet.BlockSize;
-            var divide = (frames / AllocSet.BlockSize);
-            BlockCount = remind > 0 ? divide + 1 : divide;
+            BlockCount = (int)Math.Ceiling((FrameCount + BlockOffset) / (double)AllocSet.BlockSize);
             Claims = proxy.Claims;
             Resources = proxy.Resources;
             Resources.ForEach(x => x.Ordinal = LastResourceOrdinal++).Commit();

@@ -9,10 +9,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.Configuration;
-using System;
 using System.Series;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Uniques;
 
 namespace UltimatR
@@ -194,11 +191,6 @@ namespace UltimatR
             }
         }
 
-        public TModel BuildDsModel<TModel>()
-        {
-            return Context.GetModel<TModel>();
-        }
-
         public new ValueTask DisposeAsync()
         {
             return new ValueTask(Task.Run(() => Dispose(true)));
@@ -207,11 +199,6 @@ namespace UltimatR
         public TContext GetContext<TContext>() where TContext : DbContext
         {
             return (TContext)Context;
-        }
-
-        public TModel GetDsModel<TModel>()
-        {
-            return Context.GetModel<TModel>();
         }
 
         public virtual void Lease(IRepositoryContext destContext)
@@ -378,14 +365,14 @@ namespace UltimatR
             return Context.Save(asTransaction, token);
         }
 
-        public object DsSet<TEntity>() where TEntity : class, IIdentifiable
+        public object EntitySet<TEntity>() where TEntity : class, IIdentifiable
         {
-            return Context.DataSet<TEntity>();
+            return Context.EntitySet<TEntity>();
         }
 
-        public object DsSet(Type entityType)
+        public object EntitySet(Type entityType)
         {
-            return Context.DataSet(entityType);
+            return Context.EntitySet(entityType);
         }
 
         public void SnapshotConfiguration()

@@ -1,38 +1,30 @@
-using System;
-
 namespace UltimatR
 {
-    public interface IEventStore : IDataStore
+    public interface IEventStore : IDataStore, IDataServiceStore
     {
 
     }
 
-    public interface IReportStore : IDataStore
+    public interface ICqrsStore : IDataServiceStore
     {
 
     }
 
-    public interface IEntryStore : IDataStore
+    public interface IReportStore : ICqrsStore, IDataStore
     {
 
     }
 
-    public interface IStateStore : IDataStore
-    {
-
-    }
-
-    public interface IConfigStore : IDataStore
-    {
-
-    }
-
-    public interface IFileStore : IDataStore
+    public interface IEntryStore : ICqrsStore, IDataStore
     {
 
     }
 
     public interface IDataStore
+    {
+    }
+
+    public interface IDataServiceStore
     {
     }
 }

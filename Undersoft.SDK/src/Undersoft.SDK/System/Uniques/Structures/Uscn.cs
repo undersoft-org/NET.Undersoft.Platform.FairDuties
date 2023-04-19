@@ -452,12 +452,10 @@
             if (value > 0)
             {
                 ulong vectorYZ = (vectorY * vectorZ);
-                ulong blockZdiv = (value / vectorYZ);
-                ulong blockYsub = value - (blockZdiv * vectorYZ);
-                ulong blockYdiv = blockYsub / vectorY;
-                ulong blockZ = (blockZdiv > 0) && (blockYsub > 0) ? blockZdiv + 1 : blockZdiv;
+                ulong blockZ = (ushort)Math.Ceiling(value / (double)vectorYZ);
+                ulong blockYZsub = value - (blockZ * vectorYZ);
+                ulong blockY = (ushort)Math.Ceiling(blockYZsub / (double)vectorY);
                 ulong blockX = value % vectorY;
-                ulong blockY = (blockYdiv > 0) && (blockX > 0) ? blockYdiv + 1 : blockYdiv;
 
                 ulong zyx = (blockZ << 32) | (blockY << 16) | (blockX);
                 BlockZYX = zyx;
