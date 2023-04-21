@@ -2,8 +2,7 @@
 
 namespace Undersoft.ODP.Api
 {
-    using Domain;
-    public class ShiftRequestValidator : DtoCommandSetValidator<ShiftRequestDto>
+    public class ShiftRequestValidator : DtoCommandSetValidator<ShiftRequest>
     {
         public ShiftRequestValidator(IUltimatr ultimatr) : base(ultimatr)
         {
@@ -15,7 +14,7 @@ namespace Undersoft.ODP.Api
             ValidationScope(CommandMode.Delete | CommandMode.Change | CommandMode.Update, () =>
             {
                 ValidateRequired(a => a.Data.Id);
-                ValidateExist<IEntryStore, ShiftRequest>((cmd) => (e) => e.Id == cmd.Id);
+                ValidateExist<IEntryStore, Domain.ShiftRequest>((cmd) => (e) => e.Id == cmd.Id);
             });
         }
     }

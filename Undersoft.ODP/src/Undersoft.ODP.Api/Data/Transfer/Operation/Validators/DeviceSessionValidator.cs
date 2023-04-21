@@ -3,7 +3,7 @@
 namespace Undersoft.ODP.Api
 {
     using Domain;
-    public class DeviceSessionValidator : DtoCommandSetValidator<DeviceSessionDto>
+    public class DeviceSessionValidator : DtoCommandSetValidator<DeviceSession>
     {
         public DeviceSessionValidator(IUltimatr ultimatr) : base(ultimatr)
         {
@@ -15,13 +15,13 @@ namespace Undersoft.ODP.Api
             ValidationScope(CommandMode.Update | CommandMode.Change, () =>
             {
                 ValidateRequired(p => p.Data.DeviceId);
-                ValidateExist<IEntryStore, DeviceSession>((cmd) => (e) => e.Id == cmd.Id);
+                ValidateExist<IEntryStore, Domain.DeviceSession>((cmd) => (e) => e.Id == cmd.Id);
             });
 
             ValidationScope(CommandMode.Delete, () =>
             {
                 ValidateRequired(a => a.Data.Id);
-                ValidateExist<IEntryStore, DeviceSession>((cmd) => (e) => e.Id == cmd.Id);
+                ValidateExist<IEntryStore, Domain.DeviceSession>((cmd) => (e) => e.Id == cmd.Id);
             });
         }
     }

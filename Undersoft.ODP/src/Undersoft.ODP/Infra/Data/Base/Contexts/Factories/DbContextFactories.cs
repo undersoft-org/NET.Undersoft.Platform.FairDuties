@@ -2,15 +2,15 @@
 
 namespace Undersoft.ODP.Infra.Data.Base.Contexts.Factories
 {
-    public class EntryDbContextFactory : DbContextFactory<EntryDbContext>
+    public class EntryDbContextFactory : DataBaseContextFactory<EntryDbContext>
     {
     }
 
-    public class EventDbContextFactory : DbContextFactory<EventDbContext>
+    public class EventDbContextFactory : DataBaseContextFactory<EventDbContext>
     {
     }
 
-    public class ReportDbContextFactory : DbContextFactory<ReportDbContext>
+    public class ReportDbContextFactory : DataBaseContextFactory<ReportDbContext>
     {
     }
 }

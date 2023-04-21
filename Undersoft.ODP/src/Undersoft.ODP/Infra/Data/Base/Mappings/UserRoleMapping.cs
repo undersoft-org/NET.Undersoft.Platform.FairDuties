@@ -13,7 +13,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Mappings
         public override void Configure(EntityTypeBuilder<UserRole> builder)
         {
             builder
-                .ToTable(TABLE_NAME, DbSchema.LocalSchema);
+                .ToTable(TABLE_NAME, DataBaseSchema.LocalSchema);
 
             builder
             .Property(p => p.Name)

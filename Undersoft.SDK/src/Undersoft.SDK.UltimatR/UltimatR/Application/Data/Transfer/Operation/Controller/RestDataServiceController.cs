@@ -5,9 +5,9 @@ using System.Text.Json;
 namespace UltimatR
 {
     [LinkedResult]
-    [RestDataService]
-    [Route($"{StoreRoutes.Constant.RestCqrsStore}/[controller]")]
-    public abstract class RestDataServiceController<TKey, TEntry, TReport, TEntity, TDto>
+    [RestService]
+    [ApiController]
+    public class RestDataServiceController<TKey, TEntry, TReport, TEntity, TDto>
         : ControllerBase, IRestDataServiceController<TKey, TEntity, TDto> where TDto : Dto
         where TEntity : Entity
         where TEntry : IDataStore

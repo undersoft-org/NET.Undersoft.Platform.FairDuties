@@ -12,7 +12,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Mappings
 
         public override void Configure(EntityTypeBuilder<Personal> builder)
         {
-            builder.ToTable(TABLE_NAME, DbSchema.LocalSchema);
+            builder.ToTable(TABLE_NAME, DataBaseSchema.LocalSchema);
 
             builder.Property(p => p.Email).HasMaxLength(100).HasColumnType("varchar").IsRequired();
 

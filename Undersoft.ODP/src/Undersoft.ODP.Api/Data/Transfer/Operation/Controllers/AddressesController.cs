@@ -8,7 +8,7 @@ namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Entries
 
     [Authorize]
     [Route("/addresses")]
-    public class AddressesController : DtoCommandController<long, IEntryStore, Address, AddressDto>
+    public class AddressesController : DtoCommandController<long, IEntryStore, Address, Api.Address>
     {
         public AddressesController(IUltimatr ultimatr) : base(ultimatr)
         {
@@ -22,7 +22,7 @@ namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Reports
 
     [Authorize]
     [Route("/addresses")]
-    public class AddressesController : DtoQueryController<long, IReportStore, Address, AddressDto>
+    public class AddressesController : DtoQueryController<long, IReportStore, Address, Api.Address>
     {
         public AddressesController(IUltimatr ultimatr) : base(ultimatr)
         {

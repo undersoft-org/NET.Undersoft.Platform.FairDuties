@@ -1,20 +1,18 @@
-using Microsoft.EntityFrameworkCore;
 using Microsoft.OData.Client;
 using Microsoft.OData.Edm;
-using System;
 
 namespace UltimatR
 {
-    public partial class DataClientContext<TStore> : DsContext where TStore : IDataStore
+    public partial class DataClientContext<TStore> : DataClientContext where TStore : IDataStore
     {
         public DataClientContext(Uri serviceUri) : base(serviceUri)
         {
-        }       
+        }
     }
 
-    public partial class DsContext : DataServiceContext, IDataClient
+    public partial class DataClientContext : DataServiceContext, IDataClient
     {
-        public DsContext(Uri serviceUri) : base(serviceUri)
+        public DataClientContext(Uri serviceUri) : base(serviceUri)
         {
             MergeOption = MergeOption.AppendOnly;
             HttpRequestTransportMode = HttpRequestTransportMode.HttpClient;
@@ -30,7 +28,7 @@ namespace UltimatR
         }
 
         public void CreateServiceModel()
-        {          
+        {
             Format.LoadServiceModel = () => GetServiceModel();
             Format.UseJson();
         }
@@ -38,9 +36,9 @@ namespace UltimatR
         public IEdmModel GetServiceModel()
         {
             Type t = GetType();
-            if (!OpenDataServiceRegistry.EdmModels.TryGet(t, out IEdmModel edmModel))
-                 OpenDataServiceRegistry.EdmModels.Add(t, edmModel = OnModelCreating(this.GetEdmModel()));
-            return edmModel;
+            if (!DataClientRegistry.EdmModels.TryGet(t, out IEdmModel edmModel))
+                DataClientRegistry.EdmModels.Add(t, edmModel = OnModelCreating(this.GetEdmModel()));
+            return null;
         }
 
         protected virtual IEdmModel OnModelCreating(IEdmModel builder)
@@ -48,10 +46,8 @@ namespace UltimatR
             return builder;
         }
 
-
         public override DataServiceQuery<T> CreateQuery<T>(string resourcePath, bool isComposable)
         {
-
             return base.CreateQuery<T>(resourcePath, isComposable);
         }
 

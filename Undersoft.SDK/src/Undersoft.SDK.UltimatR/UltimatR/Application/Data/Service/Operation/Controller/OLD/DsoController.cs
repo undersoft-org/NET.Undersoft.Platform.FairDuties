@@ -2,17 +2,14 @@
 using Microsoft.AspNetCore.OData.Formatter;
 using Microsoft.AspNetCore.OData.Query;
 using Microsoft.AspNetCore.OData.Routing.Controllers;
-using System;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
 using System.Uniques;
 
 namespace UltimatR
 {
     [LinkedResult]
     [IgnoreApi]
-    public abstract class DsoController<TKey, TStore, TEntity> : ODataController, IDsoController<TKey, TStore, TEntity> where TEntity : Entity where TStore : IDataStore
+    public abstract class DsoController<TKey, TStore, TEntity> : ODataController, IDsoController<TKey, TStore, TEntity> where TEntity : Entity where TStore : IDataServiceStore
     {
         protected readonly Func<TKey, Expression<Func<TEntity, bool>>> _keymatcher;
         protected readonly IUltimatr _ultimatr;
@@ -33,14 +30,14 @@ namespace UltimatR
         [HttpGet]
         public virtual IQueryable Get()
         {
-            return _ultimatr.Use<TStore, TEntity>().AsQueryable();
+            return _ultimatr.Use<IReportStore, TEntity>().AsQueryable();
         }
 
         [EnableQuery]
         [HttpGet]
         public virtual UniqueOne Get([FromODataUri] TKey key)
         {
-            return _ultimatr.Use<TStore, TEntity>()[_keymatcher(key)].AsUniqueOne();
+            return _ultimatr.Use<IReportStore, TEntity>()[_keymatcher(key)].AsUniqueOne();
         }
 
         [HttpPost]
@@ -48,7 +45,7 @@ namespace UltimatR
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            return Created(await _ultimatr.Send(new CreateDso<TStore, TEntity>
+            return Created(await _ultimatr.Send(new CreateDso<IEntryStore, TEntity>
                                                     (_publishMode, entity))
                                                     .ConfigureAwait(false));
         }
@@ -58,7 +55,7 @@ namespace UltimatR
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            return Updated(await _ultimatr.Send(new ChangeDso<TStore, TEntity>
+            return Updated(await _ultimatr.Send(new ChangeDso<IEntryStore, TEntity>
                                                     (_publishMode, entity, key))
                                                     .ConfigureAwait(false));
         }
@@ -68,7 +65,7 @@ namespace UltimatR
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            return Updated(await _ultimatr.Send(new UpdateDso<TStore, TEntity>
+            return Updated(await _ultimatr.Send(new UpdateDso<IEntryStore, TEntity>
                                                      (_publishMode, entity, key))
                                                     .ConfigureAwait(false));
         }
@@ -78,7 +75,7 @@ namespace UltimatR
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            return Ok(await _ultimatr.Send(new DeleteDso<TStore, TEntity>
+            return Ok(await _ultimatr.Send(new DeleteDso<IEntryStore, TEntity>
                                                     (_publishMode, key))
                                                     .ConfigureAwait(false));
         }

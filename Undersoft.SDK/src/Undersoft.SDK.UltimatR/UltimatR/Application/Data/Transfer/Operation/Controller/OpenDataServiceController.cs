@@ -1,18 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Formatter;
 using Microsoft.AspNetCore.OData.Query;
-using Microsoft.AspNetCore.OData.Routing.Attributes;
 using Microsoft.AspNetCore.OData.Routing.Controllers;
 using System.Linq.Expressions;
 using System.Uniques;
 
 namespace UltimatR
 {
-    [IgnoreApi]
+    //[IgnoreApi]
     [LinkedResult]
-    [OpenDataService]
-    [ODataRouteComponent(StoreRoutes.Constant.OpenCqrsStore)]
-    public abstract class OpenDataServiceController<TKey, TEntry, TReport, TEntity, TDto>
+    [ODataService]
+    public class OpenDataServiceController<TKey, TEntry, TReport, TEntity, TDto>
         : ODataController, IOpenDataServiceController<TKey, TEntity, TDto> where TDto : Dto
         where TEntity : Entity
         where TEntry : IDataStore
@@ -47,9 +45,9 @@ namespace UltimatR
 
         [HttpGet]
         [EnableQuery]
-        public virtual Task<IQueryable<TDto>> Get()
+        public virtual IQueryable<TDto> Get()
         {
-            return _ultimatr.Send(new GetAllQuery<TReport, TEntity, TDto>());
+            return _ultimatr.Send(new GetAllQuery<TReport, TEntity, TDto>()).Result;
         }
 
         [HttpGet]

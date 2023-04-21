@@ -47,13 +47,13 @@ namespace UltimatR
         public IEntityRepository<TEntity> Use<TEntity>()
         where TEntity : Entity
         {
-            return Use<TEntity>(DbRegistry.GetContexts<TEntity>().FirstOrDefault());
+            return Use<TEntity>(DataBaseRegistry.GetContexts<TEntity>().FirstOrDefault());
         }
         public IEntityRepository<TEntity> Use<TEntity>(Type contextType)
             where TEntity : Entity
         {
             return (IEntityRepository<TEntity>)Services.GetService(typeof(IEntityRepository<,>)
-                                                     .MakeGenericType(DbRegistry
+                                                     .MakeGenericType(DataBaseRegistry
                                                      .Stores[contextType],
                                                       typeof(TEntity)));
         }
@@ -74,13 +74,13 @@ namespace UltimatR
 
         public IRemoteRepository<TEntity> Load<TEntity>() where TEntity : Entity
         {
-            return Load<TEntity>(OpenDataServiceRegistry.GetContexts<TEntity>().FirstOrDefault());
+            return Load<TEntity>(DataClientRegistry.GetContexts<TEntity>().FirstOrDefault());
         }
         public IRemoteRepository<TEntity> Load<TEntity>(Type contextType)
            where TEntity : Entity
         {
             return (IRemoteRepository<TEntity>)Services.GetService(typeof(IRemoteRepository<,>)
-                                                     .MakeGenericType(OpenDataServiceRegistry
+                                                     .MakeGenericType(DataClientRegistry
                                                      .Stores[contextType],
                                                       typeof(TEntity)));
         }
@@ -93,14 +93,14 @@ namespace UltimatR
         public IRepositoryEndpoint GetEndpoint<TStore, TEntity>()
         where TEntity : Entity
         {
-            var contextType = DbRegistry.GetContext<TStore, TEntity>();
+            var contextType = DataBaseRegistry.GetContext<TStore, TEntity>();
             return Endpoints.Get(contextType);
         }
 
         public IRepositoryClient GetClient<TStore, TEntity>()
         where TEntity : Entity
         {
-            var contextType = OpenDataServiceRegistry.GetContext<TStore, TEntity>();
+            var contextType = DataClientRegistry.GetContext<TStore, TEntity>();
 
             return Clients.Get(contextType);
         }
@@ -131,11 +131,11 @@ namespace UltimatR
             return (IRepositoryClient)repotype.New(client);
         }
         public static IRepositoryClient<TContext> CreateClient<TContext>(IRepositoryClient<TContext> client)
-            where TContext : DsContext
+            where TContext : DataClientContext
         {
             return new RepositoryClient<TContext>(client);
         }
-        public static IRepositoryClient<TContext> CreateClient<TContext>(Uri serviceRoot) where TContext : DsContext
+        public static IRepositoryClient<TContext> CreateClient<TContext>(Uri serviceRoot) where TContext : DataClientContext
         {
             return new RepositoryClient<TContext>(serviceRoot);
         }        
@@ -152,7 +152,7 @@ namespace UltimatR
             return client;
         }
 
-        public static bool TryGetClient<TContext>(out IRepositoryClient<TContext> endpoint) where TContext : DsContext
+        public static bool TryGetClient<TContext>(out IRepositoryClient<TContext> endpoint) where TContext : DataClientContext
         {
             return Clients.TryGet(out endpoint);
         }

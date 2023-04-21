@@ -1,16 +1,16 @@
 version: '3.4'
 
 services:
-  undersoft.ais.admin:
+  io.undersoft.idp.admin:
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
     labels:
       com.microsoft.visualstudio.debuggee.arguments: ' --additionalProbingPath /root/.nuget/packages --additionalProbingPath /root/.nuget/fallbackpackages  "bin/Debug/net6.0/Undersoft.IDP.Admin.dll" /seed'
 
-  undersoft.ais.admin.api:
+  io.undersoft.idp.admin.api:
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
 
-  undersoft.ais.sts.identity:
+  io.undersoft.idp.sts.identity:
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro

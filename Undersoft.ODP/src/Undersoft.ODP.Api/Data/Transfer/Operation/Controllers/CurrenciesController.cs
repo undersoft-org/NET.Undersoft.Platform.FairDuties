@@ -8,7 +8,7 @@ namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Entries
 
     [Authorize(Roles = "Administrator, Manager")]
     [Route("/currencies")]
-    public class CurrenciesController : DtoCommandController<long, IEntryStore, Currency, CurrencyDto>
+    public class CurrenciesController : DtoCommandController<long, IEntryStore, Currency, Api.Currency>
     {
         public CurrenciesController(IUltimatr ultimatr) : base(ultimatr)
         {
@@ -22,7 +22,7 @@ namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Reports
 
     [Authorize]
     [Route("/currencies")]
-    public class CurrenciesController : DtoQueryController<long, IReportStore, Currency, CurrencyDto>
+    public class CurrenciesController : DtoQueryController<long, IReportStore, Currency, Api.Currency>
     {
         public CurrenciesController(IUltimatr ultimatr) : base(ultimatr)
         {

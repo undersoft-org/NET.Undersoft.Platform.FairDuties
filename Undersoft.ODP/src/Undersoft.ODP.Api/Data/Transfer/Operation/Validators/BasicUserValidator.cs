@@ -2,9 +2,7 @@
 
 namespace Undersoft.ODP.Api
 {
-    using Domain;
-
-    public class BasicUserValidator : DtoCommandSetValidator<BasicUserDto>
+    public class BasicUserValidator : DtoCommandSetValidator<BasicUser>
     {
         public BasicUserValidator(IUltimatr ultimatr) : base(ultimatr)
         {
@@ -17,7 +15,7 @@ namespace Undersoft.ODP.Api
             });
             ValidationScope(CommandMode.Create, () =>
             {
-                ValidateNotExist<IEntryStore, User>((cmd) =>
+                ValidateNotExist<IEntryStore, Domain.User>((cmd) =>
                 (e) => e.Email == cmd.Email
                 || e.UserName == cmd.UserName
                 || e.PhoneNumber == cmd.PhoneNumber, "same Name, Email or PhoneNumber");
@@ -26,12 +24,12 @@ namespace Undersoft.ODP.Api
             {
                 ValidateRequired(p => p.Data.UserName);
                 ValidateLength(3, 100, a => a.Data.UserName);
-                ValidateExist<IEntryStore, User>((cmd) => (e) => e.Id == cmd.Id);
+                ValidateExist<IEntryStore, Domain.User>((cmd) => (e) => e.Id == cmd.Id);
             });
             ValidationScope(CommandMode.Delete, () =>
             {
                 ValidateRequired(a => a.Data.Id);
-                ValidateExist<IEntryStore, User>((cmd) => (e) => e.Id == cmd.Id);
+                ValidateExist<IEntryStore, Domain.User>((cmd) => (e) => e.Id == cmd.Id);
             });
         }
     }

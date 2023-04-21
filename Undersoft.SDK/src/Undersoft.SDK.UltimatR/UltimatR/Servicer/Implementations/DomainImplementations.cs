@@ -19,11 +19,11 @@ namespace UltimatR
             service.AddHttpContextAccessor();
 
             HashSet<Type> duplicateCheck = new HashSet<Type>();
-            Type[] stores = DbRegistry.Stores.Where(s => s.IsAssignableTo(typeof(IDataStore))).ToArray();
+            Type[] stores = DataBaseRegistry.Stores.Where(s => s.IsAssignableTo(typeof(IDataStore))).ToArray();
 
             service.AddScoped<ILinkSynchronizer, LinkSynchronizer>();
 
-            foreach (IDeck<IEntityType> contextEntityTypes in DbRegistry.Entities)
+            foreach (IDeck<IEntityType> contextEntityTypes in DataBaseRegistry.Entities)
             {
                 foreach (IEntityType _entityType in contextEntityTypes)
                 {

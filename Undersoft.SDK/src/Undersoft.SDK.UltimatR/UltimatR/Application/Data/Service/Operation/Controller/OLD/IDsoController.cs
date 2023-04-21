@@ -1,14 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Formatter;
-using System.Linq;
 using System.ServiceModel;
-using System.Threading.Tasks;
 using System.Uniques;
 
 namespace UltimatR
 {
     [ServiceContract]
-    public interface IDsoController<TKey, TStore, TEntity> where TEntity : Entity where TStore : IDataStore
+    public interface IDsoController<TKey, TStore, TEntity> where TEntity : Entity where TStore : IDataServiceStore
     {
         Task<IActionResult> Delete([FromODataUri] TKey key);
         IQueryable Get();

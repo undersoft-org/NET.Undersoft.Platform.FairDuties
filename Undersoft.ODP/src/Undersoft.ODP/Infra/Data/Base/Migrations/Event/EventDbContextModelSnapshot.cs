@@ -3,8 +3,8 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Undersoft.ODP.Infra.Data.Base.Contexts;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
+using Undersoft.ODP.Infra.Data.Base.Contexts;
 
 namespace Undersoft.ODP.Infra.Data.Base.Migrations.Event
 {
@@ -30,6 +30,12 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Event
                     b.Property<string>("AggregateType")
                         .HasColumnType("text");
 
+                    b.Property<string>("CodeNumber")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
                     b.Property<DateTime>("Created")
                         .HasColumnType("timestamp");
 
@@ -37,8 +43,8 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Event
                         .HasMaxLength(32)
                         .HasColumnType("character varying(32)");
 
-                    b.Property<string>("EventData")
-                        .HasColumnType("text");
+                    b.Property<byte[]>("EventData")
+                        .HasColumnType("bytea");
 
                     b.Property<string>("EventType")
                         .HasColumnType("text");
@@ -71,12 +77,6 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Event
 
                     b.Property<DateTime>("PublishTime")
                         .HasColumnType("timestamp");
-
-                    b.Property<string>("SSN")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
 
                     b.Property<long>("SourceId")
                         .HasColumnType("bigint");

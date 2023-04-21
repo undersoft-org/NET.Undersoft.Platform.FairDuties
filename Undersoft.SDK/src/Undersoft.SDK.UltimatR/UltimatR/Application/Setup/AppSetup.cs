@@ -1,5 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.OData;
@@ -47,6 +46,22 @@ namespace UltimatR
             return this;
         }
 
+        public void UseEndpoints()
+        {
+            app.UseEndpoints(endpoints =>
+            {
+
+                //var method = typeof(GrpcEndpointRouteBuilderExtensions).GetMethods().Where(m => m.Name.Contains("MapGrpcService")).FirstOrDefault().GetGenericMethodDefinition();
+                //IDeck<Type> serviceContracts = GrpcServiceRegistry.ServiceContracts;
+                //foreach (var serviceContract in serviceContracts)
+                //{
+                //    method.MakeGenericMethod(serviceContract).Invoke(endpoints, new object[] { endpoints });
+                //}
+                //endpoints.MapCodeFirstGrpcReflectionService();
+                endpoints.MapControllers();
+            });
+        }
+
         public IAppSetup UseDataClients()
         {
             RepositoryManager.LoadClientEdms(app).ConfigureAwait(true);
@@ -84,8 +99,7 @@ namespace UltimatR
         {
             IServiceManager sm = ServiceManager.GetManager();
             sm.Registry.MergeServices();
-            ServiceManager.BuildInternalProvider();
-            app.ApplicationServices = ServiceManager.GetProvider();
+            app.ApplicationServices = ServiceManager.BuildInternalProvider();
             usedExternal = false;
             return this;
         }
@@ -115,7 +129,7 @@ namespace UltimatR
             app.UseDefaultFiles();
             app.UseStaticFiles();
 
-            app.UseEndpoints(endpoints => endpoints.MapControllers());
+            UseEndpoints();
 
             return this;
         }

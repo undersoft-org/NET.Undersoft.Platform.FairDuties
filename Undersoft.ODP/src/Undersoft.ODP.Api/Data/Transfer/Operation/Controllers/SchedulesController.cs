@@ -8,7 +8,7 @@ namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Entries
 
     [Authorize(Roles = "Administrator, Leader, Manager")]
     [Route("/schedules")]
-    public class SchedulesController : DtoCommandController<long, IEntryStore, Schedule, ScheduleDto>
+    public class SchedulesController : DtoCommandController<long, IEntryStore, Schedule, Api.Schedule>
     {
         public SchedulesController(IUltimatr ultimatr) : base(ultimatr)
         {
@@ -22,7 +22,7 @@ namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Reports
 
     [Authorize]
     [Route("/schedules")]
-    public class SchedulesController : DtoQueryController<long, IReportStore, Schedule, ScheduleDto>
+    public class SchedulesController : DtoQueryController<long, IReportStore, Schedule, Api.Schedule>
     {
         public SchedulesController(IUltimatr ultimatr) : base(ultimatr)
         {

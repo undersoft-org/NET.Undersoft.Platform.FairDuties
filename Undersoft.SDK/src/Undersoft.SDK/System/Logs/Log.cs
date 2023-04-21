@@ -8,8 +8,6 @@
 
     public static partial class Log
     {
-        #region Fields
-
         private static readonly int BACK_LOG_DAYS = -1;
         private static readonly int BACK_LOG_HOURS = -1;
         private static readonly int BACK_LOG_MINUTES = -1;
@@ -18,16 +16,13 @@
         private static bool cleaningEnabled = false;
         private static DateTime clearLogTime;
         private static Thread logger;
+        private static ILogHandler handler { get; set; }
 
         private static ConcurrentQueue<Starlog> logQueue = new ConcurrentQueue<Starlog>();
 
         private static bool threadLive;
 
         public static DateTime Clock = DateTime.Now;
-
-        #endregion
-
-        #region Constructors
 
         static Log()
         {
@@ -41,16 +36,6 @@
             logger = new Thread(new ThreadStart(logging));
             logger.Start();
         }
-
-        #endregion
-
-        #region Properties
-
-        private static ILogHandler handler { get; set; }
-
-        #endregion
-
-        #region Methods
 
         public static void Add(LogLevel logLevel, string category, string message, ILogSate state)
         {
@@ -157,11 +142,12 @@
             var options = new JsonSerializerOptions();
             options.Converters.Add(new ExceptionConverter());
             options.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
-            options.DefaultIgnoreCondition = Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull;
+            options.DefaultIgnoreCondition = Text.Json
+                .Serialization
+                .JsonIgnoreCondition
+                .WhenWritingNull;
             options.ReferenceHandler = ReferenceHandler.IgnoreCycles;
             return options;
         }
-
-        #endregion
     }
 }

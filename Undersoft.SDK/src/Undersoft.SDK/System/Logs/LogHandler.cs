@@ -14,6 +14,7 @@ namespace System.Logs
         private string sender;
         private ILogger logger;
         private LogLevel level;
+        private LoggingConfiguration configuration;
         private JsonSerializerOptions jsonOptions;
 
         public LogHandler(JsonSerializerOptions options, LogLevel level)
@@ -23,8 +24,8 @@ namespace System.Logs
             var config = new XmlLoggingConfiguration(nlogEnvironment == ""
                         ? "Properties/nlog.config"
                         : $"Properties/nlog.{nlogEnvironment}.config");
-            config.Reload();
-            factory = config.LogFactory;
+            configuration = config.Reload();
+            factory = configuration.LogFactory;
 
             jsonOptions = options;
             this.level = level;

@@ -3,7 +3,7 @@
 namespace Undersoft.ODP.Api
 {
     using Domain;
-    public class ScheduleValidator : DtoCommandSetValidator<ScheduleDto>
+    public class ScheduleValidator : DtoCommandSetValidator<Schedule>
     {
         public ScheduleValidator(IUltimatr ultimatr) : base(ultimatr)
         {
@@ -18,12 +18,12 @@ namespace Undersoft.ODP.Api
                 ValidateRequired(p => p.Data.Name);
                 ValidateRequired(p => p.Data.TeamId);
                 ValidateLength(3, 100, a => a.Data.Name);
-                ValidateExist<IEntryStore, Schedule>((cmd) => (e) => e.Id == cmd.Id);
+                ValidateExist<IEntryStore, Domain.Schedule>((cmd) => (e) => e.Id == cmd.Id);
             });
             ValidationScope(CommandMode.Delete, () =>
             {
                 ValidateRequired(a => a.Data.Id);
-                ValidateExist<IEntryStore, Schedule>((cmd) => (e) => e.Id == cmd.Id);
+                ValidateExist<IEntryStore, Domain.Schedule>((cmd) => (e) => e.Id == cmd.Id);
             });
         }
     }

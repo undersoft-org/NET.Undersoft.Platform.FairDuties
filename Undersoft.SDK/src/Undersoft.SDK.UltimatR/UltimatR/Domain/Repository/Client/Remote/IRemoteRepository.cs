@@ -6,7 +6,7 @@ namespace UltimatR
 {
     public interface IRemoteRepository<TEntity> : IRepository<TEntity> where TEntity : class, IIdentifiable
     {
-        DsContext Context { get; }
+        DataClientContext Context { get; }
 
         new DataServiceQuery<TEntity> Query { get; }
 

@@ -17,20 +17,20 @@ namespace UltimatR
             Type[] stores = new Type[] { typeof(IEntryStore), typeof(IReportStore) };
 
             /**************************************** DataService Entity Type Routines ***************************************/
-            foreach (IDeck<IEdmEntityType> contextEntityTypes in OpenDataServiceRegistry.Entities)
+            foreach (IDeck<IEdmEntityType> contextEntityTypes in DataClientRegistry.Entities)
             {
                 foreach (IEdmEntityType _entityType in contextEntityTypes)
                 {
-                    Type entityType = OpenDataServiceRegistry.Mappings[_entityType.Name];
+                    Type entityType = DataClientRegistry.Mappings[_entityType.Name];
 
                     if (duplicateCheck.Add(entityType))
                     {
-                        Type callerType = DbRegistry.Callers[entityType.FullName];
+                        Type callerType = DataBaseRegistry.Callers[entityType.FullName];
 
                         /*****************************************************************************************/
                         foreach (Type store in stores)
                         {
-                            if ((entityType != null) && (OpenDataServiceRegistry.GetContext(store, entityType) != null))
+                            if ((entityType != null) && (DataClientRegistry.GetContext(store, entityType) != null))
                             {
                                 /*****************************************************************************************/
                                 service.AddScoped(

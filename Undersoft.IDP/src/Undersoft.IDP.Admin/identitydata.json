@@ -17,7 +17,7 @@
     "Users": [
       {
         "Username": "admin",
-        "Password": "321Open$e$ame",
+        "Password": "V00dkaPL",
         "Email": "dhanc@undersoft.com",
         "Roles": [
           "Administrator"
@@ -31,7 +31,7 @@
       },
       {
         "Username": "darhan",
-        "Password": "321Open$e$ame",
+        "Password": "V00dkaPL",
         "Email": "dh@undersoft.pl",
         "Roles": [
           "Administrator"
@@ -45,7 +45,7 @@
       },
       {
         "Username": "user",
-        "Password": "321Open$e$ame",
+        "Password": "V00dkaPL",
         "Email": "user@undersoft.pl",
         "Roles": [
           "User"
@@ -59,7 +59,7 @@
       },
       {
         "Username": "leader",
-        "Password": "321Open$e$ame",
+        "Password": "V00dkaPL",
         "Email": "leader@undersoft.pl",
         "Roles": [
           "Leader"
@@ -73,7 +73,7 @@
       },
       {
         "Username": "manager",
-        "Password": "321Open$e$ame",
+        "Password": "V00dkaPL",
         "Email": "manager@undersoft.pl",
         "Roles": [
           "Manager"

@@ -1,7 +1,5 @@
 ﻿using MediatR;
 using System.Series;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace UltimatR
 {

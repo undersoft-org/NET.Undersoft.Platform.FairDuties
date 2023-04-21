@@ -1,10 +1,3 @@
-using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using MongoDB.Bson.IO;
-using MongoDB.EntityFramework.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Series;
 using System.Uniques;
 
@@ -19,7 +12,7 @@ namespace UltimatR
             get => base[contextName.UniqueKey64()];
             set => base.Set(contextName.UniqueKey64(), value);
         }
-        public IRepositoryClient this[DsContext context]
+        public IRepositoryClient this[DataClientContext context]
         {
             get => base[context.GetType()];
             set => base.Set(context.GetType(), value);
@@ -34,7 +27,7 @@ namespace UltimatR
         {
             return base[contextType];
         }
-        public IRepositoryClient<TContext> Get<TContext>() where TContext : DsContext
+        public IRepositoryClient<TContext> Get<TContext>() where TContext : DataClientContext
         {
             return (IRepositoryClient<TContext>)base[typeof(TContext)];
         }
@@ -43,7 +36,7 @@ namespace UltimatR
         {
             return base.TryGet(contextType, out repoSource);
         }
-        public bool TryGet<TContext>(out IRepositoryClient<TContext> repoSource) where TContext : DsContext
+        public bool TryGet<TContext>(out IRepositoryClient<TContext> repoSource) where TContext : DataClientContext
         {
             if (!TryGet(typeof(TContext), out IRepositoryClient _repo))
             {
@@ -62,12 +55,12 @@ namespace UltimatR
         {
             return base.Add(repoSource.ContextType, repoSource);
         }
-        public bool TryAdd<TContext>(IRepositoryClient<TContext> repoSource) where TContext : DsContext
+        public bool TryAdd<TContext>(IRepositoryClient<TContext> repoSource) where TContext : DataClientContext
         {
             return base.Add(typeof(TContext), repoSource);
         }
 
-        public IRepositoryClient<TContext> Add<TContext>(IRepositoryClient<TContext> repoSource) where TContext : DsContext
+        public IRepositoryClient<TContext> Add<TContext>(IRepositoryClient<TContext> repoSource) where TContext : DataClientContext
         {
             return (IRepositoryClient<TContext>)base.Put(typeof(TContext), repoSource).Value;
         }
@@ -76,27 +69,27 @@ namespace UltimatR
             base.Put(repoSource.ContextType, repoSource);
         }
 
-        public bool Remove<TContext>() where TContext : DsContext
+        public bool Remove<TContext>() where TContext : DataClientContext
         {
             return TryRemove(typeof(TContext));
         }
 
         public int PoolCount(Type contextType)
         {
-            return  Get(contextType).Count;
+            return Get(contextType).Count;
         }
-        public int PoolCount<TContext>() where TContext : DsContext
+        public int PoolCount<TContext>() where TContext : DataClientContext
         {
             return Get<TContext>().Count;
         }
 
         public IRepositoryClient<TContext> Put<TContext>(IRepositoryClient<TContext> repoSource)
-            where TContext : DsContext
+            where TContext : DataClientContext
         {
             return (IRepositoryClient<TContext>)base.Put(typeof(TContext), repoSource).Value;
         }
 
-        public IRepositoryClient<TContext> New<TContext>(Uri route) where TContext : DsContext
+        public IRepositoryClient<TContext> New<TContext>(Uri route) where TContext : DataClientContext
         {
             return Add(new RepositoryClient<TContext>(route));
         }

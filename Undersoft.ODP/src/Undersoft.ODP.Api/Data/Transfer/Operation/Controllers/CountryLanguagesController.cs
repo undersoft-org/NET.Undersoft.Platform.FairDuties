@@ -9,7 +9,7 @@ namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Entries
     [Authorize(Roles = "Administrator, Manager")]
     [Route("/countryLanguages")]
     public class
-        CountryLanguagesController : DtoCommandController<long, IEntryStore, CountryLanguage, CountryLanguageDto>
+        CountryLanguagesController : DtoCommandController<long, IEntryStore, CountryLanguage, Api.CountryLanguage>
     {
         public CountryLanguagesController(IUltimatr ultimatr) : base(ultimatr)
         {
@@ -23,7 +23,7 @@ namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Reports
 
     [Authorize]
     [Route("/countryLanguages")]
-    public class CountryLanguagesController : DtoQueryController<long, IReportStore, CountryLanguage, CountryLanguageDto>
+    public class CountryLanguagesController : DtoQueryController<long, IReportStore, CountryLanguage, Api.CountryLanguage>
     {
         public CountryLanguagesController(IUltimatr ultimatr) : base(ultimatr)
         {

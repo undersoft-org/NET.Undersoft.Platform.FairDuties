@@ -6,8 +6,8 @@ namespace UltimatR
 {
     [LinkedResult]
     [IgnoreApi]
-    [GrpcDataService]
-    public abstract class GrpcDataServiceController<TKey, TEntry, TReport, TEntity, TDto> : IGrpcDataServiceController<TKey, TEntity, TDto> where TDto : Dto
+    [GrpcService]
+    public class GrpcDataServiceController<TKey, TEntry, TReport, TEntity, TDto> : IGrpcDataServiceController<TKey, TEntity, TDto> where TDto : Dto
         where TEntity : Entity
         where TEntry : IDataStore
         where TReport : IDataStore
@@ -19,15 +19,9 @@ namespace UltimatR
         protected readonly PublishMode _publishMode;
 
 
-        protected GrpcDataServiceController() { }
+        public GrpcDataServiceController() : this(new Ultimatr(), null, k => e => e.SetId(k), null, PublishMode.PropagateCommand) { }
 
-        protected GrpcDataServiceController(
-            IUltimatr ultimatr,
-            PublishMode publishMode = PublishMode.PropagateCommand
-        ) : this(ultimatr, null, k => e => e.SetId(k), null, publishMode) { }
-
-        protected GrpcDataServiceController(
-            IUltimatr ultimatr,
+        public GrpcDataServiceController(IUltimatr ultimatr,
             Func<TDto, Expression<Func<TEntity, bool>>> predicate,
             Func<TKey, Func<TDto, object>> keysetter,
             Func<TKey, Expression<Func<TEntity, bool>>> keymatcher,

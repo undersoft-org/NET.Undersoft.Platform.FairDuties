@@ -8,7 +8,7 @@ namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Entries
 
     [Authorize(Roles = "Administrator")]
     [Route("/deviceSessions")]
-    public class DeviceSessionsController : DtoCommandController<long, IEntryStore, DeviceSession, DeviceSessionDto>
+    public class DeviceSessionsController : DtoCommandController<long, IEntryStore, DeviceSession, Api.DeviceSession>
     {
         public DeviceSessionsController(IUltimatr uservice) : base(uservice)
         {
@@ -22,7 +22,7 @@ namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Reports
 
     [Authorize(Roles = "Administrator")]
     [Route("/deviceSessions")]
-    public class DeviceSessionsController : DtoQueryController<long, IReportStore, DeviceSession, DeviceSessionDto>
+    public class DeviceSessionsController : DtoQueryController<long, IReportStore, DeviceSession, Api.DeviceSession>
     {
         public DeviceSessionsController(IUltimatr uservice) : base(uservice)
         {

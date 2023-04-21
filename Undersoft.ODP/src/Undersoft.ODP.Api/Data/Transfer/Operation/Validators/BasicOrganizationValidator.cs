@@ -3,7 +3,7 @@
 namespace Undersoft.ODP.Api
 {
     using Domain;
-    public class BasicOrganizationValidator : DtoCommandSetValidator<BasicOrganizationDto>
+    public class BasicOrganizationValidator : DtoCommandSetValidator<BasicOrganization>
     {
         public BasicOrganizationValidator(IUltimatr ultimatr) : base(ultimatr)
         {
@@ -17,13 +17,13 @@ namespace Undersoft.ODP.Api
             {
                 ValidateRequired(p => p.Data.Name);
                 ValidateLength(2, 100, a => a.Data.Name);
-                ValidateExist<IEntryStore, Organization>((cmd) => (e) => e.Id == cmd.Id);
+                ValidateExist<IEntryStore, Domain.Organization>((cmd) => (e) => e.Id == cmd.Id);
             });
 
             ValidationScope(CommandMode.Delete, () =>
             {
                 ValidateRequired(a => a.Data.Id);
-                ValidateExist<IEntryStore, Organization>((cmd) => (e) => e.Id == cmd.Id);
+                ValidateExist<IEntryStore, Domain.Organization>((cmd) => (e) => e.Id == cmd.Id);
             });
         }
     }

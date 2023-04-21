@@ -127,7 +127,7 @@
         "RequirePkce": true,
         "ClientSecrets": [
           {
-            "Value": "idp.admin"
+            "Value": "V00dkaPL"
           }
         ],
         "RedirectUris": [
@@ -148,8 +148,8 @@
         ]
       },
       {
-        "ClientId": "mda.ios",
-        "ClientName": "mda.ios",
+        "ClientId": "uip.app",
+        "ClientName": "uip.app",
         "ClientUri": "https://localhost:44303",
         "AllowedGrantTypes": [
           "password"
@@ -157,7 +157,7 @@
         "RequirePkce": false,
         "ClientSecrets": [
           {
-            "Value": "mda.ios"
+            "Value": "uip.app"
           }
         ],
         "AllowedScopes": [

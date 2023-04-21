@@ -8,7 +8,7 @@ namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Entries
 
     [Authorize]
     [Route("/plans")]
-    public class PlansController : DtoCommandController<long, IEntryStore, Plan, PlanDto>
+    public class PlansController : DtoCommandController<long, IEntryStore, Plan, Api.Plan>
     {
         public PlansController(IUltimatr ultimatr) : base(ultimatr)
         {
@@ -22,7 +22,7 @@ namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Reports
 
     [Authorize]
     [Route("/plans")]
-    public class PlansController : DtoQueryController<long, IReportStore, Plan, PlanDto>
+    public class PlansController : DtoQueryController<long, IReportStore, Plan, Api.Plan>
     {
         public PlansController(IUltimatr ultimatr) : base(ultimatr)
         {

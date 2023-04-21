@@ -3,7 +3,7 @@
 namespace Undersoft.ODP.Api
 {
     using Domain;
-    public class PlanValidator : DtoCommandSetValidator<PlanDto>
+    public class PlanValidator : DtoCommandSetValidator<Plan>
     {
         public PlanValidator(IUltimatr ultimatr) : base(ultimatr)
         {
@@ -16,12 +16,12 @@ namespace Undersoft.ODP.Api
             {
                 ValidateRequired(p => p.Data.Name);
                 ValidateLength(3, 100, a => a.Data.Name);
-                ValidateExist<IEntryStore, Plan>((cmd) => (e) => e.Id == cmd.Id);
+                ValidateExist<IEntryStore, Domain.Plan>((cmd) => (e) => e.Id == cmd.Id);
             });
             ValidationScope(CommandMode.Delete, () =>
             {
                 ValidateRequired(a => a.Data.Id);
-                ValidateExist<IEntryStore, Plan>((cmd) => (e) => e.Id == cmd.Id);
+                ValidateExist<IEntryStore, Domain.Plan>((cmd) => (e) => e.Id == cmd.Id);
             });
         }
     }

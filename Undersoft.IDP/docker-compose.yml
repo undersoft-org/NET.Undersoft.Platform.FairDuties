@@ -1,99 +1,99 @@
 version: '3.4'
 services:
-  nginx-proxy:
+  io.undersoft.gwp.nginx-proxy:
     image: jwilder/nginx-proxy
-    container_name: nginx
+    container_name: io.undersoft.gwp.nginx-proxy
     ports:
-      - '80:80'
-      - '443:443'
+      - '9080:80'
+      - '9443:443'
     volumes:
-      - '/var/run/docker.sock:/tmp/docker.sock:ro'
+      -  '/var/run/docker.sock:/tmp/docker.sock:ro'
       - './shared/nginx/vhost.d:/etc/nginx/vhost.d'
       - './shared/nginx/certs:/etc/nginx/certs:ro'
     networks:
       proxy: null
-      undersoft.ais:
+      undersoft.int:
         aliases:
-          - sts.ais.undersoft.local
-          - admin.ais.undersoft.local
-          - admin-api.ais.undersoft.local
+          - identity.sts.idp.undersoft.int
+          - admin.idp.undersoft.int
+          - api.admin.idp.undersoft.int
     restart: always
-  undersoft.ais.admin:
-    image: '${DOCKER_REGISTRY-}undersoft-ais-admin'
+  io.undersoft.idp.admin:
+    image: '${DOCKER_REGISTRY-}undersoft-idp-admin'
     build:
       context: .
       dockerfile: src/Undersoft.IDP.Admin/Dockerfile
-    container_name: undersoft-ais-admin
+    container_name: io.undersoft.idp.admin
     environment:
-      - VIRTUAL_HOST=admin.ais.undersoft.local
-      - 'ConnectionStrings__ConfigurationDbConnection=Host=db; Port=5432; Database=AIS.Identity; UserId=postgres;Password=321Open$e$ame; Pooling=true;'
-      - 'ConnectionStrings__PersistedGrantDbConnection=Host=db; Port=5432; Database=AIS.Identity; UserId=postgres;Password=321Open$e$ame; Pooling=true'
-      - 'ConnectionStrings__IdentityDbConnection=Host=db; Port=5432; Database=AIS.Identity; UserId=postgres;Password=321Open$e$ame; Pooling=true'
-      - 'ConnectionStrings__AdminLogDbConnection=Host=db; Port=5432; Database=AIS.Identity; UserId=postgres;Password=321Open$e$ame; Pooling=true'
-      - 'ConnectionStrings__AdminAuditLogDbConnection=Host=db; Port=5432; Database=AIS.Identity; UserId=postgres;Password=321Open$e$ame; Pooling=true'
-      - 'ConnectionStrings__DataProtectionDbConnection=Host=db; Port=5432; Database=AIS.Identity; UserId=postgres;Password=321Open$e$ame; Pooling=true'
-      - 'AdminConfiguration__IdentityAdminBaseUrl=https://admin.ais.undersoft.local'
-      - 'AdminConfiguration__IdentityAdminRedirectUri=https://admin.ais.undersoft.local/signin-oidc'
-      - 'AdminConfiguration__IdentityServerBaseUrl=https://sts.ais.undersoft.local'
+      - VIRTUAL_HOST=admin.idp.undersoft.int
+      - 'ConnectionStrings__ConfigurationDbConnection=Host=db; Port=7432; Database=IDP.Identity; UserId=postgres;Password=V00dkaPL; Pooling=true;'
+      - 'ConnectionStrings__PersistedGrantDbConnection=Host=db; Port=7432; Database=IDP.Identity; UserId=postgres;Password=V00dkaPL; Pooling=true'
+      - 'ConnectionStrings__IdentityDbConnection=Host=db; Port=7432; Database=IDP.Identity; UserId=postgres;Password=V00dkaPL; Pooling=true'
+      - 'ConnectionStrings__AdminLogDbConnection=Host=db; Port=7432; Database=IDP.Identity; UserId=postgres;Password=V00dkaPL; Pooling=true'
+      - 'ConnectionStrings__AdminAuditLogDbConnection=Host=db; Port=7432; Database=IDP.Identity; UserId=postgres;Password=V00dkaPL; Pooling=true'
+      - 'ConnectionStrings__DataProtectionDbConnection=Host=db; Port=7432; Database=IDP.Identity; UserId=postgres;Password=V00dkaPL; Pooling=true'
+      - 'AdminConfiguration__IdentityAdminBaseUrl=https://admin.idp.undersoft.int'
+      - 'AdminConfiguration__IdentityAdminRedirectUri=https://admin.idp.undersoft.int/signin-oidc'
+      - 'AdminConfiguration__IdentityServerBaseUrl=https://identity.sts.idp.undersoft.int'
       - AdminConfiguration__RequireHttpsMetadata=false
-      - 'IdentityServerData__Clients__0__ClientUri=https://admin.ais.undersoft.local'
-      - 'IdentityServerData__Clients__0__RedirectUris__0=https://admin.ais.undersoft.local/signin-oidc'
-      - 'IdentityServerData__Clients__0__FrontChannelLogoutUri=https://admin.ais.undersoft.local/signin-oidc'
-      - 'IdentityServerData__Clients__0__PostLogoutRedirectUris__0=https://admin.ais.undersoft.local/signout-callback-oidc'
-      - 'IdentityServerData__Clients__0__AllowedCorsOrigins__0=https://admin.ais.undersoft.local'
-      - 'IdentityServerData__Clients__1__RedirectUris__0=https://admin-api.ais.undersoft.local/swagger/oauth2-redirect.html'
-      - 'Serilog__WriteTo__1__Args__connectionString=Host=db; Port=5432; Database=AIS.Identity; UserId=postgres;Password=321Open$e$ame; Pooling=true'
+      - 'IdentityServerData__Clients__0__ClientUri=https://admin.idp.undersoft.int'
+      - 'IdentityServerData__Clients__0__RedirectUris__0=https://admin.idp.undersoft.int/signin-oidc'
+      - 'IdentityServerData__Clients__0__FrontChannelLogoutUri=https://admin.idp.undersoft.int/signin-oidc'
+      - 'IdentityServerData__Clients__0__PostLogoutRedirectUris__0=https://admin.idp.undersoft.int/signout-callback-oidc'
+      - 'IdentityServerData__Clients__0__AllowedCorsOrigins__0=https://admin.idp.undersoft.int'
+      - 'IdentityServerData__Clients__1__RedirectUris__0=https://api.admin.idp.undersoft.int/swagger/oauth2-redirect.html'
+      - 'Serilog__WriteTo__1__Args__connectionString=Host=db; Port=7432; Database=IDP.Identity; UserId=postgres;Password=V00dkaPL; Pooling=true'
       - DockerConfiguration__UpdateCaCertificate=true
       - ASPNETCORE_ENVIRONMENT=Development
-    command: dotnet Undersoft.IDP.Admin.dll /seed
+    command: dotnet Undersoft.IDP.Admin /seed
     depends_on:
-      - db
-      - undersoft.ais.sts.identity
+      - io.undersoft.dbp.pgsql
+      - io.undersoft.idp.sts.identity
     volumes:
       - './shared/serilog.json:/app/serilog.json'
       - './shared/identitydata.json:/app/identitydata.json'
       - './shared/identityserverdata.json:/app/identityserverdata.json'
       - './shared/nginx/certs/cacerts.crt:/usr/local/share/ca-certificates/cacerts.crt'
     networks:
-      undersoft.ais: null
-  undersoft.ais.admin.api:
-    image: '${DOCKER_REGISTRY-}undersoft-ais-admin-api'
+      undersoft.int: null
+  io.undersoft.idp.admin.api:
+    image: '${DOCKER_REGISTRY-}undersoft-idp-admin-api'
     build:
       context: .
       dockerfile: src/Undersoft.IDP.Admin.Api/Dockerfile
-    container_name: undersoft-ais-admin-api
+    container_name: io.undersoft.idp.admin.api
     environment:
-      - VIRTUAL_HOST=admin-api.ais.undersoft.local
+      - VIRTUAL_HOST=api.admin.idp.undersoft.int
       - AdminApiConfiguration__RequireHttpsMetadata=false
-      - 'AdminApiConfiguration__ApiBaseUrl=https://admin-api.ais.undersoft.local'
-      - 'AdminApiConfiguration__IdentityServerBaseUrl=https://sts.ais.undersoft.local'
-      - 'ConnectionStrings__ConfigurationDbConnection=Host=db; Port=5432; Database=AIS.Identity; UserId=postgres;Password=321Open$e$ame; Pooling=true;'
-      - 'ConnectionStrings__PersistedGrantDbConnection=Host=db; Port=5432; Database=AIS.Identity; UserId=postgres;Password=321Open$e$ame; Pooling=true'
-      - 'ConnectionStrings__IdentityDbConnection=Host=db; Port=5432; Database=AIS.Identity; UserId=postgres;Password=321Open$e$ame; Pooling=true'
-      - 'ConnectionStrings__AdminLogDbConnection=Host=db; Port=5432; Database=AIS.Identity; UserId=postgres;Password=321Open$e$ame; Pooling=true'
-      - 'ConnectionStrings__AdminAuditLogDbConnection=Host=db; Port=5432; Database=AIS.Identity; UserId=postgres;Password=321Open$e$ame; Pooling=true'
-      - 'ConnectionStrings__DataProtectionDbConnection=Host=db; Port=5432; Database=AIS.Identity; UserId=postgres;Password=321Open$e$ame; Pooling=true'
+      - 'AdminApiConfiguration__ApiBaseUrl=https://api.admin.idp.undersoft.int'
+      - 'AdminApiConfiguration__IdentityServerBaseUrl=https://identity.sts.idp.undersoft.int'
+      - 'ConnectionStrings__ConfigurationDbConnection=Host=db; Port=7432; Database=IDP.Identity; UserId=postgres;Password=V00dkaPL; Pooling=true;'
+      - 'ConnectionStrings__PersistedGrantDbConnection=Host=db; Port=7432; Database=IDP.Identity; UserId=postgres;Password=V00dkaPL; Pooling=true'
+      - 'ConnectionStrings__IdentityDbConnection=Host=db; Port=7432; Database=IDP.Identity; UserId=postgres;Password=V00dkaPL; Pooling=true'
+      - 'ConnectionStrings__AdminLogDbConnection=Host=db; Port=7432; Database=IDP.Identity; UserId=postgres;Password=V00dkaPL; Pooling=true'
+      - 'ConnectionStrings__AdminAuditLogDbConnection=Host=db; Port=7432; Database=IDP.Identity; UserId=postgres;Password=V00dkaPL; Pooling=true'
+      - 'ConnectionStrings__DataProtectionDbConnection=Host=db; Port=7432; Database=IDP.Identity; UserId=postgres;Password=V00dkaPL; Pooling=true'
       - DockerConfiguration__UpdateCaCertificate=true
       - ASPNETCORE_ENVIRONMENT=Development
     volumes:
       - './shared/serilog.json:/app/serilog.json'
       - './shared/nginx/certs/cacerts.crt:/usr/local/share/ca-certificates/cacerts.crt'
     networks:
-      undersoft.ais: null
-  undersoft.ais.sts.identity:
-    image: '${DOCKER_REGISTRY-}undersoft-ais-sts-identity'
+      undersoft.int: null
+  io.undersoft.idp.sts.identity:
+    image: '${DOCKER_REGISTRY-}undersoft-idp-sts-identity'
     build:
       context: .
       dockerfile: src/Undersoft.IDP.STS.Identity/Dockerfile
-    container_name: undersoft-ais-sts-identity
+    container_name: io.undersoft.idp.sts.identity
     environment:
-      - VIRTUAL_HOST=sts.ais.undersoft.local
-      - 'ConnectionStrings__ConfigurationDbConnection=Host=db; Port=5432; Database=AIS.Identity; UserId=postgres;Password=321Open$e$ame; Pooling=true;'
-      - 'ConnectionStrings__PersistedGrantDbConnection=Host=db; Port=5432; Database=AIS.Identity; UserId=postgres;Password=321Open$e$ame; Pooling=true'
-      - 'ConnectionStrings__IdentityDbConnection=Host=db; Port=5432; Database=AIS.Identity; UserId=postgres;Password=321Open$e$ame; Pooling=true'
-      - 'ConnectionStrings__DataProtectionDbConnection=Host=db; Port=5432; Database=AIS.Identity; UserId=postgres;Password=321Open$e$ame; Pooling=true'
-      - 'AdminConfiguration__IdentityAdminBaseUrl=https://admin.ais.undersoft.local'
-      - 'IdentityServerOptions__IssuerUri=https://sts.ais.undersoft.local'
+      - VIRTUAL_HOST=identity.sts.idp.undersoft.int
+      - 'ConnectionStrings__ConfigurationDbConnection=Host=db; Port=7432; Database=IDP.Identity; UserId=postgres;Password=V00dkaPL; Pooling=true;'
+      - 'ConnectionStrings__PersistedGrantDbConnection=Host=db; Port=7432; Database=IDP.Identity; UserId=postgres;Password=V00dkaPL; Pooling=true'
+      - 'ConnectionStrings__IdentityDbConnection=Host=db; Port=7432; Database=IDP.Identity; UserId=postgres;Password=V00dkaPL; Pooling=true'
+      - 'ConnectionStrings__DataProtectionDbConnection=Host=db; Port=7432; Database=IDP.Identity; UserId=postgres;Password=V00dkaPL; Pooling=true'
+      - 'AdminConfiguration__IdentityAdminBaseUrl=https://admin.idp.undersoft.int'
+      - 'IdentityServerOptions__IssuerUri=https://identity.sts.idp.undersoft.int'
       - IdentityServerOptions__Events__RaiseErrorEvents=true
       - IdentityServerOptions__Events__RaiseInformationEvents=true
       - IdentityServerOptions__Events__RaiseFailureEvents=true
@@ -101,39 +101,40 @@ services:
       - DockerConfiguration__UpdateCaCertificate=true
       - ASPNETCORE_ENVIRONMENT=Development
     depends_on:
-      - db
+      - io.undersoft.dbp.pgsql
     volumes:
       - './shared/serilog.json:/app/serilog.json'
       - './shared/nginx/certs/cacerts.crt:/usr/local/share/ca-certificates/cacerts.crt'
     networks:
-      undersoft.ais:
+      undersoft.int:
         aliases:
-          - sts.ais.undersoft.local
-  db:
-    image: postgres
+          - identity.sts.idp.undersoft.int
+  io.undersoft.dbp.pgsql:
+    image: postgres:alpine3.17
     restart: always
     environment:
       - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=321Open$e$ame
+      - POSTGRES_PASSWORD=V00dkaPL
     ports:
-      - '5432:5432'
-    container_name: undersoft-ais-db
+      - '7432:5432'
+    container_name: io.undersoft.dbp.pgsql
     volumes:
-      - 'db:/var/opt/pgsql/data'
+      - 'io.undersoft.dbp:/var/opt/pgsql/data'
     networks:
-      undersoft.ais: null
-  adminer:
+      undersoft.int: null
+  io.undersoft.tkp.adminer:
     image: adminer
     restart: always
     ports:
       - 5880:8080
+    container_name: io.undersoft.tkp.adminer
     networks:
-      undersoft.ais: null
+      undersoft.int: null
 volumes:
-  db:
+  io.undersoft.dbp:
     driver: local
 networks:
   proxy:
     driver: bridge
-  undersoft.ais:
+  undersoft.int:
     driver: bridge

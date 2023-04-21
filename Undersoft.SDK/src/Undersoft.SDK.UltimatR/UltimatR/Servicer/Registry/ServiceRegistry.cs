@@ -178,5 +178,30 @@ namespace UltimatR
                     }
                 });
         }
+        public void MergeServices(IServiceCollection services, bool actualizeExternalServices = true)
+        {
+            if (services.Count == Count)
+                return;
+
+            var sdeck = new Album<ServiceDescriptor>(true);
+
+            services.ForEach(s =>
+            {
+                if (actualizeExternalServices)
+                    sdeck.Add(GetKey(s.ServiceType), s);
+                if (!Contains(s))
+                {
+                    Add(s);
+                }
+            });
+            if (actualizeExternalServices)
+                this.ForEach(c =>
+                {
+                    if (!sdeck.Contains(GetKey(c.ServiceType), c))
+                    {
+                        services.Add(c);
+                    }
+                });
+        }
     }
 }

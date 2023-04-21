@@ -2,8 +2,7 @@
 
 namespace Undersoft.ODP.Api
 {
-    using Domain;
-    public class AttributeValidator : DtoCommandSetValidator<AttributeDto>
+    public class AttributeValidator : DtoCommandSetValidator<Attribute>
     {
         public AttributeValidator(IUltimatr ultimatr) : base(ultimatr)
         {
@@ -16,12 +15,12 @@ namespace Undersoft.ODP.Api
             {
                 ValidateRequired(p => p.Data.Value);
                 ValidateRequired(p => p.Data.Key);
-                ValidateExist<IEntryStore, Attribute>((cmd) => (e) => e.Id == cmd.Id);
+                ValidateExist<IEntryStore, Domain.Attribute>((cmd) => (e) => e.Id == cmd.Id);
             });
             ValidationScope(CommandMode.Delete, () =>
             {
                 ValidateRequired(a => a.Data.Id);
-                ValidateExist<IEntryStore, Attribute>((cmd) => (e) => e.Id == cmd.Id);
+                ValidateExist<IEntryStore, Domain.Attribute>((cmd) => (e) => e.Id == cmd.Id);
             });
         }
     }

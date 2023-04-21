@@ -1,46 +1,29 @@
-using System;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore.Design;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.OData.Client;
-
 namespace UltimatR
 {
-    #region Interfaces
-
-    public interface IRepositoryClient : IRepositoryContextPool, IUnique, IDisposable, IAsyncDisposable
+    public interface IRepositoryClient
+        : IRepositoryContextPool,
+            IUnique,
+            IDisposable,
+            IAsyncDisposable
     {
-        #region Properties        
+        DataClientContext Context { get; }
 
-        DsContext Context { get; }
+        Uri Route { get; }
 
-        Uri Route { get; }        
-
-        #endregion
-
-        #region Methods
-
-        TContext GetContext<TContext>() where TContext : DsContext;        
+        TContext GetContext<TContext>() where TContext : DataClientContext;
 
         object CreateContext(Type contextType, Uri serviceRoot);
-        TContext CreateContext<TContext>(Uri serviceRoot) where TContext : DsContext;
+        TContext CreateContext<TContext>(Uri serviceRoot) where TContext : DataClientContext;
 
         void BuildMetadata();
-
-        #endregion
     }
 
-    public interface IRepositoryClient<TContext> : IRepositoryContextPool<TContext>,
-                                                   IRepositoryClient where TContext : class
+    public interface IRepositoryClient<TContext>
+        : IRepositoryContextPool<TContext>,
+            IRepositoryClient where TContext : class
     {
-        #region Properties
-
         new TContext Context { get; }
-
-        #endregion
 
         TContext CreateContext(Uri serviceRoot);
     }
-
-    #endregion
 }

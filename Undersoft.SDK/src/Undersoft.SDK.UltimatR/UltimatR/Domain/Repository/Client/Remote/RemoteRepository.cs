@@ -29,7 +29,7 @@ namespace UltimatR
             Provider = new LinkedRepositoryQueryProvider<TEntity>(Query);
         }
 
-        public RemoteRepository(DsContext context) : base(context)
+        public RemoteRepository(DataClientContext context) : base(context)
         {
             if (dsContext != null)
             {
@@ -221,7 +221,7 @@ namespace UltimatR
             return -1;
         }
 
-        protected DsContext dsContext => (DsContext)InnerContext;
+        protected DataClientContext dsContext => (DataClientContext)InnerContext;
 
         public override object TracePatching(object item, string propertyName = null, Type type = null)
         {
@@ -300,7 +300,7 @@ namespace UltimatR
             return Query;
         }
 
-        public DsContext Context => dsContext;
+        public DataClientContext Context => dsContext;
 
         public override DataServiceQuery<TEntity> Query => dsContext.CreateQuery<TEntity>(Name, true);
     }

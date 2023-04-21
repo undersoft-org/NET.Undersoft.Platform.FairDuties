@@ -15,7 +15,11 @@ namespace UltimatR
         public virtual Task<IQueryable<TDto>> Handle(GetAllQuery<TStore, TEntity, TDto> request,
                                                 CancellationToken cancellationToken)
         {
-            return _repository.GetQueryAsync<TDto>(request.Sort, request.Expanders);
+            var result = _repository.GetQueryAsync<TDto>(request.Sort, request.Expanders);
+
+            result.Wait(30 * 1000);
+
+            return result;
         }
     }
 }

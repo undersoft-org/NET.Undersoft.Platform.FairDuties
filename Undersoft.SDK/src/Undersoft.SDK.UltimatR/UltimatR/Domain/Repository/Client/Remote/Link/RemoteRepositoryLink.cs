@@ -32,10 +32,10 @@ namespace UltimatR
 
         public void Load(object origin) { Load(origin, dsContext); }
 
-        public void Load<T>(IEnumerable<T> origins, DsContext context) where T : class
+        public void Load<T>(IEnumerable<T> origins, DataClientContext context) where T : class
         { origins.DoEach((o) => Load(o, context)); }
 
-        public void Load(object origin, DsContext context)
+        public void Load(object origin, DataClientContext context)
         {
             IEntity _entity = (IEntity)origin;
             int rubricId = LinkedMember.RubricId;
@@ -53,14 +53,14 @@ namespace UltimatR
                         Synchronizer.ReleaseLinker();
                         break;
                     case Towards.ToSet:
-                        dso = typeof(DsoToSet<TTarget>).New<DsoToSet<TTarget>>(context);
+                        dso = typeof(RemoteOnSet<TTarget>).New<RemoteSet<TTarget>>(context);
                         dso.LoadCompleted += Synchronizer.OnLinked;
                         _entity[rubricId] = dso;
                         dso.LoadAsync(predicate);
                         Synchronizer.AcquireLinker();
                         break;
                     case Towards.SetToSet:
-                        dso = typeof(DsoSetToSet<TTarget>).New<DsoSetToSet<TTarget>>(context);
+                        dso = typeof(RemoteOnSets<TTarget>).New<RemoteOnSets<TTarget>>(context);
                         dso.LoadCompleted += Synchronizer.OnLinked;
                         _entity[rubricId] = dso;
                         dso.LoadAsync(predicate);
@@ -74,7 +74,7 @@ namespace UltimatR
 
         public async Task LoadAsync(object origin) { await Task.Run(() => Load(origin, dsContext), Cancellation); }
 
-        public async ValueTask LoadAsync(object origin, DsContext context, CancellationToken token)
+        public async ValueTask LoadAsync(object origin, DataClientContext context, CancellationToken token)
         { await Task.Run(() => Load(origin, context), token); }
 
         public override Task<int> Save(bool asTransaction, CancellationToken token = default)

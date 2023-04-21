@@ -1,7 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace UltimatR
 {
@@ -11,10 +8,9 @@ namespace UltimatR
         private static IServiceRegistry registry;
         private static IServiceConfiguration configuration;
 
-        protected IServiceProvider provider;
         protected IServiceScope scope;
 
-        public IServiceProvider Provider => provider ??= Scope.ServiceProvider;
+        public IServiceProvider Provider => GetProvider();
         public IServiceScope Scope => scope ??= CreateScope();
         public IServiceConfiguration Configuration
         {
@@ -28,13 +24,22 @@ namespace UltimatR
             Services = this;
         }
 
-        internal ServiceManager(IServiceCollection services) : base()
+        internal ServiceManager(IServiceCollection services) : this()
         {
-            registry = new ServiceRegistry(services, this);
+            if (registry == null)
+            {
+                registry = new ServiceRegistry(services, this);
+                registry.MergeServices();
+                AddObject<IServiceManager>(this);
+            }
+            else
+                registry.MergeServices(services, false);
 
-            configuration = new ServiceConfiguration(registry);
-
-            AddObject<IServiceManager>(this);
+            if (configuration == null)
+            {
+                configuration = new ServiceConfiguration(registry);
+                AddObject<IServiceConfiguration>(configuration);
+            }
         }
 
         public virtual T GetService<T>()
@@ -109,13 +114,22 @@ namespace UltimatR
             _provider.GetRequiredService<ObjectAccessor<IServiceProvider>>().Value = _provider;
         }
 
-        public static void BuildInternalProvider()
+        public static IServiceProvider BuildInternalProvider()
         {
             SetProvider(registry.BuildServiceProvider());
+            return registry.GetProvider();
         }
 
         public static IServiceProvider GetProvider()
-            => registry.GetProvider();
+        {
+            var _provider = registry.GetProvider();
+            if (_provider == null)
+            {
+                BuildInternalProvider();
+                return registry.GetProvider();
+            }
+            return _provider;
+        }
 
         public ObjectFactory NewFactory<T>(Type[] constrTypes)
         {
@@ -143,18 +157,21 @@ namespace UltimatR
 
         public static IServiceScope CreateScope()
         {
-            var provider = GetProvider();
-            if (provider == null)
-            {
-                BuildInternalProvider();
-                return GetProvider().CreateScope();
-            }
-            return provider.CreateScope();
+            return GetProvider().CreateScope();
         }
 
         public static IServiceManager GetManager()
         {
+            if (registry == null)
+                return new ServiceManager(new ServiceCollection());
             return registry.GetObject<IServiceManager>();
+        }
+
+        public static IServiceRegistry GetRegistry()
+        {
+            if (registry == null)
+                return new ServiceManager(new ServiceCollection()).Registry;
+            return registry;
         }
 
         public static IServiceConfiguration GetConfiguration()

@@ -2,10 +2,9 @@ using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Linq;
 using System.Reflection;
 using System.Series;
+using System.Uniques;
 
 namespace UltimatR
 {
@@ -33,8 +32,8 @@ namespace UltimatR
                 .AddScoped<IMassDeck<IDto>, MassDeck<IDto>>();
 
             Deck<Type> duplicateCheck = new Deck<Type>();
-            Type[] stores = DbRegistry.Stores.Where(s => s.IsAssignableTo(typeof(IDataStore))).ToArray();
-            foreach (IDeck<IEntityType> contextEntityTypes in DbRegistry.Entities)
+            Type[] stores = DataBaseRegistry.Stores.Where(s => s.IsAssignableTo(typeof(IDataServiceStore))).ToArray();
+            foreach (IDeck<IEntityType> contextEntityTypes in DataBaseRegistry.Entities)
             {
                 foreach (IEntityType _entityType in contextEntityTypes)
                 {
@@ -44,12 +43,12 @@ namespace UltimatR
                         foreach (Type _dto in dtos)
                         {
                             Type dto = _dto;
-                            if (!dto.Name.Contains($"{entityType.Name}Dto"))
+                            if (!dto.Name.Contains($"{entityType.Name}"))
                                 if (entityType.IsGenericType &&
                                     entityType.IsAssignableTo(typeof(Identifier)) &&
-                                    dto.Name.Contains($"{entityType.GetGenericArguments().FirstOrDefault().Name}Dto"))
+                                    dto.Name.Contains(entityType.GetGenericArguments().FirstOrDefault().Name))
                                     dto = typeof(IdentifierDto<>).MakeGenericType(_dto);
-                                else if (entityType == typeof(Event) && dto.Name.Contains("DtoEvent"))
+                                else if (entityType == typeof(Event) && dto.Name.Contains("Event"))
                                     dto = typeof(EventDto);
                                 else
                                     continue;
@@ -77,11 +76,25 @@ namespace UltimatR
                                         dto),
                                     typeof(FindOneHandler<,,>).MakeGenericType(store, entityType, dto));
 
+
+                                service.AddTransient(
+                                    typeof(IRequestHandler<,>).MakeGenericType(
+                                        typeof(FindOneQuery<,,>).MakeGenericType(store, entityType, dto),
+                                        typeof(UniqueOne<>).MakeGenericType(dto)),
+                                    typeof(FindOneQueryHandler<,,>).MakeGenericType(store, entityType, dto));
+
                                 service.AddTransient(
                                     typeof(IRequestHandler<,>).MakeGenericType(
                                         typeof(GetAll<,,>).MakeGenericType(store, entityType, dto),
                                         typeof(IDeck<>).MakeGenericType(dto)),
                                     typeof(GetAllHandler<,,>).MakeGenericType(store, entityType, dto));
+
+                                service.AddTransient(
+                                   typeof(IRequestHandler<,>).MakeGenericType(
+                                       typeof(GetAllQuery<,,>).MakeGenericType(store, entityType, dto),
+                                       typeof(IQueryable<>).MakeGenericType(dto)),
+                                   typeof(GetAllQueryHandler<,,>).MakeGenericType(store, entityType, dto));
+
                                 service.AddTransient(
                                     typeof(IRequestHandler<,>).MakeGenericType(
                                         new[]

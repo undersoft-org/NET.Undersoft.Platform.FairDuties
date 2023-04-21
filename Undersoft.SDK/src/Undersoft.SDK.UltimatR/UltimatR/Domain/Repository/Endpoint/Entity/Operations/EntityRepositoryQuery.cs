@@ -1,15 +1,5 @@
-﻿//-----------------------------------------------------------------------
-// <copyright file="HostRepositoryQuery.cs" company="Undersoft">
-//     Author: Dariusz Hanc
-//     Copyright (c) Undersoft. All rights reserved.
-// </copyright>
-//-----------------------------------------------------------------------
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 using System.Series;
-using System.Threading.Tasks;
 using System.Uniques;
 
 namespace UltimatR
@@ -591,8 +581,8 @@ namespace UltimatR
         }
 
         public virtual IQueryable<TDto> GetQuery<TDto>(
-          params Expression<Func<TEntity, object>>[] expanders
-      ) where TDto : class
+            params Expression<Func<TEntity, object>>[] expanders
+        ) where TDto : class
         {
             return QueryMapTo<TDto>(base[expanders]);
         }
@@ -606,8 +596,8 @@ namespace UltimatR
         }
 
         public virtual Task<IQueryable<TDto>> GetQueryAsync<TDto>(
-          params Expression<Func<TEntity, object>>[] expanders
-      ) where TDto : class
+            params Expression<Func<TEntity, object>>[] expanders
+        ) where TDto : class
         {
             return QueryMapAsyncTo<TDto>(base[expanders]);
         }
@@ -621,17 +611,17 @@ namespace UltimatR
         }
 
         public virtual Task<UniqueOne<TDto>> FindOneAsync<TDto>(
-             Expression<Func<TEntity, bool>> predicate,
-        params Expression<Func<TEntity, object>>[] expanders
-    ) where TDto : class, IUnique
+            Expression<Func<TEntity, bool>> predicate,
+            params Expression<Func<TEntity, object>>[] expanders
+        ) where TDto : class, IUnique
         {
             return UniqueOneMapAsyncTo<TDto>(base[predicate, expanders]);
         }
 
         public virtual Task<UniqueOne<TDto>> FindOneAsync<TDto>(
-             object[] keys,
-        params Expression<Func<TEntity, object>>[] expanders
-    ) where TDto : class, IUnique
+            object[] keys,
+            params Expression<Func<TEntity, object>>[] expanders
+        ) where TDto : class, IUnique
         {
             return UniqueOneMapAsyncTo<TDto>(this[keys, expanders].ToQueryable());
         }

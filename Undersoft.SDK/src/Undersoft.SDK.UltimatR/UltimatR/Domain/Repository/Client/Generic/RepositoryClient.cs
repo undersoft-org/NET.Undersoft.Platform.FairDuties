@@ -14,7 +14,7 @@ using RTools_NTS.Util;
 namespace UltimatR
 {
  
-    public class RepositoryClient<TContext> : RepositoryClient, IRepositoryClient<TContext> where TContext : DsContext
+    public class RepositoryClient<TContext> : RepositoryClient, IRepositoryClient<TContext> where TContext : DataClientContext
     {
         public RepositoryClient() { }
         public RepositoryClient(IServiceConfiguration config) : this()

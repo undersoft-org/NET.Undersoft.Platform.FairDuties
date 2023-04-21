@@ -10,8 +10,14 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Net.Http.Headers;
 using Microsoft.OpenApi.Models;
+using MongoDB.Driver;
+using OpenTelemetry.Exporter;
+using OpenTelemetry.Metrics;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
 using ProtoBuf.Grpc.Configuration;
 using ProtoBuf.Grpc.Server;
+using System.Diagnostics.Metrics;
 using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -24,10 +30,16 @@ namespace UltimatR
         Assembly[] Assemblies;
         IMvcBuilder mvc;
 
-        public ServiceSetup(IServiceCollection services)
+        public ServiceSetup(IServiceCollection services, IMvcBuilder mvcBuilder = null)
         {
             manager = new ServiceManager(services);
             registry = manager.Registry;
+            registry.MergeServices();
+            if (mvcBuilder != null)
+                mvc = mvcBuilder;
+            else
+                mvc = services.AddControllers();
+            registry.MergeServices(mvc.Services);
         }
 
         public ServiceSetup(IServiceCollection services, IConfiguration configuration)
@@ -39,10 +51,16 @@ namespace UltimatR
         public void AddJsonSerializerDefaults()
         {
 #if NET6_0
-            var opt = ((JsonSerializerOptions)typeof(JsonSerializerOptions)
-                .GetField("s_defaultOptions",
-                    System.Reflection.BindingFlags.Static |
-                    System.Reflection.BindingFlags.NonPublic).GetValue(null));
+            var opt = (
+                (JsonSerializerOptions)
+                    typeof(JsonSerializerOptions)
+                        .GetField(
+                            "s_defaultOptions",
+                            System.Reflection.BindingFlags.Static
+                                | System.Reflection.BindingFlags.NonPublic
+                        )
+                        .GetValue(null)
+            );
 
             //opt.PropertyNameCaseInsensitive = true;
             opt.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
@@ -53,13 +71,13 @@ namespace UltimatR
 
             var flds = typeof(JsonSerializerOptions).GetRuntimeFields();
             flds.Single(f => f.Name == "_defaultIgnoreCondition")
-            .SetValue(JsonSerializerOptions.Default, JsonIgnoreCondition.WhenWritingNull);
+                .SetValue(JsonSerializerOptions.Default, JsonIgnoreCondition.WhenWritingNull);
             flds.Single(f => f.Name == "_referenceHandler")
-            .SetValue(JsonSerializerOptions.Default, ReferenceHandler.IgnoreCycles);
+                .SetValue(JsonSerializerOptions.Default, ReferenceHandler.IgnoreCycles);
 #endif
         }
 
-        void AddDbContextConfiguration(IDataBaseContext context)
+        void AddDataBaseConfiguration(IDataBaseContext context)
         {
             DataBaseContext _context = context as DataBaseContext;
             _context.ChangeTracker.AutoDetectChangesEnabled = true;
@@ -67,45 +85,44 @@ namespace UltimatR
             _context.Database.AutoTransactionsEnabled = false;
         }
 
-        string AddDsClientPrefix(Type contextType, string routePrefix = null)
+        string AddDataClientPrefix(Type contextType, string routePrefix = null)
         {
-            Type iface = OpenDataServiceRegistry.GetDsStore(contextType);
+            Type iface = DataClientRegistry.GetRemoteStore(contextType);
             return GetStoreRoutes(iface, routePrefix);
         }
 
-        string AddDsEndpointPrefix(Type contextType, string routePrefix = null)
+        string AddDataServiceEndpointPrefix(Type contextType, string routePrefix = null)
         {
-            Type iface = DbRegistry.GetDbStore(contextType);
+            Type iface = DataBaseRegistry.GetDbStore(contextType);
             return GetStoreRoutes(iface, routePrefix);
         }
 
-        public IServiceSetup AddMvcDsSupport()
+        public IServiceSetup AddMvcDataServiceSupport()
         {
-            (mvc ??= Services.AddControllers())
-                .AddMvcOptions(options =>
+            (mvc ??= Services.AddControllers()).AddMvcOptions(options =>
+            {
+                foreach (
+                    OutputFormatter outputFormatter in options.OutputFormatters
+                        .OfType<OutputFormatter>()
+                        .Where(x => x.SupportedMediaTypes.Count == 0)
+                )
                 {
-                    foreach (
-                        OutputFormatter outputFormatter in options.OutputFormatters
-                            .OfType<OutputFormatter>()
-                            .Where(x => x.SupportedMediaTypes.Count == 0)
-                    )
-                    {
-                        outputFormatter.SupportedMediaTypes.Add(
-                            new MediaTypeHeaderValue("application/prs.odatatestxx-odata")
-                        );
-                    }
+                    outputFormatter.SupportedMediaTypes.Add(
+                        new MediaTypeHeaderValue("application/prs.odatatestxx-odata")
+                    );
+                }
 
-                    foreach (
-                        InputFormatter inputFormatter in options.InputFormatters
-                            .OfType<InputFormatter>()
-                            .Where(x => x.SupportedMediaTypes.Count == 0)
-                    )
-                    {
-                        inputFormatter.SupportedMediaTypes.Add(
-                            new MediaTypeHeaderValue("application/prs.odatatestxx-odata")
-                        );
-                    }
-                });
+                foreach (
+                    InputFormatter inputFormatter in options.InputFormatters
+                        .OfType<InputFormatter>()
+                        .Where(x => x.SupportedMediaTypes.Count == 0)
+                )
+                {
+                    inputFormatter.SupportedMediaTypes.Add(
+                        new MediaTypeHeaderValue("application/prs.odatatestxx-odata")
+                    );
+                }
+            });
             return this;
         }
 
@@ -138,8 +155,8 @@ namespace UltimatR
             else
             {
                 return (routePrefix != null)
-                  ? (StoreRoutes.CqrsStore = routePrefix)
-                  : StoreRoutes.CqrsStore;
+                    ? (StoreRoutes.CqrsStore = routePrefix)
+                    : StoreRoutes.CqrsStore;
             }
         }
 
@@ -165,13 +182,13 @@ namespace UltimatR
             };
             foreach (Type item in stores)
             {
-                AddDataCache(item);
+                AddStoreCache(item);
             }
 
             return this;
         }
 
-        public IServiceSetup AddDataCache(Type tstore)
+        public IServiceSetup AddStoreCache(Type tstore)
         {
             Type idatacache = typeof(IStoreCache<>).MakeGenericType(tstore);
             Type datacache = typeof(StoreCache<>).MakeGenericType(tstore);
@@ -183,36 +200,167 @@ namespace UltimatR
             return this;
         }
 
-        public IServiceSetup AddOperationalServices<TServiceStore>(DataServiceTypes dataServiceTypes, Action<DataServiceBuilder> builder) where TServiceStore : IDataServiceStore
+        public IServiceSetup AddDataServices<TServiceStore>(
+            DataServiceTypes dataServiceTypes,
+            Action<DataServiceBuilder> builder
+        ) where TServiceStore : IDataServiceStore
         {
             DataServiceBuilder.ServiceTypes = dataServiceTypes;
             if ((dataServiceTypes & DataServiceTypes.OData) > 0)
             {
-                Task.Run(() =>
-                {
-                    var ds = new OpenDataServiceBuilder<TServiceStore>();
-                    builder.Invoke(ds);
-                    ds.Build();
-                });
+                var ds = new DataServiceBuilder<TServiceStore>();
+                builder.Invoke(ds);
+                ds.Build();
+                ds.AddOData(mvc);
             }
-            if ((dataServiceTypes & DataServiceTypes.Grpc) > 0)
-            {
-                Task.Run(() =>
+            //if ((dataServiceTypes & DataServiceTypes.Grpc) > 0)
+            //{
+            //    var ds = new GrpcServiceBuilder<TServiceStore>();
+            //    builder.Invoke(ds);
+            //    ds.Build();
+            //}
+            //if ((dataServiceTypes & DataServiceTypes.Rest) > 0)
+            //{
+            //    var ds = new RestServiceBuilder<TServiceStore>();
+            //    builder.Invoke(ds);
+            //    ds.Build();
+            //}
+            return this;
+        }
+
+        public IServiceSetup AddOpenTelemetry()
+        {
+            var config = configuration;
+
+            Action<ResourceBuilder> configureResource = r =>
+                r.AddService(
+                    serviceName: config.GetValue<string>("ServiceName"),
+                    serviceVersion: Environment.Version.ToString(),
+                    serviceInstanceId: Environment.MachineName
+                );
+
+            var tracingExporter = config.GetValue<string>("UseTracingExporter").ToLowerInvariant();
+            var histogramAggregation = config
+                .GetValue<string>("HistogramAggregation")
+                .ToLowerInvariant();
+            var metricsExporter = config.GetValue<string>("UseMetricsExporter").ToLowerInvariant();
+
+            services
+                .AddOpenTelemetry()
+                .ConfigureResource(configureResource)
+                .WithTracing(builder =>
                 {
-                    var ds = new GrpcDataServiceBuilder<TServiceStore>();
-                    builder.Invoke(ds);
-                    ds.Build();
-                });
-            }
-            if ((dataServiceTypes & DataServiceTypes.WebAPI) > 0)
-            {
-                Task.Run(() =>
+                    switch (tracingExporter)
+                    {
+                        case "jaeger":
+                            builder.AddJaegerExporter();
+
+                            builder.ConfigureServices(services =>
+                            {
+                                // Use IConfiguration binding for Jaeger exporter options.
+                                services.Configure<JaegerExporterOptions>(
+                                    config.GetSection("Jaeger")
+                                );
+
+                                // Customize the HttpClient that will be used when JaegerExporter is configured for HTTP transport.
+                                services.AddHttpClient(
+                                    "JaegerExporter",
+                                    configureClient: (client) =>
+                                        client.DefaultRequestHeaders.Add(
+                                            "X-Title",
+                                            config.Title
+                                                + " ,OS="
+                                                + Environment.OSVersion
+                                                + ",Name="
+                                                + Environment.MachineName
+                                                + ",Domain="
+                                                + Environment.UserDomainName
+                                        )
+                                );
+                            });
+                            break;
+
+                        case "zipkin":
+                            builder.AddZipkinExporter();
+
+                            builder.ConfigureServices(services =>
+                            {
+                                // Use IConfiguration binding for Zipkin exporter options.
+                                services.Configure<ZipkinExporterOptions>(
+                                    config.GetSection("Zipkin")
+                                );
+                            });
+                            break;
+
+                        case "otlp":
+                            builder.AddOtlpExporter(otlpOptions =>
+                            {
+                                // Use IConfiguration directly for Otlp exporter endpoint option.
+                                otlpOptions.Endpoint = new Uri(
+                                    config.GetValue<string>("Otlp:Endpoint")
+                                );
+                            });
+                            break;
+
+                        default:
+                            builder.AddConsoleExporter();
+                            break;
+                    }
+                })
+                .WithMetrics(builder =>
                 {
-                    var ds = new RestDataServiceBuilder<TServiceStore>();
-                    builder.Invoke(ds);
-                    ds.Build();
+                    // Metrics
+
+                    // Ensure the MeterProvider subscribes to any custom Meters.
+                    builder
+                        .AddRuntimeInstrumentation()
+                        .AddHttpClientInstrumentation()
+                        .AddAspNetCoreInstrumentation();
+
+                    switch (histogramAggregation)
+                    {
+                        case "exponential":
+                            builder.AddView(instrument =>
+                            {
+                                return
+                                    instrument.GetType().GetGenericTypeDefinition()
+                                    == typeof(Histogram<>)
+                                    ? new ExplicitBucketHistogramConfiguration()
+                                    : null;
+                            });
+                            break;
+                        default:
+                            // Explicit bounds histogram is the default.
+                            // No additional configuration necessary.
+                            break;
+                    }
+
+                    switch (metricsExporter)
+                    {
+                        case "prometheus":
+                            builder.AddPrometheusExporter();
+                            break;
+                        case "otlp":
+                            builder.AddOtlpExporter(otlpOptions =>
+                            {
+                                // Use IConfiguration directly for Otlp exporter endpoint option.
+                                otlpOptions.Endpoint = new Uri(
+                                    config.GetValue<string>("Otlp:Endpoint")
+                                );
+                            });
+                            break;
+                        default:
+                            builder.AddConsoleExporter();
+                            break;
+                    }
                 });
-            }
+
+            return this;
+        }
+
+        public IServiceSetup AddHealthChecks()
+        {
+            services.AddHealthChecks();
             return this;
         }
 
@@ -220,25 +368,27 @@ namespace UltimatR
         {
             var ao = configuration.Identity;
 
-            registry.AddAuthentication(options =>
-            {
-                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultSignInScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultForbidScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
-            {
-                options.Authority = ao.BaseUrl;
-                options.RequireHttpsMetadata = ao.RequireHttpsMetadata;
-                options.SaveToken = true;
-                options.Audience = ao.OidcApiName;
-            });
-
+            registry
+                .AddAuthentication(options =>
+                {
+                    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultSignInScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultForbidScheme = JwtBearerDefaults.AuthenticationScheme;
+                })
+                .AddJwtBearer(
+                    JwtBearerDefaults.AuthenticationScheme,
+                    options =>
+                    {
+                        options.Authority = ao.BaseUrl;
+                        options.RequireHttpsMetadata = ao.RequireHttpsMetadata;
+                        options.SaveToken = true;
+                        options.Audience = ao.OidcApiName;
+                    }
+                );
 
             AddPolicies();
-
 
             registry.AddCors(
                 options =>
@@ -255,9 +405,15 @@ namespace UltimatR
         {
             registry.AddCodeFirstGrpc(config =>
             {
-                config.ResponseCompressionLevel = System.IO.Compression.CompressionLevel.NoCompression;
+                config.ResponseCompressionLevel = System
+                    .IO
+                    .Compression
+                    .CompressionLevel
+                    .NoCompression;
             });
-            registry.TryAddSingleton(BinderConfiguration.Create(binder: new ProcedureBinder(registry)));
+            registry.TryAddSingleton(
+                BinderConfiguration.Create(binder: new ProcedureBinder(registry))
+            );
             registry.AddCodeFirstGrpcReflection();
             return this;
         }
@@ -298,23 +454,33 @@ namespace UltimatR
         {
             var ic = configuration.Identity;
 
-            registry.AddAuthorization(
-                options =>
-                {
-                    ic.Scopes
-                        .ForEach(s => options.AddPolicy(s, policy => policy.RequireScope(s)));
+            registry.AddAuthorization(options =>
+            {
+                ic.Scopes.ForEach(s => options.AddPolicy(s, policy => policy.RequireScope(s)));
 
-                    ic.Roles
-                        .ForEach(s => options.AddPolicy(s, policy => policy.RequireRole(s)));
+                ic.Roles.ForEach(s => options.AddPolicy(s, policy => policy.RequireRole(s)));
 
-                    options.AddPolicy("RequireAdministratorRole",
-                        policy =>
-                            policy.RequireAssertion(context => context.User.HasClaim(c =>
-                                    ((c.Type == JwtClaimTypes.Role && c.Value == ic.AdministrationRole) ||
-                                    (c.Type == $"client_{JwtClaimTypes.Role}" && c.Value == ic.AdministrationRole)))
-                            ));
-                }
-            );
+                options.AddPolicy(
+                    "Administrators",
+                    policy =>
+                        policy.RequireAssertion(
+                            context =>
+                                context.User.HasClaim(
+                                    c =>
+                                        (
+                                            (
+                                                c.Type == JwtClaimTypes.Role
+                                                && c.Value == ic.AdministrationRole
+                                            )
+                                            || (
+                                                c.Type == $"client_{JwtClaimTypes.Role}"
+                                                && c.Value == ic.AdministrationRole
+                                            )
+                                        )
+                                )
+                        )
+                );
+            });
             return this;
         }
 
@@ -324,24 +490,30 @@ namespace UltimatR
             var ao = configuration.Identity;
             registry.AddSwaggerGen(options =>
             {
-                options.SwaggerDoc(ao.ApiVersion, new OpenApiInfo { Title = ao.ApiName, Version = ao.ApiVersion });
+                options.SwaggerDoc(
+                    ao.ApiVersion,
+                    new OpenApiInfo { Title = ao.ApiName, Version = ao.ApiVersion }
+                );
                 //options.OperationFilter<SwaggerDefaultValues>();
                 options.OperationFilter<SwaggerJsonIgnoreFilter>();
                 options.DocumentFilter<IgnoreApiDocument>();
                 //options.SchemaFilter<SwaggerExcludeFilter>();
 
-                options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
-                {
-                    Type = SecuritySchemeType.OAuth2,
-                    Flows = new OpenApiOAuthFlows
+                options.AddSecurityDefinition(
+                    "oauth2",
+                    new OpenApiSecurityScheme
                     {
-                        Password = new OpenApiOAuthFlow
+                        Type = SecuritySchemeType.OAuth2,
+                        Flows = new OpenApiOAuthFlows
                         {
-                            TokenUrl = new Uri($"{ao.BaseUrl}/connect/token"),
-                            Scopes = ao.Scopes.ToDictionary(s => s)
+                            Password = new OpenApiOAuthFlow
+                            {
+                                TokenUrl = new Uri($"{ao.BaseUrl}/connect/token"),
+                                Scopes = ao.Scopes.ToDictionary(s => s)
+                            }
                         }
                     }
-                });
+                );
                 //options.OperationFilter<AuthorizeCheckOperationFilter>();
             });
             return this;
@@ -383,13 +555,13 @@ namespace UltimatR
 
                 Type[] contextTypes = new Type[]
                 {
-                    preContextType.MakeGenericType(typeof(IEntryStore)),
-                    preContextType.MakeGenericType(typeof(IReportStore))
+                    preContextType.MakeGenericType(typeof(ICqrsStore)),
+                    preContextType.MakeGenericType(typeof(IEventStore))
                 };
 
                 foreach (Type contextType in contextTypes)
                 {
-                    string routePrefix = AddDsClientPrefix(contextType).Trim();
+                    string routePrefix = AddDataClientPrefix(contextType).Trim();
                     if (!connectionString.EndsWith('/'))
                     {
                         connectionString += "/";
@@ -409,7 +581,7 @@ namespace UltimatR
                         repoType.New(provider, _connectionString);
 
                     Type storeDbType = typeof(DataClientContext<>).MakeGenericType(
-                        OpenDataServiceRegistry.GetDsStore(contextType)
+                        DataClientRegistry.GetRemoteStore(contextType)
                     );
                     Type storeRepoType = typeof(RepositoryClient<>).MakeGenericType(storeDbType);
 
@@ -455,6 +627,7 @@ namespace UltimatR
             RepositoryEndpoints repoEndpoints = new RepositoryEndpoints();
             registry.AddSingleton(registry.AddObject<IRepositoryEndpoints>(repoEndpoints).Value);
 
+            var providerNotExists = new HashSet<string>();
 
             foreach (IConfigurationSection endpoint in endpoints)
             {
@@ -475,7 +648,8 @@ namespace UltimatR
                     continue;
                 }
 
-                RepositoryEndpointOptions.AddEntityServicesForDb(provider);
+                if (providerNotExists.Add(provider.ToString()))
+                    RepositoryEndpointOptions.AddEntityServicesForDb(provider);
 
                 Type iRepoType = typeof(IRepositoryEndpoint<>).MakeGenericType(contextType);
                 Type repoType = typeof(RepositoryEndpoint<>).MakeGenericType(contextType);
@@ -485,7 +659,7 @@ namespace UltimatR
                     repoType.New(provider, connectionString);
 
                 Type storeDbType = typeof(DataBaseContext<>).MakeGenericType(
-                    DbRegistry.GetDbStore(contextType)
+                    DataBaseRegistry.GetDbStore(contextType)
                 );
                 Type storeOptionsType = typeof(DbContextOptions<>).MakeGenericType(storeDbType);
                 Type storeRepoType = typeof(RepositoryEndpoint<>).MakeGenericType(storeDbType);
@@ -504,7 +678,7 @@ namespace UltimatR
 
                 IRepositoryEndpoint globalEndpoint = RepositoryManager.AddEndpoint(repoEndpoint);
 
-                AddDbContextConfiguration(globalEndpoint.Context);
+                AddDataBaseConfiguration(globalEndpoint.Context);
 
                 registry.AddObject(iRepoType, globalEndpoint);
                 registry.AddObject(repoType, globalEndpoint);
@@ -587,6 +761,8 @@ namespace UltimatR
             AddMapper(new DataMapper());
 
             AddCaching();
+
+            mvc = registry.AddControllers();
 
             AddJsonSerializerDefaults();
 

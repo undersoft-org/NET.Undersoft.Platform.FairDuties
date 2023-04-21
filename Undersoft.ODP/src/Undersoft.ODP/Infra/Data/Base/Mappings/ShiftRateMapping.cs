@@ -12,7 +12,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Mappings
 
         public override void Configure(EntityTypeBuilder<ShiftRate> builder)
         {
-            builder.ToTable(TABLE_NAME, DbSchema.LocalSchema);
+            builder.ToTable(TABLE_NAME, DataBaseSchema.LocalSchema);
 
             modelBuilder
                 .LinkToSet<Team, ShiftRate>(ExpandSite.OnRight)

@@ -1,22 +1,14 @@
-using System;
-using System.Linq;
-using System.Logs;
-using System.Security.Policy;
-using System.Series;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Uniques;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using Microsoft.OData.Client;
-using RTools_NTS.Util;
+using System.Logs;
+using System.Series;
+using System.Uniques;
 
 namespace UltimatR
 {
     public class RepositoryClient : Board<IRepositoryContext>, IRepositoryClient
     {
-        protected Uri uri;        
-        protected Uscn servicecode;        
+        protected Uri uri;
+        protected Uscn servicecode;
         private new bool disposedValue;
         protected Type contextType;
 
@@ -39,7 +31,7 @@ namespace UltimatR
         public RepositoryClient(Type contextType, ClientProvider provider, string connectionString) : this()
         {
             InnerContext = CreateContext(contextType, new Uri(connectionString));
-        }            
+        }
         public RepositoryClient(IRepositoryClient pool) : this()
         {
             PoolSize = pool.PoolSize;
@@ -57,40 +49,40 @@ namespace UltimatR
 
         public virtual Uri Route => uri;
 
-        public virtual DsContext Context => (DsContext)InnerContext;
+        public virtual DataClientContext Context => (DataClientContext)InnerContext;
 
-        public virtual object    CreateContext()
+        public virtual object CreateContext()
         {
-            return ContextType.New<DsContext>(uri);         
-        }     
-        public virtual object    CreateContext(Type contextType, Uri serviceRoot)
+            return ContextType.New<DataClientContext>(uri);
+        }
+        public virtual object CreateContext(Type contextType, Uri serviceRoot)
         {
             uri ??= serviceRoot;
             this.contextType ??= contextType;
-            return (DsContext)contextType.New(uri);                        
+            return (DataClientContext)contextType.New(uri);
         }
 
-        public virtual TContext GetContext<TContext>() where TContext : DsContext
+        public virtual TContext GetContext<TContext>() where TContext : DataClientContext
         {
-           return (TContext)InnerContext;
+            return (TContext)InnerContext;
         }
-      
+
         public virtual TContext CreateContext<TContext>() where TContext : class
         {
             contextType ??= typeof(TContext);
-            return typeof(TContext).New<TContext>(uri);            
+            return typeof(TContext).New<TContext>(uri);
         }
-        public virtual TContext CreateContext<TContext>(Uri serviceRoot) where TContext : DsContext
+        public virtual TContext CreateContext<TContext>(Uri serviceRoot) where TContext : DataClientContext
         {
             uri = serviceRoot;
             contextType ??= typeof(TContext);
-            return typeof(TContext).New<TContext>(uri);            
+            return typeof(TContext).New<TContext>(uri);
         }
 
         public void BuildMetadata()
         {
             Context.CreateServiceModel();
-            Context.GetDsEntityTypes();
+            Context.GetEdmEntityTypes();
         }
 
         public override ulong UniqueKey
@@ -121,12 +113,12 @@ namespace UltimatR
                 {
                     await Save(true);
 
-                    await ReleaseAsync();                      
+                    await ReleaseAsync();
 
                     InnerContext = null;
                     contextType = null;
                     uri = null;
-                    servicecode.Dispose();                      
+                    servicecode.Dispose();
                 }
 
                 disposedValue = true;
@@ -157,7 +149,7 @@ namespace UltimatR
         }
 
         public virtual Task ReturnAsync(CancellationToken token = default)
-{
+        {
             return Task.Run(() =>
             {
                 ResetStateAsync(token);
@@ -166,18 +158,18 @@ namespace UltimatR
         }
 
         public virtual void CreatePool()
-        {            
+        {
             Type repotype = typeof(RepositoryClient<>)
                             .MakeGenericType(ContextType);
             var size = PoolSize - Count;
             for (int i = 0; i < size; i++)
             {
-                var repo = repotype.New<IRepositoryContext>(this);                
+                var repo = repotype.New<IRepositoryContext>(this);
                 Add(repo);
             }
         }
         public virtual void CreatePool<TContext>()
-        {            
+        {
             Type repotype = typeof(RepositoryClient<>)
                             .MakeGenericType(typeof(TContext));
             var size = PoolSize - Count;
@@ -188,7 +180,7 @@ namespace UltimatR
                 Add(repo);
             }
         }
-        
+
         public virtual void ResetState()
         {
             Context.Entities.ForEach((e) => Context.Detach(e.Entity));
@@ -202,7 +194,7 @@ namespace UltimatR
         public virtual Task<int> Save(bool asTransaction, CancellationToken token = default(CancellationToken))
         {
             return saveClient(asTransaction);
-        }        
+        }
 
         public virtual bool Release()
         {
@@ -252,8 +244,8 @@ namespace UltimatR
                 destContext.InnerContext = rentContext.InnerContext;
             }
             else
-            {                
-                if(Count > 0)
+            {
+                if (Count > 0)
                     destContext.ContextPool = this;
                 destContext.InnerContext = CreateContext();
             }
@@ -277,7 +269,7 @@ namespace UltimatR
             return 0;
         }
 
-        private async Task<int> saveAsTransaction(DsContext context, CancellationToken token = default(CancellationToken))
+        private async Task<int> saveAsTransaction(DataClientContext context, CancellationToken token = default(CancellationToken))
         {
             try
             {
@@ -293,7 +285,7 @@ namespace UltimatR
             return -1;
         }
 
-        private async Task<int> saveChanges(DsContext context, CancellationToken token = default(CancellationToken))
+        private async Task<int> saveChanges(DataClientContext context, CancellationToken token = default(CancellationToken))
         {
             try
             {

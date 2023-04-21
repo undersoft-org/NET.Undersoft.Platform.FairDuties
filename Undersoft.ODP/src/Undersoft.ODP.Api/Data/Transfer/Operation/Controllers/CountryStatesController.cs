@@ -8,7 +8,7 @@ namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Entries
 
     [Authorize(Roles = "Administrator, Manager")]
     [Route("/countryStates")]
-    public class CountryStatesController : DtoCommandController<long, IEntryStore, CountryState, CountryStateDto>
+    public class CountryStatesController : DtoCommandController<long, IEntryStore, CountryState, Api.CountryState>
     {
         public CountryStatesController(IUltimatr ultimatr) : base(ultimatr)
         {
@@ -22,7 +22,7 @@ namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Reports
 
     [Authorize]
     [Route("/countryStates")]
-    public class CountryStatesController : DtoQueryController<long, IReportStore, CountryState, CountryStateDto>
+    public class CountryStatesController : DtoQueryController<long, IReportStore, CountryState, Api.CountryState>
     {
         public CountryStatesController(IUltimatr ultimatr) : base(ultimatr)
         {

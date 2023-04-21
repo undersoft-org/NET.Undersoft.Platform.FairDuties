@@ -3,8 +3,8 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Undersoft.ODP.Infra.Data.Base.Contexts;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
+using Undersoft.ODP.Infra.Data.Base.Contexts;
 
 namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
 {
@@ -18,6 +18,1592 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                 .HasAnnotation("Relational:MaxIdentifierLength", 63)
                 .HasAnnotation("ProductVersion", "5.0.13")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.Attribute, Undersoft.ODP.Domain.Attribute>", b =>
+                {
+                    b.Property<long>("LeftEntityId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("RightEntityId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("CodeNumber")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("Creator")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<long>("Id")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Label")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<DateTime>("Modified")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("Modifier")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<int>("Ordinal")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("OriginName")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<long>("SourceId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("SourceType")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.Property<long>("TargetId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("TargetType")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.HasKey("LeftEntityId", "RightEntityId");
+
+                    b.HasIndex("RightEntityId");
+
+                    b.ToTable("AttributesToAttributes", "Relation");
+                });
+
+            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.Configuration, Undersoft.ODP.Domain.Setting>", b =>
+                {
+                    b.Property<long>("LeftEntityId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("RightEntityId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("CodeNumber")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("Creator")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<long>("Id")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Label")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<DateTime>("Modified")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("Modifier")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<int>("Ordinal")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("OriginName")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<long>("SourceId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("SourceType")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.Property<long>("TargetId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("TargetType")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.HasKey("LeftEntityId", "RightEntityId");
+
+                    b.HasIndex("RightEntityId");
+
+                    b.ToTable("ConfigurationsToSettings", "Relation");
+                });
+
+            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.Organization, Undersoft.ODP.Domain.Attribute>", b =>
+                {
+                    b.Property<long>("LeftEntityId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("RightEntityId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("CodeNumber")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("Creator")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<long>("Id")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Label")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<DateTime>("Modified")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("Modifier")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<int>("Ordinal")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("OriginName")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<long>("SourceId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("SourceType")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.Property<long>("TargetId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("TargetType")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.HasKey("LeftEntityId", "RightEntityId");
+
+                    b.HasIndex("RightEntityId");
+
+                    b.ToTable("OrganizationsToAttributes", "Relation");
+                });
+
+            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.Organization, Undersoft.ODP.Domain.Plan>", b =>
+                {
+                    b.Property<long>("LeftEntityId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("RightEntityId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("CodeNumber")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("Creator")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<long>("Id")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Label")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<DateTime>("Modified")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("Modifier")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<int>("Ordinal")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("OriginName")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<long>("SourceId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("SourceType")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.Property<long>("TargetId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("TargetType")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.HasKey("LeftEntityId", "RightEntityId");
+
+                    b.HasIndex("RightEntityId");
+
+                    b.ToTable("OrganizationsToPlans", "Relation");
+                });
+
+            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.Organization, Undersoft.ODP.Domain.User>", b =>
+                {
+                    b.Property<long>("LeftEntityId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("RightEntityId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("CodeNumber")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("Creator")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<long>("Id")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Label")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<DateTime>("Modified")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("Modifier")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<int>("Ordinal")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("OriginName")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<long>("SourceId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("SourceType")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.Property<long>("TargetId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("TargetType")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.HasKey("LeftEntityId", "RightEntityId");
+
+                    b.HasIndex("RightEntityId");
+
+                    b.ToTable("OrganizationsToUsers", "Relation");
+                });
+
+            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.Personal, Undersoft.ODP.Domain.Attribute>", b =>
+                {
+                    b.Property<long>("LeftEntityId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("RightEntityId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("CodeNumber")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("Creator")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<long>("Id")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Label")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<DateTime>("Modified")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("Modifier")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<int>("Ordinal")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("OriginName")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<long>("SourceId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("SourceType")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.Property<long>("TargetId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("TargetType")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.HasKey("LeftEntityId", "RightEntityId");
+
+                    b.HasIndex("RightEntityId");
+
+                    b.ToTable("PersonalsToAttributes", "Relation");
+                });
+
+            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.Personal, Undersoft.ODP.Domain.Contact>", b =>
+                {
+                    b.Property<long>("LeftEntityId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("RightEntityId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("CodeNumber")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("Creator")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<long>("Id")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Label")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<DateTime>("Modified")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("Modifier")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<int>("Ordinal")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("OriginName")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<long>("SourceId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("SourceType")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.Property<long>("TargetId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("TargetType")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.HasKey("LeftEntityId", "RightEntityId");
+
+                    b.HasIndex("RightEntityId");
+
+                    b.ToTable("PersonalsToContacts", "Relation");
+                });
+
+            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.Personal, Undersoft.ODP.Domain.Device>", b =>
+                {
+                    b.Property<long>("LeftEntityId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("RightEntityId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("CodeNumber")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("Creator")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<long>("Id")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Label")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<DateTime>("Modified")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("Modifier")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<int>("Ordinal")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("OriginName")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<long>("SourceId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("SourceType")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.Property<long>("TargetId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("TargetType")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.HasKey("LeftEntityId", "RightEntityId");
+
+                    b.HasIndex("RightEntityId");
+
+                    b.ToTable("PersonalsToDevices", "Relation");
+                });
+
+            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.Shift, Undersoft.ODP.Domain.Schedule>", b =>
+                {
+                    b.Property<long>("LeftEntityId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("RightEntityId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("CodeNumber")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("Creator")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<long>("Id")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Label")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<DateTime>("Modified")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("Modifier")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<int>("Ordinal")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("OriginName")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<long>("SourceId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("SourceType")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.Property<long>("TargetId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("TargetType")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.HasKey("LeftEntityId", "RightEntityId");
+
+                    b.HasIndex("RightEntityId");
+
+                    b.ToTable("ShiftsToSchedules", "Relation");
+                });
+
+            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.Shift, Undersoft.ODP.Domain.ShiftRequest>", b =>
+                {
+                    b.Property<long>("LeftEntityId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("RightEntityId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("CodeNumber")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("Creator")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<long>("Id")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Label")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<DateTime>("Modified")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("Modifier")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<int>("Ordinal")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("OriginName")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<long>("SourceId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("SourceType")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.Property<long>("TargetId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("TargetType")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.HasKey("LeftEntityId", "RightEntityId");
+
+                    b.HasIndex("RightEntityId");
+
+                    b.ToTable("ShiftsToShiftRequests", "Relation");
+                });
+
+            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.ShiftRate, Undersoft.ODP.Domain.ShiftRate>", b =>
+                {
+                    b.Property<long>("LeftEntityId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("RightEntityId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("CodeNumber")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("Creator")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<long>("Id")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Label")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<DateTime>("Modified")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("Modifier")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<int>("Ordinal")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("OriginName")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<long>("SourceId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("SourceType")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.Property<long>("TargetId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("TargetType")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.HasKey("LeftEntityId", "RightEntityId");
+
+                    b.HasIndex("RightEntityId");
+
+                    b.ToTable("ShiftRatesToShiftRateOptionals", "Relation");
+                });
+
+            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.ShiftType, Undersoft.ODP.Domain.Attribute>", b =>
+                {
+                    b.Property<long>("LeftEntityId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("RightEntityId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("CodeNumber")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("Creator")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<long>("Id")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Label")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<DateTime>("Modified")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("Modifier")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<int>("Ordinal")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("OriginName")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<long>("SourceId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("SourceType")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.Property<long>("TargetId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("TargetType")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.HasKey("LeftEntityId", "RightEntityId");
+
+                    b.HasIndex("RightEntityId");
+
+                    b.ToTable("ShiftTypesToAttributes", "Relation");
+                });
+
+            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.ShiftType, Undersoft.ODP.Domain.Organization>", b =>
+                {
+                    b.Property<long>("LeftEntityId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("RightEntityId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("CodeNumber")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("Creator")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<long>("Id")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Label")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<DateTime>("Modified")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("Modifier")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<int>("Ordinal")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("OriginName")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<long>("SourceId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("SourceType")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.Property<long>("TargetId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("TargetType")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.HasKey("LeftEntityId", "RightEntityId");
+
+                    b.HasIndex("RightEntityId");
+
+                    b.ToTable("ShiftTypesToOrganizations", "Relation");
+                });
+
+            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.ShiftType, Undersoft.ODP.Domain.Plan>", b =>
+                {
+                    b.Property<long>("LeftEntityId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("RightEntityId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("CodeNumber")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("Creator")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<long>("Id")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Label")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<DateTime>("Modified")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("Modifier")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<int>("Ordinal")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("OriginName")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<long>("SourceId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("SourceType")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.Property<long>("TargetId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("TargetType")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.HasKey("LeftEntityId", "RightEntityId");
+
+                    b.HasIndex("RightEntityId");
+
+                    b.ToTable("ShiftTypesToPlans", "Relation");
+                });
+
+            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.ShiftType, Undersoft.ODP.Domain.ShiftType>", b =>
+                {
+                    b.Property<long>("LeftEntityId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("RightEntityId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("CodeNumber")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("Creator")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<long>("Id")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Label")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<DateTime>("Modified")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("Modifier")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<int>("Ordinal")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("OriginName")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<long>("SourceId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("SourceType")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.Property<long>("TargetId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("TargetType")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.HasKey("LeftEntityId", "RightEntityId");
+
+                    b.HasIndex("RightEntityId");
+
+                    b.ToTable("ShiftTypesToShiftTypeOptionals", "Relation");
+                });
+
+            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.ShiftType, Undersoft.ODP.Domain.Team>", b =>
+                {
+                    b.Property<long>("LeftEntityId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("RightEntityId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("CodeNumber")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("Creator")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<long>("Id")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Label")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<DateTime>("Modified")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("Modifier")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<int>("Ordinal")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("OriginName")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<long>("SourceId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("SourceType")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.Property<long>("TargetId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("TargetType")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.HasKey("LeftEntityId", "RightEntityId");
+
+                    b.HasIndex("RightEntityId");
+
+                    b.ToTable("ShiftTypesToTeams", "Relation");
+                });
+
+            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.ShiftType, Undersoft.ODP.Domain.User>", b =>
+                {
+                    b.Property<long>("LeftEntityId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("RightEntityId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("CodeNumber")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("Creator")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<long>("Id")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Label")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<DateTime>("Modified")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("Modifier")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<int>("Ordinal")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("OriginName")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<long>("SourceId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("SourceType")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.Property<long>("TargetId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("TargetType")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.HasKey("LeftEntityId", "RightEntityId");
+
+                    b.HasIndex("RightEntityId");
+
+                    b.ToTable("ShiftTypesToUsers", "Relation");
+                });
+
+            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.Team, Undersoft.ODP.Domain.Attribute>", b =>
+                {
+                    b.Property<long>("LeftEntityId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("RightEntityId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("CodeNumber")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("Creator")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<long>("Id")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Label")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<DateTime>("Modified")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("Modifier")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<int>("Ordinal")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("OriginName")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<long>("SourceId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("SourceType")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.Property<long>("TargetId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("TargetType")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.HasKey("LeftEntityId", "RightEntityId");
+
+                    b.HasIndex("RightEntityId");
+
+                    b.ToTable("TeamsToAttributes", "Relation");
+                });
+
+            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.Team, Undersoft.ODP.Domain.Plan>", b =>
+                {
+                    b.Property<long>("LeftEntityId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("RightEntityId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("CodeNumber")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("Creator")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<long>("Id")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Label")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<DateTime>("Modified")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("Modifier")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<int>("Ordinal")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("OriginName")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<long>("SourceId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("SourceType")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.Property<long>("TargetId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("TargetType")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.HasKey("LeftEntityId", "RightEntityId");
+
+                    b.HasIndex("RightEntityId");
+
+                    b.ToTable("TeamsToPlans", "Relation");
+                });
+
+            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.User, Undersoft.ODP.Domain.Attribute>", b =>
+                {
+                    b.Property<long>("LeftEntityId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("RightEntityId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("CodeNumber")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("Creator")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<long>("Id")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Label")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<DateTime>("Modified")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("Modifier")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<int>("Ordinal")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("OriginName")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<long>("SourceId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("SourceType")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.Property<long>("TargetId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("TargetType")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.HasKey("LeftEntityId", "RightEntityId");
+
+                    b.HasIndex("RightEntityId");
+
+                    b.ToTable("UsersToAttributes", "Relation");
+                });
+
+            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.User, Undersoft.ODP.Domain.Plan>", b =>
+                {
+                    b.Property<long>("LeftEntityId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("RightEntityId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("CodeNumber")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("Creator")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<long>("Id")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Label")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<DateTime>("Modified")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("Modifier")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<int>("Ordinal")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("OriginName")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<long>("SourceId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("SourceType")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.Property<long>("TargetId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("TargetType")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.HasKey("LeftEntityId", "RightEntityId");
+
+                    b.HasIndex("RightEntityId");
+
+                    b.ToTable("UsersToPlans", "Relation");
+                });
+
+            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.User, Undersoft.ODP.Domain.Team>", b =>
+                {
+                    b.Property<long>("LeftEntityId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("RightEntityId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("CodeNumber")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("Creator")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<long>("Id")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Label")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<DateTime>("Modified")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("Modifier")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<int>("Ordinal")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("OriginName")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<long>("SourceId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("SourceType")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.Property<long>("TargetId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("TargetType")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.HasKey("LeftEntityId", "RightEntityId");
+
+                    b.HasIndex("RightEntityId");
+
+                    b.ToTable("UsersToTeams", "Relation");
+                });
+
+            modelBuilder.Entity("UltimatR.Identifier<Undersoft.ODP.Domain.Device>", b =>
+                {
+                    b.Property<long>("Id")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("CodeNumber")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("Creator")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<long>("EntityId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("Key")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("Kind")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Label")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<DateTime>("Modified")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("Modifier")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Ordinal")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("OriginName")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<long>("SourceId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("SourceType")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.Property<long>("TargetId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("TargetType")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EntityId");
+
+                    b.HasIndex("Key");
+
+                    b.HasIndex("Ordinal");
+
+                    b.ToTable("DeviceIdentifiers", "Identifier");
+                });
+
+            modelBuilder.Entity("UltimatR.Identifier<Undersoft.ODP.Domain.User>", b =>
+                {
+                    b.Property<long>("Id")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("CodeNumber")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("Creator")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<long>("EntityId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("Key")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("Kind")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Label")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<DateTime>("Modified")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("Modifier")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Ordinal")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("OriginName")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<long>("SourceId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("SourceType")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.Property<long>("TargetId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("TargetType")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EntityId");
+
+                    b.HasIndex("Key");
+
+                    b.HasIndex("Ordinal");
+
+                    b.ToTable("UserIdentifiers", "Identifier");
+                });
 
             modelBuilder.Entity("Undersoft.ODP.Domain.Address", b =>
                 {
@@ -37,6 +1623,12 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("varchar");
+
+                    b.Property<string>("CodeNumber")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
 
                     b.Property<long?>("ContactId")
                         .HasColumnType("bigint");
@@ -79,12 +1671,6 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                         .IsRequired()
                         .HasMaxLength(12)
                         .HasColumnType("varchar");
-
-                    b.Property<string>("SSN")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
 
                     b.Property<long>("SourceId")
                         .HasColumnType("bigint");
@@ -129,6 +1715,12 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.Property<long>("Id")
                         .HasColumnType("bigint");
 
+                    b.Property<string>("CodeNumber")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
                     b.Property<DateTime>("Created")
                         .HasColumnType("timestamp");
 
@@ -158,12 +1750,6 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("OriginName")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<string>("SSN")
-                        .IsConcurrencyToken()
-                        .IsRequired()
                         .HasMaxLength(32)
                         .HasColumnType("character varying(32)");
 
@@ -201,6 +1787,12 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.Property<long?>("AttributeId")
                         .HasColumnType("bigint");
 
+                    b.Property<string>("CodeNumber")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
                     b.Property<long?>("ConfigurationId")
                         .HasColumnType("bigint");
 
@@ -231,12 +1823,6 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                         .HasColumnType("bigint");
 
                     b.Property<string>("OriginName")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<string>("SSN")
-                        .IsConcurrencyToken()
-                        .IsRequired()
                         .HasMaxLength(32)
                         .HasColumnType("character varying(32)");
 
@@ -276,6 +1862,12 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                 {
                     b.Property<long>("Id")
                         .HasColumnType("bigint");
+
+                    b.Property<string>("CodeNumber")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("timestamp");
@@ -319,12 +1911,6 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.Property<int>("PhoneType")
                         .HasColumnType("integer");
 
-                    b.Property<string>("SSN")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
                     b.Property<long>("SourceId")
                         .HasColumnType("bigint");
 
@@ -356,6 +1942,12 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
 
                     b.Property<string>("Code")
                         .HasColumnType("text");
+
+                    b.Property<string>("CodeNumber")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
 
                     b.Property<string>("Continent")
                         .HasColumnType("text");
@@ -396,12 +1988,6 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                         .HasMaxLength(32)
                         .HasColumnType("character varying(32)");
 
-                    b.Property<string>("SSN")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
                     b.Property<long>("SourceId")
                         .HasColumnType("bigint");
 
@@ -438,6 +2024,12 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.Property<string>("Code")
                         .HasColumnType("text");
 
+                    b.Property<string>("CodeNumber")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
                     b.Property<DateTime>("Created")
                         .HasColumnType("timestamp");
 
@@ -465,12 +2057,6 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("OriginName")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<string>("SSN")
-                        .IsConcurrencyToken()
-                        .IsRequired()
                         .HasMaxLength(32)
                         .HasColumnType("character varying(32)");
 
@@ -503,6 +2089,12 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.Property<string>("Code")
                         .HasColumnType("text");
 
+                    b.Property<string>("CodeNumber")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
                     b.Property<long?>("CountryId")
                         .HasColumnType("bigint");
 
@@ -533,12 +2125,6 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("OriginName")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<string>("SSN")
-                        .IsConcurrencyToken()
-                        .IsRequired()
                         .HasMaxLength(32)
                         .HasColumnType("character varying(32)");
 
@@ -576,6 +2162,12 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.Property<string>("Code")
                         .HasColumnType("text");
 
+                    b.Property<string>("CodeNumber")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
                     b.Property<DateTime>("Created")
                         .HasColumnType("timestamp");
 
@@ -609,12 +2201,6 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.Property<double>("Rate")
                         .HasColumnType("double precision");
 
-                    b.Property<string>("SSN")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
                     b.Property<long>("SourceId")
                         .HasColumnType("bigint");
 
@@ -640,6 +2226,12 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                 {
                     b.Property<long>("Id")
                         .HasColumnType("bigint");
+
+                    b.Property<string>("CodeNumber")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("timestamp");
@@ -679,12 +2271,6 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                         .HasMaxLength(32)
                         .HasColumnType("character varying(32)");
 
-                    b.Property<string>("SSN")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
                     b.Property<string>("SerialNumber")
                         .HasColumnType("text");
 
@@ -719,6 +2305,12 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                 {
                     b.Property<long>("Id")
                         .HasColumnType("bigint");
+
+                    b.Property<string>("CodeNumber")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
 
                     b.Property<DateTime>("ConnectedOn")
                         .HasColumnType("timestamp without time zone");
@@ -762,12 +2354,6 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.Property<int>("Port")
                         .HasColumnType("integer");
 
-                    b.Property<string>("SSN")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
                     b.Property<long>("SourceId")
                         .HasColumnType("bigint");
 
@@ -795,6 +2381,12 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                 {
                     b.Property<long>("Id")
                         .HasColumnType("bigint");
+
+                    b.Property<string>("CodeNumber")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
 
                     b.Property<long?>("ConfigurationId")
                         .HasColumnType("bigint");
@@ -840,12 +2432,6 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                         .HasMaxLength(32)
                         .HasColumnType("character varying(32)");
 
-                    b.Property<string>("SSN")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
                     b.Property<string>("ShortName")
                         .IsRequired()
                         .HasMaxLength(32)
@@ -882,6 +2468,12 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
 
                     b.Property<DateTime>("Birthdate")
                         .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("CodeNumber")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("timestamp");
@@ -936,12 +2528,6 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.Property<string>("Profession")
                         .HasColumnType("text");
 
-                    b.Property<string>("SSN")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
                     b.Property<string>("SecondName")
                         .HasColumnType("text");
 
@@ -976,6 +2562,12 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                 {
                     b.Property<long>("Id")
                         .HasColumnType("bigint");
+
+                    b.Property<string>("CodeNumber")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("timestamp");
@@ -1015,12 +2607,6 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                         .HasMaxLength(32)
                         .HasColumnType("character varying(32)");
 
-                    b.Property<string>("SSN")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
                     b.Property<long>("SourceId")
                         .HasColumnType("bigint");
 
@@ -1049,6 +2635,12 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                 {
                     b.Property<long>("Id")
                         .HasColumnType("bigint");
+
+                    b.Property<string>("CodeNumber")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("timestamp");
@@ -1088,12 +2680,6 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("OriginName")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<string>("SSN")
-                        .IsConcurrencyToken()
-                        .IsRequired()
                         .HasMaxLength(32)
                         .HasColumnType("character varying(32)");
 
@@ -1140,6 +2726,12 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.Property<long>("Id")
                         .HasColumnType("bigint");
 
+                    b.Property<string>("CodeNumber")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
                     b.Property<DateTime>("Created")
                         .HasColumnType("timestamp");
 
@@ -1173,12 +2765,6 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                         .HasMaxLength(32)
                         .HasColumnType("character varying(32)");
 
-                    b.Property<string>("SSN")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
                     b.Property<long>("SourceId")
                         .HasColumnType("bigint");
 
@@ -1207,6 +2793,12 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                 {
                     b.Property<long>("Id")
                         .HasColumnType("bigint");
+
+                    b.Property<string>("CodeNumber")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("timestamp");
@@ -1244,12 +2836,6 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                         .HasColumnType("bigint");
 
                     b.Property<string>("OriginName")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<string>("SSN")
-                        .IsConcurrencyToken()
-                        .IsRequired()
                         .HasMaxLength(32)
                         .HasColumnType("character varying(32)");
 
@@ -1315,6 +2901,12 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
 
                     b.Property<double>("Checksum")
                         .HasColumnType("double precision");
+
+                    b.Property<string>("CodeNumber")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("timestamp");
@@ -1382,12 +2974,6 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.Property<double>("Rate")
                         .HasColumnType("double precision");
 
-                    b.Property<string>("SSN")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
                     b.Property<long?>("ShiftTypeId")
                         .HasColumnType("bigint");
 
@@ -1446,6 +3032,12 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.Property<long>("Id")
                         .HasColumnType("bigint");
 
+                    b.Property<string>("CodeNumber")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
                     b.Property<DateTime>("Created")
                         .HasColumnType("timestamp");
 
@@ -1480,12 +3072,6 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("varchar");
-
-                    b.Property<string>("SSN")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
 
                     b.Property<long>("SourceId")
                         .HasColumnType("bigint");
@@ -1529,6 +3115,12 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.Property<long>("Id")
                         .HasColumnType("bigint");
 
+                    b.Property<string>("CodeNumber")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
                     b.Property<DateTime>("Created")
                         .HasColumnType("timestamp");
 
@@ -1559,12 +3151,6 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("OriginName")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<string>("SSN")
-                        .IsConcurrencyToken()
-                        .IsRequired()
                         .HasMaxLength(32)
                         .HasColumnType("character varying(32)");
 
@@ -1605,6 +3191,12 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
 
                     b.Property<int>("BlockSize")
                         .HasColumnType("integer");
+
+                    b.Property<string>("CodeNumber")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
 
                     b.Property<long?>("ConfigurationId")
                         .HasColumnType("bigint");
@@ -1662,12 +3254,6 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                         .HasMaxLength(32)
                         .HasColumnType("character varying(32)");
 
-                    b.Property<string>("SSN")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
                     b.Property<long?>("ScheduleId")
                         .HasColumnType("bigint");
 
@@ -1708,6 +3294,12 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                 {
                     b.Property<long>("Id")
                         .HasColumnType("bigint");
+
+                    b.Property<string>("CodeNumber")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
 
                     b.Property<long?>("ConfigurationId")
                         .HasColumnType("bigint");
@@ -1754,12 +3346,6 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                         .HasMaxLength(50)
                         .HasColumnType("varchar");
 
-                    b.Property<string>("SSN")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
                     b.Property<long>("SourceId")
                         .HasColumnType("bigint");
 
@@ -1797,6 +3383,12 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.Property<long>("Id")
                         .HasColumnType("bigint");
 
+                    b.Property<string>("CodeNumber")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
                     b.Property<DateTime>("Created")
                         .HasColumnType("timestamp");
 
@@ -1829,12 +3421,6 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                         .HasMaxLength(32)
                         .HasColumnType("character varying(32)");
 
-                    b.Property<string>("SSN")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
                     b.Property<long>("SourceId")
                         .HasColumnType("bigint");
 
@@ -1864,1590 +3450,444 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.ToTable("UserRoles", "Local");
                 });
 
-            modelBuilder.Entity("UltimatR.DboRelation<Undersoft.ODP.Domain.Attribute, Undersoft.ODP.Domain.Attribute>", b =>
+            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.Attribute, Undersoft.ODP.Domain.Attribute>", b =>
                 {
-                    b.Property<long>("LeftEntityId")
-                        .HasColumnType("bigint");
+                    b.HasOne("Undersoft.ODP.Domain.Attribute", "LeftEntity")
+                        .WithMany()
+                        .HasForeignKey("LeftEntityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<long>("RightEntityId")
-                        .HasColumnType("bigint");
+                    b.HasOne("Undersoft.ODP.Domain.Attribute", "RightEntity")
+                        .WithMany()
+                        .HasForeignKey("RightEntityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("timestamp");
+                    b.Navigation("LeftEntity");
 
-                    b.Property<string>("Creator")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<long>("Id")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Label")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<DateTime>("Modified")
-                        .HasColumnType("timestamp");
-
-                    b.Property<string>("Modifier")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<int>("Ordinal")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("OriginName")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<string>("SSN")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<long>("SourceId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("SourceType")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
-
-                    b.Property<long>("TargetId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("TargetType")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
-
-                    b.HasKey("LeftEntityId", "RightEntityId");
-
-                    b.HasIndex("RightEntityId");
-
-                    b.ToTable("AttributesToAttributes", "Relation");
+                    b.Navigation("RightEntity");
                 });
 
-            modelBuilder.Entity("UltimatR.DboRelation<Undersoft.ODP.Domain.Configuration, Undersoft.ODP.Domain.Setting>", b =>
+            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.Configuration, Undersoft.ODP.Domain.Setting>", b =>
                 {
-                    b.Property<long>("LeftEntityId")
-                        .HasColumnType("bigint");
+                    b.HasOne("Undersoft.ODP.Domain.Configuration", "LeftEntity")
+                        .WithMany()
+                        .HasForeignKey("LeftEntityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<long>("RightEntityId")
-                        .HasColumnType("bigint");
+                    b.HasOne("Undersoft.ODP.Domain.Setting", "RightEntity")
+                        .WithMany()
+                        .HasForeignKey("RightEntityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("timestamp");
+                    b.Navigation("LeftEntity");
 
-                    b.Property<string>("Creator")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<long>("Id")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Label")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<DateTime>("Modified")
-                        .HasColumnType("timestamp");
-
-                    b.Property<string>("Modifier")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<int>("Ordinal")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("OriginName")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<string>("SSN")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<long>("SourceId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("SourceType")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
-
-                    b.Property<long>("TargetId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("TargetType")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
-
-                    b.HasKey("LeftEntityId", "RightEntityId");
-
-                    b.HasIndex("RightEntityId");
-
-                    b.ToTable("ConfigurationsToSettings", "Relation");
+                    b.Navigation("RightEntity");
                 });
 
-            modelBuilder.Entity("UltimatR.DboRelation<Undersoft.ODP.Domain.Organization, Undersoft.ODP.Domain.Attribute>", b =>
+            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.Organization, Undersoft.ODP.Domain.Attribute>", b =>
                 {
-                    b.Property<long>("LeftEntityId")
-                        .HasColumnType("bigint");
+                    b.HasOne("Undersoft.ODP.Domain.Organization", "LeftEntity")
+                        .WithMany()
+                        .HasForeignKey("LeftEntityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<long>("RightEntityId")
-                        .HasColumnType("bigint");
+                    b.HasOne("Undersoft.ODP.Domain.Attribute", "RightEntity")
+                        .WithMany()
+                        .HasForeignKey("RightEntityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("timestamp");
+                    b.Navigation("LeftEntity");
 
-                    b.Property<string>("Creator")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<long>("Id")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Label")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<DateTime>("Modified")
-                        .HasColumnType("timestamp");
-
-                    b.Property<string>("Modifier")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<int>("Ordinal")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("OriginName")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<string>("SSN")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<long>("SourceId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("SourceType")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
-
-                    b.Property<long>("TargetId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("TargetType")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
-
-                    b.HasKey("LeftEntityId", "RightEntityId");
-
-                    b.HasIndex("RightEntityId");
-
-                    b.ToTable("OrganizationsToAttributes", "Relation");
+                    b.Navigation("RightEntity");
                 });
 
-            modelBuilder.Entity("UltimatR.DboRelation<Undersoft.ODP.Domain.Organization, Undersoft.ODP.Domain.Plan>", b =>
+            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.Organization, Undersoft.ODP.Domain.Plan>", b =>
                 {
-                    b.Property<long>("LeftEntityId")
-                        .HasColumnType("bigint");
+                    b.HasOne("Undersoft.ODP.Domain.Organization", "LeftEntity")
+                        .WithMany()
+                        .HasForeignKey("LeftEntityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<long>("RightEntityId")
-                        .HasColumnType("bigint");
+                    b.HasOne("Undersoft.ODP.Domain.Plan", "RightEntity")
+                        .WithMany()
+                        .HasForeignKey("RightEntityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("timestamp");
+                    b.Navigation("LeftEntity");
 
-                    b.Property<string>("Creator")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<long>("Id")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Label")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<DateTime>("Modified")
-                        .HasColumnType("timestamp");
-
-                    b.Property<string>("Modifier")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<int>("Ordinal")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("OriginName")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<string>("SSN")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<long>("SourceId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("SourceType")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
-
-                    b.Property<long>("TargetId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("TargetType")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
-
-                    b.HasKey("LeftEntityId", "RightEntityId");
-
-                    b.HasIndex("RightEntityId");
-
-                    b.ToTable("OrganizationsToPlans", "Relation");
+                    b.Navigation("RightEntity");
                 });
 
-            modelBuilder.Entity("UltimatR.DboRelation<Undersoft.ODP.Domain.Organization, Undersoft.ODP.Domain.User>", b =>
+            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.Organization, Undersoft.ODP.Domain.User>", b =>
                 {
-                    b.Property<long>("LeftEntityId")
-                        .HasColumnType("bigint");
+                    b.HasOne("Undersoft.ODP.Domain.Organization", "LeftEntity")
+                        .WithMany()
+                        .HasForeignKey("LeftEntityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<long>("RightEntityId")
-                        .HasColumnType("bigint");
+                    b.HasOne("Undersoft.ODP.Domain.User", "RightEntity")
+                        .WithMany()
+                        .HasForeignKey("RightEntityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("timestamp");
+                    b.Navigation("LeftEntity");
 
-                    b.Property<string>("Creator")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<long>("Id")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Label")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<DateTime>("Modified")
-                        .HasColumnType("timestamp");
-
-                    b.Property<string>("Modifier")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<int>("Ordinal")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("OriginName")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<string>("SSN")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<long>("SourceId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("SourceType")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
-
-                    b.Property<long>("TargetId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("TargetType")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
-
-                    b.HasKey("LeftEntityId", "RightEntityId");
-
-                    b.HasIndex("RightEntityId");
-
-                    b.ToTable("OrganizationsToUsers", "Relation");
+                    b.Navigation("RightEntity");
                 });
 
-            modelBuilder.Entity("UltimatR.DboRelation<Undersoft.ODP.Domain.Personal, Undersoft.ODP.Domain.Attribute>", b =>
+            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.Personal, Undersoft.ODP.Domain.Attribute>", b =>
                 {
-                    b.Property<long>("LeftEntityId")
-                        .HasColumnType("bigint");
+                    b.HasOne("Undersoft.ODP.Domain.Personal", "LeftEntity")
+                        .WithMany()
+                        .HasForeignKey("LeftEntityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<long>("RightEntityId")
-                        .HasColumnType("bigint");
+                    b.HasOne("Undersoft.ODP.Domain.Attribute", "RightEntity")
+                        .WithMany()
+                        .HasForeignKey("RightEntityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("timestamp");
+                    b.Navigation("LeftEntity");
 
-                    b.Property<string>("Creator")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<long>("Id")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Label")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<DateTime>("Modified")
-                        .HasColumnType("timestamp");
-
-                    b.Property<string>("Modifier")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<int>("Ordinal")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("OriginName")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<string>("SSN")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<long>("SourceId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("SourceType")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
-
-                    b.Property<long>("TargetId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("TargetType")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
-
-                    b.HasKey("LeftEntityId", "RightEntityId");
-
-                    b.HasIndex("RightEntityId");
-
-                    b.ToTable("PersonalsToAttributes", "Relation");
+                    b.Navigation("RightEntity");
                 });
 
-            modelBuilder.Entity("UltimatR.DboRelation<Undersoft.ODP.Domain.Personal, Undersoft.ODP.Domain.Contact>", b =>
+            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.Personal, Undersoft.ODP.Domain.Contact>", b =>
                 {
-                    b.Property<long>("LeftEntityId")
-                        .HasColumnType("bigint");
+                    b.HasOne("Undersoft.ODP.Domain.Personal", "LeftEntity")
+                        .WithMany()
+                        .HasForeignKey("LeftEntityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<long>("RightEntityId")
-                        .HasColumnType("bigint");
+                    b.HasOne("Undersoft.ODP.Domain.Contact", "RightEntity")
+                        .WithMany()
+                        .HasForeignKey("RightEntityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("timestamp");
+                    b.Navigation("LeftEntity");
 
-                    b.Property<string>("Creator")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<long>("Id")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Label")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<DateTime>("Modified")
-                        .HasColumnType("timestamp");
-
-                    b.Property<string>("Modifier")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<int>("Ordinal")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("OriginName")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<string>("SSN")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<long>("SourceId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("SourceType")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
-
-                    b.Property<long>("TargetId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("TargetType")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
-
-                    b.HasKey("LeftEntityId", "RightEntityId");
-
-                    b.HasIndex("RightEntityId");
-
-                    b.ToTable("PersonalsToContacts", "Relation");
+                    b.Navigation("RightEntity");
                 });
 
-            modelBuilder.Entity("UltimatR.DboRelation<Undersoft.ODP.Domain.Personal, Undersoft.ODP.Domain.Device>", b =>
+            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.Personal, Undersoft.ODP.Domain.Device>", b =>
                 {
-                    b.Property<long>("LeftEntityId")
-                        .HasColumnType("bigint");
+                    b.HasOne("Undersoft.ODP.Domain.Personal", "LeftEntity")
+                        .WithMany()
+                        .HasForeignKey("LeftEntityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<long>("RightEntityId")
-                        .HasColumnType("bigint");
+                    b.HasOne("Undersoft.ODP.Domain.Device", "RightEntity")
+                        .WithMany()
+                        .HasForeignKey("RightEntityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("timestamp");
+                    b.Navigation("LeftEntity");
 
-                    b.Property<string>("Creator")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<long>("Id")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Label")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<DateTime>("Modified")
-                        .HasColumnType("timestamp");
-
-                    b.Property<string>("Modifier")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<int>("Ordinal")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("OriginName")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<string>("SSN")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<long>("SourceId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("SourceType")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
-
-                    b.Property<long>("TargetId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("TargetType")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
-
-                    b.HasKey("LeftEntityId", "RightEntityId");
-
-                    b.HasIndex("RightEntityId");
-
-                    b.ToTable("PersonalsToDevices", "Relation");
+                    b.Navigation("RightEntity");
                 });
 
-            modelBuilder.Entity("UltimatR.DboRelation<Undersoft.ODP.Domain.Shift, Undersoft.ODP.Domain.Schedule>", b =>
+            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.Shift, Undersoft.ODP.Domain.Schedule>", b =>
                 {
-                    b.Property<long>("LeftEntityId")
-                        .HasColumnType("bigint");
+                    b.HasOne("Undersoft.ODP.Domain.Shift", "LeftEntity")
+                        .WithMany()
+                        .HasForeignKey("LeftEntityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<long>("RightEntityId")
-                        .HasColumnType("bigint");
+                    b.HasOne("Undersoft.ODP.Domain.Schedule", "RightEntity")
+                        .WithMany()
+                        .HasForeignKey("RightEntityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("timestamp");
+                    b.Navigation("LeftEntity");
 
-                    b.Property<string>("Creator")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<long>("Id")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Label")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<DateTime>("Modified")
-                        .HasColumnType("timestamp");
-
-                    b.Property<string>("Modifier")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<int>("Ordinal")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("OriginName")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<string>("SSN")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<long>("SourceId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("SourceType")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
-
-                    b.Property<long>("TargetId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("TargetType")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
-
-                    b.HasKey("LeftEntityId", "RightEntityId");
-
-                    b.HasIndex("RightEntityId");
-
-                    b.ToTable("ShiftsToSchedules", "Relation");
+                    b.Navigation("RightEntity");
                 });
 
-            modelBuilder.Entity("UltimatR.DboRelation<Undersoft.ODP.Domain.Shift, Undersoft.ODP.Domain.ShiftRequest>", b =>
+            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.Shift, Undersoft.ODP.Domain.ShiftRequest>", b =>
                 {
-                    b.Property<long>("LeftEntityId")
-                        .HasColumnType("bigint");
+                    b.HasOne("Undersoft.ODP.Domain.Shift", "LeftEntity")
+                        .WithMany()
+                        .HasForeignKey("LeftEntityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<long>("RightEntityId")
-                        .HasColumnType("bigint");
+                    b.HasOne("Undersoft.ODP.Domain.ShiftRequest", "RightEntity")
+                        .WithMany()
+                        .HasForeignKey("RightEntityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("timestamp");
+                    b.Navigation("LeftEntity");
 
-                    b.Property<string>("Creator")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<long>("Id")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Label")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<DateTime>("Modified")
-                        .HasColumnType("timestamp");
-
-                    b.Property<string>("Modifier")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<int>("Ordinal")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("OriginName")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<string>("SSN")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<long>("SourceId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("SourceType")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
-
-                    b.Property<long>("TargetId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("TargetType")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
-
-                    b.HasKey("LeftEntityId", "RightEntityId");
-
-                    b.HasIndex("RightEntityId");
-
-                    b.ToTable("ShiftsToShiftRequests", "Relation");
+                    b.Navigation("RightEntity");
                 });
 
-            modelBuilder.Entity("UltimatR.DboRelation<Undersoft.ODP.Domain.ShiftRate, Undersoft.ODP.Domain.ShiftRate>", b =>
+            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.ShiftRate, Undersoft.ODP.Domain.ShiftRate>", b =>
                 {
-                    b.Property<long>("LeftEntityId")
-                        .HasColumnType("bigint");
+                    b.HasOne("Undersoft.ODP.Domain.ShiftRate", "LeftEntity")
+                        .WithMany()
+                        .HasForeignKey("LeftEntityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<long>("RightEntityId")
-                        .HasColumnType("bigint");
+                    b.HasOne("Undersoft.ODP.Domain.ShiftRate", "RightEntity")
+                        .WithMany()
+                        .HasForeignKey("RightEntityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("timestamp");
+                    b.Navigation("LeftEntity");
 
-                    b.Property<string>("Creator")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<long>("Id")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Label")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<DateTime>("Modified")
-                        .HasColumnType("timestamp");
-
-                    b.Property<string>("Modifier")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<int>("Ordinal")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("OriginName")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<string>("SSN")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<long>("SourceId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("SourceType")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
-
-                    b.Property<long>("TargetId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("TargetType")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
-
-                    b.HasKey("LeftEntityId", "RightEntityId");
-
-                    b.HasIndex("RightEntityId");
-
-                    b.ToTable("ShiftRatesToShiftRateOptionals", "Relation");
+                    b.Navigation("RightEntity");
                 });
 
-            modelBuilder.Entity("UltimatR.DboRelation<Undersoft.ODP.Domain.ShiftType, Undersoft.ODP.Domain.Attribute>", b =>
+            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.ShiftType, Undersoft.ODP.Domain.Attribute>", b =>
                 {
-                    b.Property<long>("LeftEntityId")
-                        .HasColumnType("bigint");
+                    b.HasOne("Undersoft.ODP.Domain.ShiftType", "LeftEntity")
+                        .WithMany()
+                        .HasForeignKey("LeftEntityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<long>("RightEntityId")
-                        .HasColumnType("bigint");
+                    b.HasOne("Undersoft.ODP.Domain.Attribute", "RightEntity")
+                        .WithMany()
+                        .HasForeignKey("RightEntityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("timestamp");
+                    b.Navigation("LeftEntity");
 
-                    b.Property<string>("Creator")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<long>("Id")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Label")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<DateTime>("Modified")
-                        .HasColumnType("timestamp");
-
-                    b.Property<string>("Modifier")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<int>("Ordinal")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("OriginName")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<string>("SSN")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<long>("SourceId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("SourceType")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
-
-                    b.Property<long>("TargetId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("TargetType")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
-
-                    b.HasKey("LeftEntityId", "RightEntityId");
-
-                    b.HasIndex("RightEntityId");
-
-                    b.ToTable("ShiftTypesToAttributes", "Relation");
+                    b.Navigation("RightEntity");
                 });
 
-            modelBuilder.Entity("UltimatR.DboRelation<Undersoft.ODP.Domain.ShiftType, Undersoft.ODP.Domain.Organization>", b =>
+            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.ShiftType, Undersoft.ODP.Domain.Organization>", b =>
                 {
-                    b.Property<long>("LeftEntityId")
-                        .HasColumnType("bigint");
+                    b.HasOne("Undersoft.ODP.Domain.ShiftType", "LeftEntity")
+                        .WithMany()
+                        .HasForeignKey("LeftEntityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<long>("RightEntityId")
-                        .HasColumnType("bigint");
+                    b.HasOne("Undersoft.ODP.Domain.Organization", "RightEntity")
+                        .WithMany()
+                        .HasForeignKey("RightEntityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("timestamp");
+                    b.Navigation("LeftEntity");
 
-                    b.Property<string>("Creator")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<long>("Id")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Label")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<DateTime>("Modified")
-                        .HasColumnType("timestamp");
-
-                    b.Property<string>("Modifier")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<int>("Ordinal")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("OriginName")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<string>("SSN")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<long>("SourceId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("SourceType")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
-
-                    b.Property<long>("TargetId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("TargetType")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
-
-                    b.HasKey("LeftEntityId", "RightEntityId");
-
-                    b.HasIndex("RightEntityId");
-
-                    b.ToTable("ShiftTypesToOrganizations", "Relation");
+                    b.Navigation("RightEntity");
                 });
 
-            modelBuilder.Entity("UltimatR.DboRelation<Undersoft.ODP.Domain.ShiftType, Undersoft.ODP.Domain.Plan>", b =>
+            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.ShiftType, Undersoft.ODP.Domain.Plan>", b =>
                 {
-                    b.Property<long>("LeftEntityId")
-                        .HasColumnType("bigint");
+                    b.HasOne("Undersoft.ODP.Domain.ShiftType", "LeftEntity")
+                        .WithMany()
+                        .HasForeignKey("LeftEntityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<long>("RightEntityId")
-                        .HasColumnType("bigint");
+                    b.HasOne("Undersoft.ODP.Domain.Plan", "RightEntity")
+                        .WithMany()
+                        .HasForeignKey("RightEntityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("timestamp");
+                    b.Navigation("LeftEntity");
 
-                    b.Property<string>("Creator")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<long>("Id")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Label")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<DateTime>("Modified")
-                        .HasColumnType("timestamp");
-
-                    b.Property<string>("Modifier")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<int>("Ordinal")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("OriginName")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<string>("SSN")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<long>("SourceId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("SourceType")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
-
-                    b.Property<long>("TargetId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("TargetType")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
-
-                    b.HasKey("LeftEntityId", "RightEntityId");
-
-                    b.HasIndex("RightEntityId");
-
-                    b.ToTable("ShiftTypesToPlans", "Relation");
+                    b.Navigation("RightEntity");
                 });
 
-            modelBuilder.Entity("UltimatR.DboRelation<Undersoft.ODP.Domain.ShiftType, Undersoft.ODP.Domain.ShiftType>", b =>
+            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.ShiftType, Undersoft.ODP.Domain.ShiftType>", b =>
                 {
-                    b.Property<long>("LeftEntityId")
-                        .HasColumnType("bigint");
+                    b.HasOne("Undersoft.ODP.Domain.ShiftType", "LeftEntity")
+                        .WithMany()
+                        .HasForeignKey("LeftEntityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<long>("RightEntityId")
-                        .HasColumnType("bigint");
+                    b.HasOne("Undersoft.ODP.Domain.ShiftType", "RightEntity")
+                        .WithMany()
+                        .HasForeignKey("RightEntityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("timestamp");
+                    b.Navigation("LeftEntity");
 
-                    b.Property<string>("Creator")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<long>("Id")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Label")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<DateTime>("Modified")
-                        .HasColumnType("timestamp");
-
-                    b.Property<string>("Modifier")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<int>("Ordinal")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("OriginName")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<string>("SSN")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<long>("SourceId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("SourceType")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
-
-                    b.Property<long>("TargetId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("TargetType")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
-
-                    b.HasKey("LeftEntityId", "RightEntityId");
-
-                    b.HasIndex("RightEntityId");
-
-                    b.ToTable("ShiftTypesToShiftTypeOptionals", "Relation");
+                    b.Navigation("RightEntity");
                 });
 
-            modelBuilder.Entity("UltimatR.DboRelation<Undersoft.ODP.Domain.ShiftType, Undersoft.ODP.Domain.Team>", b =>
+            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.ShiftType, Undersoft.ODP.Domain.Team>", b =>
                 {
-                    b.Property<long>("LeftEntityId")
-                        .HasColumnType("bigint");
+                    b.HasOne("Undersoft.ODP.Domain.ShiftType", "LeftEntity")
+                        .WithMany()
+                        .HasForeignKey("LeftEntityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<long>("RightEntityId")
-                        .HasColumnType("bigint");
+                    b.HasOne("Undersoft.ODP.Domain.Team", "RightEntity")
+                        .WithMany()
+                        .HasForeignKey("RightEntityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("timestamp");
+                    b.Navigation("LeftEntity");
 
-                    b.Property<string>("Creator")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<long>("Id")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Label")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<DateTime>("Modified")
-                        .HasColumnType("timestamp");
-
-                    b.Property<string>("Modifier")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<int>("Ordinal")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("OriginName")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<string>("SSN")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<long>("SourceId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("SourceType")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
-
-                    b.Property<long>("TargetId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("TargetType")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
-
-                    b.HasKey("LeftEntityId", "RightEntityId");
-
-                    b.HasIndex("RightEntityId");
-
-                    b.ToTable("ShiftTypesToTeams", "Relation");
+                    b.Navigation("RightEntity");
                 });
 
-            modelBuilder.Entity("UltimatR.DboRelation<Undersoft.ODP.Domain.ShiftType, Undersoft.ODP.Domain.User>", b =>
+            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.ShiftType, Undersoft.ODP.Domain.User>", b =>
                 {
-                    b.Property<long>("LeftEntityId")
-                        .HasColumnType("bigint");
+                    b.HasOne("Undersoft.ODP.Domain.ShiftType", "LeftEntity")
+                        .WithMany()
+                        .HasForeignKey("LeftEntityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<long>("RightEntityId")
-                        .HasColumnType("bigint");
+                    b.HasOne("Undersoft.ODP.Domain.User", "RightEntity")
+                        .WithMany()
+                        .HasForeignKey("RightEntityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("timestamp");
+                    b.Navigation("LeftEntity");
 
-                    b.Property<string>("Creator")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<long>("Id")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Label")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<DateTime>("Modified")
-                        .HasColumnType("timestamp");
-
-                    b.Property<string>("Modifier")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<int>("Ordinal")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("OriginName")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<string>("SSN")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<long>("SourceId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("SourceType")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
-
-                    b.Property<long>("TargetId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("TargetType")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
-
-                    b.HasKey("LeftEntityId", "RightEntityId");
-
-                    b.HasIndex("RightEntityId");
-
-                    b.ToTable("ShiftTypesToUsers", "Relation");
+                    b.Navigation("RightEntity");
                 });
 
-            modelBuilder.Entity("UltimatR.DboRelation<Undersoft.ODP.Domain.Team, Undersoft.ODP.Domain.Attribute>", b =>
+            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.Team, Undersoft.ODP.Domain.Attribute>", b =>
                 {
-                    b.Property<long>("LeftEntityId")
-                        .HasColumnType("bigint");
+                    b.HasOne("Undersoft.ODP.Domain.Team", "LeftEntity")
+                        .WithMany()
+                        .HasForeignKey("LeftEntityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<long>("RightEntityId")
-                        .HasColumnType("bigint");
+                    b.HasOne("Undersoft.ODP.Domain.Attribute", "RightEntity")
+                        .WithMany()
+                        .HasForeignKey("RightEntityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("timestamp");
+                    b.Navigation("LeftEntity");
 
-                    b.Property<string>("Creator")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<long>("Id")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Label")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<DateTime>("Modified")
-                        .HasColumnType("timestamp");
-
-                    b.Property<string>("Modifier")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<int>("Ordinal")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("OriginName")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<string>("SSN")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<long>("SourceId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("SourceType")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
-
-                    b.Property<long>("TargetId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("TargetType")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
-
-                    b.HasKey("LeftEntityId", "RightEntityId");
-
-                    b.HasIndex("RightEntityId");
-
-                    b.ToTable("TeamsToAttributes", "Relation");
+                    b.Navigation("RightEntity");
                 });
 
-            modelBuilder.Entity("UltimatR.DboRelation<Undersoft.ODP.Domain.Team, Undersoft.ODP.Domain.Plan>", b =>
+            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.Team, Undersoft.ODP.Domain.Plan>", b =>
                 {
-                    b.Property<long>("LeftEntityId")
-                        .HasColumnType("bigint");
+                    b.HasOne("Undersoft.ODP.Domain.Team", "LeftEntity")
+                        .WithMany()
+                        .HasForeignKey("LeftEntityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<long>("RightEntityId")
-                        .HasColumnType("bigint");
+                    b.HasOne("Undersoft.ODP.Domain.Plan", "RightEntity")
+                        .WithMany()
+                        .HasForeignKey("RightEntityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("timestamp");
+                    b.Navigation("LeftEntity");
 
-                    b.Property<string>("Creator")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<long>("Id")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Label")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<DateTime>("Modified")
-                        .HasColumnType("timestamp");
-
-                    b.Property<string>("Modifier")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<int>("Ordinal")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("OriginName")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<string>("SSN")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<long>("SourceId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("SourceType")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
-
-                    b.Property<long>("TargetId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("TargetType")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
-
-                    b.HasKey("LeftEntityId", "RightEntityId");
-
-                    b.HasIndex("RightEntityId");
-
-                    b.ToTable("TeamsToPlans", "Relation");
+                    b.Navigation("RightEntity");
                 });
 
-            modelBuilder.Entity("UltimatR.DboRelation<Undersoft.ODP.Domain.User, Undersoft.ODP.Domain.Attribute>", b =>
+            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.User, Undersoft.ODP.Domain.Attribute>", b =>
                 {
-                    b.Property<long>("LeftEntityId")
-                        .HasColumnType("bigint");
+                    b.HasOne("Undersoft.ODP.Domain.User", "LeftEntity")
+                        .WithMany()
+                        .HasForeignKey("LeftEntityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<long>("RightEntityId")
-                        .HasColumnType("bigint");
+                    b.HasOne("Undersoft.ODP.Domain.Attribute", "RightEntity")
+                        .WithMany()
+                        .HasForeignKey("RightEntityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("timestamp");
+                    b.Navigation("LeftEntity");
 
-                    b.Property<string>("Creator")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<long>("Id")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Label")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<DateTime>("Modified")
-                        .HasColumnType("timestamp");
-
-                    b.Property<string>("Modifier")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<int>("Ordinal")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("OriginName")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<string>("SSN")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<long>("SourceId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("SourceType")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
-
-                    b.Property<long>("TargetId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("TargetType")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
-
-                    b.HasKey("LeftEntityId", "RightEntityId");
-
-                    b.HasIndex("RightEntityId");
-
-                    b.ToTable("UsersToAttributes", "Relation");
+                    b.Navigation("RightEntity");
                 });
 
-            modelBuilder.Entity("UltimatR.DboRelation<Undersoft.ODP.Domain.User, Undersoft.ODP.Domain.Plan>", b =>
+            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.User, Undersoft.ODP.Domain.Plan>", b =>
                 {
-                    b.Property<long>("LeftEntityId")
-                        .HasColumnType("bigint");
+                    b.HasOne("Undersoft.ODP.Domain.User", "LeftEntity")
+                        .WithMany()
+                        .HasForeignKey("LeftEntityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<long>("RightEntityId")
-                        .HasColumnType("bigint");
+                    b.HasOne("Undersoft.ODP.Domain.Plan", "RightEntity")
+                        .WithMany()
+                        .HasForeignKey("RightEntityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("timestamp");
+                    b.Navigation("LeftEntity");
 
-                    b.Property<string>("Creator")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<long>("Id")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Label")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<DateTime>("Modified")
-                        .HasColumnType("timestamp");
-
-                    b.Property<string>("Modifier")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<int>("Ordinal")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("OriginName")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<string>("SSN")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<long>("SourceId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("SourceType")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
-
-                    b.Property<long>("TargetId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("TargetType")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
-
-                    b.HasKey("LeftEntityId", "RightEntityId");
-
-                    b.HasIndex("RightEntityId");
-
-                    b.ToTable("UsersToPlans", "Relation");
+                    b.Navigation("RightEntity");
                 });
 
-            modelBuilder.Entity("UltimatR.DboRelation<Undersoft.ODP.Domain.User, Undersoft.ODP.Domain.Team>", b =>
+            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.User, Undersoft.ODP.Domain.Team>", b =>
                 {
-                    b.Property<long>("LeftEntityId")
-                        .HasColumnType("bigint");
+                    b.HasOne("Undersoft.ODP.Domain.User", "LeftEntity")
+                        .WithMany()
+                        .HasForeignKey("LeftEntityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<long>("RightEntityId")
-                        .HasColumnType("bigint");
+                    b.HasOne("Undersoft.ODP.Domain.Team", "RightEntity")
+                        .WithMany()
+                        .HasForeignKey("RightEntityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("timestamp");
+                    b.Navigation("LeftEntity");
 
-                    b.Property<string>("Creator")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<long>("Id")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Label")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<DateTime>("Modified")
-                        .HasColumnType("timestamp");
-
-                    b.Property<string>("Modifier")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<int>("Ordinal")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("OriginName")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<string>("SSN")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<long>("SourceId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("SourceType")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
-
-                    b.Property<long>("TargetId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("TargetType")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
-
-                    b.HasKey("LeftEntityId", "RightEntityId");
-
-                    b.HasIndex("RightEntityId");
-
-                    b.ToTable("UsersToTeams", "Relation");
+                    b.Navigation("RightEntity");
                 });
 
             modelBuilder.Entity("UltimatR.Identifier<Undersoft.ODP.Domain.Device>", b =>
                 {
-                    b.Property<long>("Id")
-                        .HasColumnType("bigint");
+                    b.HasOne("Undersoft.ODP.Domain.Device", "Entity")
+                        .WithMany("Identifiers")
+                        .HasForeignKey("EntityId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("timestamp");
-
-                    b.Property<string>("Creator")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<long>("EntityId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("Key")
-                        .HasColumnType("bigint");
-
-                    b.Property<int>("Kind")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Label")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<DateTime>("Modified")
-                        .HasColumnType("timestamp");
-
-                    b.Property<string>("Modifier")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
-
-                    b.Property<int>("Ordinal")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("OriginName")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<string>("SSN")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<long>("SourceId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("SourceType")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
-
-                    b.Property<long>("TargetId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("TargetType")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
-
-                    b.Property<string>("Value")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EntityId");
-
-                    b.HasIndex("Key");
-
-                    b.HasIndex("Ordinal");
-
-                    b.ToTable("DeviceIdentifiers", "Identifier");
+                    b.Navigation("Entity");
                 });
 
             modelBuilder.Entity("UltimatR.Identifier<Undersoft.ODP.Domain.User>", b =>
                 {
-                    b.Property<long>("Id")
-                        .HasColumnType("bigint");
+                    b.HasOne("Undersoft.ODP.Domain.User", "Entity")
+                        .WithMany("Identifiers")
+                        .HasForeignKey("EntityId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("timestamp");
-
-                    b.Property<string>("Creator")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<long>("EntityId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("Key")
-                        .HasColumnType("bigint");
-
-                    b.Property<int>("Kind")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Label")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<DateTime>("Modified")
-                        .HasColumnType("timestamp");
-
-                    b.Property<string>("Modifier")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
-
-                    b.Property<int>("Ordinal")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("OriginName")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<string>("SSN")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<long>("SourceId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("SourceType")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
-
-                    b.Property<long>("TargetId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("TargetType")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
-
-                    b.Property<string>("Value")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EntityId");
-
-                    b.HasIndex("Key");
-
-                    b.HasIndex("Ordinal");
-
-                    b.ToTable("UserIdentifiers", "Identifier");
+                    b.Navigation("Entity");
                 });
 
             modelBuilder.Entity("Undersoft.ODP.Domain.Address", b =>
@@ -3650,446 +4090,6 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                         .HasForeignKey("UserId");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("UltimatR.DboRelation<Undersoft.ODP.Domain.Attribute, Undersoft.ODP.Domain.Attribute>", b =>
-                {
-                    b.HasOne("Undersoft.ODP.Domain.Attribute", "LeftEntity")
-                        .WithMany()
-                        .HasForeignKey("LeftEntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Undersoft.ODP.Domain.Attribute", "RightEntity")
-                        .WithMany()
-                        .HasForeignKey("RightEntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("LeftEntity");
-
-                    b.Navigation("RightEntity");
-                });
-
-            modelBuilder.Entity("UltimatR.DboRelation<Undersoft.ODP.Domain.Configuration, Undersoft.ODP.Domain.Setting>", b =>
-                {
-                    b.HasOne("Undersoft.ODP.Domain.Configuration", "LeftEntity")
-                        .WithMany()
-                        .HasForeignKey("LeftEntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Undersoft.ODP.Domain.Setting", "RightEntity")
-                        .WithMany()
-                        .HasForeignKey("RightEntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("LeftEntity");
-
-                    b.Navigation("RightEntity");
-                });
-
-            modelBuilder.Entity("UltimatR.DboRelation<Undersoft.ODP.Domain.Organization, Undersoft.ODP.Domain.Attribute>", b =>
-                {
-                    b.HasOne("Undersoft.ODP.Domain.Organization", "LeftEntity")
-                        .WithMany()
-                        .HasForeignKey("LeftEntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Undersoft.ODP.Domain.Attribute", "RightEntity")
-                        .WithMany()
-                        .HasForeignKey("RightEntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("LeftEntity");
-
-                    b.Navigation("RightEntity");
-                });
-
-            modelBuilder.Entity("UltimatR.DboRelation<Undersoft.ODP.Domain.Organization, Undersoft.ODP.Domain.Plan>", b =>
-                {
-                    b.HasOne("Undersoft.ODP.Domain.Organization", "LeftEntity")
-                        .WithMany()
-                        .HasForeignKey("LeftEntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Undersoft.ODP.Domain.Plan", "RightEntity")
-                        .WithMany()
-                        .HasForeignKey("RightEntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("LeftEntity");
-
-                    b.Navigation("RightEntity");
-                });
-
-            modelBuilder.Entity("UltimatR.DboRelation<Undersoft.ODP.Domain.Organization, Undersoft.ODP.Domain.User>", b =>
-                {
-                    b.HasOne("Undersoft.ODP.Domain.Organization", "LeftEntity")
-                        .WithMany()
-                        .HasForeignKey("LeftEntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Undersoft.ODP.Domain.User", "RightEntity")
-                        .WithMany()
-                        .HasForeignKey("RightEntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("LeftEntity");
-
-                    b.Navigation("RightEntity");
-                });
-
-            modelBuilder.Entity("UltimatR.DboRelation<Undersoft.ODP.Domain.Personal, Undersoft.ODP.Domain.Attribute>", b =>
-                {
-                    b.HasOne("Undersoft.ODP.Domain.Personal", "LeftEntity")
-                        .WithMany()
-                        .HasForeignKey("LeftEntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Undersoft.ODP.Domain.Attribute", "RightEntity")
-                        .WithMany()
-                        .HasForeignKey("RightEntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("LeftEntity");
-
-                    b.Navigation("RightEntity");
-                });
-
-            modelBuilder.Entity("UltimatR.DboRelation<Undersoft.ODP.Domain.Personal, Undersoft.ODP.Domain.Contact>", b =>
-                {
-                    b.HasOne("Undersoft.ODP.Domain.Personal", "LeftEntity")
-                        .WithMany()
-                        .HasForeignKey("LeftEntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Undersoft.ODP.Domain.Contact", "RightEntity")
-                        .WithMany()
-                        .HasForeignKey("RightEntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("LeftEntity");
-
-                    b.Navigation("RightEntity");
-                });
-
-            modelBuilder.Entity("UltimatR.DboRelation<Undersoft.ODP.Domain.Personal, Undersoft.ODP.Domain.Device>", b =>
-                {
-                    b.HasOne("Undersoft.ODP.Domain.Personal", "LeftEntity")
-                        .WithMany()
-                        .HasForeignKey("LeftEntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Undersoft.ODP.Domain.Device", "RightEntity")
-                        .WithMany()
-                        .HasForeignKey("RightEntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("LeftEntity");
-
-                    b.Navigation("RightEntity");
-                });
-
-            modelBuilder.Entity("UltimatR.DboRelation<Undersoft.ODP.Domain.Shift, Undersoft.ODP.Domain.Schedule>", b =>
-                {
-                    b.HasOne("Undersoft.ODP.Domain.Shift", "LeftEntity")
-                        .WithMany()
-                        .HasForeignKey("LeftEntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Undersoft.ODP.Domain.Schedule", "RightEntity")
-                        .WithMany()
-                        .HasForeignKey("RightEntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("LeftEntity");
-
-                    b.Navigation("RightEntity");
-                });
-
-            modelBuilder.Entity("UltimatR.DboRelation<Undersoft.ODP.Domain.Shift, Undersoft.ODP.Domain.ShiftRequest>", b =>
-                {
-                    b.HasOne("Undersoft.ODP.Domain.Shift", "LeftEntity")
-                        .WithMany()
-                        .HasForeignKey("LeftEntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Undersoft.ODP.Domain.ShiftRequest", "RightEntity")
-                        .WithMany()
-                        .HasForeignKey("RightEntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("LeftEntity");
-
-                    b.Navigation("RightEntity");
-                });
-
-            modelBuilder.Entity("UltimatR.DboRelation<Undersoft.ODP.Domain.ShiftRate, Undersoft.ODP.Domain.ShiftRate>", b =>
-                {
-                    b.HasOne("Undersoft.ODP.Domain.ShiftRate", "LeftEntity")
-                        .WithMany()
-                        .HasForeignKey("LeftEntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Undersoft.ODP.Domain.ShiftRate", "RightEntity")
-                        .WithMany()
-                        .HasForeignKey("RightEntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("LeftEntity");
-
-                    b.Navigation("RightEntity");
-                });
-
-            modelBuilder.Entity("UltimatR.DboRelation<Undersoft.ODP.Domain.ShiftType, Undersoft.ODP.Domain.Attribute>", b =>
-                {
-                    b.HasOne("Undersoft.ODP.Domain.ShiftType", "LeftEntity")
-                        .WithMany()
-                        .HasForeignKey("LeftEntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Undersoft.ODP.Domain.Attribute", "RightEntity")
-                        .WithMany()
-                        .HasForeignKey("RightEntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("LeftEntity");
-
-                    b.Navigation("RightEntity");
-                });
-
-            modelBuilder.Entity("UltimatR.DboRelation<Undersoft.ODP.Domain.ShiftType, Undersoft.ODP.Domain.Organization>", b =>
-                {
-                    b.HasOne("Undersoft.ODP.Domain.ShiftType", "LeftEntity")
-                        .WithMany()
-                        .HasForeignKey("LeftEntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Undersoft.ODP.Domain.Organization", "RightEntity")
-                        .WithMany()
-                        .HasForeignKey("RightEntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("LeftEntity");
-
-                    b.Navigation("RightEntity");
-                });
-
-            modelBuilder.Entity("UltimatR.DboRelation<Undersoft.ODP.Domain.ShiftType, Undersoft.ODP.Domain.Plan>", b =>
-                {
-                    b.HasOne("Undersoft.ODP.Domain.ShiftType", "LeftEntity")
-                        .WithMany()
-                        .HasForeignKey("LeftEntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Undersoft.ODP.Domain.Plan", "RightEntity")
-                        .WithMany()
-                        .HasForeignKey("RightEntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("LeftEntity");
-
-                    b.Navigation("RightEntity");
-                });
-
-            modelBuilder.Entity("UltimatR.DboRelation<Undersoft.ODP.Domain.ShiftType, Undersoft.ODP.Domain.ShiftType>", b =>
-                {
-                    b.HasOne("Undersoft.ODP.Domain.ShiftType", "LeftEntity")
-                        .WithMany()
-                        .HasForeignKey("LeftEntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Undersoft.ODP.Domain.ShiftType", "RightEntity")
-                        .WithMany()
-                        .HasForeignKey("RightEntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("LeftEntity");
-
-                    b.Navigation("RightEntity");
-                });
-
-            modelBuilder.Entity("UltimatR.DboRelation<Undersoft.ODP.Domain.ShiftType, Undersoft.ODP.Domain.Team>", b =>
-                {
-                    b.HasOne("Undersoft.ODP.Domain.ShiftType", "LeftEntity")
-                        .WithMany()
-                        .HasForeignKey("LeftEntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Undersoft.ODP.Domain.Team", "RightEntity")
-                        .WithMany()
-                        .HasForeignKey("RightEntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("LeftEntity");
-
-                    b.Navigation("RightEntity");
-                });
-
-            modelBuilder.Entity("UltimatR.DboRelation<Undersoft.ODP.Domain.ShiftType, Undersoft.ODP.Domain.User>", b =>
-                {
-                    b.HasOne("Undersoft.ODP.Domain.ShiftType", "LeftEntity")
-                        .WithMany()
-                        .HasForeignKey("LeftEntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Undersoft.ODP.Domain.User", "RightEntity")
-                        .WithMany()
-                        .HasForeignKey("RightEntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("LeftEntity");
-
-                    b.Navigation("RightEntity");
-                });
-
-            modelBuilder.Entity("UltimatR.DboRelation<Undersoft.ODP.Domain.Team, Undersoft.ODP.Domain.Attribute>", b =>
-                {
-                    b.HasOne("Undersoft.ODP.Domain.Team", "LeftEntity")
-                        .WithMany()
-                        .HasForeignKey("LeftEntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Undersoft.ODP.Domain.Attribute", "RightEntity")
-                        .WithMany()
-                        .HasForeignKey("RightEntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("LeftEntity");
-
-                    b.Navigation("RightEntity");
-                });
-
-            modelBuilder.Entity("UltimatR.DboRelation<Undersoft.ODP.Domain.Team, Undersoft.ODP.Domain.Plan>", b =>
-                {
-                    b.HasOne("Undersoft.ODP.Domain.Team", "LeftEntity")
-                        .WithMany()
-                        .HasForeignKey("LeftEntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Undersoft.ODP.Domain.Plan", "RightEntity")
-                        .WithMany()
-                        .HasForeignKey("RightEntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("LeftEntity");
-
-                    b.Navigation("RightEntity");
-                });
-
-            modelBuilder.Entity("UltimatR.DboRelation<Undersoft.ODP.Domain.User, Undersoft.ODP.Domain.Attribute>", b =>
-                {
-                    b.HasOne("Undersoft.ODP.Domain.User", "LeftEntity")
-                        .WithMany()
-                        .HasForeignKey("LeftEntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Undersoft.ODP.Domain.Attribute", "RightEntity")
-                        .WithMany()
-                        .HasForeignKey("RightEntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("LeftEntity");
-
-                    b.Navigation("RightEntity");
-                });
-
-            modelBuilder.Entity("UltimatR.DboRelation<Undersoft.ODP.Domain.User, Undersoft.ODP.Domain.Plan>", b =>
-                {
-                    b.HasOne("Undersoft.ODP.Domain.User", "LeftEntity")
-                        .WithMany()
-                        .HasForeignKey("LeftEntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Undersoft.ODP.Domain.Plan", "RightEntity")
-                        .WithMany()
-                        .HasForeignKey("RightEntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("LeftEntity");
-
-                    b.Navigation("RightEntity");
-                });
-
-            modelBuilder.Entity("UltimatR.DboRelation<Undersoft.ODP.Domain.User, Undersoft.ODP.Domain.Team>", b =>
-                {
-                    b.HasOne("Undersoft.ODP.Domain.User", "LeftEntity")
-                        .WithMany()
-                        .HasForeignKey("LeftEntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Undersoft.ODP.Domain.Team", "RightEntity")
-                        .WithMany()
-                        .HasForeignKey("RightEntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("LeftEntity");
-
-                    b.Navigation("RightEntity");
-                });
-
-            modelBuilder.Entity("UltimatR.Identifier<Undersoft.ODP.Domain.Device>", b =>
-                {
-                    b.HasOne("Undersoft.ODP.Domain.Device", "Entity")
-                        .WithMany("Identifiers")
-                        .HasForeignKey("EntityId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Entity");
-                });
-
-            modelBuilder.Entity("UltimatR.Identifier<Undersoft.ODP.Domain.User>", b =>
-                {
-                    b.HasOne("Undersoft.ODP.Domain.User", "Entity")
-                        .WithMany("Identifiers")
-                        .HasForeignKey("EntityId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Entity");
                 });
 
             modelBuilder.Entity("Undersoft.ODP.Domain.Attribute", b =>

@@ -1,10 +1,7 @@
 ﻿using AutoMapper;
 using AutoMapper.Configuration;
 using AutoMapper.Internal;
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Uniques;
 
@@ -82,8 +79,6 @@ namespace UltimatR
                     expression.CreateMap(_pair.SourceType, _pair.DestinationType).ReverseMap();
                 else
                     expression.CreateMap(_pair.SourceType, _pair.DestinationType);
-
-
 
                 _pair.SourceType
                     .GetProperties()

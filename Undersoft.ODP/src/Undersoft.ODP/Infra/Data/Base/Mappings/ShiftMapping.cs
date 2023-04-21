@@ -12,7 +12,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Mappings
 
         public override void Configure(EntityTypeBuilder<Shift> builder)
         {
-            builder.ToTable(TABLE_NAME, DbSchema.LocalSchema);
+            builder.ToTable(TABLE_NAME, DataBaseSchema.LocalSchema);
 
             modelBuilder
                 .LinkToSet<Schedule, Shift>(ExpandSite.OnRight)

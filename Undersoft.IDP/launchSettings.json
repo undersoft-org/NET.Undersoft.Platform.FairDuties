@@ -4,12 +4,12 @@
       "commandName": "DockerCompose",
       "commandVersion": "1.0",
       "serviceActions": {
-        "adminer": "StartWithoutDebugging",
-        "db": "StartWithoutDebugging",
-        "nginx-proxy": "StartWithoutDebugging",
-        "undersoft.ais.admin": "StartDebugging",
-        "undersoft.ais.admin.api": "StartDebugging",
-        "undersoft.ais.sts.identity": "StartDebugging"
+        "io.undersoft.tkp.adminer": "StartWithoutDebugging",
+        "io.undersoft.dbp.pgsql": "StartWithoutDebugging",
+        "io.undersoft.gwp.nginx-proxy": "StartWithoutDebugging",
+        "io.undersoft.idp.admin": "StartDebugging",
+        "io.undersoft.idp.admin.api": "StartDebugging",
+        "io.undersoft.idp.sts.identity": "StartDebugging"
       }
     }
   }

@@ -100,7 +100,7 @@ namespace UltimatR
 
         public ModelBuilder Configure()
         {
-            _identifierBuilder.ToTable(TABLE_NAME, DbSchema.IdentifierSchema);
+            _identifierBuilder.ToTable(TABLE_NAME, DataBaseSchema.IdentifierSchema);
 
             _identifierBuilder.HasIndex(k => k.Key);
 

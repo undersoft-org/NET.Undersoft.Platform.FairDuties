@@ -1,6 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Series;
 
@@ -17,7 +15,7 @@ namespace UltimatR
         ObjectAccessor<T> AddObject<T>() where T : class;
         ObjectAccessor<T> AddObject<T>(ObjectAccessor<T> accessor) where T : class;
         ObjectAccessor<T> AddObject<T>(T obj) where T : class;
-        ObjectAccessor AddObject(Type type , object obj);
+        ObjectAccessor AddObject(Type type, object obj);
         ObjectAccessor AddObject(Type type);
         IServiceProvider BuildServiceProviderFromFactory();
         IServiceProvider BuildServiceProviderFromFactory<TContainerBuilder>([NotNull] Action<TContainerBuilder> builderAction = null);
@@ -43,6 +41,7 @@ namespace UltimatR
         bool IsAdded(Type type);
         bool IsAdded<T>() where T : class;
         void MergeServices(bool actualizeExternalServices = true);
+        void MergeServices(IServiceCollection services, bool actualizeExternalServices = true);
         bool Remove<TContext>() where TContext : class;
         ICard<ServiceDescriptor> Set(ServiceDescriptor descriptor);
         bool TryAdd(ServiceDescriptor profile);

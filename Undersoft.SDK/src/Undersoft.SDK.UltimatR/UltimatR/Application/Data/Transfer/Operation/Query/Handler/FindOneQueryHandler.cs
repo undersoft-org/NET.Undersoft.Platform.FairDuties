@@ -1,7 +1,4 @@
 ﻿using MediatR;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Uniques;
 
 namespace UltimatR
@@ -18,9 +15,15 @@ namespace UltimatR
 
         public virtual Task<UniqueOne<TDto>> Handle(FindOneQuery<TStore, TEntity, TDto> request, CancellationToken cancellationToken)
         {
+            Task<UniqueOne<TDto>> result = null;
             if (request.Keys != null)
-                return _repository.FindOneAsync<TDto>(request.Keys, request.Expanders);
-            return _repository.FindOneAsync<TDto>(request.Predicate, request.Expanders);
+                result = _repository.FindOneAsync<TDto>(request.Keys, request.Expanders);
+            else
+                result = _repository.FindOneAsync<TDto>(request.Predicate, request.Expanders);
+
+            //result.Wait(30 * 1000);
+
+            return result;
         }
     }
 }

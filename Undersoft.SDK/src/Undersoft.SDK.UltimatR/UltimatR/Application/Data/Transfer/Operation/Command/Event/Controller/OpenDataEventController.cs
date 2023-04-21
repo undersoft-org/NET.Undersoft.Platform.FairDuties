@@ -10,7 +10,7 @@ namespace UltimatR
 {
     [IgnoreApi]
     [LinkedResult]
-    [OpenDataService]
+    [ODataService]
     [ODataRouteComponent(StoreRoutes.Constant.OpenEventStore)]
     public abstract class OpenDataEventController<TKey, TStore, TEntity, TDto> : ODataController where TDto : Dto
         where TEntity : Entity

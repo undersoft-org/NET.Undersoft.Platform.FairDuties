@@ -1,20 +1,20 @@
 version: '3.4'
 
 services:
-  undersoft.ais.admin:
+  io.undersoft.idp.admin:
     environment:
-      - ASPNETCORE_ENVIRONMENT=develop
+      - ASPNETCORE_ENVIRONMENT=Development
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
   
-  undersoft.ais.admin.api:
+  io.undersoft.idp.admin.api:
     environment:
-      - ASPNETCORE_ENVIRONMENT=develop
+      - ASPNETCORE_ENVIRONMENT=Development
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
 
-  undersoft.ais.sts.identity:
+  io.undersoft.idp.sts.identity:
     environment:
-      - ASPNETCORE_ENVIRONMENT=develop
+      - ASPNETCORE_ENVIRONMENT=Development
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro

@@ -14,45 +14,45 @@ namespace UltimatR
     {
         public static IServiceRegistry AddEntityServicesForDb(EndpointProvider provider)
         {
-            IServiceManager sm = ServiceManager.GetManager();
-            if (!DbRegistry.Providers.ContainsKey((int)provider))
+            IServiceRegistry registry = ServiceManager.GetRegistry();
+            if (!DataBaseRegistry.Providers.ContainsKey((int)provider))
             {
                 switch (provider)
                 {
                     case EndpointProvider.SqlServer:
-                        sm.Registry.AddEntityFrameworkSqlServer();
+                        registry.AddEntityFrameworkSqlServer();
                         break;
                     case EndpointProvider.AzureSql:
-                        sm.Registry.AddEntityFrameworkSqlServer();
+                        registry.AddEntityFrameworkSqlServer();
                         break;
                     case EndpointProvider.PostgreSql:
-                        sm.Registry.AddEntityFrameworkNpgsql();
+                        registry.AddEntityFrameworkNpgsql();
                         break;
                     case EndpointProvider.SqlLite:
-                        sm.Registry.AddEntityFrameworkSqlite();
+                        registry.AddEntityFrameworkSqlite();
                         break;
                     case EndpointProvider.MariaDb:
-                        sm.Registry.AddEntityFrameworkMySql();
+                        registry.AddEntityFrameworkMySql();
                         break;
                     case EndpointProvider.MySql:
-                        sm.Registry.AddEntityFrameworkMySql();
+                        registry.AddEntityFrameworkMySql();
                         break;
                     case EndpointProvider.Oracle:
-                        sm.Registry.AddEntityFrameworkOracle();
+                        registry.AddEntityFrameworkOracle();
                         break;
                     case EndpointProvider.CosmosDb:
-                        sm.Registry.AddEntityFrameworkCosmos();
+                        registry.AddEntityFrameworkCosmos();
                         break;
                     case EndpointProvider.MemoryDb:
-                        sm.Registry.AddEntityFrameworkInMemoryDatabase();
+                        registry.AddEntityFrameworkInMemoryDatabase();
                         break;
                     default:
                         break;
                 }
-                sm.Registry.AddEntityFrameworkProxies();
-                DbRegistry.Providers.Add((int)provider, provider);
+                registry.AddEntityFrameworkProxies();
+                DataBaseRegistry.Providers.Add((int)provider, provider);
             }
-            return sm.Registry;
+            return registry;
         }
 
         public static DbContextOptionsBuilder<TContext> BuildOptions<TContext>(

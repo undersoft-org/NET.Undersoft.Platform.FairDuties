@@ -4,11 +4,9 @@ using UltimatR;
 
 namespace Undersoft.ODP.Api.Data.Service.Operation.Controllers.Entries
 {
-    using Domain;
-
     [AllowAnonymous]
-    [ODataRouteComponent(StoreRoutes.Constant.EntryStore)]
-    public class AttributeController : DsoController<long, IEntryStore, Attribute>
+    [ODataRouteComponent(StoreRoutes.Constant.CqrsStore)]
+    public class AttributeController : DsoController<long, ICqrsStore, Domain.Attribute>
     {
         public AttributeController(IUltimatr ultimatr) : base(ultimatr) { }
     }
@@ -16,11 +14,9 @@ namespace Undersoft.ODP.Api.Data.Service.Operation.Controllers.Entries
 
 namespace Undersoft.ODP.Api.Data.Service.Operation.Controllers.Reports
 {
-    using Domain;
-
     [AllowAnonymous]
     [ODataRouteComponent(StoreRoutes.Constant.ReportStore)]
-    public class AttributeController : DsoController<long, IReportStore, Attribute>
+    public class AttributeController : DsoController<long, ICqrsStore, Domain.Attribute>
     {
         public AttributeController(IUltimatr ultimatr) : base(ultimatr) { }
     }

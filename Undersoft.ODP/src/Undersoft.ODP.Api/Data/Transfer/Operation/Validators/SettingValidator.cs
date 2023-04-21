@@ -2,26 +2,25 @@
 
 namespace Undersoft.ODP.Api
 {
-    using Domain;
-    public class SettingValidator : DtoCommandSetValidator<SettingDto>
+    public class SettingValidator : DtoCommandSetValidator<Setting>
     {
         public SettingValidator(IUltimatr ultimatr) : base(ultimatr)
         {
-            ValidationScope(CommandMode.Create, () =>
+            ValidationScope(CommandMode.Create, (Action)(() =>
             {
-                ValidateNotExist<IEntryStore, Setting>((cmd) =>
-                (e) => e.Name == cmd.Name, "same type name already exists");
-            });
+                base.ValidateNotExist<IEntryStore, Domain.Setting>(((cmd) =>
+                ((e) => e.Name == cmd.Name)), "same type name already exists");
+            }));
             ValidationScope(CommandMode.Create | CommandMode.Upsert | CommandMode.Update, () =>
             {
                 ValidateRequired(p => p.Data.Name);
                 ValidateLength(3, 80, a => a.Data.Name);
             });
-            ValidationScope(CommandMode.Delete | CommandMode.Change | CommandMode.Update, () =>
+            ValidationScope(CommandMode.Delete | CommandMode.Change | CommandMode.Update, (Action)(() =>
             {
-                ValidateRequired(a => a.Data.Id);
-                ValidateExist<IEntryStore, Setting>((cmd) => (e) => e.Id == cmd.Id);
-            });
+                ValidateRequired((a => (object)a.Data.Id));
+                base.ValidateExist<IEntryStore, Domain.Setting>(((cmd) => ((e) => e.Id == cmd.Id)));
+            }));
         }
     }
 }

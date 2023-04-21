@@ -1,12 +1,11 @@
 using Microsoft.Extensions.DependencyInjection;
-using System;
 
 namespace UltimatR
 {
     public partial class ServiceRegistry
     {
         public ObjectAccessor<T> TryAddObject<T>() where T : class
-        {           
+        {
             if (ContainsKey(typeof(ObjectAccessor<T>)))
             {
                 return (ObjectAccessor<T>)Get<ObjectAccessor<T>>()?.ImplementationInstance;
@@ -60,7 +59,7 @@ namespace UltimatR
             {
                 return accessor;
             }
-            
+
             Put(ServiceDescriptor.Singleton(oaType), accessor);
             Put(ServiceDescriptor.Singleton(iaType), accessor);
 
@@ -84,8 +83,8 @@ namespace UltimatR
 
             Put(ServiceDescriptor.Singleton(typeof(ObjectAccessor<T>), accessor));
             Put(ServiceDescriptor.Singleton(typeof(IObjectAccessor<T>), accessor));
-            
-            if(accessor.Value != null)
+
+            if (accessor.Value != null)
                 this.AddSingleton<T>(accessor.Value);
 
             return accessor;
@@ -98,7 +97,7 @@ namespace UltimatR
         }
 
         public T GetObject<T>()
-            where T : class 
+            where T : class
         {
             return GetSingleton<IObjectAccessor<T>>()?.Value;
         }

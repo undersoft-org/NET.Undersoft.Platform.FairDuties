@@ -12,7 +12,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Mappings
 
         public override void Configure(EntityTypeBuilder<Contact> builder)
         {
-            builder.ToTable(TABLE_NAME, DbSchema.LocalSchema);
+            builder.ToTable(TABLE_NAME, DataBaseSchema.LocalSchema);
 
             modelBuilder.LinkToSet<Contact, Address>(
                 nameof(Address.Contact),

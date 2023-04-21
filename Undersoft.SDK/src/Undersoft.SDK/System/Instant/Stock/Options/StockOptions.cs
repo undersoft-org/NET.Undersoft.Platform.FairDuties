@@ -111,7 +111,7 @@ namespace System.Instant.Stock
 
         public virtual string BasePath
         {
-            get => basepath ??= "MMFS";
+            get => basepath ??= ".mmfs";
             set => basepath = value;
         }
 

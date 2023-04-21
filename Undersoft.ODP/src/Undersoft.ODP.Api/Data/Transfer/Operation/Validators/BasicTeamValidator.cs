@@ -3,7 +3,7 @@
 namespace Undersoft.ODP.Api
 {
     using Domain;
-    public class BasicTeamValidator : DtoCommandSetValidator<BasicTeamDto>
+    public class BasicTeamValidator : DtoCommandSetValidator<BasicTeam>
     {
         public BasicTeamValidator(IUltimatr ultimatr) : base(ultimatr)
         {
@@ -20,12 +20,12 @@ namespace Undersoft.ODP.Api
                 ValidateRequired(p => p.Data.LeadershipId);
                 ValidateLength(3, 80, a => a.Data.Name);
                 ValidateLength(1, 50, a => a.Data.ShortName);
-                ValidateExist<IEntryStore, Team>((cmd) => (e) => e.Id == cmd.Id);
+                ValidateExist<IEntryStore, Domain.Team>((cmd) => (e) => e.Id == cmd.Id);
             });
             ValidationScope(CommandMode.Delete, () =>
             {
                 ValidateRequired(a => a.Data.Id);
-                ValidateExist<IEntryStore, Team>((cmd) => (e) => e.Id == cmd.Id);
+                ValidateExist<IEntryStore, Domain.Team>((cmd) => (e) => e.Id == cmd.Id);
             });
         }
     }
