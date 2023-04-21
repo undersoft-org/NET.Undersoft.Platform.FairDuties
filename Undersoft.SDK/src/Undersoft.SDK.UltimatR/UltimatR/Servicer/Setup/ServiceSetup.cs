@@ -213,12 +213,12 @@ namespace UltimatR
                 ds.Build();
                 ds.AddOData(mvc);
             }
-            //if ((dataServiceTypes & DataServiceTypes.Grpc) > 0)
-            //{
-            //    var ds = new GrpcServiceBuilder<TServiceStore>();
-            //    builder.Invoke(ds);
-            //    ds.Build();
-            //}
+            if ((dataServiceTypes & DataServiceTypes.Grpc) > 0)
+            {
+                var ds = new GrpcServiceBuilder<TServiceStore>();
+                builder.Invoke(ds);
+                ds.Build();
+            }
             //if ((dataServiceTypes & DataServiceTypes.Rest) > 0)
             //{
             //    var ds = new RestServiceBuilder<TServiceStore>();

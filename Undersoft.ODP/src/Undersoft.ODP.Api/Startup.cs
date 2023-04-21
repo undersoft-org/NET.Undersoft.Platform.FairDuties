@@ -15,28 +15,23 @@ namespace Undersoft.ODP.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services
-                .AddServiceSetup(/*services.AddControllers()*/)
+                .AddServiceSetup()
                 .ConfigureServices()
-            .AddDataServices<ICqrsStore>(
-                DataServiceTypes.All,
-                builder =>
-                    builder.AddDataService<EntryDbContext>()
-                           .AddDataService<ReportDbContext>()
-            //)
-            //.AddDataServices<IEventStore>(
-            //    DataServiceTypes.All,
-            //    builder =>
-            //        builder.AddDataService<EventDbContext>()
-            );
-
-
+                .AddDataServices<ICqrsStore>(
+                    DataServiceTypes.All,
+                    builder =>
+                        builder.AddDataService<EntryDbContext>().AddDataService<ReportDbContext>()
+                //)
+                //.AddDataServices<IEventStore>(
+                //    DataServiceTypes.All,
+                //    builder =>
+                //        builder.AddDataService<EventDbContext>()
+                );
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseAppSetup(env)
-               .UseInternalProvider()
-               .UseDataMigrations();
+            app.UseAppSetup(env).UseInternalProvider().UseDataMigrations();
         }
     }
 }

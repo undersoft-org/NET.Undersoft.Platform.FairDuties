@@ -1528,3 +1528,93 @@
    at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString(Object targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
 2023-04-21 15:02:38.1127 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
 2023-04-21 15:02:38.1967 Info NLog Configuration has not been loaded.
+2023-04-21 15:19:00.3394 Info Message Template Auto Format enabled
+2023-04-21 15:19:00.3687 Info Loading assembly: NLog.Web.AspNetCore
+2023-04-21 15:19:00.6993 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2023-04-21 15:19:00.7214 Info Registered target NLog.Targets.FileTarget(Name=webfile)
+2023-04-21 15:19:00.7214 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'ConsoleTarget' cannot assign unknown property 'useDefaultRowHighlightingRules'='true'
+   at NLog.Internal.PropertyHelper.SetPropertyFromString(Object targetObject, String propertyName, String stringValue, ConfigurationItemFactory configurationItemFactory)
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString(Object targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2023-04-21 15:19:00.7980 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2023-04-21 15:19:00.8256 Info Loading NLog config from XML file: X:\DEVELOPMENT\PROJECTS\NET\Undersoft\Universer\Undersoft.ODP\src\Undersoft.ODP.Api\Properties\nlog.Development.config
+2023-04-21 15:19:00.8256 Info Message Template Auto Format enabled
+2023-04-21 15:19:00.8256 Info Loading assembly: NLog.Web.AspNetCore
+2023-04-21 15:19:00.8256 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2023-04-21 15:19:00.8256 Info Registered target NLog.Targets.FileTarget(Name=webfile)
+2023-04-21 15:19:00.8256 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'ConsoleTarget' cannot assign unknown property 'useDefaultRowHighlightingRules'='true'
+   at NLog.Internal.PropertyHelper.SetPropertyFromString(Object targetObject, String propertyName, String stringValue, ConfigurationItemFactory configurationItemFactory)
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString(Object targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2023-04-21 15:19:00.8256 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2023-04-21 15:19:00.9188 Info NLog Configuration has not been loaded.
+2023-04-21 22:30:33.3261 Info Message Template Auto Format enabled
+2023-04-21 22:30:33.3471 Info Loading assembly: NLog.Web.AspNetCore
+2023-04-21 22:30:33.7476 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2023-04-21 22:30:33.7612 Info Registered target NLog.Targets.FileTarget(Name=webfile)
+2023-04-21 22:30:33.7612 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'ConsoleTarget' cannot assign unknown property 'useDefaultRowHighlightingRules'='true'
+   at NLog.Internal.PropertyHelper.SetPropertyFromString(Object targetObject, String propertyName, String stringValue, ConfigurationItemFactory configurationItemFactory)
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString(Object targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2023-04-21 22:30:33.8238 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2023-04-21 22:30:33.8494 Info Loading NLog config from XML file: X:\DEVELOPMENT\PROJECTS\NET\Undersoft\Universer\Undersoft.ODP\src\Undersoft.ODP.Api\Properties\nlog.Development.config
+2023-04-21 22:30:33.8494 Info Message Template Auto Format enabled
+2023-04-21 22:30:33.8494 Info Loading assembly: NLog.Web.AspNetCore
+2023-04-21 22:30:33.8494 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2023-04-21 22:30:33.8494 Info Registered target NLog.Targets.FileTarget(Name=webfile)
+2023-04-21 22:30:33.8494 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'ConsoleTarget' cannot assign unknown property 'useDefaultRowHighlightingRules'='true'
+   at NLog.Internal.PropertyHelper.SetPropertyFromString(Object targetObject, String propertyName, String stringValue, ConfigurationItemFactory configurationItemFactory)
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString(Object targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2023-04-21 22:30:33.8494 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2023-04-21 22:30:33.9239 Info NLog Configuration has not been loaded.
+2023-04-21 22:38:59.9047 Info Message Template Auto Format enabled
+2023-04-21 22:38:59.9271 Info Loading assembly: NLog.Web.AspNetCore
+2023-04-21 22:39:00.3416 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2023-04-21 22:39:00.3672 Info Registered target NLog.Targets.FileTarget(Name=webfile)
+2023-04-21 22:39:00.3672 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'ConsoleTarget' cannot assign unknown property 'useDefaultRowHighlightingRules'='true'
+   at NLog.Internal.PropertyHelper.SetPropertyFromString(Object targetObject, String propertyName, String stringValue, ConfigurationItemFactory configurationItemFactory)
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString(Object targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2023-04-21 22:39:00.5570 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2023-04-21 22:39:00.5910 Info Loading NLog config from XML file: X:\DEVELOPMENT\PROJECTS\NET\Undersoft\Universer\Undersoft.ODP\src\Undersoft.ODP.Api\Properties\nlog.Development.config
+2023-04-21 22:39:00.5910 Info Message Template Auto Format enabled
+2023-04-21 22:39:00.5910 Info Loading assembly: NLog.Web.AspNetCore
+2023-04-21 22:39:00.5910 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2023-04-21 22:39:00.5910 Info Registered target NLog.Targets.FileTarget(Name=webfile)
+2023-04-21 22:39:00.6051 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'ConsoleTarget' cannot assign unknown property 'useDefaultRowHighlightingRules'='true'
+   at NLog.Internal.PropertyHelper.SetPropertyFromString(Object targetObject, String propertyName, String stringValue, ConfigurationItemFactory configurationItemFactory)
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString(Object targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2023-04-21 22:39:00.6051 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2023-04-21 22:39:00.8200 Info NLog Configuration has not been loaded.
+2023-04-21 22:46:30.4104 Info Message Template Auto Format enabled
+2023-04-21 22:46:30.6230 Info Loading assembly: NLog.Web.AspNetCore
+2023-04-21 22:46:31.3950 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2023-04-21 22:46:31.5382 Info Registered target NLog.Targets.FileTarget(Name=webfile)
+2023-04-21 22:46:31.5434 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'ConsoleTarget' cannot assign unknown property 'useDefaultRowHighlightingRules'='true'
+   at NLog.Internal.PropertyHelper.SetPropertyFromString(Object targetObject, String propertyName, String stringValue, ConfigurationItemFactory configurationItemFactory)
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString(Object targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2023-04-21 22:46:31.6388 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2023-04-21 22:46:31.6651 Info Loading NLog config from XML file: X:\DEVELOPMENT\PROJECTS\NET\Undersoft\Universer\Undersoft.ODP\src\Undersoft.ODP.Api\Properties\nlog.Development.config
+2023-04-21 22:46:31.6651 Info Message Template Auto Format enabled
+2023-04-21 22:46:31.6651 Info Loading assembly: NLog.Web.AspNetCore
+2023-04-21 22:46:31.6651 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2023-04-21 22:46:31.6683 Info Registered target NLog.Targets.FileTarget(Name=webfile)
+2023-04-21 22:46:31.6683 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'ConsoleTarget' cannot assign unknown property 'useDefaultRowHighlightingRules'='true'
+   at NLog.Internal.PropertyHelper.SetPropertyFromString(Object targetObject, String propertyName, String stringValue, ConfigurationItemFactory configurationItemFactory)
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString(Object targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2023-04-21 22:46:31.6683 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2023-04-21 22:46:31.7533 Info NLog Configuration has not been loaded.
+2023-04-21 22:49:13.7165 Info Message Template Auto Format enabled
+2023-04-21 22:49:13.7450 Info Loading assembly: NLog.Web.AspNetCore
+2023-04-21 22:49:14.1134 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2023-04-21 22:49:14.1243 Info Registered target NLog.Targets.FileTarget(Name=webfile)
+2023-04-21 22:49:14.1243 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'ConsoleTarget' cannot assign unknown property 'useDefaultRowHighlightingRules'='true'
+   at NLog.Internal.PropertyHelper.SetPropertyFromString(Object targetObject, String propertyName, String stringValue, ConfigurationItemFactory configurationItemFactory)
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString(Object targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2023-04-21 22:49:14.1986 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2023-04-21 22:49:14.2516 Info Loading NLog config from XML file: X:\DEVELOPMENT\PROJECTS\NET\Undersoft\Universer\Undersoft.ODP\src\Undersoft.ODP.Api\Properties\nlog.Development.config
+2023-04-21 22:49:14.2516 Info Message Template Auto Format enabled
+2023-04-21 22:49:14.2516 Info Loading assembly: NLog.Web.AspNetCore
+2023-04-21 22:49:14.2516 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2023-04-21 22:49:14.2516 Info Registered target NLog.Targets.FileTarget(Name=webfile)
+2023-04-21 22:49:14.2702 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'ConsoleTarget' cannot assign unknown property 'useDefaultRowHighlightingRules'='true'
+   at NLog.Internal.PropertyHelper.SetPropertyFromString(Object targetObject, String propertyName, String stringValue, ConfigurationItemFactory configurationItemFactory)
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString(Object targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2023-04-21 22:49:14.2702 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2023-04-21 22:49:14.5032 Info NLog Configuration has not been loaded.

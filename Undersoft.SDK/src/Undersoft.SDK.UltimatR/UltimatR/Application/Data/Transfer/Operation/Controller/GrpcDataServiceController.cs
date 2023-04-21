@@ -5,7 +5,6 @@ using System.Text.Json;
 namespace UltimatR
 {
     [LinkedResult]
-    [IgnoreApi]
     [GrpcService]
     public class GrpcDataServiceController<TKey, TEntry, TReport, TEntity, TDto> : IGrpcDataServiceController<TKey, TEntity, TDto> where TDto : Dto
         where TEntity : Entity

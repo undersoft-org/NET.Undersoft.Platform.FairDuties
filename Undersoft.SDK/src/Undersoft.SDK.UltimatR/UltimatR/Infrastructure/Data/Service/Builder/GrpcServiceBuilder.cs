@@ -3,7 +3,7 @@ using System.Reflection;
 
 namespace UltimatR
 {
-    public abstract class GrpcServiceBuilder<TServiceStore> : DataServiceBuilder, IDataServiceBuilder<TServiceStore> where TServiceStore : IDataServiceStore
+    public class GrpcServiceBuilder<TServiceStore> : DataServiceBuilder, IDataServiceBuilder<TServiceStore> where TServiceStore : IDataServiceStore
     {
         IServiceRegistry _registry;
 

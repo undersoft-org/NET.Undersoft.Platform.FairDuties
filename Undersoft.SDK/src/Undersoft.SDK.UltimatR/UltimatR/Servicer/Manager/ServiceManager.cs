@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace UltimatR
 {
@@ -31,6 +33,7 @@ namespace UltimatR
                 registry = new ServiceRegistry(services, this);
                 registry.MergeServices();
                 AddObject<IServiceManager>(this);
+                BuildServiceProviderFactory(registry);
             }
             else
                 registry.MergeServices(services, false);
@@ -40,6 +43,24 @@ namespace UltimatR
                 configuration = new ServiceConfiguration(registry);
                 AddObject<IServiceConfiguration>(configuration);
             }
+        }
+
+        public virtual IServiceProviderFactory<IServiceCollection> BuildServiceProviderFactory(IServiceRegistry registry)
+        {
+            var options = new ServiceProviderOptions();
+
+            Action<WebHostBuilderContext, ServiceProviderOptions> configure = (context, options) => options.ValidateOnBuild = true;
+
+            var factory = new DefaultServiceProviderFactory(options);
+
+            AddObject<IServiceProviderFactory<IServiceCollection>>(factory);
+            AddObject<IServiceCollection>(registry);
+
+            registry.Services.Replace(ServiceDescriptor.Singleton<IServiceProviderFactory<IServiceCollection>>(factory));
+            registry.Services.Replace(ServiceDescriptor.Singleton<IServiceCollection>(registry));
+            registry.MergeServices();
+
+            return factory;
         }
 
         public virtual T GetService<T>()
@@ -116,19 +137,23 @@ namespace UltimatR
 
         public static IServiceProvider BuildInternalProvider()
         {
-            SetProvider(registry.BuildServiceProvider());
-            return registry.GetProvider();
+            var provider = ServiceManager.GetRegistry().BuildServiceProviderFromFactory<IServiceCollection>();
+            SetProvider(provider);
+            return provider;
         }
 
         public static IServiceProvider GetProvider()
         {
             var _provider = registry.GetProvider();
             if (_provider == null)
-            {
-                BuildInternalProvider();
-                return registry.GetProvider();
-            }
+                return BuildInternalProvider();
+
             return _provider;
+        }
+
+        public static IServiceProviderFactory<IServiceCollection> GetServiceFactory()
+        {
+            return GetObject<IServiceProviderFactory<IServiceCollection>>();
         }
 
         public ObjectFactory NewFactory<T>(Type[] constrTypes)

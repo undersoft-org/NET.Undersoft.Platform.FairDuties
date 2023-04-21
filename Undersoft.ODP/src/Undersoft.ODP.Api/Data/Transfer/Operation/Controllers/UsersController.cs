@@ -14,15 +14,15 @@ namespace Undersoft.ODP.Api.Open.Data.Service.Controllers
     }
 }
 
-//namespace Undersoft.ODP.Api.Grpc.Data.Service.Controllers
-//{
-//    using Domain;
+namespace Undersoft.ODP.Api.Grpc.Data.Service.Controllers
+{
+    using Domain;
 
-//    public class UserController : GrpcDataServiceController<long, IEntryStore, IReportStore, User, UserDto>
-//    {
-//        public UserController() : base() { }
-//    }
-//}
+    public class UserService : GrpcDataServiceController<long, IEntryStore, IReportStore, User, Api.User>
+    {
+        public UserService() : base() { }
+    }
+}
 
 //namespace Undersoft.ODP.Api.Rest.Data.Service.Controllers
 //{
