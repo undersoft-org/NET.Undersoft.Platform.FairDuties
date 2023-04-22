@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using UltimatR;
+using RadicalR;
 
 namespace Undersoft.ODP.Infra.Data.Base.Mappings
 {

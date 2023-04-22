@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using UltimatR;
+using RadicalR;
 
 namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Entries
 {
@@ -11,7 +11,7 @@ namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Entries
     public class
         UserIdentifiersController : DtoCommandController<long, IEntryStore, Identifier<User>, IdentifierDto<Api.User>>
     {
-        public UserIdentifiersController(IUltimatr ultimatr) : base(ultimatr)
+        public UserIdentifiersController(IRadicalr ultimatr) : base(ultimatr)
         {
         }
     }
@@ -26,7 +26,7 @@ namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Reports
     public class
         UserIdentifiersController : DtoQueryController<long, IReportStore, Identifier<User>, IdentifierDto<Api.User>>
     {
-        public UserIdentifiersController(IUltimatr ultimatr) : base(ultimatr)
+        public UserIdentifiersController(IRadicalr ultimatr) : base(ultimatr)
         {
         }
     }

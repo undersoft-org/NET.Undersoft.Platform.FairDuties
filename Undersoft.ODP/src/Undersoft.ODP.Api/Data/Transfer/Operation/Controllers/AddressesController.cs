@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using UltimatR;
+using RadicalR;
 
 namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Entries
 {
@@ -10,7 +10,7 @@ namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Entries
     [Route("/addresses")]
     public class AddressesController : DtoCommandController<long, IEntryStore, Address, Api.Address>
     {
-        public AddressesController(IUltimatr ultimatr) : base(ultimatr)
+        public AddressesController(IRadicalr ultimatr) : base(ultimatr)
         {
         }
     }
@@ -24,7 +24,7 @@ namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Reports
     [Route("/addresses")]
     public class AddressesController : DtoQueryController<long, IReportStore, Address, Api.Address>
     {
-        public AddressesController(IUltimatr ultimatr) : base(ultimatr)
+        public AddressesController(IRadicalr ultimatr) : base(ultimatr)
         {
         }
     }

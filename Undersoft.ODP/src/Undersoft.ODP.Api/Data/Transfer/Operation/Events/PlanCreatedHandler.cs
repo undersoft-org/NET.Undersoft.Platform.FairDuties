@@ -1,12 +1,12 @@
-﻿using UltimatR;
+﻿using RadicalR;
 
 namespace Undersoft.ODP.Api
 {
     public class PlanCreatedHandler : CreatedDtoHandler<IReportStore, Domain.Plan, Plan>
     {
-        private IUltimatr _ultimatr;
+        private IRadicalr _ultimatr;
 
-        public PlanCreatedHandler(IUltimatr ultimatr) : base()
+        public PlanCreatedHandler(IRadicalr ultimatr) : base()
         {
             _ultimatr = ultimatr;
         }

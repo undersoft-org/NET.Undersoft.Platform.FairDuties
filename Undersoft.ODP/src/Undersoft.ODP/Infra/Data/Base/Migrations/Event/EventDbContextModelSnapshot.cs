@@ -19,7 +19,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Event
                 .HasAnnotation("ProductVersion", "5.0.13")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-            modelBuilder.Entity("UltimatR.Event", b =>
+            modelBuilder.Entity("RadicalR.Event", b =>
                 {
                     b.Property<long>("Id")
                         .HasColumnType("bigint");

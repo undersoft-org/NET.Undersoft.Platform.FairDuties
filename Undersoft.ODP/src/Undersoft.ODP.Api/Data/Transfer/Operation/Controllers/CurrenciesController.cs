@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using UltimatR;
+using RadicalR;
 
 namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Entries
 {
@@ -10,7 +10,7 @@ namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Entries
     [Route("/currencies")]
     public class CurrenciesController : DtoCommandController<long, IEntryStore, Currency, Api.Currency>
     {
-        public CurrenciesController(IUltimatr ultimatr) : base(ultimatr)
+        public CurrenciesController(IRadicalr ultimatr) : base(ultimatr)
         {
         }
     }
@@ -24,7 +24,7 @@ namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Reports
     [Route("/currencies")]
     public class CurrenciesController : DtoQueryController<long, IReportStore, Currency, Api.Currency>
     {
-        public CurrenciesController(IUltimatr ultimatr) : base(ultimatr)
+        public CurrenciesController(IRadicalr ultimatr) : base(ultimatr)
         {
         }
     }

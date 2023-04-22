@@ -82,21 +82,21 @@
         public virtual Aspect AddWork<T>() where T : class
         {
             var deputy = new Deputy<T>();
-            AddWork(Case.Methods.SureGet(deputy, k => deputy).Value);
+            AddWork(Case.Methods.EnsureGet(deputy, k => deputy).Value);
             return this;
         }
 
         public virtual Aspect AddWork<T>(Type[] arguments) where T : class
         {
             var deputy = new Deputy<T>(arguments);
-            AddWork(Case.Methods.SureGet(deputy, k => deputy).Value);
+            AddWork(Case.Methods.EnsureGet(deputy, k => deputy).Value);
             return this;
         }
 
         public virtual Aspect AddWork<T>(params object[] consrtuctorParams) where T : class
         {
             var deputy = new Deputy<T>(consrtuctorParams);
-            AddWork(Case.Methods.SureGet(deputy, k => deputy).Value);
+            AddWork(Case.Methods.EnsureGet(deputy, k => deputy).Value);
             return this;
         }
 
@@ -104,14 +104,14 @@
             where T : class
         {
             var deputy = new Deputy<T>(arguments, consrtuctorParams);
-            AddWork(Case.Methods.SureGet(deputy, k => deputy).Value);
+            AddWork(Case.Methods.EnsureGet(deputy, k => deputy).Value);
             return this;
         }
 
         public virtual Aspect AddWork<T>(Func<T, string> method) where T : class
         {
             var deputy = new Deputy<T>(method);
-            AddWork(Case.Methods.SureGet(deputy, k => deputy).Value);
+            AddWork(Case.Methods.EnsureGet(deputy, k => deputy).Value);
             return this;
         }
 
@@ -119,7 +119,7 @@
             where T : class
         {
             var deputy = new Deputy<T>(method, arguments);
-            AddWork(Case.Methods.SureGet(deputy, k => deputy).Value);
+            AddWork(Case.Methods.EnsureGet(deputy, k => deputy).Value);
             return this;
         }
 
@@ -127,7 +127,7 @@
             where T : class
         {
             var deputy = new Deputy<T>(method, consrtuctorParams);
-            AddWork(Case.Methods.SureGet(deputy, k => deputy).Value);
+            AddWork(Case.Methods.EnsureGet(deputy, k => deputy).Value);
             return this;
         }
 
@@ -136,7 +136,7 @@
             if (!TryGet(Deputy.GetName<T>(), out WorkItem labor))
             {
                 var deputy = new Deputy<T>();
-                return AddWork(Case.Methods.SureGet(deputy, k => deputy).Value);
+                return AddWork(Case.Methods.EnsureGet(deputy, k => deputy).Value);
             }
             return labor;
         }
@@ -146,7 +146,7 @@
             if (!TryGet(Deputy.GetName<T>(arguments), out WorkItem labor))
             {
                 var deputy = new Deputy<T>();
-                return AddWork(Case.Methods.SureGet(deputy, k => deputy).Value);
+                return AddWork(Case.Methods.EnsureGet(deputy, k => deputy).Value);
             }
             return labor;
         }
@@ -156,7 +156,7 @@
             if (!TryGet(Deputy.GetName<T>(), out WorkItem labor))
             {
                 var deputy = new Deputy<T>(consrtuctorParams);
-                return AddWork(Case.Methods.SureGet(deputy, k => deputy).Value);
+                return AddWork(Case.Methods.EnsureGet(deputy, k => deputy).Value);
             }
             return labor;
         }
@@ -167,7 +167,7 @@
             if (!TryGet(Deputy.GetName<T>(arguments), out WorkItem labor))
             {
                 var deputy = new Deputy<T>(arguments, constructorParams);
-                return AddWork(Case.Methods.SureGet(deputy, k => deputy).Value);
+                return AddWork(Case.Methods.EnsureGet(deputy, k => deputy).Value);
             }
             return labor;
         }
@@ -177,7 +177,7 @@
             var deputy = new Deputy<T>(method);
             if (!TryGet(deputy.Name, out WorkItem labor))
             {
-                return AddWork(Case.Methods.SureGet(deputy, k => deputy).Value);
+                return AddWork(Case.Methods.EnsureGet(deputy, k => deputy).Value);
             }
             return labor;
         }
@@ -188,7 +188,7 @@
             var deputy = new Deputy<T>(method, arguments);
             if (!TryGet(deputy.Name, out WorkItem labor))
             {
-                return AddWork(Case.Methods.SureGet(deputy, k => deputy).Value);
+                return AddWork(Case.Methods.EnsureGet(deputy, k => deputy).Value);
             }
             return labor;
         }
@@ -199,7 +199,7 @@
             var deputy = new Deputy<T>(method, consrtuctorParams);
             if (!TryGet(deputy.Name, out WorkItem labor))
             {
-                return AddWork(Case.Methods.SureGet(deputy, k => deputy).Value);
+                return AddWork(Case.Methods.EnsureGet(deputy, k => deputy).Value);
             }
             return labor;
         }

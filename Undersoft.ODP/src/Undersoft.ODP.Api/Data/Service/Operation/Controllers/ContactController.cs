@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.OData.Routing.Attributes;
-using UltimatR;
+using RadicalR;
 
 namespace Undersoft.ODP.Api.Data.Service.Operation.Controllers.Entries
 {
@@ -10,7 +10,7 @@ namespace Undersoft.ODP.Api.Data.Service.Operation.Controllers.Entries
     [ODataRouteComponent(StoreRoutes.Constant.EntryStore)]
     public class ContactController : DsoController<long, IEntryStore, Contact>
     {
-        public ContactController(IUltimatr ultimatr) : base(ultimatr) { }
+        public ContactController(IRadicalr ultimatr) : base(ultimatr) { }
     }
 }
 
@@ -22,6 +22,6 @@ namespace Undersoft.ODP.Api.Data.Service.Operation.Controllers.Reports
     [ODataRouteComponent(StoreRoutes.Constant.ReportStore)]
     public class ContactController : DsoController<long, IReportStore, Contact>
     {
-        public ContactController(IUltimatr ultimatr) : base(ultimatr) { }
+        public ContactController(IRadicalr ultimatr) : base(ultimatr) { }
     }
 }

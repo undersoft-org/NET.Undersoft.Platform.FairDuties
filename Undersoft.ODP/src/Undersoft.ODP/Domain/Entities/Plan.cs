@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
-using UltimatR;
+using RadicalR;
 
 namespace Undersoft.ODP.Domain
 {

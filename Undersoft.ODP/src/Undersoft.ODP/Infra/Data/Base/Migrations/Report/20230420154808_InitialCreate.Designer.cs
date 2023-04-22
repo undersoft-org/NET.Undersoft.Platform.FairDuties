@@ -21,7 +21,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                 .HasAnnotation("ProductVersion", "5.0.13")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.Attribute, Undersoft.ODP.Domain.Attribute>", b =>
+            modelBuilder.Entity("RadicalR.EntityLink<Undersoft.ODP.Domain.Attribute, Undersoft.ODP.Domain.Attribute>", b =>
                 {
                     b.Property<long>("LeftEntityId")
                         .HasColumnType("bigint");
@@ -86,7 +86,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.ToTable("AttributesToAttributes", "Relation");
                 });
 
-            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.Configuration, Undersoft.ODP.Domain.Setting>", b =>
+            modelBuilder.Entity("RadicalR.EntityLink<Undersoft.ODP.Domain.Configuration, Undersoft.ODP.Domain.Setting>", b =>
                 {
                     b.Property<long>("LeftEntityId")
                         .HasColumnType("bigint");
@@ -151,7 +151,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.ToTable("ConfigurationsToSettings", "Relation");
                 });
 
-            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.Organization, Undersoft.ODP.Domain.Attribute>", b =>
+            modelBuilder.Entity("RadicalR.EntityLink<Undersoft.ODP.Domain.Organization, Undersoft.ODP.Domain.Attribute>", b =>
                 {
                     b.Property<long>("LeftEntityId")
                         .HasColumnType("bigint");
@@ -216,7 +216,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.ToTable("OrganizationsToAttributes", "Relation");
                 });
 
-            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.Organization, Undersoft.ODP.Domain.Plan>", b =>
+            modelBuilder.Entity("RadicalR.EntityLink<Undersoft.ODP.Domain.Organization, Undersoft.ODP.Domain.Plan>", b =>
                 {
                     b.Property<long>("LeftEntityId")
                         .HasColumnType("bigint");
@@ -281,7 +281,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.ToTable("OrganizationsToPlans", "Relation");
                 });
 
-            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.Organization, Undersoft.ODP.Domain.User>", b =>
+            modelBuilder.Entity("RadicalR.EntityLink<Undersoft.ODP.Domain.Organization, Undersoft.ODP.Domain.User>", b =>
                 {
                     b.Property<long>("LeftEntityId")
                         .HasColumnType("bigint");
@@ -346,7 +346,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.ToTable("OrganizationsToUsers", "Relation");
                 });
 
-            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.Personal, Undersoft.ODP.Domain.Attribute>", b =>
+            modelBuilder.Entity("RadicalR.EntityLink<Undersoft.ODP.Domain.Personal, Undersoft.ODP.Domain.Attribute>", b =>
                 {
                     b.Property<long>("LeftEntityId")
                         .HasColumnType("bigint");
@@ -411,7 +411,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.ToTable("PersonalsToAttributes", "Relation");
                 });
 
-            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.Personal, Undersoft.ODP.Domain.Contact>", b =>
+            modelBuilder.Entity("RadicalR.EntityLink<Undersoft.ODP.Domain.Personal, Undersoft.ODP.Domain.Contact>", b =>
                 {
                     b.Property<long>("LeftEntityId")
                         .HasColumnType("bigint");
@@ -476,7 +476,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.ToTable("PersonalsToContacts", "Relation");
                 });
 
-            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.Personal, Undersoft.ODP.Domain.Device>", b =>
+            modelBuilder.Entity("RadicalR.EntityLink<Undersoft.ODP.Domain.Personal, Undersoft.ODP.Domain.Device>", b =>
                 {
                     b.Property<long>("LeftEntityId")
                         .HasColumnType("bigint");
@@ -541,7 +541,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.ToTable("PersonalsToDevices", "Relation");
                 });
 
-            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.Shift, Undersoft.ODP.Domain.Schedule>", b =>
+            modelBuilder.Entity("RadicalR.EntityLink<Undersoft.ODP.Domain.Shift, Undersoft.ODP.Domain.Schedule>", b =>
                 {
                     b.Property<long>("LeftEntityId")
                         .HasColumnType("bigint");
@@ -606,7 +606,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.ToTable("ShiftsToSchedules", "Relation");
                 });
 
-            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.Shift, Undersoft.ODP.Domain.ShiftRequest>", b =>
+            modelBuilder.Entity("RadicalR.EntityLink<Undersoft.ODP.Domain.Shift, Undersoft.ODP.Domain.ShiftRequest>", b =>
                 {
                     b.Property<long>("LeftEntityId")
                         .HasColumnType("bigint");
@@ -671,7 +671,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.ToTable("ShiftsToShiftRequests", "Relation");
                 });
 
-            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.ShiftRate, Undersoft.ODP.Domain.ShiftRate>", b =>
+            modelBuilder.Entity("RadicalR.EntityLink<Undersoft.ODP.Domain.ShiftRate, Undersoft.ODP.Domain.ShiftRate>", b =>
                 {
                     b.Property<long>("LeftEntityId")
                         .HasColumnType("bigint");
@@ -736,7 +736,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.ToTable("ShiftRatesToShiftRateOptionals", "Relation");
                 });
 
-            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.ShiftType, Undersoft.ODP.Domain.Attribute>", b =>
+            modelBuilder.Entity("RadicalR.EntityLink<Undersoft.ODP.Domain.ShiftType, Undersoft.ODP.Domain.Attribute>", b =>
                 {
                     b.Property<long>("LeftEntityId")
                         .HasColumnType("bigint");
@@ -801,7 +801,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.ToTable("ShiftTypesToAttributes", "Relation");
                 });
 
-            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.ShiftType, Undersoft.ODP.Domain.Organization>", b =>
+            modelBuilder.Entity("RadicalR.EntityLink<Undersoft.ODP.Domain.ShiftType, Undersoft.ODP.Domain.Organization>", b =>
                 {
                     b.Property<long>("LeftEntityId")
                         .HasColumnType("bigint");
@@ -866,7 +866,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.ToTable("ShiftTypesToOrganizations", "Relation");
                 });
 
-            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.ShiftType, Undersoft.ODP.Domain.Plan>", b =>
+            modelBuilder.Entity("RadicalR.EntityLink<Undersoft.ODP.Domain.ShiftType, Undersoft.ODP.Domain.Plan>", b =>
                 {
                     b.Property<long>("LeftEntityId")
                         .HasColumnType("bigint");
@@ -931,7 +931,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.ToTable("ShiftTypesToPlans", "Relation");
                 });
 
-            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.ShiftType, Undersoft.ODP.Domain.ShiftType>", b =>
+            modelBuilder.Entity("RadicalR.EntityLink<Undersoft.ODP.Domain.ShiftType, Undersoft.ODP.Domain.ShiftType>", b =>
                 {
                     b.Property<long>("LeftEntityId")
                         .HasColumnType("bigint");
@@ -996,7 +996,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.ToTable("ShiftTypesToShiftTypeOptionals", "Relation");
                 });
 
-            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.ShiftType, Undersoft.ODP.Domain.Team>", b =>
+            modelBuilder.Entity("RadicalR.EntityLink<Undersoft.ODP.Domain.ShiftType, Undersoft.ODP.Domain.Team>", b =>
                 {
                     b.Property<long>("LeftEntityId")
                         .HasColumnType("bigint");
@@ -1061,7 +1061,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.ToTable("ShiftTypesToTeams", "Relation");
                 });
 
-            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.ShiftType, Undersoft.ODP.Domain.User>", b =>
+            modelBuilder.Entity("RadicalR.EntityLink<Undersoft.ODP.Domain.ShiftType, Undersoft.ODP.Domain.User>", b =>
                 {
                     b.Property<long>("LeftEntityId")
                         .HasColumnType("bigint");
@@ -1126,7 +1126,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.ToTable("ShiftTypesToUsers", "Relation");
                 });
 
-            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.Team, Undersoft.ODP.Domain.Attribute>", b =>
+            modelBuilder.Entity("RadicalR.EntityLink<Undersoft.ODP.Domain.Team, Undersoft.ODP.Domain.Attribute>", b =>
                 {
                     b.Property<long>("LeftEntityId")
                         .HasColumnType("bigint");
@@ -1191,7 +1191,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.ToTable("TeamsToAttributes", "Relation");
                 });
 
-            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.Team, Undersoft.ODP.Domain.Plan>", b =>
+            modelBuilder.Entity("RadicalR.EntityLink<Undersoft.ODP.Domain.Team, Undersoft.ODP.Domain.Plan>", b =>
                 {
                     b.Property<long>("LeftEntityId")
                         .HasColumnType("bigint");
@@ -1256,7 +1256,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.ToTable("TeamsToPlans", "Relation");
                 });
 
-            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.User, Undersoft.ODP.Domain.Attribute>", b =>
+            modelBuilder.Entity("RadicalR.EntityLink<Undersoft.ODP.Domain.User, Undersoft.ODP.Domain.Attribute>", b =>
                 {
                     b.Property<long>("LeftEntityId")
                         .HasColumnType("bigint");
@@ -1321,7 +1321,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.ToTable("UsersToAttributes", "Relation");
                 });
 
-            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.User, Undersoft.ODP.Domain.Plan>", b =>
+            modelBuilder.Entity("RadicalR.EntityLink<Undersoft.ODP.Domain.User, Undersoft.ODP.Domain.Plan>", b =>
                 {
                     b.Property<long>("LeftEntityId")
                         .HasColumnType("bigint");
@@ -1386,7 +1386,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.ToTable("UsersToPlans", "Relation");
                 });
 
-            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.User, Undersoft.ODP.Domain.Team>", b =>
+            modelBuilder.Entity("RadicalR.EntityLink<Undersoft.ODP.Domain.User, Undersoft.ODP.Domain.Team>", b =>
                 {
                     b.Property<long>("LeftEntityId")
                         .HasColumnType("bigint");
@@ -1451,7 +1451,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.ToTable("UsersToTeams", "Relation");
                 });
 
-            modelBuilder.Entity("UltimatR.Identifier<Undersoft.ODP.Domain.Device>", b =>
+            modelBuilder.Entity("RadicalR.Identifier<Undersoft.ODP.Domain.Device>", b =>
                 {
                     b.Property<long>("Id")
                         .HasColumnType("bigint");
@@ -1529,7 +1529,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.ToTable("DeviceIdentifiers", "Identifier");
                 });
 
-            modelBuilder.Entity("UltimatR.Identifier<Undersoft.ODP.Domain.User>", b =>
+            modelBuilder.Entity("RadicalR.Identifier<Undersoft.ODP.Domain.User>", b =>
                 {
                     b.Property<long>("Id")
                         .HasColumnType("bigint");
@@ -3452,7 +3452,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.ToTable("UserRoles", "Local");
                 });
 
-            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.Attribute, Undersoft.ODP.Domain.Attribute>", b =>
+            modelBuilder.Entity("RadicalR.EntityLink<Undersoft.ODP.Domain.Attribute, Undersoft.ODP.Domain.Attribute>", b =>
                 {
                     b.HasOne("Undersoft.ODP.Domain.Attribute", "LeftEntity")
                         .WithMany()
@@ -3471,7 +3471,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.Navigation("RightEntity");
                 });
 
-            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.Configuration, Undersoft.ODP.Domain.Setting>", b =>
+            modelBuilder.Entity("RadicalR.EntityLink<Undersoft.ODP.Domain.Configuration, Undersoft.ODP.Domain.Setting>", b =>
                 {
                     b.HasOne("Undersoft.ODP.Domain.Configuration", "LeftEntity")
                         .WithMany()
@@ -3490,7 +3490,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.Navigation("RightEntity");
                 });
 
-            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.Organization, Undersoft.ODP.Domain.Attribute>", b =>
+            modelBuilder.Entity("RadicalR.EntityLink<Undersoft.ODP.Domain.Organization, Undersoft.ODP.Domain.Attribute>", b =>
                 {
                     b.HasOne("Undersoft.ODP.Domain.Organization", "LeftEntity")
                         .WithMany()
@@ -3509,7 +3509,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.Navigation("RightEntity");
                 });
 
-            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.Organization, Undersoft.ODP.Domain.Plan>", b =>
+            modelBuilder.Entity("RadicalR.EntityLink<Undersoft.ODP.Domain.Organization, Undersoft.ODP.Domain.Plan>", b =>
                 {
                     b.HasOne("Undersoft.ODP.Domain.Organization", "LeftEntity")
                         .WithMany()
@@ -3528,7 +3528,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.Navigation("RightEntity");
                 });
 
-            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.Organization, Undersoft.ODP.Domain.User>", b =>
+            modelBuilder.Entity("RadicalR.EntityLink<Undersoft.ODP.Domain.Organization, Undersoft.ODP.Domain.User>", b =>
                 {
                     b.HasOne("Undersoft.ODP.Domain.Organization", "LeftEntity")
                         .WithMany()
@@ -3547,7 +3547,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.Navigation("RightEntity");
                 });
 
-            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.Personal, Undersoft.ODP.Domain.Attribute>", b =>
+            modelBuilder.Entity("RadicalR.EntityLink<Undersoft.ODP.Domain.Personal, Undersoft.ODP.Domain.Attribute>", b =>
                 {
                     b.HasOne("Undersoft.ODP.Domain.Personal", "LeftEntity")
                         .WithMany()
@@ -3566,7 +3566,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.Navigation("RightEntity");
                 });
 
-            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.Personal, Undersoft.ODP.Domain.Contact>", b =>
+            modelBuilder.Entity("RadicalR.EntityLink<Undersoft.ODP.Domain.Personal, Undersoft.ODP.Domain.Contact>", b =>
                 {
                     b.HasOne("Undersoft.ODP.Domain.Personal", "LeftEntity")
                         .WithMany()
@@ -3585,7 +3585,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.Navigation("RightEntity");
                 });
 
-            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.Personal, Undersoft.ODP.Domain.Device>", b =>
+            modelBuilder.Entity("RadicalR.EntityLink<Undersoft.ODP.Domain.Personal, Undersoft.ODP.Domain.Device>", b =>
                 {
                     b.HasOne("Undersoft.ODP.Domain.Personal", "LeftEntity")
                         .WithMany()
@@ -3604,7 +3604,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.Navigation("RightEntity");
                 });
 
-            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.Shift, Undersoft.ODP.Domain.Schedule>", b =>
+            modelBuilder.Entity("RadicalR.EntityLink<Undersoft.ODP.Domain.Shift, Undersoft.ODP.Domain.Schedule>", b =>
                 {
                     b.HasOne("Undersoft.ODP.Domain.Shift", "LeftEntity")
                         .WithMany()
@@ -3623,7 +3623,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.Navigation("RightEntity");
                 });
 
-            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.Shift, Undersoft.ODP.Domain.ShiftRequest>", b =>
+            modelBuilder.Entity("RadicalR.EntityLink<Undersoft.ODP.Domain.Shift, Undersoft.ODP.Domain.ShiftRequest>", b =>
                 {
                     b.HasOne("Undersoft.ODP.Domain.Shift", "LeftEntity")
                         .WithMany()
@@ -3642,7 +3642,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.Navigation("RightEntity");
                 });
 
-            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.ShiftRate, Undersoft.ODP.Domain.ShiftRate>", b =>
+            modelBuilder.Entity("RadicalR.EntityLink<Undersoft.ODP.Domain.ShiftRate, Undersoft.ODP.Domain.ShiftRate>", b =>
                 {
                     b.HasOne("Undersoft.ODP.Domain.ShiftRate", "LeftEntity")
                         .WithMany()
@@ -3661,7 +3661,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.Navigation("RightEntity");
                 });
 
-            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.ShiftType, Undersoft.ODP.Domain.Attribute>", b =>
+            modelBuilder.Entity("RadicalR.EntityLink<Undersoft.ODP.Domain.ShiftType, Undersoft.ODP.Domain.Attribute>", b =>
                 {
                     b.HasOne("Undersoft.ODP.Domain.ShiftType", "LeftEntity")
                         .WithMany()
@@ -3680,7 +3680,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.Navigation("RightEntity");
                 });
 
-            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.ShiftType, Undersoft.ODP.Domain.Organization>", b =>
+            modelBuilder.Entity("RadicalR.EntityLink<Undersoft.ODP.Domain.ShiftType, Undersoft.ODP.Domain.Organization>", b =>
                 {
                     b.HasOne("Undersoft.ODP.Domain.ShiftType", "LeftEntity")
                         .WithMany()
@@ -3699,7 +3699,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.Navigation("RightEntity");
                 });
 
-            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.ShiftType, Undersoft.ODP.Domain.Plan>", b =>
+            modelBuilder.Entity("RadicalR.EntityLink<Undersoft.ODP.Domain.ShiftType, Undersoft.ODP.Domain.Plan>", b =>
                 {
                     b.HasOne("Undersoft.ODP.Domain.ShiftType", "LeftEntity")
                         .WithMany()
@@ -3718,7 +3718,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.Navigation("RightEntity");
                 });
 
-            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.ShiftType, Undersoft.ODP.Domain.ShiftType>", b =>
+            modelBuilder.Entity("RadicalR.EntityLink<Undersoft.ODP.Domain.ShiftType, Undersoft.ODP.Domain.ShiftType>", b =>
                 {
                     b.HasOne("Undersoft.ODP.Domain.ShiftType", "LeftEntity")
                         .WithMany()
@@ -3737,7 +3737,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.Navigation("RightEntity");
                 });
 
-            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.ShiftType, Undersoft.ODP.Domain.Team>", b =>
+            modelBuilder.Entity("RadicalR.EntityLink<Undersoft.ODP.Domain.ShiftType, Undersoft.ODP.Domain.Team>", b =>
                 {
                     b.HasOne("Undersoft.ODP.Domain.ShiftType", "LeftEntity")
                         .WithMany()
@@ -3756,7 +3756,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.Navigation("RightEntity");
                 });
 
-            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.ShiftType, Undersoft.ODP.Domain.User>", b =>
+            modelBuilder.Entity("RadicalR.EntityLink<Undersoft.ODP.Domain.ShiftType, Undersoft.ODP.Domain.User>", b =>
                 {
                     b.HasOne("Undersoft.ODP.Domain.ShiftType", "LeftEntity")
                         .WithMany()
@@ -3775,7 +3775,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.Navigation("RightEntity");
                 });
 
-            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.Team, Undersoft.ODP.Domain.Attribute>", b =>
+            modelBuilder.Entity("RadicalR.EntityLink<Undersoft.ODP.Domain.Team, Undersoft.ODP.Domain.Attribute>", b =>
                 {
                     b.HasOne("Undersoft.ODP.Domain.Team", "LeftEntity")
                         .WithMany()
@@ -3794,7 +3794,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.Navigation("RightEntity");
                 });
 
-            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.Team, Undersoft.ODP.Domain.Plan>", b =>
+            modelBuilder.Entity("RadicalR.EntityLink<Undersoft.ODP.Domain.Team, Undersoft.ODP.Domain.Plan>", b =>
                 {
                     b.HasOne("Undersoft.ODP.Domain.Team", "LeftEntity")
                         .WithMany()
@@ -3813,7 +3813,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.Navigation("RightEntity");
                 });
 
-            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.User, Undersoft.ODP.Domain.Attribute>", b =>
+            modelBuilder.Entity("RadicalR.EntityLink<Undersoft.ODP.Domain.User, Undersoft.ODP.Domain.Attribute>", b =>
                 {
                     b.HasOne("Undersoft.ODP.Domain.User", "LeftEntity")
                         .WithMany()
@@ -3832,7 +3832,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.Navigation("RightEntity");
                 });
 
-            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.User, Undersoft.ODP.Domain.Plan>", b =>
+            modelBuilder.Entity("RadicalR.EntityLink<Undersoft.ODP.Domain.User, Undersoft.ODP.Domain.Plan>", b =>
                 {
                     b.HasOne("Undersoft.ODP.Domain.User", "LeftEntity")
                         .WithMany()
@@ -3851,7 +3851,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.Navigation("RightEntity");
                 });
 
-            modelBuilder.Entity("UltimatR.EntityLink<Undersoft.ODP.Domain.User, Undersoft.ODP.Domain.Team>", b =>
+            modelBuilder.Entity("RadicalR.EntityLink<Undersoft.ODP.Domain.User, Undersoft.ODP.Domain.Team>", b =>
                 {
                     b.HasOne("Undersoft.ODP.Domain.User", "LeftEntity")
                         .WithMany()
@@ -3870,7 +3870,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.Navigation("RightEntity");
                 });
 
-            modelBuilder.Entity("UltimatR.Identifier<Undersoft.ODP.Domain.Device>", b =>
+            modelBuilder.Entity("RadicalR.Identifier<Undersoft.ODP.Domain.Device>", b =>
                 {
                     b.HasOne("Undersoft.ODP.Domain.Device", "Entity")
                         .WithMany("Identifiers")
@@ -3881,7 +3881,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     b.Navigation("Entity");
                 });
 
-            modelBuilder.Entity("UltimatR.Identifier<Undersoft.ODP.Domain.User>", b =>
+            modelBuilder.Entity("RadicalR.Identifier<Undersoft.ODP.Domain.User>", b =>
                 {
                     b.HasOne("Undersoft.ODP.Domain.User", "Entity")
                         .WithMany("Identifiers")

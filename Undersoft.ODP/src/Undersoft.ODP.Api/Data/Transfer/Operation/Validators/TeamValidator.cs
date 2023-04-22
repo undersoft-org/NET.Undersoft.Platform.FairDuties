@@ -1,10 +1,10 @@
-﻿using UltimatR;
+﻿using RadicalR;
 
 namespace Undersoft.ODP.Api
 {
     public class TeamValidator : DtoCommandSetValidator<Team>
     {
-        public TeamValidator(IUltimatr ultimatr) : base(ultimatr)
+        public TeamValidator(IRadicalr ultimatr) : base(ultimatr)
         {
             ValidationScope(CommandMode.Create, () =>
             {

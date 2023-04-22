@@ -283,24 +283,24 @@ namespace System.Series.Basedeck
         }
         public abstract ICard<V> GetCard(int index);
 
-        public virtual ICard<V> SureGet(object key, Func<ulong, V> sureaction)
+        public virtual ICard<V> EnsureGet(object key, Func<ulong, V> sureaction)
         {
             ulong _key = unique.Key(key);
             return (!TryGet(_key, out ICard<V> item)) ?
                 Put(key, sureaction.Invoke(_key)) : item;
         }
-        public virtual ICard<V> SureGet(ulong key, Func<ulong, V> sureaction)
+        public virtual ICard<V> EnsureGet(ulong key, Func<ulong, V> sureaction)
         {
             return (!TryGet(key, out ICard<V> item)) ?
                 Put(key, sureaction.Invoke(key)) : item;
         }
-        public virtual ICard<V> SureGet(IUnique key, Func<ulong, V> sureaction)
+        public virtual ICard<V> EnsureGet(IUnique key, Func<ulong, V> sureaction)
         {
             ulong _key = unique.Key(key);
             return (!TryGet(_key, out ICard<V> item)) ?
                 Put(key, sureaction.Invoke(_key)) : item;
         }
-        public virtual ICard<V> SureGet(IUnique<V> key, Func<ulong, V> sureaction)
+        public virtual ICard<V> EnsureGet(IUnique<V> key, Func<ulong, V> sureaction)
         {
             ulong _key = key.CompactKey();
             return (!TryGet(_key, out ICard<V> item)) ?

@@ -7,7 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Uniques;
 
-namespace UltimatR
+namespace RadicalR
 {
     public static class WorkSpot
     {

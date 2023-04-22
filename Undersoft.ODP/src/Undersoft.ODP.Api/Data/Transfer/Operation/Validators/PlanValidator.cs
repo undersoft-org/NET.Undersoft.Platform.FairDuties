@@ -1,11 +1,11 @@
-﻿using UltimatR;
+﻿using RadicalR;
 
 namespace Undersoft.ODP.Api
 {
     using Domain;
     public class PlanValidator : DtoCommandSetValidator<Plan>
     {
-        public PlanValidator(IUltimatr ultimatr) : base(ultimatr)
+        public PlanValidator(IRadicalr ultimatr) : base(ultimatr)
         {
             ValidationScope(CommandMode.Create | CommandMode.Upsert, () =>
             {

@@ -1,11 +1,11 @@
-﻿using UltimatR;
+﻿using RadicalR;
 
 namespace Undersoft.ODP.Api
 {
     using Domain;
     public class DeviceSessionValidator : DtoCommandSetValidator<DeviceSession>
     {
-        public DeviceSessionValidator(IUltimatr ultimatr) : base(ultimatr)
+        public DeviceSessionValidator(IRadicalr ultimatr) : base(ultimatr)
         {
             ValidationScope(CommandMode.Create | CommandMode.Upsert, () =>
             {

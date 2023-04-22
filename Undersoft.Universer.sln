@@ -83,7 +83,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Undersoft.AEP.Tests", "Unde
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Undersoft.AEP", "Undersoft.AEP", "{9C6CD2A3-03DC-4820-AB20-5D8047B3291E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Undersoft.SDK.UltimatR", "Undersoft.SDK\src\Undersoft.SDK.UltimatR\Undersoft.SDK.UltimatR.csproj", "{67B08AA7-F2A5-47FE-8CE5-BC6FAE7464B9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Undersoft.SDK.RadicalR", "Undersoft.SDK\src\Undersoft.SDK.RadicalR\Undersoft.SDK.RadicalR.csproj", "{67B08AA7-F2A5-47FE-8CE5-BC6FAE7464B9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Undersoft.SDK.EstimatR", "Undersoft.SDK\src\Undersoft.SDK.EstimatR\Undersoft.SDK.EstimatR.csproj", "{483CD900-09E1-48B3-AE94-6AABFB1814AC}"
 EndProject

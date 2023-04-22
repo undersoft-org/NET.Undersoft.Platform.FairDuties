@@ -1,10 +1,10 @@
-﻿using UltimatR;
+﻿using RadicalR;
 
 namespace Undersoft.ODP.Api
 {
     public class SettingValidator : DtoCommandSetValidator<Setting>
     {
-        public SettingValidator(IUltimatr ultimatr) : base(ultimatr)
+        public SettingValidator(IRadicalr ultimatr) : base(ultimatr)
         {
             ValidationScope(CommandMode.Create, (Action)(() =>
             {

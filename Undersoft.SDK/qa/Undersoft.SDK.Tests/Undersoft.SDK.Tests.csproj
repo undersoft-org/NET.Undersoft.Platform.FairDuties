@@ -37,7 +37,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Undersoft.SDK.UltimatR\Undersoft.SDK.UltimatR.csproj" />
+    <ProjectReference Include="..\..\src\Undersoft.SDK.UltimatR\Undersoft.SDK.RadicalR.csproj" />
   </ItemGroup>
 
 </Project>

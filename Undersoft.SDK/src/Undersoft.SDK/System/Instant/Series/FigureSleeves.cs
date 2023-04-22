@@ -908,24 +908,24 @@
             return Sleeves.Set(values);
         }
 
-        public ICard<IFigure> SureGet(object key, Func<ulong, IFigure> sureaction)
+        public ICard<IFigure> EnsureGet(object key, Func<ulong, IFigure> sureaction)
         {
-            return Sleeves.SureGet(key, sureaction);
+            return Sleeves.EnsureGet(key, sureaction);
         }
 
         public ICard<IFigure> SureGet(ulong key, Func<ulong, IFigure> sureaction)
         {
-            return Sleeves.SureGet(key, sureaction);
+            return Sleeves.EnsureGet((object)key, sureaction);
         }
 
         public ICard<IFigure> SureGet(IUnique key, Func<ulong, IFigure> sureaction)
         {
-            return Sleeves.SureGet(key, sureaction);
+            return Sleeves.EnsureGet((object)key, sureaction);
         }
 
         public ICard<IFigure> SureGet(IUnique<IFigure> key, Func<ulong, IFigure> sureaction)
         {
-            return Sleeves.SureGet(key, sureaction);
+            return Sleeves.EnsureGet((object)key, sureaction);
         }
 
         public bool TryPick(int skip, out IFigure output)

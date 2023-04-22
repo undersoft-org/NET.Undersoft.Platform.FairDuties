@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.OData.Routing.Attributes;
-using UltimatR;
+using RadicalR;
 
 namespace Undersoft.ODP.Api.Data.Service.Operation.Controllers.Entries
 {
@@ -10,7 +10,7 @@ namespace Undersoft.ODP.Api.Data.Service.Operation.Controllers.Entries
     [ODataRouteComponent(StoreRoutes.Constant.EntryStore)]
     public class CurrencyController : DsoController<long, IEntryStore, Currency>
     {
-        public CurrencyController(IUltimatr ultimatr) : base(ultimatr) { }
+        public CurrencyController(IRadicalr ultimatr) : base(ultimatr) { }
     }
 }
 
@@ -22,6 +22,6 @@ namespace Undersoft.ODP.Api.Data.Service.Operation.Controllers.Reports
     [ODataRouteComponent(StoreRoutes.Constant.ReportStore)]
     public class CurrencyController : DsoController<long, IReportStore, Currency>
     {
-        public CurrencyController(IUltimatr ultimatr) : base(ultimatr) { }
+        public CurrencyController(IRadicalr ultimatr) : base(ultimatr) { }
     }
 }

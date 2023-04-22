@@ -1,10 +1,10 @@
-﻿using UltimatR;
+﻿using RadicalR;
 
 namespace Undersoft.ODP.Api
 {
     public class ShiftRatingValidator : DtoCommandSetValidator<ShiftRate>
     {
-        public ShiftRatingValidator(IUltimatr ultimatr) : base(ultimatr)
+        public ShiftRatingValidator(IRadicalr ultimatr) : base(ultimatr)
         {
             ValidationScope(CommandMode.Delete, () =>
             {

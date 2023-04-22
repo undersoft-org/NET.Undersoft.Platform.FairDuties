@@ -1,10 +1,10 @@
-﻿using UltimatR;
+﻿using RadicalR;
 
 namespace Undersoft.ODP.Api
 {
     public class UserValidator : DtoCommandSetValidator<User>
     {
-        public UserValidator(IUltimatr ultimatr) : base(ultimatr)
+        public UserValidator(IRadicalr ultimatr) : base(ultimatr)
         {
             ValidationScope(CommandMode.Any, () => ValidateEmail(p => p.Data.Email));
 

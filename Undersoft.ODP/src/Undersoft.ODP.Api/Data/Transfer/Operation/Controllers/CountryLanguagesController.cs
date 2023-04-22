@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using UltimatR;
+using RadicalR;
 
 namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Entries
 {
@@ -11,7 +11,7 @@ namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Entries
     public class
         CountryLanguagesController : DtoCommandController<long, IEntryStore, CountryLanguage, Api.CountryLanguage>
     {
-        public CountryLanguagesController(IUltimatr ultimatr) : base(ultimatr)
+        public CountryLanguagesController(IRadicalr ultimatr) : base(ultimatr)
         {
         }
     }
@@ -25,7 +25,7 @@ namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Reports
     [Route("/countryLanguages")]
     public class CountryLanguagesController : DtoQueryController<long, IReportStore, CountryLanguage, Api.CountryLanguage>
     {
-        public CountryLanguagesController(IUltimatr ultimatr) : base(ultimatr)
+        public CountryLanguagesController(IRadicalr ultimatr) : base(ultimatr)
         {
         }
     }

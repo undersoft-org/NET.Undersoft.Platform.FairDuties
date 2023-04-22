@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Uniques;
-using UltimatR;
+using RadicalR;
 using Xunit;
 
 namespace System.Instant.Tests

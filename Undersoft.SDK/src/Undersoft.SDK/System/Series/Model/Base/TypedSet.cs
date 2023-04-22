@@ -504,7 +504,7 @@
             return count;
         }
 
-        public ICard<V> SureGet(object key, Func<ulong, V> sureaction)
+        public ICard<V> EnsureGet(object key, Func<ulong, V> sureaction)
         {
             if (key is IUnique)
             {

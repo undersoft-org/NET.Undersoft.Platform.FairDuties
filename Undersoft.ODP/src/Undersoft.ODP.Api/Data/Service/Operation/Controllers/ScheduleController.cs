@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.OData.Routing.Attributes;
-using UltimatR;
+using RadicalR;
 
 namespace Undersoft.ODP.Api.Data.Service.Operation.Controllers.Entries
 {
@@ -10,7 +10,7 @@ namespace Undersoft.ODP.Api.Data.Service.Operation.Controllers.Entries
     [ODataRouteComponent(StoreRoutes.Constant.EntryStore)]
     public class ScheduleController : DsoController<long, IEntryStore, Schedule>
     {
-        public ScheduleController(IUltimatr ultimatr) : base(ultimatr) { }
+        public ScheduleController(IRadicalr ultimatr) : base(ultimatr) { }
     }
 }
 
@@ -22,6 +22,6 @@ namespace Undersoft.ODP.Api.Data.Service.Operation.Controllers.Reports
     [ODataRouteComponent(StoreRoutes.Constant.ReportStore)]
     public class ScheduleController : DsoController<long, IReportStore, Schedule>
     {
-        public ScheduleController(IUltimatr ultimatr) : base(ultimatr) { }
+        public ScheduleController(IRadicalr ultimatr) : base(ultimatr) { }
     }
 }

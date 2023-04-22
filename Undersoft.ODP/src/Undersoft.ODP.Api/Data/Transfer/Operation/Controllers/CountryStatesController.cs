@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using UltimatR;
+using RadicalR;
 
 namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Entries
 {
@@ -10,7 +10,7 @@ namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Entries
     [Route("/countryStates")]
     public class CountryStatesController : DtoCommandController<long, IEntryStore, CountryState, Api.CountryState>
     {
-        public CountryStatesController(IUltimatr ultimatr) : base(ultimatr)
+        public CountryStatesController(IRadicalr ultimatr) : base(ultimatr)
         {
         }
     }
@@ -24,7 +24,7 @@ namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Reports
     [Route("/countryStates")]
     public class CountryStatesController : DtoQueryController<long, IReportStore, CountryState, Api.CountryState>
     {
-        public CountryStatesController(IUltimatr ultimatr) : base(ultimatr)
+        public CountryStatesController(IRadicalr ultimatr) : base(ultimatr)
         {
         }
     }

@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using UltimatR;
+using RadicalR;
 
 namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Entries
 {
@@ -9,7 +9,7 @@ namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Entries
     [Route("/teams")]
     public class TeamsController : DtoCommandController<long, IEntryStore, Team, Api.Team>
     {
-        public TeamsController(IUltimatr ultimatr) : base(ultimatr)
+        public TeamsController(IRadicalr ultimatr) : base(ultimatr)
         {
         }
     }
@@ -23,7 +23,7 @@ namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Reports
     [Route("/teams")]
     public class TeamsController : DtoQueryController<long, IReportStore, Team, Api.Team>
     {
-        public TeamsController(IUltimatr ultimatr) : base(ultimatr)
+        public TeamsController(IRadicalr ultimatr) : base(ultimatr)
         {
         }
     }

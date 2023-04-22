@@ -61,10 +61,10 @@
         int Set(IEnumerable<ICard<V>> values);
         int Set(IEnumerable<IUnique<V>> values);
 
-        ICard<V> SureGet(object key, Func<ulong, V> sureaction);
-        ICard<V> SureGet(ulong key, Func<ulong, V> sureaction);
-        ICard<V> SureGet(IUnique key, Func<ulong, V> sureaction);
-        ICard<V> SureGet(IUnique<V> key, Func<ulong, V> sureaction);
+        ICard<V> EnsureGet(object key, Func<ulong, V> ensureaction);
+        ICard<V> EnsureGet(ulong key, Func<ulong, V> ensureaction);
+        ICard<V> EnsureGet(IUnique key, Func<ulong, V> ensureaction);
+        ICard<V> EnsureGet(IUnique<V> key, Func<ulong, V> ensureaction);
 
         ICard<V> New();
         ICard<V> New(ulong key);

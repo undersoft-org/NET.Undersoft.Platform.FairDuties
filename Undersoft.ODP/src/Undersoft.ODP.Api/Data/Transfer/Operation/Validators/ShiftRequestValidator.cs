@@ -1,10 +1,10 @@
-﻿using UltimatR;
+﻿using RadicalR;
 
 namespace Undersoft.ODP.Api
 {
     public class ShiftRequestValidator : DtoCommandSetValidator<ShiftRequest>
     {
-        public ShiftRequestValidator(IUltimatr ultimatr) : base(ultimatr)
+        public ShiftRequestValidator(IRadicalr ultimatr) : base(ultimatr)
         {
             ValidationScope(CommandMode.Create | CommandMode.Upsert | CommandMode.Update, () =>
             {

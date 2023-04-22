@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using UltimatR;
+using RadicalR;
 
 namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Entries
 {
@@ -10,7 +10,7 @@ namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Entries
     [Route("/shiftRates")]
     public class ShiftRatesController : DtoCommandController<long, IEntryStore, ShiftRate, Api.ShiftRate>
     {
-        public ShiftRatesController(IUltimatr ultimatr) : base(ultimatr)
+        public ShiftRatesController(IRadicalr ultimatr) : base(ultimatr)
         {
         }
     }
@@ -24,7 +24,7 @@ namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Reports
     [Route("/shiftRates")]
     public class ShiftRatesController : DtoQueryController<long, IReportStore, ShiftRate, Api.ShiftRate>
     {
-        public ShiftRatesController(IUltimatr ultimatr) : base(ultimatr)
+        public ShiftRatesController(IRadicalr ultimatr) : base(ultimatr)
         {
         }
     }

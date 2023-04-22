@@ -2,7 +2,7 @@ using Microsoft.OData.Client;
 using System.Runtime.Serialization;
 using System.Series;
 using System.Text.Json.Serialization;
-using UltimatR;
+using RadicalR;
 using Undersoft.AEP;
 
 namespace Undersoft.ODP.Domain

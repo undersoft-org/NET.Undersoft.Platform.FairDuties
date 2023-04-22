@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using UltimatR;
+using RadicalR;
 
 namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Entries
 {
@@ -10,7 +10,7 @@ namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Entries
     [Route("/deviceSessions")]
     public class DeviceSessionsController : DtoCommandController<long, IEntryStore, DeviceSession, Api.DeviceSession>
     {
-        public DeviceSessionsController(IUltimatr uservice) : base(uservice)
+        public DeviceSessionsController(IRadicalr uservice) : base(uservice)
         {
         }
     }
@@ -24,7 +24,7 @@ namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Reports
     [Route("/deviceSessions")]
     public class DeviceSessionsController : DtoQueryController<long, IReportStore, DeviceSession, Api.DeviceSession>
     {
-        public DeviceSessionsController(IUltimatr uservice) : base(uservice)
+        public DeviceSessionsController(IRadicalr uservice) : base(uservice)
         {
         }
     }

@@ -1,11 +1,11 @@
-﻿using UltimatR;
+﻿using RadicalR;
 
 namespace Undersoft.ODP.Api
 {
     using Domain;
     public class ScheduleValidator : DtoCommandSetValidator<Schedule>
     {
-        public ScheduleValidator(IUltimatr ultimatr) : base(ultimatr)
+        public ScheduleValidator(IRadicalr ultimatr) : base(ultimatr)
         {
             ValidationScope(CommandMode.Create | CommandMode.Upsert, () =>
             {

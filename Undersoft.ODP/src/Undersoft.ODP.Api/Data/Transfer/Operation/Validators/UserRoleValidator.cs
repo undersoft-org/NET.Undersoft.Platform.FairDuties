@@ -1,10 +1,10 @@
-﻿using UltimatR;
+﻿using RadicalR;
 
 namespace Undersoft.ODP.Api
 {
     public class UserRoleValidator : DtoCommandSetValidator<UserRole>
     {
-        public UserRoleValidator(IUltimatr ultimatr) : base(ultimatr)
+        public UserRoleValidator(IRadicalr ultimatr) : base(ultimatr)
         {
             ValidationScope(CommandMode.Create, () =>
             {

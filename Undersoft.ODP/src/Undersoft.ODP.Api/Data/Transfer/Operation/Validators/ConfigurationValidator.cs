@@ -1,11 +1,11 @@
-﻿using UltimatR;
+﻿using RadicalR;
 
 namespace Undersoft.ODP.Api
 {
     using Domain;
     public class ConfigurationValidator : DtoCommandSetValidator<Configuration>
     {
-        public ConfigurationValidator(IUltimatr ultimatr) : base(ultimatr)
+        public ConfigurationValidator(IRadicalr ultimatr) : base(ultimatr)
         {
             ValidationScope(CommandMode.Delete, () =>
             {
