@@ -6,18 +6,18 @@ namespace Undersoft.ODP.Infra.Data.Base.Mappings
 {
     using Domain;
 
-    public class ShiftMapping : EntityTypeMapping<Shift>
+    public class DutyMapping : EntityTypeMapping<Duty>
     {
-        const string TABLE_NAME = "Shifts";
+        const string TABLE_NAME = "Frames";
 
-        public override void Configure(EntityTypeBuilder<Shift> builder)
+        public override void Configure(EntityTypeBuilder<Duty> builder)
         {
             builder.ToTable(TABLE_NAME, DataBaseSchema.LocalSchema);
 
             modelBuilder
-                .LinkToSet<Schedule, Shift>(ExpandSite.OnRight)
-                .LinkSetToSet<Shift, Schedule>(nameof(Schedule.ShiftViews), nameof(Shift.ScheduleViews), ExpandSite.OnLeft)
-                .LinkSetToSet<Shift, ShiftRequest>(ExpandSite.OnLeft);
+                .LinkToSet<Vector, Duty>(ExpandSite.OnRight)
+                .LinkSetToSet<Duty, Vector>(nameof(Vector.DutyViews), nameof(Duty.VectorViews), ExpandSite.OnLeft)
+                .LinkSetToSet<Duty, Request>(ExpandSite.OnLeft);
         }
     }
 }

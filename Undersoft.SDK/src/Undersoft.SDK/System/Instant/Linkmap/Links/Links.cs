@@ -1,11 +1,11 @@
-﻿namespace System.Instant.Linking
+﻿namespace System.Instant.Relationing
 {
     using System.Collections.Generic;
     using System.Linq;
     using System.Series;
     using System.Uniques;
 
-    public enum LinkSite
+    public enum RelationSite
     {
         None,
         Origin,
@@ -13,95 +13,95 @@
         Node
     }
 
-    public class Links : CatalogBase<Link>, IUnique
+    public class Relations : CatalogBase<Relation>, IUnique
     {
         private new Uscn serialcode;
 
-        public Links() { }
+        public Relations() { }
 
-        public Links(IList<Link> links)
+        public Relations(IList<Relation> links)
         {
             Add(links);
         }
 
-        public Link this[string linkName]
+        public Relation this[string linkName]
         {
             get { return base[linkName]; }
             set { base[linkName] = value; }
         }
-        public new Link this[int linkid]
+        public new Relation this[int linkid]
         {
             get { return base[linkid]; }
             set { base[linkid] = value; }
         }
 
-        public Link TargetLink(string TargetName)
+        public Relation TargetRelation(string TargetName)
         {
             return AsValues().Where(o => o.TargetName.Equals(TargetName)).FirstOrDefault();
         }
 
-        public Link OriginLink(string OriginName)
+        public Relation OriginRelation(string OriginName)
         {
             return AsValues().Where(o => o.OriginName.Equals(OriginName)).FirstOrDefault();
         }
 
-        public LinkMember TargetMember(string TargetName)
+        public RelationMember TargetMember(string TargetName)
         {
-            Link link = TargetLink(TargetName);
+            Relation link = TargetRelation(TargetName);
             if (link != null)
                 return link.Target;
             return null;
         }
 
-        public LinkMember OriginMember(string OriginName)
+        public RelationMember OriginMember(string OriginName)
         {
-            Link link = OriginLink(OriginName);
+            Relation link = OriginRelation(OriginName);
             if (link != null)
                 return link.Origin;
             return null;
         }
 
-        public override ICard<Link> EmptyCard()
+        public override ICard<Relation> EmptyCard()
         {
-            return new Card<Link>();
+            return new Card<Relation>();
         }
 
-        public override ICard<Link> NewCard(ulong key, Link value)
+        public override ICard<Relation> NewCard(ulong key, Relation value)
         {
-            return new Card<Link>(key, value);
+            return new Card<Relation>(key, value);
         }
 
-        public override ICard<Link> NewCard(object key, Link value)
+        public override ICard<Relation> NewCard(object key, Relation value)
         {
-            return new Card<Link>(key, value);
+            return new Card<Relation>(key, value);
         }
 
-        public override ICard<Link> NewCard(ICard<Link> value)
+        public override ICard<Relation> NewCard(ICard<Relation> value)
         {
-            return new Card<Link>(value);
+            return new Card<Relation>(value);
         }
 
-        public override ICard<Link> NewCard(Link value)
+        public override ICard<Relation> NewCard(Relation value)
         {
-            return new Card<Link>(value);
+            return new Card<Relation>(value);
         }
 
-        public override ICard<Link>[] EmptyCardTable(int size)
+        public override ICard<Relation>[] EmptyCardTable(int size)
         {
-            return new Card<Link>[size];
+            return new Card<Relation>[size];
         }
 
-        public override ICard<Link>[] EmptyDeck(int size)
+        public override ICard<Relation>[] EmptyDeck(int size)
         {
-            return new Card<Link>[size];
+            return new Card<Relation>[size];
         }
 
-        protected override bool InnerAdd(Link value)
+        protected override bool InnerAdd(Relation value)
         {
             return InnerAdd(NewCard(value));
         }
 
-        protected override ICard<Link> InnerPut(Link value)
+        protected override ICard<Relation> InnerPut(Relation value)
         {
             return InnerPut(NewCard(value));
         }

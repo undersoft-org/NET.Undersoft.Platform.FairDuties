@@ -2,13 +2,13 @@
 
 namespace Undersoft.ODP.Api
 {
-    public class TeamValidator : DtoCommandSetValidator<Team>
+    public class TeamValidator : DtoCommandSetValidator<Group>
     {
         public TeamValidator(IRadicalr ultimatr) : base(ultimatr)
         {
             ValidationScope(CommandMode.Create, () =>
             {
-                ValidateNotExist<IEntryStore, Domain.Team>((cmd) =>
+                ValidateNotExist<IEntryStore, Domain.Group>((cmd) =>
                 (e) => e.Name == cmd.Name, "same name already exists");
             });
             ValidationScope(CommandMode.Create | CommandMode.Upsert | CommandMode.Update, () =>
@@ -21,7 +21,7 @@ namespace Undersoft.ODP.Api
             ValidationScope(CommandMode.Delete | CommandMode.Update | CommandMode.Change, () =>
             {
                 ValidateRequired(a => a.Data.Id);
-                ValidateExist<IEntryStore, Domain.Team>((cmd) => (e) => e.Id == cmd.Id);
+                ValidateExist<IEntryStore, Domain.Group>((cmd) => (e) => e.Id == cmd.Id);
             });
         }
     }

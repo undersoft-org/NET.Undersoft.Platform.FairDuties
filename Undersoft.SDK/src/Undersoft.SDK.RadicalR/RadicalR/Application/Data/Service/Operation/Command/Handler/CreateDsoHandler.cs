@@ -18,11 +18,11 @@ namespace RadicalR
         where TStore : IDataStore
     {
         protected readonly IEntityRepository<TEntity> _repository;
-        protected readonly IRadicalr _ultimatr;
+        protected readonly IRadicalr _radicalr;
 
-        public CreateDsoHandler(IRadicalr ultimatr, IEntityRepository<TStore, TEntity> repository)
+        public CreateDsoHandler(IRadicalr radicalr, IEntityRepository<TStore, TEntity> repository)
         {
-            _ultimatr = ultimatr;
+            _radicalr = radicalr;
             _repository = repository;
         }
 
@@ -42,7 +42,7 @@ namespace RadicalR
                             throw new Exception(
                                 $"{($"{GetType().Name} for entity ")}{($"{typeof(TEntity).Name} unable create entry")}");
 
-                        _ = _ultimatr.Publish(new CreatedDso<TStore, TEntity>(request)).ConfigureAwait(false);
+                        _ = _radicalr.Publish(new CreatedDso<TStore, TEntity>(request)).ConfigureAwait(false);
 
                         return request.Entity as TEntity;
                     } catch(Exception ex)

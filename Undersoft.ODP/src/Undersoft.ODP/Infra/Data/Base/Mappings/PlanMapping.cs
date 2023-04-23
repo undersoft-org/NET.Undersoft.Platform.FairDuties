@@ -6,11 +6,11 @@ namespace Undersoft.ODP.Infra.Data.Base.Mappings
 {
     using Domain;
 
-    public class PlanMapping : EntityTypeMapping<Plan>
+    public class PlanMapping : EntityTypeMapping<Vertex>
     {
         const string TABLE_NAME = "Plans";
 
-        public override void Configure(EntityTypeBuilder<Plan> builder)
+        public override void Configure(EntityTypeBuilder<Vertex> builder)
         {
             builder.ToTable(TABLE_NAME, DataBaseSchema.LocalSchema);
 
@@ -20,10 +20,10 @@ namespace Undersoft.ODP.Infra.Data.Base.Mappings
               .IsRequired();
 
             modelBuilder
-                .LinkSetToSet<Organization, Plan>(ExpandSite.OnLeft)
-                .LinkSetToSet<User, Plan>(ExpandSite.OnLeft)
-                .LinkSetToSet<ShiftType, Plan>(ExpandSite.OnLeft)
-                .LinkSetToSet<Team, Plan>(ExpandSite.OnLeft);
+                .LinkSetToSet<Union, Vertex>(ExpandSite.OnLeft)
+                .LinkSetToSet<Member, Vertex>(ExpandSite.OnLeft)
+                .LinkSetToSet<Asset, Vertex>(ExpandSite.OnLeft)
+                .LinkSetToSet<Group, Vertex>(ExpandSite.OnLeft);
         }
     }
 }

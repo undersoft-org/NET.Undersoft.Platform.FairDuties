@@ -10,11 +10,11 @@ namespace RadicalR
     public class ChangeDsoHandler<TStore, TEntity> : IRequestHandler<ChangeDso<TStore, TEntity>, TEntity> where TEntity : Entity where TStore : IDataStore
     {
         protected readonly IEntityRepository<TEntity> _repository;        
-        protected readonly IRadicalr _ultimatr;
+        protected readonly IRadicalr _radicalr;
 
-        public ChangeDsoHandler(IRadicalr ultimatr, IEntityRepository<TStore, TEntity> repository)
+        public ChangeDsoHandler(IRadicalr radicalr, IEntityRepository<TStore, TEntity> repository)
         {
-            _ultimatr = ultimatr;
+            _radicalr = radicalr;
             _repository = repository;
         }
 
@@ -36,7 +36,7 @@ namespace RadicalR
                     if (request.Entity == null) throw new Exception($"{ this.GetType().Name } for entity " +
                                                                     $"{ typeof(TEntity).Name } failed");   
                     
-                    _ = _ultimatr.Publish(new ChangedDso<TStore, TEntity>(request)).ConfigureAwait(false);
+                    _ = _radicalr.Publish(new ChangedDso<TStore, TEntity>(request)).ConfigureAwait(false);
 
                     return request.Entity as TEntity;
                 }

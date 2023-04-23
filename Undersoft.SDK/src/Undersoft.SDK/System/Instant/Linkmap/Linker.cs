@@ -1,54 +1,54 @@
-﻿namespace System.Instant.Linking
+﻿namespace System.Instant.Relationing
 {
     using Linq;
     using Series;
     using Uniques;
 
-    public interface ILinker
+    public interface IRelationer
     {
-        Links OriginLinks { get; }
+        Relations OriginRelations { get; }
 
-        Links TargetLinks { get; }
+        Relations TargetRelations { get; }
 
         void Clear();
 
-        Link GetOrigin(IFigure target, string OriginName);
+        Relation GetOrigin(IFigure target, string OriginName);
 
-        IDeck<Link> GetOrigins(IFigures target, string OriginName);
+        IDeck<Relation> GetOrigins(IFigures target, string OriginName);
 
-        Link GetTarget(IFigure origin, string TargetName);
+        Relation GetTarget(IFigure origin, string TargetName);
 
-        IDeck<Link> GetTargets(IFigures origin, string TargetName);
+        IDeck<Relation> GetTargets(IFigures origin, string TargetName);
     }
 
     [Serializable]
-    public class Linker
+    public class Relationer
     {
-        private static Catalog<Link> map = new Catalog<Link>(true, PRIMES_ARRAY.Get(9));
-        private Links originLinks;
-        private Links targetLinks;
+        private static Catalog<Relation> map = new Catalog<Relation>(true, PRIMES_ARRAY.Get(9));
+        private Relations originRelations;
+        private Relations targetRelations;
 
-        public Linker()
+        public Relationer()
         {
-            originLinks = new Links();
-            targetLinks = new Links();
+            originRelations = new Relations();
+            targetRelations = new Relations();
         }
 
-        public static IDeck<Link> Map
+        public static IDeck<Relation> Map
         {
             get => map;
         }
 
-        public Link Link { get; set; }
+        public Relation Relation { get; set; }
 
-        public Links OriginLinks
+        public Relations OriginRelations
         {
-            get => originLinks;
+            get => originRelations;
         }
 
-        public Links TargetLinks
+        public Relations TargetRelations
         {
-            get => targetLinks;
+            get => targetRelations;
         }
 
         public void Clear()
@@ -56,81 +56,81 @@
             Map.Flush();
         }
 
-        public Link GetOrigin(ISleeve figure, string OriginName)
+        public Relation GetOrigin(ISleeve figure, string OriginName)
         {
             return map[OriginKey(figure, OriginName)];
         }
 
-        public Link GetOriginLink(string OriginName)
+        public Relation GetOriginRelation(string OriginName)
         {
-            return OriginLinks[OriginName + "_" + Link.Name];
+            return OriginRelations[OriginName + "_" + Relation.Name];
         }
 
-        public LinkMember GetOriginMember(string OriginName)
+        public RelationMember GetOriginMember(string OriginName)
         {
-            Link link = GetOriginLink(OriginName);
+            Relation link = GetOriginRelation(OriginName);
             if (link != null)
                 return link.Origin;
             return null;
         }
 
-        public IDeck<Link> GetOrigins(Links figures, string OriginName)
+        public IDeck<Relation> GetOrigins(Relations figures, string OriginName)
         {
             var originMember = GetOriginMember(OriginName);
-            return new Album<Link>(
-                figures.Select(f => map[originMember.LinkKey(f.ToSleeve())]),
+            return new Album<Relation>(
+                figures.Select(f => map[originMember.RelationKey(f.ToSleeve())]),
                 255
             );
         }
 
-        public Link GetTarget(ISleeve figure, string TargetName)
+        public Relation GetTarget(ISleeve figure, string TargetName)
         {
             return map[TargetKey(figure, TargetName)];
         }
 
-        public Link GetTargetLink(string TargetName)
+        public Relation GetTargetRelation(string TargetName)
         {
-            return TargetLinks[Link.Name + "_&_" + TargetName];
+            return TargetRelations[Relation.Name + "_&_" + TargetName];
         }
 
-        public LinkMember GetTargetMember(string TargetName)
+        public RelationMember GetTargetMember(string TargetName)
         {
-            Link link = GetTargetLink(TargetName);
+            Relation link = GetTargetRelation(TargetName);
             if (link != null)
                 return link.Target;
             return null;
         }
 
-        public IDeck<Link> GetTargets(IFigures figures, string TargetName)
+        public IDeck<Relation> GetTargets(IFigures figures, string TargetName)
         {
             var targetMember = GetTargetMember(TargetName);
-            return new Album<Link>(
-                figures.Select(f => map[targetMember.LinkKey(f.ToSleeve())]).ToArray(),
+            return new Album<Relation>(
+                figures.Select(f => map[targetMember.RelationKey(f.ToSleeve())]).ToArray(),
                 255
             );
         }
 
         public ulong OriginKey(ISleeve figure, string OriginName)
         {
-            return GetOriginMember(OriginName).LinkKey(figure);
+            return GetOriginMember(OriginName).RelationKey(figure);
         }
 
         public ulong TargetKey(ISleeve figure, string TargetName)
         {
-            return GetTargetMember(TargetName).LinkKey(figure);
+            return GetTargetMember(TargetName).RelationKey(figure);
         }
     }
 
-    public static class LinkerExtension
+    public static class RelationerExtension
     {
-        public static Link GetOriginLink(this Sleeve figures, string OriginName)
+        public static Relation GetOriginRelation(this Sleeve figures, string OriginName)
         {
-            return Linker.Map[OriginName + "_" + figures.Name];
+            return Relationer.Map[OriginName + "_" + figures.Name];
         }
 
-        public static Link GetTargetLink(this Sleeve figures, string TargetName)
+        public static Relation GetTargetRelation(this Sleeve figures, string TargetName)
         {
-            return Linker.Map[figures.Name + "_" + TargetName];
+            return Relationer.Map[figures.Name + "_" + TargetName];
         }
     }
 }

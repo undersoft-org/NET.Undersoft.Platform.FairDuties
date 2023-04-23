@@ -2,14 +2,13 @@
 
 namespace Undersoft.ODP.Api
 {
-    using Domain;
-    public class ShiftTypeValidator : DtoCommandSetValidator<ShiftType>
+    public class ShiftTypeValidator : DtoCommandSetValidator<Asset>
     {
         public ShiftTypeValidator(IRadicalr ultimatr) : base(ultimatr)
         {
             ValidationScope(CommandMode.Create, () =>
             {
-                ValidateNotExist<IEntryStore, Domain.ShiftType>((cmd) =>
+                ValidateNotExist<IEntryStore, Domain.Asset>((cmd) =>
                 (e) => e.Name == cmd.Name, "same type name already exists");
             });
             ValidationScope(CommandMode.Create | CommandMode.Upsert | CommandMode.Update, () =>
@@ -21,7 +20,7 @@ namespace Undersoft.ODP.Api
             ValidationScope(CommandMode.Delete | CommandMode.Change | CommandMode.Update, () =>
             {
                 ValidateRequired(a => a.Data.Id);
-                ValidateExist<IEntryStore, Domain.ShiftType>((cmd) => (e) => e.Id == cmd.Id);
+                ValidateExist<IEntryStore, Domain.Asset>((cmd) => (e) => e.Id == cmd.Id);
             });
         }
     }

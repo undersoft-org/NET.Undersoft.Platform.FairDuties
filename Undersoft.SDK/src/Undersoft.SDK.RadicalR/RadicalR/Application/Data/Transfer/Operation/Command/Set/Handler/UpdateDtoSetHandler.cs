@@ -12,12 +12,12 @@ namespace RadicalR
         where TEntity : Entity where TDto : Dto where TStore : IDataStore
     {
         protected readonly IEntityRepository<TEntity> _repository;
-        protected readonly IRadicalr _ultimatr;
+        protected readonly IRadicalr _radicalr;
 
-        public UpdateDtoSetHandler(IRadicalr ultimatr, IEntityRepository<TStore, TEntity> repository)
+        public UpdateDtoSetHandler(IRadicalr radicalr, IEntityRepository<TStore, TEntity> repository)
         {
             _repository = repository;
-            _ultimatr = ultimatr;
+            _radicalr = radicalr;
         }
 
         public async Task<DtoCommandSet<TDto>> Handle(UpdateDtoSet<TStore, TEntity, TDto> request, CancellationToken cancellationToken)
@@ -34,7 +34,7 @@ namespace RadicalR
 
                 await entities.ForEachAsync((e) => { request[e.Id].Entity = e; }).ConfigureAwait(false);
 
-                _ = _ultimatr.Publish(new UpdatedDtoSet<TStore, TEntity, TDto>(request)).ConfigureAwait(false);
+                _ = _radicalr.Publish(new UpdatedDtoSet<TStore, TEntity, TDto>(request)).ConfigureAwait(false);
             }
             catch (Exception ex)
             {

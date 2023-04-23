@@ -2,13 +2,13 @@
 
 namespace Undersoft.ODP.Api
 {
-    public class UserRoleValidator : DtoCommandSetValidator<UserRole>
+    public class UserRoleValidator : DtoCommandSetValidator<Role>
     {
         public UserRoleValidator(IRadicalr ultimatr) : base(ultimatr)
         {
             ValidationScope(CommandMode.Create, () =>
             {
-                ValidateNotExist<IEntryStore, Domain.UserRole>((cmd) =>
+                ValidateNotExist<IEntryStore, Domain.Role>((cmd) =>
                 (e) => e.Name == cmd.Name, "same Name");
             });
             ValidationScope(CommandMode.Create | CommandMode.Upsert | CommandMode.Update, () =>
@@ -19,7 +19,7 @@ namespace Undersoft.ODP.Api
             ValidationScope(CommandMode.Delete | CommandMode.Update | CommandMode.Change, () =>
             {
                 ValidateRequired(a => a.Data.Id);
-                ValidateExist<IEntryStore, Domain.UserRole>((cmd) => (e) => e.Id == cmd.Id);
+                ValidateExist<IEntryStore, Domain.Role>((cmd) => (e) => e.Id == cmd.Id);
             });
         }
     }

@@ -51,7 +51,7 @@ namespace RadicalR
 
                 GrpcServiceRegistry.ServiceContracts.Add(ifaceType);
 
-                _registry.AddScoped(ifaceType, controllerType.New());
+                _registry.AddSingleton(ifaceType, controllerType.New());
             }
         }
 

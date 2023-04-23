@@ -14,13 +14,12 @@ namespace RadicalR
         protected Func<TKey, Func<TDto, object>> _keysetter = k => e => e.SetId(k);
         protected Func<TKey, Expression<Func<TEntity, bool>>> _keymatcher;
         protected Func<TDto, Expression<Func<TEntity, bool>>> _predicate;
-        protected readonly IRadicalr _ultimatr;
+        protected readonly IRadicalr _radicalr;
         protected readonly PublishMode _publishMode;
-
 
         public GrpcDataServiceController() : this(new Radicalr(), null, k => e => e.SetId(k), null, PublishMode.PropagateCommand) { }
 
-        public GrpcDataServiceController(IRadicalr ultimatr,
+        public GrpcDataServiceController(IRadicalr radicalr,
             Func<TDto, Expression<Func<TEntity, bool>>> predicate,
             Func<TKey, Func<TDto, object>> keysetter,
             Func<TKey, Expression<Func<TEntity, bool>>> keymatcher,
@@ -29,39 +28,29 @@ namespace RadicalR
         {
             _keymatcher = keymatcher;
             _keysetter = keysetter;
-            _ultimatr = ultimatr;
+            _radicalr = radicalr;
             _publishMode = publishMode;
         }
 
-        public virtual async Task<IEnumerable<TDto>> Get()
+        public virtual async Task<IEnumerable<TDto>> All()
         {
-            return await _ultimatr.Send(new GetAll<TReport, TEntity, TDto>(0, 0)).ConfigureAwait(true);
+            return await _radicalr.Send(new GetAll<TReport, TEntity, TDto>(0, 0)).ConfigureAwait(true);
         }
 
         public virtual async Task<int> Count()
         {
-            return await Task.Run(() => _ultimatr.use<TReport, TEntity>().Count());
+            return await Task.Run(() => _radicalr.use<TReport, TEntity>().Count());
         }
 
-        public virtual async Task<TDto> Get(TKey key)
-        {
-            Task<TDto> query =
-                (_keymatcher == null)
-                    ? _ultimatr.Send(new FindOne<TReport, TEntity, TDto>(key))
-                    : _ultimatr.Send(new FindOne<TReport, TEntity, TDto>(_keymatcher(key)));
-
-            return await query.ConfigureAwait(false);
-        }
-
-        public virtual async Task<IEnumerable<TDto>> Get(int offset, int limit)
+        public virtual async Task<IEnumerable<TDto>> Range(int offset, int limit)
         {
             return
-                await _ultimatr
+                await _radicalr
                     .Send(new GetAll<TReport, TEntity, TDto>(offset, limit))
                     .ConfigureAwait(true);
         }
 
-        public virtual async Task<IEnumerable<TDto>> Post(int offset, int limit, QueryItems query)
+        public virtual async Task<IEnumerable<TDto>> Query(int offset, int limit, QueryItems query)
         {
             query.Filter.ForEach(
                 (fi) =>
@@ -72,7 +61,7 @@ namespace RadicalR
             );
 
             return
-                await _ultimatr
+                await _radicalr
                     .Send(
                         new FilterData<TReport, TEntity, TDto>(offset, limit,
                             new FilterExpression<TEntity>(query.Filter).Create(),
@@ -82,9 +71,9 @@ namespace RadicalR
                     .ConfigureAwait(false);
         }
 
-        public virtual async Task<string[]> Post([FromBody] TDto[] dtos)
+        public virtual async Task<IEnumerable<string>> Creates([FromBody] TDto[] dtos)
         {
-            var result = await _ultimatr.Send(new CreateDtoSet<TEntry, TEntity, TDto>
+            var result = await _radicalr.Send(new CreateDtoSet<TEntry, TEntity, TDto>
                                                         (_publishMode, dtos)).ConfigureAwait(false);
             var response = result.ForEach(c => (c.IsValid)
                                                    ? c.Id.ToString()
@@ -92,20 +81,9 @@ namespace RadicalR
             return response;
         }
 
-        public virtual async Task<string[]> Post([FromRoute] TKey key, [FromBody] TDto dto)
+        public virtual async Task<IEnumerable<string>> Changes([FromBody] TDto[] dtos)
         {
-            var result = await _ultimatr.Send(new CreateDtoSet<TEntry, TEntity, TDto>
-                                                    (_publishMode, new[] { dto }))
-                                                        .ConfigureAwait(false);
-            var response = result.ForEach(c => (c.IsValid)
-                                       ? c.Id.ToString()
-                                       : c.ErrorMessages).ToArray();
-            return response;
-        }
-
-        public virtual async Task<string[]> Patch([FromBody] TDto[] dtos)
-        {
-            var result = await _ultimatr.Send(new ChangeDtoSet<TEntry, TEntity, TDto>
+            var result = await _radicalr.Send(new ChangeDtoSet<TEntry, TEntity, TDto>
                                                                     (_publishMode, dtos, _predicate))
                                                                         .ConfigureAwait(false);
             var response = result.ForEach(c => (c.IsValid)
@@ -114,23 +92,9 @@ namespace RadicalR
             return response;
         }
 
-        public virtual async Task<string[]> Patch([FromRoute] TKey key, [FromBody] TDto dto)
+        public virtual async Task<IEnumerable<string>> Updates([FromBody] TDto[] dtos)
         {
-            _keysetter(key).Invoke(dto);
-
-            var result = await _ultimatr.Send(new ChangeDtoSet<TEntry, TEntity, TDto>
-                                                  (_publishMode, new[] { dto }, _predicate))
-                                                     .ConfigureAwait(false);
-
-            var response = result.ForEach(c => (c.IsValid)
-                                       ? c.Id.ToString()
-                                       : c.ErrorMessages).ToArray();
-            return response;
-        }
-
-        public virtual async Task<string[]> Put([FromBody] TDto[] dtos)
-        {
-            var result = await _ultimatr.Send(new UpdateDtoSet<TEntry, TEntity, TDto>
+            var result = await _radicalr.Send(new UpdateDtoSet<TEntry, TEntity, TDto>
                                                                         (_publishMode, dtos, _predicate))
                                                                                     .ConfigureAwait(false);
 
@@ -140,39 +104,11 @@ namespace RadicalR
             return response;
         }
 
-        public virtual async Task<string[]> Put([FromRoute] TKey key, [FromBody] TDto dto)
+        public virtual async Task<IEnumerable<string>> Deletes([FromBody] TDto[] dtos)
         {
-            _keysetter(key).Invoke(dto);
-
-            var result = await _ultimatr.Send(new UpdateDtoSet<TEntry, TEntity, TDto>
-                                                        (_publishMode, new[] { dto }, _predicate))
-                                                            .ConfigureAwait(false);
-
-            var response = result.ForEach(c => (c.IsValid)
-                                                   ? c.Id.ToString()
-                                                   : c.ErrorMessages).ToArray();
-            return response;
-        }
-
-        public virtual async Task<string[]> Delete([FromBody] TDto[] dtos)
-        {
-            var result = await _ultimatr.Send(new DeleteDtoSet<TEntry, TEntity, TDto>
+            var result = await _radicalr.Send(new DeleteDtoSet<TEntry, TEntity, TDto>
                                                                 (_publishMode, dtos))
                                                                  .ConfigureAwait(false);
-
-            var response = result.ForEach(c => (c.IsValid)
-                                                   ? c.Id.ToString()
-                                                   : c.ErrorMessages).ToArray();
-            return response;
-        }
-
-        public virtual async Task<string[]> Delete(TKey key, TDto dto)
-        {
-            _keysetter(key).Invoke(dto);
-
-            var result = await _ultimatr.Send(new DeleteDtoSet<TEntry, TEntity, TDto>
-                                                                 (_publishMode, new[] { dto }))
-                                                                        .ConfigureAwait(false);
 
             var response = result.ForEach(c => (c.IsValid)
                                                    ? c.Id.ToString()

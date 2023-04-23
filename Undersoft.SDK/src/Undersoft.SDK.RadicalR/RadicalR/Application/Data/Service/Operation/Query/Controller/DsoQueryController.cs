@@ -19,12 +19,12 @@ namespace RadicalR
         protected readonly Func<TKey, Expression<Func<TEntity, bool>>> _keymatcher;
         protected readonly IEntityRepository<TEntity> _repository;
 
-        protected DsoQueryController(IRadicalr ultimatr) : this(ultimatr, k => e => k.Equals(e.Id))
+        protected DsoQueryController(IRadicalr radicalr) : this(radicalr, k => e => k.Equals(e.Id))
         {
         }
-        protected DsoQueryController(IRadicalr ultimatr, Func<TKey, Expression<Func<TEntity, bool>>> keymatcher)
+        protected DsoQueryController(IRadicalr radicalr, Func<TKey, Expression<Func<TEntity, bool>>> keymatcher)
         {
-            _repository = ultimatr.Use<TStore, TEntity>();
+            _repository = radicalr.Use<TStore, TEntity>();
             _keymatcher = keymatcher;
         }
 

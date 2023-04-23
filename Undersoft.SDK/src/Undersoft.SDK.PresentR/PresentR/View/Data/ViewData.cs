@@ -1,8 +1,5 @@
 ﻿using BootstrapBlazor.Components;
 
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
 namespace PresentR
 {
     public abstract class ViewData<TModel> : IDataService<TModel> where TModel : class, new()

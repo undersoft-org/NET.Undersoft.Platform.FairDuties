@@ -1,35 +1,35 @@
-﻿namespace System.Instant.Linking
+﻿namespace System.Instant.Relationing
 {
     using System.Extract;
     using System.Linq;
     using System.Uniques;
 
     [Serializable]
-    public class LinkMember : IUnique
+    public class RelationMember : IUnique
     {
         private Ussc serialcode;
 
-        public LinkMember()
+        public RelationMember()
         {
             KeyRubrics = new MemberRubrics();
         }
 
-        public LinkMember(ISleeve sleeve, Link link, LinkSite site) : this()
+        public RelationMember(ISleeve sleeve, Relation link, RelationSite site) : this()
         {
             string[] names = link.Name.Split("To");
-            LinkMember member;
+            RelationMember member;
             Site = site;
-            Link = link;
+            Relation = link;
 
             int siteId = 1;
 
-            if (site == LinkSite.Origin)
+            if (site == RelationSite.Origin)
             {
                 siteId = 0;
-                member = Link.Origin;
+                member = Relation.Origin;
             }
             else
-                member = Link.Target;
+                member = Relation.Target;
 
             Name = names[siteId];
             UniqueKey = names[siteId].UniqueKey64(link.UniqueKey);
@@ -38,21 +38,21 @@
             Sleeve = sleeve;
         }
 
-        public LinkMember(Link link, LinkSite site) : this()
+        public RelationMember(Relation link, RelationSite site) : this()
         {
             string[] names = link.Name.Split("_&_");
             Site = site;
-            Link = link;
-            LinkMember member;
+            Relation = link;
+            RelationMember member;
             int siteId = 1;
 
-            if (site == LinkSite.Origin)
+            if (site == RelationSite.Origin)
             {
                 siteId = 0;
-                member = Link.Origin;
+                member = Relation.Origin;
             }
             else
-                member = Link.Target;
+                member = Relation.Target;
 
             Name = names[siteId];
             UniqueKey = names[siteId].UniqueKey64(link.UniqueKey);
@@ -67,7 +67,7 @@
 
         public IRubrics KeyRubrics { get; set; }
 
-        public Link Link { get; set; }
+        public Relation Relation { get; set; }
 
         public string Name { get; set; }
 
@@ -79,7 +79,7 @@
             set => serialcode = value;
         }
 
-        public LinkSite Site { get; set; }
+        public RelationSite Site { get; set; }
 
         public ulong UniqueKey
         {
@@ -113,7 +113,7 @@
             return serialcode.GetUniqueBytes();
         }
 
-        public unsafe ulong LinkKey(ISleeve figure)
+        public unsafe ulong RelationKey(ISleeve figure)
         {
             byte[] b = KeyRubrics.Ordinals.SelectMany(x => figure[x].GetBytes()).ToArray();
 
@@ -126,24 +126,24 @@
     }
 
     [Serializable]
-    public class LinkNode : IUnique
+    public class RelationNode : IUnique
     {
         private Ussc serialcode;
 
-        public LinkNode()
+        public RelationNode()
         {
             OriginKeyRubrics = new MemberRubrics();
             TargetKeyRubrics = new MemberRubrics();
         }
 
-        public LinkNode(ISleeve sleeve, Link link) : this()
+        public RelationNode(ISleeve sleeve, Relation link) : this()
         {
             Name = link.Name;
-            LinkNode member;
-            Site = LinkSite.Node;
-            Link = link;
+            RelationNode member;
+            Site = RelationSite.Node;
+            Relation = link;
 
-            member = Link.Node;
+            member = Relation.Node;
 
             UniqueKey = Name.UniqueKey64(link.UniqueKey);
             UniqueType = link.UniqueKey;
@@ -159,7 +159,7 @@
 
         public IRubrics TargetKeyRubrics { get; set; }
 
-        public Link Link { get; set; }
+        public Relation Relation { get; set; }
 
         public string Name { get; set; }
 
@@ -171,7 +171,7 @@
             set => serialcode = value;
         }
 
-        public LinkSite Site { get; set; }
+        public RelationSite Site { get; set; }
 
         public ulong UniqueKey
         {
@@ -205,7 +205,7 @@
             return serialcode.GetUniqueBytes();
         }
 
-        public unsafe ulong LinkOriginKey(ISleeve figure)
+        public unsafe ulong RelationOriginKey(ISleeve figure)
         {
             byte[] b = OriginKeyRubrics.Ordinals.SelectMany(x => figure[x].GetBytes()).ToArray();
 
@@ -216,7 +216,7 @@
             }
         }
 
-        public unsafe ulong LinkTargetKey(ISleeve figure)
+        public unsafe ulong RelationTargetKey(ISleeve figure)
         {
             byte[] b = OriginKeyRubrics.Ordinals.SelectMany(x => figure[x].GetBytes()).ToArray();
 

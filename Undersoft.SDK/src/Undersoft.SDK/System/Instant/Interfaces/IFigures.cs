@@ -1,6 +1,6 @@
 ﻿namespace System.Instant
 {
-    using System.Instant.Linking;
+    using System.Instant.Relationing;
     using System.Instant.Treatments;
     using System.Linq;
     using System.Series;
@@ -43,7 +43,7 @@
 
         Treatment Treatment { get; set; }
 
-        Linker Linker { get; set; }
+        Relationer Linker { get; set; }
 
         IDeck<IComputation> Computations { get; set; }
     }

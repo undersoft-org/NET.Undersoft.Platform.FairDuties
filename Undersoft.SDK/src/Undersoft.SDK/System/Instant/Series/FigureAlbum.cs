@@ -1,6 +1,6 @@
 ﻿namespace System.Instant
 {
-    using System.Instant.Linking;
+    using Relationing;
     using System.Instant.Treatments;
     using System.IO;
     using System.Linq;
@@ -178,7 +178,7 @@
 
         public int ItemsCount => throw new NotImplementedException();
 
-        public Linker Linker { get; set; } = new Linker();
+        public Relationer Linker { get; set; } = new Relationer();
 
         private Treatment treatment;
         public Treatment Treatment

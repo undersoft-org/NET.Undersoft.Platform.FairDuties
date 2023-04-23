@@ -1,7 +1,6 @@
 ﻿namespace System.Instant
 {
-    using System.Collections.Generic;
-    using System.Instant.Linking;
+    using System.Instant.Relationing;
     using System.Instant.Treatments;
     using System.IO;
     using System.Linq;
@@ -123,7 +122,7 @@
 
         public Func<IFigure, bool> Predicate { get; set; }
 
-        public Linker Linker { get; set; } = new Linker();
+        public Relationer Linker { get; set; } = new Relationer();
 
         private Treatment treatment;
         public Treatment Treatment

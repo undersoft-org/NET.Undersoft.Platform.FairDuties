@@ -8,7 +8,7 @@ namespace Undersoft.ODP.Api.Data.Service.Operation.Controllers.Entries
 
     [AllowAnonymous]
     [ODataRouteComponent(StoreRoutes.Constant.EntryStore)]
-    public class CountryLanguageController : DsoController<long, IEntryStore, CountryLanguage>
+    public class CountryLanguageController : DsoController<long, IEntryStore, Language>
     {
         public CountryLanguageController(IRadicalr ultimatr) : base(ultimatr) { }
     }
@@ -20,7 +20,7 @@ namespace Undersoft.ODP.Api.Data.Service.Operation.Controllers.Reports
 
     [AllowAnonymous]
     [ODataRouteComponent(StoreRoutes.Constant.ReportStore)]
-    public class CountryLanguageController : DsoController<long, IReportStore, CountryLanguage>
+    public class CountryLanguageController : DsoController<long, IReportStore, Language>
     {
         public CountryLanguageController(IRadicalr ultimatr) : base(ultimatr) { }
     }

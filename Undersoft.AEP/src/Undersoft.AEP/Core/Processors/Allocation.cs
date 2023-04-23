@@ -1,8 +1,8 @@
 ﻿namespace Undersoft.AEP
 {
-    public class Allocation
+    public class Usageation
     {
-        public Allocation() { }
+        public Usageation() { }
     }
 }
 

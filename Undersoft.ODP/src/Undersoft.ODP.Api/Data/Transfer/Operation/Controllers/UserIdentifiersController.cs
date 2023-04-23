@@ -9,7 +9,7 @@ namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Entries
     [Authorize(Roles = "Administrator, Leader, Manager")]
     [Route("/userIdentifiers")]
     public class
-        UserIdentifiersController : DtoCommandController<long, IEntryStore, Identifier<User>, IdentifierDto<Api.User>>
+        UserIdentifiersController : DtoCommandController<long, IEntryStore, Identifier<Member>, IdentifierDto<Api.Member>>
     {
         public UserIdentifiersController(IRadicalr ultimatr) : base(ultimatr)
         {
@@ -24,7 +24,7 @@ namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Reports
     [Authorize]
     [Route("/userIdentifiers")]
     public class
-        UserIdentifiersController : DtoQueryController<long, IReportStore, Identifier<User>, IdentifierDto<Api.User>>
+        UserIdentifiersController : DtoQueryController<long, IReportStore, Identifier<Member>, IdentifierDto<Api.Member>>
     {
         public UserIdentifiersController(IRadicalr ultimatr) : base(ultimatr)
         {

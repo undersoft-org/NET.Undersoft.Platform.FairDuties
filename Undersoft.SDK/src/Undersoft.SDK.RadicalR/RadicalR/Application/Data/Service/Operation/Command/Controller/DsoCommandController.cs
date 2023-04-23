@@ -10,11 +10,11 @@ namespace RadicalR
     [ODataRouteComponent(StoreRoutes.Constant.EntryStore)]
     public abstract class DsoCommandController<TKey, TStore, TEntity> : ODataController where TEntity : Entity where TStore : IDataStore
     {
-        protected readonly IServicer _ultimatr;
+        protected readonly IServicer _radicalr;
 
-        protected DsoCommandController(IRadicalr ultimatr)
+        protected DsoCommandController(IRadicalr radicalr)
         {
-            _ultimatr = ultimatr;
+            _radicalr = radicalr;
         }
 
         [IgnoreApi]
@@ -23,7 +23,7 @@ namespace RadicalR
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            return Created(await _ultimatr.Send(new CreateDso<TStore, TEntity>
+            return Created(await _radicalr.Send(new CreateDso<TStore, TEntity>
                                                     (PublishMode.PropagateCommand, entity))
                                                     .ConfigureAwait(false));
         }
@@ -34,7 +34,7 @@ namespace RadicalR
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            return Updated(await _ultimatr.Send(new ChangeDso<TStore, TEntity>
+            return Updated(await _radicalr.Send(new ChangeDso<TStore, TEntity>
                                                     (PublishMode.PropagateCommand,
                                                     entity.Sign<TEntity>(key)))
                                                     .ConfigureAwait(false));
@@ -46,7 +46,7 @@ namespace RadicalR
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            return Updated(await _ultimatr.Send(new UpdateDso<TStore, TEntity>
+            return Updated(await _radicalr.Send(new UpdateDso<TStore, TEntity>
                                                     (PublishMode.PropagateCommand,
                                                     entity.Sign<TEntity>(key)))
                                                     .ConfigureAwait(false));
@@ -58,7 +58,7 @@ namespace RadicalR
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            return Ok(await _ultimatr.Send(new DeleteDso<TStore, TEntity>
+            return Ok(await _radicalr.Send(new DeleteDso<TStore, TEntity>
                                                     (PublishMode.PropagateCommand, key))
                                                     .ConfigureAwait(false));
         }

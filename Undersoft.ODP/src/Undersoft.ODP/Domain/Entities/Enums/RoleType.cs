@@ -3,7 +3,7 @@ namespace Undersoft.ODP.Domain
     public enum RoleType
     {
         User,
-        TeamLeader,
+        GroupLeader,
         AccountManager,
         Administrator
     }

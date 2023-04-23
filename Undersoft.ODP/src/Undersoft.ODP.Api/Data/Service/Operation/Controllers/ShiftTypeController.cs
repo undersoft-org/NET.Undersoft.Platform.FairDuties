@@ -8,7 +8,7 @@ namespace Undersoft.ODP.Api.Data.Service.Operation.Controllers.Entries
 
     [AllowAnonymous]
     [ODataRouteComponent(StoreRoutes.Constant.EntryStore)]
-    public class ShiftTypeController : DsoController<long, IEntryStore, ShiftType>
+    public class ShiftTypeController : DsoController<long, IEntryStore, Asset>
     {
         public ShiftTypeController(IRadicalr ultimatr) : base(ultimatr) { }
     }
@@ -20,7 +20,7 @@ namespace Undersoft.ODP.Api.Data.Service.Operation.Controllers.Reports
 
     [AllowAnonymous]
     [ODataRouteComponent(StoreRoutes.Constant.ReportStore)]
-    public class ShiftTypeController : DsoController<long, IReportStore, ShiftType>
+    public class ShiftTypeController : DsoController<long, IReportStore, Asset>
     {
         public ShiftTypeController(IRadicalr ultimatr) : base(ultimatr) { }
     }

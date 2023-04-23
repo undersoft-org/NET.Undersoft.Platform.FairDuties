@@ -9,7 +9,7 @@ namespace Undersoft.ODP.Api.Open.Data.Service.Controllers
 
     [AllowAnonymous]
     [ODataRouteComponent(StoreRoutes.Constant.OpenCqrsStore)]
-    public class UserController : OpenDataServiceController<long, IEntryStore, IReportStore, User, Api.User>
+    public class UserController : OpenDataServiceController<long, IEntryStore, IReportStore, Member, Api.Member>
     {
         public UserController(IRadicalr ultimatr) : base(ultimatr) { }
     }
@@ -19,7 +19,7 @@ namespace Undersoft.ODP.Api.Grpc.Data.Service.Controllers
 {
     using Domain;
 
-    public class UserStreamController : GrpcDataServiceController<long, IEntryStore, IReportStore, User, BasicUser>
+    public class UserStreamController : GrpcDataServiceController<long, IEntryStore, IReportStore, Member, BasicUser>
     {
         public UserStreamController() : base() { }
     }
@@ -31,7 +31,7 @@ namespace Undersoft.ODP.Api.Rest.Data.Service.Controllers
 
     [ApiController]
     [Route($"{StoreRoutes.Constant.RestCqrsStore}/[controller]")]
-    public class UsersController : RestDataServiceController<long, IEntryStore, IReportStore, User, Api.User>
+    public class UsersController : RestDataServiceController<long, IEntryStore, IReportStore, Member, Api.Member>
     {
         public UsersController(IRadicalr ultimatr) : base(ultimatr) { }
     }

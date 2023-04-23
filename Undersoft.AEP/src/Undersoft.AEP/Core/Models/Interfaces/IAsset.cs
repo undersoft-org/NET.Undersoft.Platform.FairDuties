@@ -1,20 +1,17 @@
 ﻿using System.Instant.Linking;
-using System.Series;
-using RadicalR;
 
-namespace Undersoft.AEP
+namespace Undersoft.AEP.Core
 {
-    public interface IAsset : IIdentifiable
+    public interface IAsset : IId
     {
-        public int LastRateOrdinal { get; set; }
+        string Name { get; set; }
 
-        public int LastResourceOrdinal { get; set; }
+        float Size { get; set; }
 
-        IFindable<IAllocRate> AllocRates { get; }
+        IEnumerable<ILink> RelatedTo { get; }
 
-        IEnumerable<ILink> AllocTypeLinks { get; }
+        IEnumerable<ILink> OptionalTo { get; }
 
-        long ConfigurationId { get; }
-        IConfiguration Configuration { get; }
+        IEnumerable<ILink> DependentOn { get; }
     }
 }

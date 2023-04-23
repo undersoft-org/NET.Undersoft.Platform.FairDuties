@@ -1,13 +1,13 @@
 ﻿using System.Series;
 
-namespace Undersoft.AEP
+namespace Undersoft.AEP.Core
 {
-    public interface IAllocSetProxy : IAllocSet
+    public interface IUsageSetProxy : IUsageSet
     {
-        IAllocSet AllocSet { get; set; }
-        IFindable<IAllocType> AllocTypes { get; }
-        IFindable<IAssetProxy> Assets { get; }
-        IDeck<IClaim> Claims { get; }
+        IUsageSet UsageSet { get; set; }
+        IFindable<IAsset> Assets { get; }
+        IFindable<ISourceProxy> Sources { get; }
+        IDeck<ILiability> Liabilities { get; }
         IDeck<IResource> Resources { get; }
     }
 }

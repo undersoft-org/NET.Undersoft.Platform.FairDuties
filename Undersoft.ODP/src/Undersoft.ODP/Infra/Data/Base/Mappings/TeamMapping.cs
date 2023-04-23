@@ -6,11 +6,11 @@ namespace Undersoft.ODP.Infra.Data.Base.Mappings
 {
     using Domain;
 
-    public class TeamMapping : EntityTypeMapping<Team>
+    public class GroupMapping : EntityTypeMapping<Group>
     {
-        const string TABLE_NAME = "Teams";
+        const string TABLE_NAME = "Groups";
 
-        public override void Configure(EntityTypeBuilder<Team> builder)
+        public override void Configure(EntityTypeBuilder<Group> builder)
         {
             builder.ToTable(TABLE_NAME, DataBaseSchema.LocalSchema);
 
@@ -25,12 +25,12 @@ namespace Undersoft.ODP.Infra.Data.Base.Mappings
              .IsRequired();
 
             modelBuilder
-                .LinkToSet<Team, Schedule>(nameof(Schedule.TeamView), nameof(Team.ScheduleViews), ExpandSite.OnRight)
-                .LinkToSingle<Team, Schedule>(nameof(Schedule.Team), nameof(Team.Schedule), ExpandSite.OnRight)
-                .LinkToSet<Team, Shift>(ExpandSite.OnRight)
-                .LinkToSet<Team, ShiftRequest>(ExpandSite.OnRight)
-                .LinkSetToSet<Team, Attribute>(ExpandSite.OnRight)
-                .LinkToSingle<Team, Configuration>(ExpandSite.OnRight);
+                .LinkToSet<Group, Vector>(nameof(Vector.GroupView), nameof(Group.ScheduleViews), ExpandSite.OnRight)
+                .LinkToSingle<Group, Vector>(nameof(Vector.Group), nameof(Group.Schedule), ExpandSite.OnRight)
+                .LinkToSet<Group, Duty>(ExpandSite.OnRight)
+                .LinkToSet<Group, Request>(ExpandSite.OnRight)
+                .LinkSetToSet<Group, Property>(ExpandSite.OnRight)
+                .LinkToSingle<Group, Setup>(ExpandSite.OnRight);
         }
     }
 }

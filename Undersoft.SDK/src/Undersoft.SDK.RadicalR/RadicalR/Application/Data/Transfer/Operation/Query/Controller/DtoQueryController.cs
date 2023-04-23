@@ -12,19 +12,19 @@ namespace RadicalR
         where TStore : IDataStore
     {
         protected readonly Func<TKey, Expression<Func<TEntity, bool>>> _keymatcher;
-        protected readonly IRadicalr _ultimatr;
+        protected readonly IRadicalr _radicalr;
 
-        protected DtoQueryController(IRadicalr ultimatr)
+        protected DtoQueryController(IRadicalr radicalr)
         {
-            _ultimatr = ultimatr;
+            _radicalr = radicalr;
         }
 
         protected DtoQueryController(
             Func<TKey, Expression<Func<TEntity, bool>>> keymatcher,
-            IRadicalr ultimatr
+            IRadicalr radicalr
         )
         {
-            _ultimatr = ultimatr;
+            _radicalr = radicalr;
             _keymatcher = keymatcher;
         }
 
@@ -32,14 +32,14 @@ namespace RadicalR
         public virtual async Task<IActionResult> Get()
         {
             return Ok(
-                await _ultimatr.Send(new GetAll<TStore, TEntity, TDto>(0, 0)).ConfigureAwait(true)
+                await _radicalr.Send(new GetAll<TStore, TEntity, TDto>(0, 0)).ConfigureAwait(true)
             );
         }
 
         [HttpGet("count")]
         public virtual async Task<IActionResult> Count()
         {
-            return Ok(await Task.Run(() => _ultimatr.use<TStore, TEntity>().Query.Count()));
+            return Ok(await Task.Run(() => _radicalr.use<TStore, TEntity>().Query.Count()));
         }
 
         [HttpGet("{key}")]
@@ -47,8 +47,8 @@ namespace RadicalR
         {
             Task<TDto> query =
                 (_keymatcher == null)
-                    ? _ultimatr.Send(new FindOne<TStore, TEntity, TDto>(key))
-                    : _ultimatr.Send(new FindOne<TStore, TEntity, TDto>(_keymatcher(key)));
+                    ? _radicalr.Send(new FindOne<TStore, TEntity, TDto>(key))
+                    : _radicalr.Send(new FindOne<TStore, TEntity, TDto>(_keymatcher(key)));
 
             return Ok(await query.ConfigureAwait(false));
         }
@@ -57,7 +57,7 @@ namespace RadicalR
         public virtual async Task<IActionResult> Get(int offset, int limit)
         {
             return Ok(
-                await _ultimatr
+                await _radicalr
                     .Send(new GetAll<TStore, TEntity, TDto>(offset, limit))
                     .ConfigureAwait(true)
             );
@@ -75,7 +75,7 @@ namespace RadicalR
             );
 
             return Ok(
-                await _ultimatr
+                await _radicalr
                     .Send(
                         new FilterData<TStore, TEntity, TDto>(offset, limit,
                             new FilterExpression<TEntity>(query.Filter).Create(),

@@ -1,6 +1,6 @@
+using RadicalR;
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
-using RadicalR;
 
 namespace Undersoft.ODP.Domain
 {
@@ -19,11 +19,11 @@ namespace Undersoft.ODP.Domain
         public virtual Currency Currency { get; set; }
 
         public long? LanguageId { get; set; }
-        public virtual CountryLanguage Language { get; set; }
+        public virtual Language Language { get; set; }
 
-        public virtual EntityOnSet<CountryState> States { get; set; }
+        public virtual EntitySet<CountryState> States { get; set; }
         [JsonIgnore]
         [IgnoreDataMember]
-        public virtual EntityOnSet<Address> Addresses { get; set; }
+        public virtual EntitySet<Address> Addresses { get; set; }
     }
 }

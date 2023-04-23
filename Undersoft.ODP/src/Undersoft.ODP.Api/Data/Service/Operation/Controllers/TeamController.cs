@@ -8,7 +8,7 @@ namespace Undersoft.ODP.Api.Data.Service.Operation.Controllers.Entries
 
     [AllowAnonymous]
     [ODataRouteComponent(StoreRoutes.Constant.EntryStore)]
-    public class TeamController : DsoController<long, IEntryStore, Team>
+    public class TeamController : DsoController<long, IEntryStore, Group>
     {
         public TeamController(IRadicalr ultimatr) : base(ultimatr) { }
     }
@@ -20,7 +20,7 @@ namespace Undersoft.ODP.Api.Data.Service.Operation.Controllers.Reports
 
     [AllowAnonymous]
     [ODataRouteComponent(StoreRoutes.Constant.ReportStore)]
-    public class TeamController : DsoController<long, IReportStore, Team>
+    public class TeamController : DsoController<long, IReportStore, Group>
     {
         public TeamController(IRadicalr ultimatr) : base(ultimatr) { }
     }

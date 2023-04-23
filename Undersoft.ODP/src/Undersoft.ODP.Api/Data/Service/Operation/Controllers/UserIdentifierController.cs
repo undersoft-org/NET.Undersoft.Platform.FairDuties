@@ -8,7 +8,7 @@ namespace Undersoft.ODP.Api.Data.Service.Operation.Controllers.Entries
 
     [AllowAnonymous]
     [ODataRouteComponent(StoreRoutes.Constant.EntryStore)]
-    public class UserIdentifierController : DsoController<long, IEntryStore, Identifier<User>>
+    public class UserIdentifierController : DsoController<long, IEntryStore, Identifier<Member>>
     {
         public UserIdentifierController(IRadicalr ultimatr) : base(ultimatr) { }
     }
@@ -20,7 +20,7 @@ namespace Undersoft.ODP.Api.Data.Service.Operation.Controllers.Reports
 
     [AllowAnonymous]
     [ODataRouteComponent(StoreRoutes.Constant.ReportStore)]
-    public class UserIdentifierController : DsoController<long, IReportStore, Identifier<User>>
+    public class UserIdentifierController : DsoController<long, IReportStore, Identifier<Member>>
     {
         public UserIdentifierController(IRadicalr ultimatr) : base(ultimatr) { }
     }

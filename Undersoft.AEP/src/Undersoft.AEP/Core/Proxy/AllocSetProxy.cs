@@ -1,138 +1,136 @@
-﻿using System.Instant;
+﻿using RadicalR;
+using System.Instant;
 using System.Instant.Linking;
 using System.Series;
-using RadicalR;
 
-namespace Undersoft.AEP
+namespace Undersoft.AEP.Core
 {
-    public class AllocSetProxy<TType, TRate, TObject> : AllocSetProxy
-        where TObject : IAllocSet
-        where TType : IAllocType
-        where TRate : IAllocRate
+    public class UsageSetProxy<TType, TEstimate, TObject> : UsageSetProxy
+        where TObject : IUsageSet
+        where TType : IAsset
+        where TEstimate : IEstimate
     {
-        private IDeck<ClaimModel<TType, TRate>> _claims;
+        private IDeck<Liability<TType, TEstimate>> _claims;
 
-        public AllocSetProxy(long allocSetId, IUniverse universe) : base(allocSetId, universe) { }
+        public UsageSetProxy(long allocSetId, IVertex universe) : base(allocSetId, universe) { }
 
-        public new IEnumerable<TType> AllocTypes => base.AllocTypes.Cast<TType>();
+        public new IEnumerable<TType> Assets => base.Assets.Cast<TType>();
 
-        public new IDeck<TRate> AllocRates => base.AllocRates.Cast<TRate>().ToAlbum();
+        public new IDeck<TEstimate> Estimates => base.Estimates.Cast<TEstimate>().ToAlbum();
 
-        public new IDeck<ClaimModel<TType, TRate>> Claims =>
-            _claims ??= AllocRates
+        public new IDeck<Liability<TType, TEstimate>> Liabilities =>
+            _claims ??= Estimates
                 .Select(
                     (ar, i) =>
-                        new ClaimModel<TType, TRate>()
+                        new Liability<TType, TEstimate>()
                         {
-                            AllocTypeId = ar.AllocTypeId,
-                            AllocType = (TType)AllocSet.Universe.AllocTypes[ar.AllocTypeId],
-                            AllocRateId = ar.Id,
-                            AllocRate = ar,
-                            AllocSetId = AllocSet.Id,
-                            AllocSet = this
+                            AssetId = (long)ar.AssetId,
+                            Asset = (TType)UsageSet.Vertex.Assets[ar.AssetId],
+                            EstimateId = ar.Id,
+                            Estimate = ar,
+                            UsageSetId = UsageSet.Id,
+                            UsageSet = this
                         }
                 )
                 .ToAlbum();
 
-        public new TObject AllocSet
+        public new TObject UsageSet
         {
-            get => (TObject)base.AllocSet;
-            set => base.AllocSet = value;
+            get => (TObject)base.UsageSet;
+            set => base.UsageSet = value;
         }
     }
 
-    public class AllocSetProxy : Identifiable, IAllocSet, IAllocSetProxy
+    public class UsageSetProxy : Identifiable, IUsageSet, IUsageSetProxy
     {
-        private IDeck<IClaim> _claims;
+        private IDeck<ILiability> _claims;
         private IDeck<IResource> _resources;
 
-        public AllocSetProxy(long allocSetId, IUniverse universe)
+        public UsageSetProxy(long allocSetId, IVertex universe)
         {
-            Universe = universe;
-            UniverseId = universe.Id;
-            AllocSet = universe.AllocSets[allocSetId];
+            Vertex = universe;
+            VertexId = universe.Id;
+            UsageSet = universe.UsageSets[allocSetId];
             Id = allocSetId;
         }
 
-        public IAllocSet AllocSet { get; set; }
+        public IUsageSet UsageSet { get; set; }
 
-        private IDeck<IAllocType> allocTypes;
-        public virtual IFindable<IAllocType> AllocTypes =>
-            allocTypes ??= AllocSet.Universe.AllocTypes
+        public virtual IFindable<IEstimate> Estimates => UsageSet.Estimates;
+
+        private IDeck<IAsset> assets;
+        public virtual IFindable<IAsset> Assets =>
+            assets ??= UsageSet.Vertex.Assets
                 .AsQueryable()
-                .WhereIn(st => st.Id, AllocSet.AllocTypeLinks.Select(at => at.TargetId))
-                .ToAlbum();
+                .WhereIn(st => st.Id, AssetLinks.Select(al => al.TargetId)).ToAlbum();
 
-        public virtual IEnumerable<ILink> AllocTypeLinks => AllocSet.AllocTypeLinks;
+        public virtual IEnumerable<ILink> AssetLinks => UsageSet.AssetLinks;
 
-        public virtual IFindable<IAllocRate> AllocRates => AllocSet.AllocRates;
-
-        public virtual IDeck<IClaim> Claims =>
-            _claims ??= AllocRates.OrderBy(o => o.Ordinal)
+        public virtual IDeck<ILiability> Liabilities =>
+            _claims ??= Estimates.OrderBy(o => o.Ordinal)
                 .Select(
                     (ar, i) =>
-                        new ClaimModel()
+                        new Liability()
                         {
-                            AllocTypeId = ar.AllocTypeId,
-                            AllocType = AllocTypes[ar.AllocTypeId],
-                            AllocRateId = ar.Id,
-                            AllocRate = ar,
-                            AllocSetId = AllocSet.Id,
-                            AllocSet = this,
-                            Ordinal = LastClaimOrdinal++
+                            AssetId = (long)ar.AssetId,
+                            Asset = Assets[ar.AssetId],
+                            EstimateId = ar.Id,
+                            Estimate = ar,
+                            UsageSetId = UsageSet.Id,
+                            UsageSet = this,
+                            Ordinal = LastLiabilityOrdinal++
                         }
                 )
-                .ToCatalog<IClaim>();
+                .ToCatalog<ILiability>();
 
-        public virtual IEnumerable<ILink> AssetLinks => AllocSet.AssetLinks;
-
-        private IDeck<IAssetProxy> assets;
-        public virtual IFindable<IAssetProxy> Assets =>
-            assets ??= AssetLinks.ForEach(al => new AssetProxy(al.TargetId, AllocSet)).ToCatalog<IAssetProxy>();
+        private IDeck<ISourceProxy> sources;
+        public virtual IFindable<ISourceProxy> Sources =>
+            sources ??= SourceLinks.ForEach(al => new SourceProxy(al.TargetId, UsageSet)).ToCatalog<ISourceProxy>();
+        public virtual IEnumerable<ILink> SourceLinks => UsageSet.SourceLinks;
 
         public virtual IDeck<IResource> Resources =>
-            _resources ??= new Catalog<IResource>(Assets.OrderBy(a => a.Ordinal).SelectMany(a => a.Resources).Select(r => r.PatchTo(new ResourceModel())));
+            _resources ??= new Catalog<IResource>(Sources.OrderBy(a => a.Ordinal).SelectMany(a => a.Resources).Select(r => r.PatchTo(new ResourceModel())));
 
-        public long ConfigurationId => AllocSet.ConfigurationId;
-        public IConfiguration Configuration => AllocSet.Configuration;
+        public long SetupId => UsageSet.SetupId;
+        public ISetup Setup => UsageSet.Setup;
 
-        public long UniverseId { get; set; }
-        public IUniverse Universe { get; set; }
+        public long VertexId { get; set; }
+        public IVertex Vertex { get; set; }
 
-        public int FrameSize
+        public int SectorSize
         {
-            get => AllocSet.FrameSize;
-            set => AllocSet.FrameSize = value;
+            get => UsageSet.SectorSize;
+            set => UsageSet.SectorSize = value;
         }
 
         public int BlockSize
         {
-            get => AllocSet.BlockSize;
-            set => AllocSet.BlockSize = value;
+            get => UsageSet.BlockSize;
+            set => UsageSet.BlockSize = value;
         }
 
-        public float FrameSeed
+        public float BlockSeed
         {
-            get => AllocSet.FrameSeed;
-            set => AllocSet.FrameSeed = value;
+            get => UsageSet.BlockSeed;
+            set => UsageSet.BlockSeed = value;
         }
 
-        public float FrameCapacity
+        public float SectorCapacity
         {
-            get => AllocSet.FrameCapacity;
-            set => AllocSet.FrameCapacity = value;
+            get => UsageSet.SectorCapacity;
+            set => UsageSet.SectorCapacity = value;
         }
 
         public float BlockCapacity
         {
-            get => AllocSet.BlockCapacity;
-            set => AllocSet.BlockCapacity = value;
+            get => UsageSet.BlockCapacity;
+            set => UsageSet.BlockCapacity = value;
         }
 
-        public int LastRateOrdinal { get; set; }
+        public int LastEstimateOrdinal { get; set; }
 
         public int LastResourceOrdinal { get; set; }
 
-        public int LastClaimOrdinal { get; set; }
+        public int LastLiabilityOrdinal { get; set; }
     }
 }

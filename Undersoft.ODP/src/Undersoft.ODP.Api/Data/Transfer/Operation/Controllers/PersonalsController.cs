@@ -8,7 +8,7 @@ namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Entries
 
     [Authorize]
     [Route("/personals")]
-    public class PersonalsController : DtoCommandController<long, IEntryStore, Personal, Api.Personal>
+    public class PersonalsController : DtoCommandController<long, IEntryStore, Profile, Api.Profile>
     {
         public PersonalsController(IRadicalr ultimatr) : base(ultimatr)
         {
@@ -22,7 +22,7 @@ namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Reports
 
     [Authorize]
     [Route("/personals")]
-    public class PersonalsController : DtoQueryController<long, IReportStore, Personal, Api.Personal>
+    public class PersonalsController : DtoQueryController<long, IReportStore, Profile, Api.Profile>
     {
         public PersonalsController(IRadicalr ultimatr) : base(ultimatr)
         {

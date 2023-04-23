@@ -14,19 +14,19 @@ namespace RadicalR
     {
         protected Func<TKey, Func<TDto, object>> _keymatcher = k => e => e.SetId(k);
         protected Func<TDto, Expression<Func<TEntity, bool>>> _predicate;
-        protected IServicer _ultimatr;
+        protected IServicer _radicalr;
         protected PublishMode _publishMode;
 
-        protected DtoCommandController(IRadicalr ultimatr, PublishMode publishMode = PublishMode.PropagateCommand) { _ultimatr = ultimatr; _publishMode = publishMode; }
+        protected DtoCommandController(IRadicalr radicalr, PublishMode publishMode = PublishMode.PropagateCommand) { _radicalr = radicalr; _publishMode = publishMode; }
 
-        protected DtoCommandController(IRadicalr ultimatr, Func<TKey, Func<TDto, object>> keymatcher, PublishMode publishMode = PublishMode.PropagateCommand)
-            : this(ultimatr, publishMode) { _keymatcher = keymatcher; }
+        protected DtoCommandController(IRadicalr radicalr, Func<TKey, Func<TDto, object>> keymatcher, PublishMode publishMode = PublishMode.PropagateCommand)
+            : this(radicalr, publishMode) { _keymatcher = keymatcher; }
 
         protected DtoCommandController(
-            IRadicalr ultimatr,
+            IRadicalr radicalr,
             Func<TDto, Expression<Func<TEntity, bool>>> predicate,
             Func<TKey, Func<TDto, object>> keymatcher,
-            PublishMode publishMode = PublishMode.PropagateCommand) : this(ultimatr, keymatcher, publishMode) { _predicate = predicate; }
+            PublishMode publishMode = PublishMode.PropagateCommand) : this(radicalr, keymatcher, publishMode) { _predicate = predicate; }
 
         [HttpDelete]
         public virtual async Task<IActionResult> Delete([FromBody] TDto[] dtos)
@@ -36,7 +36,7 @@ namespace RadicalR
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var result = await _ultimatr.Send(new DeleteDtoSet<TStore, TEntity, TDto>
+            var result = await _radicalr.Send(new DeleteDtoSet<TStore, TEntity, TDto>
                                                                 (_publishMode, dtos))
                                                                  .ConfigureAwait(false);
 
@@ -58,7 +58,7 @@ namespace RadicalR
 
             _keymatcher(key).Invoke(dto);
 
-            var result = await _ultimatr.Send(new DeleteDtoSet<TStore, TEntity, TDto>
+            var result = await _radicalr.Send(new DeleteDtoSet<TStore, TEntity, TDto>
                                                                  (_publishMode, new[] { dto }))
                                                                         .ConfigureAwait(false);
 
@@ -78,7 +78,7 @@ namespace RadicalR
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var result = await _ultimatr.Send(new ChangeDtoSet<TStore, TEntity, TDto>
+            var result = await _radicalr.Send(new ChangeDtoSet<TStore, TEntity, TDto>
                                                                     (_publishMode, dtos, _predicate))
                                                                         .ConfigureAwait(false);
             var response = result.ForEach(c => (isValid = c.IsValid)
@@ -98,7 +98,7 @@ namespace RadicalR
 
             _keymatcher(key).Invoke(dto);
 
-            var result = await _ultimatr.Send(new ChangeDtoSet<TStore, TEntity, TDto>
+            var result = await _radicalr.Send(new ChangeDtoSet<TStore, TEntity, TDto>
                                                   (_publishMode, new[] { dto }, _predicate))
                                                      .ConfigureAwait(false);
 
@@ -118,7 +118,7 @@ namespace RadicalR
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            DtoCommandSet<TDto> result = await _ultimatr.Send(new CreateDtoSet<TStore, TEntity, TDto>
+            DtoCommandSet<TDto> result = await _radicalr.Send(new CreateDtoSet<TStore, TEntity, TDto>
                                                         (_publishMode, dtos)).ConfigureAwait(false);
 
             object[] response = result.ForEach(c => (isValid = c.IsValid) ? (c.Id as object) : c.ErrorMessages)
@@ -136,7 +136,7 @@ namespace RadicalR
 
             _keymatcher(key).Invoke(dto);
 
-            var result = await _ultimatr.Send(new CreateDtoSet<TStore, TEntity, TDto>
+            var result = await _radicalr.Send(new CreateDtoSet<TStore, TEntity, TDto>
                                                     (_publishMode, new[] { dto }))
                                                         .ConfigureAwait(false);
 
@@ -156,7 +156,7 @@ namespace RadicalR
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            DtoCommandSet<TDto> result = await _ultimatr.Send(new UpdateDtoSet<TStore, TEntity, TDto>
+            DtoCommandSet<TDto> result = await _radicalr.Send(new UpdateDtoSet<TStore, TEntity, TDto>
                                                                         (_publishMode, dtos, _predicate))
                                                                                     .ConfigureAwait(false);
 
@@ -175,7 +175,7 @@ namespace RadicalR
 
             _keymatcher(key).Invoke(dto);
 
-            var result = await _ultimatr.Send(new UpdateDtoSet<TStore, TEntity, TDto>
+            var result = await _radicalr.Send(new UpdateDtoSet<TStore, TEntity, TDto>
                                                         (_publishMode, new[] { dto }, _predicate))
                                                             .ConfigureAwait(false);
 

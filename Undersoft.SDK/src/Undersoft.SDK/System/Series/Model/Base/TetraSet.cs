@@ -346,17 +346,17 @@ namespace System.Series.Basedeck
             return deckImplementation.EnsureGet(key, sureaction);
         }
 
-        public ICard<V> SureGet(ulong key, Func<ulong, V> sureaction)
+        public ICard<V> EnsureGet(ulong key, Func<ulong, V> sureaction)
         {
             return deckImplementation.EnsureGet((object)key, sureaction);
         }
 
-        public ICard<V> SureGet(IUnique key, Func<ulong, V> sureaction)
+        public ICard<V> EnsureGet(IUnique key, Func<ulong, V> sureaction)
         {
             return deckImplementation.EnsureGet((object)key, sureaction);
         }
 
-        public ICard<V> SureGet(IUnique<V> key, Func<ulong, V> sureaction)
+        public ICard<V> EnsureGet(IUnique<V> key, Func<ulong, V> sureaction)
         {
             return deckImplementation.EnsureGet((object)key, sureaction);
         }

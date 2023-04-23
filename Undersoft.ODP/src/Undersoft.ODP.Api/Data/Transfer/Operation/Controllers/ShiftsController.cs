@@ -8,7 +8,7 @@ namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Entries
 
     [Authorize(Roles = "Administrator, Leader, Manager")]
     [Route("/shifts")]
-    public class ShiftsController : DtoCommandController<long, IEntryStore, Shift, Api.Shift>
+    public class ShiftsController : DtoCommandController<long, IEntryStore, Duty, Api.Duty>
     {
         public ShiftsController(IRadicalr ultimatr) : base(ultimatr)
         {
@@ -22,7 +22,7 @@ namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Reports
 
     [Authorize]
     [Route("/shifts")]
-    public class ShiftsController : DtoQueryController<long, IReportStore, Shift, Api.Shift>
+    public class ShiftsController : DtoQueryController<long, IReportStore, Duty, Api.Duty>
     {
         public ShiftsController(IRadicalr ultimatr) : base(ultimatr)
         {

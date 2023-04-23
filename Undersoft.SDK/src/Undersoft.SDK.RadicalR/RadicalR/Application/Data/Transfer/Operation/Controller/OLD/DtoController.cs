@@ -17,33 +17,33 @@ namespace RadicalR
         protected Func<TKey, Expression<Func<TEntity, bool>>> _keymatcher = k =>
             e => k.Equals(e.Id);
         protected Func<TDto, Expression<Func<TEntity, bool>>> _predicate = p => e => p.Id == e.Id;
-        protected IServicer _ultimatr;
+        protected IServicer _radicalr;
         protected PublishMode _publishMode;
 
         protected DtoController(
-            IRadicalr ultimatr,
+            IRadicalr radicalr,
             PublishMode publishMode = PublishMode.PropagateCommand
         )
         {
-            _ultimatr = ultimatr;
+            _radicalr = radicalr;
             _publishMode = publishMode;
         }
 
         protected DtoController(
-            IRadicalr ultimatr,
+            IRadicalr radicalr,
             Func<TKey, Expression<Func<TEntity, bool>>> keymatcher,
             PublishMode publishMode = PublishMode.PropagateCommand
-        ) : this(ultimatr, publishMode)
+        ) : this(radicalr, publishMode)
         {
             _keymatcher = keymatcher;
         }
 
         protected DtoController(
-            IRadicalr ultimatr,
+            IRadicalr radicalr,
             Func<TDto, Expression<Func<TEntity, bool>>> predicate,
             Func<TKey, Expression<Func<TEntity, bool>>> keymatcher,
             PublishMode publishMode = PublishMode.PropagateCommand
-        ) : this(ultimatr, keymatcher, publishMode)
+        ) : this(radicalr, keymatcher, publishMode)
         {
             _predicate = predicate;
         }
@@ -56,7 +56,7 @@ namespace RadicalR
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            DtoCommandSet<TDto> result = await _ultimatr
+            DtoCommandSet<TDto> result = await _radicalr
                 .Send(new DeleteDtoSet<TStore, TEntity, TDto>(_publishMode, dtos))
                 .ConfigureAwait(false);
 
@@ -74,7 +74,7 @@ namespace RadicalR
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            DtoCommand<TDto> result = await _ultimatr
+            DtoCommand<TDto> result = await _radicalr
                 .Send(new DeleteDto<TStore, TEntity, TDto>(_publishMode, dto, key))
                 .ConfigureAwait(false);
 
@@ -86,7 +86,7 @@ namespace RadicalR
         public virtual async Task<IActionResult> Get()
         {
             return Ok(
-                await _ultimatr.Send(new GetAll<TStore, TEntity, TDto>(0, 0)).ConfigureAwait(false)
+                await _radicalr.Send(new GetAll<TStore, TEntity, TDto>(0, 0)).ConfigureAwait(false)
             );
         }
 
@@ -95,8 +95,8 @@ namespace RadicalR
         {
             Task<TDto> query =
                 (_keymatcher == null)
-                    ? _ultimatr.Send(new FindOne<TStore, TEntity, TDto>(key))
-                    : _ultimatr.Send(new FindOne<TStore, TEntity, TDto>(_keymatcher(key)));
+                    ? _radicalr.Send(new FindOne<TStore, TEntity, TDto>(key))
+                    : _radicalr.Send(new FindOne<TStore, TEntity, TDto>(_keymatcher(key)));
 
             return Ok(await query.ConfigureAwait(false));
         }
@@ -105,7 +105,7 @@ namespace RadicalR
         public virtual async Task<IActionResult> Get(int page, int pageSize)
         {
             return Ok(
-                await _ultimatr
+                await _radicalr
                     .Send(new GetAll<TStore, TEntity, TDto>(page * pageSize, pageSize))
                     .ConfigureAwait(true)
             );
@@ -119,7 +119,7 @@ namespace RadicalR
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            DtoCommandSet<TDto> result = await _ultimatr
+            DtoCommandSet<TDto> result = await _radicalr
                 .Send(new ChangeDtoSet<TStore, TEntity, TDto>(_publishMode, dtos))
                 .ConfigureAwait(false);
 
@@ -137,7 +137,7 @@ namespace RadicalR
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            DtoCommand<TDto> result = await _ultimatr
+            DtoCommand<TDto> result = await _radicalr
                 .Send(new ChangeDto<TStore, TEntity, TDto>(_publishMode, dto, key))
                 .ConfigureAwait(false);
 
@@ -153,7 +153,7 @@ namespace RadicalR
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            DtoCommandSet<TDto> result = await _ultimatr
+            DtoCommandSet<TDto> result = await _radicalr
                 .Send(new CreateDtoSet<TStore, TEntity, TDto>(_publishMode, dtos))
                 .ConfigureAwait(false);
 
@@ -175,7 +175,7 @@ namespace RadicalR
             );
 
             return Ok(
-                await _ultimatr
+                await _radicalr
                     .Send(
                         new FilterData<TStore, TEntity, TDto>(
                             offset,
@@ -196,7 +196,7 @@ namespace RadicalR
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            DtoCommand<TDto> result = await _ultimatr
+            DtoCommand<TDto> result = await _radicalr
                 .Send(new CreateDto<TStore, TEntity, TDto>(_publishMode, dto, key))
                 .ConfigureAwait(false);
 
@@ -212,7 +212,7 @@ namespace RadicalR
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            DtoCommandSet<TDto> result = await _ultimatr
+            DtoCommandSet<TDto> result = await _radicalr
                 .Send(new UpdateDtoSet<TStore, TEntity, TDto>(_publishMode, dtos))
                 .ConfigureAwait(false);
 
@@ -230,7 +230,7 @@ namespace RadicalR
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            DtoCommand<TDto> result = await _ultimatr
+            DtoCommand<TDto> result = await _radicalr
                 .Send(new UpdateDto<TStore, TEntity, TDto>(_publishMode, dto, key))
                 .ConfigureAwait(false);
 

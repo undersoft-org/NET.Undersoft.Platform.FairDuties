@@ -8,7 +8,7 @@ namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Entries
 
     [Authorize(Roles = "Administrator, Manager")]
     [Route("/userRoles")]
-    public class UserRolesController : DtoCommandController<long, IEntryStore, UserRole, Api.UserRole>
+    public class UserRolesController : DtoCommandController<long, IEntryStore, Role, Api.Role>
     {
         public UserRolesController(IRadicalr ultimatr) : base(ultimatr)
         {
@@ -22,7 +22,7 @@ namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Reports
 
     [Authorize]
     [Route("/userRoles")]
-    public class UserRolesController : DtoQueryController<long, IReportStore, UserRole, Api.UserRole>
+    public class UserRolesController : DtoQueryController<long, IReportStore, Role, Api.Role>
     {
         public UserRolesController(IRadicalr ultimatr) : base(ultimatr)
         {

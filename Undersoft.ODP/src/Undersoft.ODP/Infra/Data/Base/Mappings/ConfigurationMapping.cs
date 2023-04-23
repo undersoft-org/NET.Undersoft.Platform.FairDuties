@@ -6,16 +6,16 @@ namespace Undersoft.ODP.Infra.Data.Base.Mappings
 {
     using Domain;
 
-    public class ConfigurationMapping : EntityTypeMapping<Configuration>
+    public class SetupMapping : EntityTypeMapping<Setup>
     {
-        const string TABLE_NAME = "Configurations";
+        const string TABLE_NAME = "Setups";
 
-        public override void Configure(EntityTypeBuilder<Configuration> builder)
+        public override void Configure(EntityTypeBuilder<Setup> builder)
         {
             builder.ToTable(TABLE_NAME, DataBaseSchema.LocalSchema);
 
             modelBuilder
-               .LinkSetToSet<Configuration, Setting>(ExpandSite.OnRight);
+               .LinkSetToSet<Setup, Option>(ExpandSite.OnRight);
         }
     }
 }

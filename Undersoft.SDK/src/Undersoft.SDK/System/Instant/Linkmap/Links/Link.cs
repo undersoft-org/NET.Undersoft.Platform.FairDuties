@@ -1,39 +1,39 @@
-﻿namespace System.Instant.Linking
+﻿namespace System.Instant.Relationing
 {
     using System.Uniques;
 
     [Serializable]
-    public class Link : IUniqueCode
+    public class Relation : IUniqueCode
     {
         private Uscn uniquecode;
 
-        public Link() { }
+        public Relation() { }
 
-        public Link(ISleeve origin, ISleeve target)
+        public Relation(ISleeve origin, ISleeve target)
         {
-            LinkPair(origin, target);
+            RelationPair(origin, target);
         }
 
-        public Link(ISleeve origin, ISleeve target, IRubrics parentKeys, IRubrics childKeys)
+        public Relation(ISleeve origin, ISleeve target, IRubrics parentKeys, IRubrics childKeys)
             : this(origin, target)
         {
-            LinkParentKeys(parentKeys);
-            LinkChildKeys(childKeys);
+            RelationParentKeys(parentKeys);
+            RelationChildKeys(childKeys);
         }
 
-        public Link(ISleeve origin, ISleeve target, string[] parentKeys, string[] childKeys)
+        public Relation(ISleeve origin, ISleeve target, string[] parentKeys, string[] childKeys)
             : this(origin, target)
         {
-            LinkParentKeys(parentKeys);
-            LinkChildKeys(childKeys);
+            RelationParentKeys(parentKeys);
+            RelationChildKeys(childKeys);
         }
 
-        public Link(ISleeve origin, ISleeve node, ISleeve target)
+        public Relation(ISleeve origin, ISleeve node, ISleeve target)
         {
-            LinkTrio(origin, node, target);
+            RelationTrio(origin, node, target);
         }
 
-        public Link(
+        public Relation(
             ISleeve origin,
             ISleeve node,
             ISleeve target,
@@ -43,12 +43,12 @@
             IRubrics childKeys
         ) : this(origin, node, target)
         {
-            LinkParentKeys(parentKeys);
-            LinkNodeKeys(nodeParentKeys, nodeChildKeys);
-            LinkChildKeys(childKeys);
+            RelationParentKeys(parentKeys);
+            RelationNodeKeys(nodeParentKeys, nodeChildKeys);
+            RelationChildKeys(childKeys);
         }
 
-        public Link(
+        public Relation(
             ISleeve origin,
             ISleeve node,
             ISleeve target,
@@ -58,16 +58,16 @@
             string[] childKeys
         ) : this(origin, node, target)
         {
-            LinkParentKeys(parentKeys);
-            LinkNodeKeys(nodeParentKeys, nodeParentKeys);
-            LinkChildKeys(childKeys);
+            RelationParentKeys(parentKeys);
+            RelationNodeKeys(nodeParentKeys, nodeParentKeys);
+            RelationChildKeys(childKeys);
         }
 
         public IUnique Empty => Uscn.Empty;
 
         public string Name { get; set; }
 
-        public LinkMember Origin { get; set; }
+        public RelationMember Origin { get; set; }
 
         public IRubrics OriginKeys
         {
@@ -97,7 +97,7 @@
             set => uniquecode = value;
         }
 
-        public LinkNode Node { get; set; }
+        public RelationNode Node { get; set; }
 
         public IRubrics NodeOriginKeys
         {
@@ -131,7 +131,7 @@
             set { Node.Rubrics = value; }
         }
 
-        public LinkMember Target { get; set; }
+        public RelationMember Target { get; set; }
 
         public IRubrics TargetKeys
         {
@@ -187,55 +187,55 @@
             return uniquecode.GetUniqueBytes();
         }
 
-        public Link SetLink(ISleeve origin, ISleeve target, IRubrics parentKeys, IRubrics childKeys)
+        public Relation SetRelation(ISleeve origin, ISleeve target, IRubrics parentKeys, IRubrics childKeys)
         {
-            LinkPair(origin, target);
-            LinkParentKeys(parentKeys);
-            LinkChildKeys(childKeys);
+            RelationPair(origin, target);
+            RelationParentKeys(parentKeys);
+            RelationChildKeys(childKeys);
             return this;
         }
 
-        public Link SetLink(
+        public Relation SetRelation(
             ISleeve origin,
             ISleeve target,
             string[] parentKeynames,
             string[] childKeynames
         )
         {
-            LinkPair(origin, target);
-            LinkParentKeys(parentKeynames);
-            LinkChildKeys(childKeynames);
+            RelationPair(origin, target);
+            RelationParentKeys(parentKeynames);
+            RelationChildKeys(childKeynames);
             return this;
         }
 
-        public Link LinkPair(ISleeve origin, ISleeve target)
+        public Relation RelationPair(ISleeve origin, ISleeve target)
         {
             Name = origin.GetType().Name + "To" + target.GetType().Name;
 
             UniqueKey = Name.UniqueKey64();
             UniqueType = Name.UniqueKey32();
 
-            Origin = new LinkMember(origin, this, LinkSite.Origin);
-            Target = new LinkMember(target, this, LinkSite.Target);
+            Origin = new RelationMember(origin, this, RelationSite.Origin);
+            Target = new RelationMember(target, this, RelationSite.Target);
 
-            return Linker.Map.Put(this).Value;
+            return Relationer.Map.Put(this).Value;
         }
 
-        public Link LinkTrio(ISleeve origin, ISleeve node, ISleeve target)
+        public Relation RelationTrio(ISleeve origin, ISleeve node, ISleeve target)
         {
             Name = origin.GetType().Name + "To" + target.GetType().Name;
 
             UniqueKey = Name.UniqueKey64();
             UniqueType = Name.UniqueKey32();
 
-            Origin = new LinkMember(origin, this, LinkSite.Origin);
-            Node = new LinkNode(node, this);
-            Target = new LinkMember(target, this, LinkSite.Target);
+            Origin = new RelationMember(origin, this, RelationSite.Origin);
+            Node = new RelationNode(node, this);
+            Target = new RelationMember(target, this, RelationSite.Target);
 
-            return Linker.Map.Put(this).Value;
+            return Relationer.Map.Put(this).Value;
         }
 
-        public void LinkParentKeys(IRubrics keyRubrics)
+        public void RelationParentKeys(IRubrics keyRubrics)
         {
             foreach (IUnique rubric in keyRubrics)
             {
@@ -250,7 +250,7 @@
             }
         }
 
-        public void LinkNodeKeys(IRubrics originKeyRubric, IRubrics targetKeyRubric)
+        public void RelationNodeKeys(IRubrics originKeyRubric, IRubrics targetKeyRubric)
         {
             foreach (var rubric in originKeyRubric)
             {
@@ -279,7 +279,7 @@
             TargetKeys.Update();
         }
 
-        public void LinkChildKeys(IRubrics keyRubrics)
+        public void RelationChildKeys(IRubrics keyRubrics)
         {
             foreach (IUnique rubric in keyRubrics)
             {
@@ -294,7 +294,7 @@
             }
         }
 
-        public void LinkChildKeys(string[] keyRubricNames)
+        public void RelationChildKeys(string[] keyRubricNames)
         {
             foreach (var name in keyRubricNames)
             {
@@ -310,7 +310,7 @@
             TargetKeys.Update();
         }
 
-        public void LinkNodeKeys(string[] originKeyRubricNames, string[] targetKeyRubricNames)
+        public void RelationNodeKeys(string[] originKeyRubricNames, string[] targetKeyRubricNames)
         {
             foreach (var name in originKeyRubricNames)
             {
@@ -339,7 +339,7 @@
             TargetKeys.Update();
         }
 
-        public void LinkParentKeys(string[] keyRubricNames)
+        public void RelationParentKeys(string[] keyRubricNames)
         {
             foreach (var name in keyRubricNames)
             {

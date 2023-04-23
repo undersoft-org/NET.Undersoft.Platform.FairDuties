@@ -11,7 +11,7 @@ namespace RadicalR
         {
             readonly ILinkSynchronizer synchronizer;
 
-            public LinkedResult(IRadicalr ultimatr) { synchronizer = ultimatr.GetService<ILinkSynchronizer>(); }
+            public LinkedResult(IRadicalr radicalr) { synchronizer = radicalr.GetService<ILinkSynchronizer>(); }
 
             public void OnResultExecuted(ResultExecutedContext context)
             {

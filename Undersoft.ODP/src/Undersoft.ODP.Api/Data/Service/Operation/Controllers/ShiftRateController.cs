@@ -8,7 +8,7 @@ namespace Undersoft.ODP.Api.Data.Service.Operation.Controllers.Entries
 
     [AllowAnonymous]
     [ODataRouteComponent(StoreRoutes.Constant.EntryStore)]
-    public class ShiftRateController : DsoController<long, IEntryStore, ShiftRate>
+    public class ShiftRateController : DsoController<long, IEntryStore, Estimate>
     {
         public ShiftRateController(IRadicalr ultimatr) : base(ultimatr) { }
     }
@@ -20,7 +20,7 @@ namespace Undersoft.ODP.Api.Data.Service.Operation.Controllers.Reports
 
     [AllowAnonymous]
     [ODataRouteComponent(StoreRoutes.Constant.ReportStore)]
-    public class ShiftRateController : DsoController<long, IReportStore, ShiftRate>
+    public class ShiftRateController : DsoController<long, IReportStore, Estimate>
     {
         public ShiftRateController(IRadicalr ultimatr) : base(ultimatr) { }
     }

@@ -518,18 +518,18 @@
                 throw new NotSupportedException();
         }
 
-        public ICard<V> SureGet(ulong key, Func<ulong, V> sureaction)
+        public ICard<V> EnsureGet(ulong key, Func<ulong, V> sureaction)
         {
             return (!TryGet(key, out ICard<V> item)) ? Put(key, sureaction.Invoke(key)) : item;
         }
 
-        public ICard<V> SureGet(IUnique key, Func<ulong, V> sureaction)
+        public ICard<V> EnsureGet(IUnique key, Func<ulong, V> sureaction)
         {
             ulong _key = unique.Key(key, key.UniqueType);
             return (!TryGet(_key, out ICard<V> item)) ? Put(key, sureaction.Invoke(_key)) : item;
         }
 
-        public ICard<V> SureGet(IUnique<V> key, Func<ulong, V> sureaction)
+        public ICard<V> EnsureGet(IUnique<V> key, Func<ulong, V> sureaction)
         {
             ulong _key = unique.Key(key, key.UniqueType);
             return (!TryGet(_key, out ICard<V> item)) ? Put(key, sureaction.Invoke(_key)) : item;

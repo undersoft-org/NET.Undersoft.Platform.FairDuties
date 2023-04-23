@@ -8,7 +8,7 @@ namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Entries
 
     [Authorize(Roles = "Administrator, Leader, Manager")]
     [Route("/settings")]
-    public class SettingsController : DtoCommandController<long, IEntryStore, Setting, Api.Setting>
+    public class SettingsController : DtoCommandController<long, IEntryStore, Option, Api.Option>
     {
         public SettingsController(IRadicalr ultimatr) : base(ultimatr)
         {
@@ -22,7 +22,7 @@ namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Reports
 
     [Authorize]
     [Route("/settings")]
-    public class SettingsController : DtoQueryController<long, IReportStore, Setting, Api.Setting>
+    public class SettingsController : DtoQueryController<long, IReportStore, Option, Api.Option>
     {
         public SettingsController(IRadicalr ultimatr) : base(ultimatr)
         {

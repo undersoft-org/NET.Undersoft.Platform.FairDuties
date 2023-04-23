@@ -11,11 +11,11 @@ namespace RadicalR
         where TEntity : Entity where TDto : Dto where TStore : IDataStore
     {
         protected readonly IEntityRepository<TEntity> _repository;
-        protected readonly IRadicalr _ultimatr;
+        protected readonly IRadicalr _radicalr;
 
-        public ChangeDtoHandler(IRadicalr ultimatr, IEntityRepository<TStore, TEntity> repository)
+        public ChangeDtoHandler(IRadicalr radicalr, IEntityRepository<TStore, TEntity> repository)
         {
-            _ultimatr = ultimatr;
+            _radicalr = radicalr;
             _repository = repository;
         }
 
@@ -33,7 +33,7 @@ namespace RadicalR
                 if (request.Entity == null) throw new Exception($"{ GetType().Name } for entity " +
                                                                 $"{ typeof(TEntity).Name } unable patch entry");                
                 
-                _ = _ultimatr.Publish(new ChangedDto<TStore, TEntity, TDto>(request), cancellationToken).ConfigureAwait(false);
+                _ = _radicalr.Publish(new ChangedDto<TStore, TEntity, TDto>(request), cancellationToken).ConfigureAwait(false);
             }
             catch (Exception ex)
             {

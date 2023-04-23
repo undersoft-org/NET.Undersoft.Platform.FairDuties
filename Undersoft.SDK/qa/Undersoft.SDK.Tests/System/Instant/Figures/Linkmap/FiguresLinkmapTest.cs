@@ -1,6 +1,6 @@
 namespace System.Instant.Tests
 {
-    using System.Instant.Linking;
+    using System.Instant.Relationing;
     using System.Uniques;
     using Xunit;
 
@@ -21,7 +21,7 @@ namespace System.Instant.Tests
 
             figuresB = FiguresLinkmap_AddFigures_B_Helper_Test(figuresB);
 
-            Link fl = new Link(figureA, figureB);
+            Relation fl = new Relation(figureA, figureB);
         }
 
         private IFigures FiguresLinkmap_AddFigures_A_Helper_Test(IFigures figures)

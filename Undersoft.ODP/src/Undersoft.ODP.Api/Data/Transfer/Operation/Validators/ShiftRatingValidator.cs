@@ -2,14 +2,14 @@
 
 namespace Undersoft.ODP.Api
 {
-    public class ShiftRatingValidator : DtoCommandSetValidator<ShiftRate>
+    public class ShiftRatingValidator : DtoCommandSetValidator<Estimate>
     {
         public ShiftRatingValidator(IRadicalr ultimatr) : base(ultimatr)
         {
             ValidationScope(CommandMode.Delete, () =>
             {
                 ValidateRequired(a => a.Data.Id);
-                ValidateExist<IEntryStore, Domain.ShiftRate>((cmd) => (e) => e.Id == cmd.Id);
+                ValidateExist<IEntryStore, Domain.Estimate>((cmd) => (e) => e.Id == cmd.Id);
             });
         }
     }

@@ -26,36 +26,36 @@ namespace Undersoft.ODP.Infra.Data.Base.Contexts
         {
             modelBuilder
                 .ApplyIdentity<TContext>()
-                .ApplyMapping(new TeamMapping())
-                .ApplyMapping(new ShiftTypeMapping())
-                .ApplyMapping(new ShiftRateMapping())
-                .ApplyMapping(new ShiftMapping())
-                .ApplyMapping(new ShiftRequestMapping())
+                .ApplyMapping(new GroupMapping())
+                .ApplyMapping(new AssetMapping())
+                .ApplyMapping(new EstamteMapping())
+                .ApplyMapping(new DutyMapping())
+                .ApplyMapping(new RequestMapping())
                 .ApplyMapping(new PlanMapping())
-                .ApplyMapping(new ScheduleMapping())
-                .ApplyMapping(new ConfigurationMapping())
-                .ApplyMapping(new OrganizationMapping())
-                .ApplyMapping(new DeviceMapping())
-                .ApplyMapping(new DeviceSessionMapping())
-                .ApplyMapping(new UserMapping())
-                .ApplyMapping(new UserRoleMapping())
-                .ApplyMapping(new PersonalMapping())
+                .ApplyMapping(new VectorMapping())
+                .ApplyMapping(new SetupMapping())
+                .ApplyMapping(new UnionMapping())
+                .ApplyMapping(new ClientMapping())
+                .ApplyMapping(new SessionMapping())
+                .ApplyMapping(new MemberMapping())
+                .ApplyMapping(new RoleMapping())
+                .ApplyMapping(new ProfileMapping())
                 .ApplyMapping(new AddressMapping())
                 .ApplyMapping(new ContactMapping())
                 .ApplyMapping(new CountryMapping())
                 .ApplyMapping(new CountryStateMapping())
-                .ApplyMapping(new CountryLanguageMapping())
+                .ApplyMapping(new LanguageMapping())
                 .ApplyMapping(new CurrencyMapping())
-                .ApplyMapping(new AttributeMapping());
+                .ApplyMapping(new PropertyMapping());
 
             base.OnModelCreating(modelBuilder);
         }
 
-        public virtual DbSet<Team> Teams { get; set; }
+        public virtual DbSet<Group> Groups { get; set; }
 
         public virtual DbSet<Address> Addresses { get; set; }
 
-        public virtual DbSet<Attribute> Attributes { get; set; }
+        public virtual DbSet<Property> Properties { get; set; }
 
         public virtual DbSet<Contact> Contacts { get; set; }
 
@@ -63,36 +63,36 @@ namespace Undersoft.ODP.Infra.Data.Base.Contexts
 
         public virtual DbSet<Currency> Currencies { get; set; }
 
-        public virtual DbSet<CountryLanguage> CountryLanguages { get; set; }
+        public virtual DbSet<Language> Languages { get; set; }
 
         public virtual DbSet<CountryState> CountryStates { get; set; }
 
-        public virtual DbSet<Personal> Personals { get; set; }
+        public virtual DbSet<Profile> Profiles { get; set; }
 
-        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Member> Members { get; set; }
 
-        public virtual DbSet<UserRole> UserRoles { get; set; }
+        public virtual DbSet<Role> Roles { get; set; }
 
-        public virtual DbSet<Shift> Shifts { get; set; }
+        public virtual DbSet<Duty> Duties { get; set; }
 
-        public virtual DbSet<ShiftType> ShiftTypes { get; set; }
+        public virtual DbSet<Asset> Assets { get; set; }
 
-        public virtual DbSet<ShiftRate> ShiftRatings { get; set; }
+        public virtual DbSet<Estimate> Estimates { get; set; }
 
-        public virtual DbSet<ShiftRequest> ShiftRequests { get; set; }
+        public virtual DbSet<Request> Requests { get; set; }
 
-        public virtual DbSet<Schedule> Schedules { get; set; }
+        public virtual DbSet<Vector> Vectors { get; set; }
 
-        public virtual DbSet<Plan> Plans { get; set; }
+        public virtual DbSet<Vertex> Vertices { get; set; }
 
-        public virtual DbSet<Setting> Settings { get; set; }
+        public virtual DbSet<Option> Options { get; set; }
 
-        public virtual DbSet<Organization> Organizations { get; set; }
+        public virtual DbSet<Union> Unions { get; set; }
 
-        public virtual DbSet<Configuration> Configurations { get; set; }
+        public virtual DbSet<Setup> Setups { get; set; }
 
-        public virtual DbSet<Device> Devices { get; set; }
+        public virtual DbSet<Client> Clients { get; set; }
 
-        public virtual DbSet<DeviceSession> DeviceSessions { get; set; }
+        public virtual DbSet<Session> Sessions { get; set; }
     }
 }

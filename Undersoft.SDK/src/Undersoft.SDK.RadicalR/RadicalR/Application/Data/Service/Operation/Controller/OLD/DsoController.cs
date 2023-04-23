@@ -12,17 +12,17 @@ namespace RadicalR
     public abstract class DsoController<TKey, TStore, TEntity> : ODataController, IDsoController<TKey, TStore, TEntity> where TEntity : Entity where TStore : IDataServiceStore
     {
         protected readonly Func<TKey, Expression<Func<TEntity, bool>>> _keymatcher;
-        protected readonly IRadicalr _ultimatr;
+        protected readonly IRadicalr _radicalr;
         protected readonly PublishMode _publishMode;
 
         protected DsoController() { }
-        protected DsoController(IRadicalr ultimatr, PublishMode publishMode = PublishMode.PropagateCommand) : this(ultimatr, k => e => k.Equals(e.Id), publishMode)
+        protected DsoController(IRadicalr radicalr, PublishMode publishMode = PublishMode.PropagateCommand) : this(radicalr, k => e => k.Equals(e.Id), publishMode)
         {
         }
-        protected DsoController(IRadicalr ultimatr, Func<TKey, Expression<Func<TEntity, bool>>> keymatcher, PublishMode publishMode = PublishMode.PropagateCommand)
+        protected DsoController(IRadicalr radicalr, Func<TKey, Expression<Func<TEntity, bool>>> keymatcher, PublishMode publishMode = PublishMode.PropagateCommand)
         {
             _keymatcher = keymatcher;
-            _ultimatr = ultimatr;
+            _radicalr = radicalr;
             _publishMode = publishMode;
         }
 
@@ -30,14 +30,14 @@ namespace RadicalR
         [HttpGet]
         public virtual IQueryable Get()
         {
-            return _ultimatr.Use<IReportStore, TEntity>().AsQueryable();
+            return _radicalr.Use<IReportStore, TEntity>().AsQueryable();
         }
 
         [EnableQuery]
         [HttpGet]
         public virtual UniqueOne Get([FromODataUri] TKey key)
         {
-            return _ultimatr.Use<IReportStore, TEntity>()[_keymatcher(key)].AsUniqueOne();
+            return _radicalr.Use<IReportStore, TEntity>()[_keymatcher(key)].AsUniqueOne();
         }
 
         [HttpPost]
@@ -45,7 +45,7 @@ namespace RadicalR
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            return Created(await _ultimatr.Send(new CreateDso<IEntryStore, TEntity>
+            return Created(await _radicalr.Send(new CreateDso<IEntryStore, TEntity>
                                                     (_publishMode, entity))
                                                     .ConfigureAwait(false));
         }
@@ -55,7 +55,7 @@ namespace RadicalR
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            return Updated(await _ultimatr.Send(new ChangeDso<IEntryStore, TEntity>
+            return Updated(await _radicalr.Send(new ChangeDso<IEntryStore, TEntity>
                                                     (_publishMode, entity, key))
                                                     .ConfigureAwait(false));
         }
@@ -65,7 +65,7 @@ namespace RadicalR
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            return Updated(await _ultimatr.Send(new UpdateDso<IEntryStore, TEntity>
+            return Updated(await _radicalr.Send(new UpdateDso<IEntryStore, TEntity>
                                                      (_publishMode, entity, key))
                                                     .ConfigureAwait(false));
         }
@@ -75,7 +75,7 @@ namespace RadicalR
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            return Ok(await _ultimatr.Send(new DeleteDso<IEntryStore, TEntity>
+            return Ok(await _radicalr.Send(new DeleteDso<IEntryStore, TEntity>
                                                     (_publishMode, key))
                                                     .ConfigureAwait(false));
         }

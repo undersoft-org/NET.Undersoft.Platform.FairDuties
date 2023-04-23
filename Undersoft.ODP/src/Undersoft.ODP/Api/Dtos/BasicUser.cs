@@ -16,6 +16,6 @@ namespace Undersoft.ODP.Api
         public string PhoneNumber { get; set; }
 
         [DataMember(Order = 3)]
-        public long? ConfigurationId { get; set; }
+        public long? SetupId { get; set; }
     }
 }

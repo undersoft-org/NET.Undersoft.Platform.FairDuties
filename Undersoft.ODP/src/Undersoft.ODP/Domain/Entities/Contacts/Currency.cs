@@ -1,6 +1,6 @@
-﻿using System.Runtime.Serialization;
+﻿using RadicalR;
+using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
-using RadicalR;
 
 namespace Undersoft.ODP.Domain
 {
@@ -13,7 +13,7 @@ namespace Undersoft.ODP.Domain
 
         [JsonIgnore]
         [IgnoreDataMember]
-        public virtual EntityOnSet<Country> Countries { get; set; }
+        public virtual EntitySet<Country> Countries { get; set; }
 
         public double Rate { get; set; }
     }

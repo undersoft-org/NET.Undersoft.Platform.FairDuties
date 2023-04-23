@@ -6,11 +6,11 @@ namespace Undersoft.ODP.Infra.Data.Base.Mappings
 {
     using Domain;
 
-    public class ShiftRequestMapping : EntityTypeMapping<ShiftRequest>
+    public class RequestMapping : EntityTypeMapping<Request>
     {
-        const string TABLE_NAME = "ShiftRequests";
+        const string TABLE_NAME = "Requests";
 
-        public override void Configure(EntityTypeBuilder<ShiftRequest> builder)
+        public override void Configure(EntityTypeBuilder<Request> builder)
         {
             builder.ToTable(TABLE_NAME, DataBaseSchema.LocalSchema);           
 

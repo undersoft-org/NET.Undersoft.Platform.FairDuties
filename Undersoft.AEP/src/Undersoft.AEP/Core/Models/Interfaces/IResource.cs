@@ -1,16 +1,15 @@
 ﻿using RadicalR;
 
-namespace Undersoft.AEP
+namespace Undersoft.AEP.Core
 {
     public interface IResource : IIdentifiable
     {
-        IAllocType AllocType { get; set; }
-
-        IAllocRate AllocRate { get; set; }
-
-        IAllocSet AllocSet { get; set; }
-
-        long AssetId { get; }
         IAsset Asset { get; set; }
+
+        IEstimate Estimate { get; set; }
+
+        IUsageSet UsageSet { get; set; }
+
+        ISource Source { get; set; }
     }
 }

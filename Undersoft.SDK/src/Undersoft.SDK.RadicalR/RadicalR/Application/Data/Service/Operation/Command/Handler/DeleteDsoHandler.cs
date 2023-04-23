@@ -10,11 +10,11 @@ namespace RadicalR
     public class DeleteDsoHandler<TStore, TEntity> : IRequestHandler<DeleteDso<TStore, TEntity>, TEntity> where TEntity : Entity where TStore : IDataStore
     {
         protected readonly IEntityRepository<TEntity> _repository;        
-        protected readonly IRadicalr _ultimatr;
+        protected readonly IRadicalr _radicalr;
 
-        public DeleteDsoHandler(IRadicalr ultimatr, IEntityRepository<TStore, TEntity> repository)
+        public DeleteDsoHandler(IRadicalr radicalr, IEntityRepository<TStore, TEntity> repository)
         {
-            _ultimatr = ultimatr;
+            _radicalr = radicalr;
             _repository = repository;            
         }
 
@@ -37,7 +37,7 @@ namespace RadicalR
                     if (request.Entity == null) throw new Exception($"{ GetType().Name } for entity " +
                                                                     $"{ typeof(TEntity).Name } failed");
 
-                    _ = _ultimatr.Publish(new DeletedDso<TStore, TEntity>(request)).ConfigureAwait(false); ;
+                    _ = _radicalr.Publish(new DeletedDso<TStore, TEntity>(request)).ConfigureAwait(false); ;
 
                     return request.Entity as TEntity;
                 }

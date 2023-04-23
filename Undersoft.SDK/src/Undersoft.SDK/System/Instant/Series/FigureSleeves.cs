@@ -2,7 +2,7 @@
 {
     using System.Collections;
     using System.Collections.Generic;
-    using System.Instant.Linking;
+    using System.Instant.Relationing;
     using System.Instant.Treatments;
     using System.IO;
     using System.Linq;
@@ -754,7 +754,7 @@
             set => Figures.Type = value;
         }
 
-        public Linker Linker
+        public Relationer Linker
         {
             get => Sleeves.Linker;
             set => Sleeves.Linker = value;
@@ -913,17 +913,17 @@
             return Sleeves.EnsureGet(key, sureaction);
         }
 
-        public ICard<IFigure> SureGet(ulong key, Func<ulong, IFigure> sureaction)
+        public ICard<IFigure> EnsureGet(ulong key, Func<ulong, IFigure> sureaction)
         {
             return Sleeves.EnsureGet((object)key, sureaction);
         }
 
-        public ICard<IFigure> SureGet(IUnique key, Func<ulong, IFigure> sureaction)
+        public ICard<IFigure> EnsureGet(IUnique key, Func<ulong, IFigure> sureaction)
         {
             return Sleeves.EnsureGet((object)key, sureaction);
         }
 
-        public ICard<IFigure> SureGet(IUnique<IFigure> key, Func<ulong, IFigure> sureaction)
+        public ICard<IFigure> EnsureGet(IUnique<IFigure> key, Func<ulong, IFigure> sureaction)
         {
             return Sleeves.EnsureGet((object)key, sureaction);
         }

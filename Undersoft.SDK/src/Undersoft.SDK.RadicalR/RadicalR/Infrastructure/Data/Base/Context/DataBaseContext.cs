@@ -10,7 +10,7 @@ namespace RadicalR
     {
         protected virtual Type StoreType { get; }
 
-        public DataBaseContext(DbContextOptions options, IRadicalr ultimatr = null) : base(options, ultimatr)
+        public DataBaseContext(DbContextOptions options, IRadicalr radicalr = null) : base(options, radicalr)
         {
             StoreType = typeof(TStore);
         }
@@ -18,7 +18,7 @@ namespace RadicalR
 
     public class DataBaseContext : DbContext, IDataBaseContext, IResettableService
     {
-        public virtual IRadicalr ultimatr { get; }
+        public virtual IRadicalr radicalr { get; }
 
         public override IModel Model
         {
@@ -28,9 +28,9 @@ namespace RadicalR
             }
         }
 
-        public DataBaseContext(DbContextOptions options, IRadicalr ultimatr = null) : base(options)
+        public DataBaseContext(DbContextOptions options, IRadicalr radicalr = null) : base(options)
         {
-            this.ultimatr = ultimatr;
+            this.radicalr = radicalr;
         }
 
         public IQueryable<TEntity> Query<TEntity>() where TEntity : class, IIdentifiable

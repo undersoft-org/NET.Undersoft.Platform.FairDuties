@@ -8,7 +8,7 @@ namespace Undersoft.ODP.Api.Data.Service.Operation.Controllers.Entries
 
     [AllowAnonymous]
     [ODataRouteComponent(StoreRoutes.Constant.EntryStore)]
-    public class ScheduleController : DsoController<long, IEntryStore, Schedule>
+    public class ScheduleController : DsoController<long, IEntryStore, Vector>
     {
         public ScheduleController(IRadicalr ultimatr) : base(ultimatr) { }
     }
@@ -20,7 +20,7 @@ namespace Undersoft.ODP.Api.Data.Service.Operation.Controllers.Reports
 
     [AllowAnonymous]
     [ODataRouteComponent(StoreRoutes.Constant.ReportStore)]
-    public class ScheduleController : DsoController<long, IReportStore, Schedule>
+    public class ScheduleController : DsoController<long, IReportStore, Vector>
     {
         public ScheduleController(IRadicalr ultimatr) : base(ultimatr) { }
     }

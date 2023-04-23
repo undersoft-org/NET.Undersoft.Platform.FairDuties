@@ -2,25 +2,25 @@
 
 namespace Undersoft.ODP.Api
 {
-    public class ShiftValidator : DtoCommandSetValidator<Shift>
+    public class ShiftValidator : DtoCommandSetValidator<Duty>
     {
         public ShiftValidator(IRadicalr ultimatr) : base(ultimatr)
         {
             ValidationScope(CommandMode.Create, () =>
             {
-                ValidateNotExist<IEntryStore, Domain.Shift>((cmd) =>
+                ValidateNotExist<IEntryStore, Domain.Duty>((cmd) =>
                 (e) => (e.StartTime == cmd.StartTime || e.EndTime == cmd.EndTime)
-                && e.ShiftTypeId == cmd.ShiftTypeId, "same shift type already exists in this time frame");
+                && e.Id == cmd.Id, "same shift type already exists in this time frame");
             });
             ValidationScope(CommandMode.Create | CommandMode.Upsert | CommandMode.Update | CommandMode.Change, () =>
             {
-                ValidateRequired(p => p.Data.TeamId);
-                ValidateRequired(p => p.Data.ShiftTypeId);
+                ValidateRequired(p => p.Data.GroupId);
+                ValidateRequired(p => p.Data.Id);
             });
             ValidationScope(CommandMode.Delete | CommandMode.Update | CommandMode.Change, () =>
             {
                 ValidateRequired(a => a.Data.Id);
-                ValidateExist<IEntryStore, Domain.Shift>((cmd) => (e) => e.Id == cmd.Id);
+                ValidateExist<IEntryStore, Domain.Duty>((cmd) => (e) => e.Id == cmd.Id);
             });
         }
     }

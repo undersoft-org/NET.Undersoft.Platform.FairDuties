@@ -1,7 +1,7 @@
 using AutoMapper;
+using RadicalR;
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
-using RadicalR;
 
 namespace Undersoft.ODP.Domain
 {
@@ -20,11 +20,11 @@ namespace Undersoft.ODP.Domain
 
         public virtual string Notices { get; set; }
 
-        public virtual EntityOnSet<Address> Addresses { get; set; }
+        public virtual EntitySet<Address> Addresses { get; set; }
 
         [IgnoreMap]
         [JsonIgnore]
-        public virtual EntitySet<Personal> Personals { get; set; }
+        public virtual EntitySet<Profile> Personals { get; set; }
     }
 
 }

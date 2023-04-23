@@ -11,12 +11,12 @@ namespace RadicalR
         where TEntity : Entity where TDto : Dto where TStore : IDataStore
     {
         protected readonly IEntityRepository<TEntity> _repository;       
-        protected readonly IRadicalr _ultimatr;
+        protected readonly IRadicalr _radicalr;
 
-        public CreateDtoHandler(IRadicalr ultimatr, IEntityRepository<TStore, TEntity> repository)
+        public CreateDtoHandler(IRadicalr radicalr, IEntityRepository<TStore, TEntity> repository)
         {
             _repository = repository;
-            _ultimatr = ultimatr;
+            _radicalr = radicalr;
         }
 
         public async Task<DtoCommand<TDto>> Handle(CreateDto<TStore, TEntity, TDto> request, CancellationToken cancellationToken)
@@ -31,7 +31,7 @@ namespace RadicalR
                                                                 $"for entity { typeof(TEntity).Name } " +
                                                                 $"unable create entry");              
 
-                _ = _ultimatr.Publish(new CreatedDto<TStore, TEntity, TDto>(request)).ConfigureAwait(false); ;
+                _ = _radicalr.Publish(new CreatedDto<TStore, TEntity, TDto>(request)).ConfigureAwait(false); ;
             }
             catch (Exception ex)
             {

@@ -19,18 +19,18 @@ namespace RadicalR
         protected Func<TKey, Func<TDto, object>> _keysetter = k => e => e.SetId(k);
         protected Func<TKey, Expression<Func<TEntity, bool>>> _keymatcher = k => e => k.Equals(e.Id);
         protected Func<TDto, Expression<Func<TEntity, bool>>> _predicate;
-        protected readonly IRadicalr _ultimatr;
+        protected readonly IRadicalr _radicalr;
         protected readonly PublishMode _publishMode;
 
         protected OpenDataEventController() { }
 
         protected OpenDataEventController(
-            IRadicalr ultimatr,
+            IRadicalr radicalr,
             PublishMode publishMode = PublishMode.PropagateCommand
-        ) : this(ultimatr, null, k => e => e.SetId(k), k => e => k.Equals(e.Id), publishMode) { }
+        ) : this(radicalr, null, k => e => e.SetId(k), k => e => k.Equals(e.Id), publishMode) { }
 
         protected OpenDataEventController(
-            IRadicalr ultimatr,
+            IRadicalr radicalr,
             Func<TDto, Expression<Func<TEntity, bool>>> predicate,
             Func<TKey, Func<TDto, object>> keysetter,
             Func<TKey, Expression<Func<TEntity, bool>>> keymatcher,
@@ -39,7 +39,7 @@ namespace RadicalR
         {
             _keymatcher = keymatcher;
             _keysetter = keysetter;
-            _ultimatr = ultimatr;
+            _radicalr = radicalr;
             _publishMode = publishMode;
         }
 
@@ -52,7 +52,7 @@ namespace RadicalR
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var result = await _ultimatr.Send(new DeleteDtoSet<TStore, TEntity, TDto>
+            var result = await _radicalr.Send(new DeleteDtoSet<TStore, TEntity, TDto>
                                                                  (_publishMode, key))
                                                                         .ConfigureAwait(false);
 
@@ -68,14 +68,14 @@ namespace RadicalR
         [HttpGet]
         public virtual Task<IQueryable<TDto>> Get()
         {
-            return _ultimatr.Send(new GetAllQuery<TStore, TEntity, TDto>());
+            return _radicalr.Send(new GetAllQuery<TStore, TEntity, TDto>());
         }
 
         [EnableQuery]
         [HttpGet]
         public virtual Task<UniqueOne<TDto>> Get([FromODataUri] TKey key)
         {
-            return _ultimatr.Send(new FindOneQuery<TStore, TEntity, TDto>(_keymatcher(key)));
+            return _radicalr.Send(new FindOneQuery<TStore, TEntity, TDto>(_keymatcher(key)));
         }
 
         [HttpPatch]
@@ -87,7 +87,7 @@ namespace RadicalR
 
             _keysetter(key).Invoke(dto);
 
-            var result = await _ultimatr.Send(new ChangeDtoSet<TStore, TEntity, TDto>
+            var result = await _radicalr.Send(new ChangeDtoSet<TStore, TEntity, TDto>
                                                   (_publishMode, new[] { dto }, _predicate))
                                                      .ConfigureAwait(false);
 
@@ -106,7 +106,7 @@ namespace RadicalR
 
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            var result = await _ultimatr.Send(new CreateDtoSet<TStore, TEntity, TDto>
+            var result = await _radicalr.Send(new CreateDtoSet<TStore, TEntity, TDto>
                                                     (_publishMode, new[] { dto }))
                                                         .ConfigureAwait(false);
 
@@ -128,7 +128,7 @@ namespace RadicalR
 
             _keysetter(key).Invoke(dto);
 
-            var result = await _ultimatr.Send(new UpdateDtoSet<TStore, TEntity, TDto>
+            var result = await _radicalr.Send(new UpdateDtoSet<TStore, TEntity, TDto>
                                                         (_publishMode, new[] { dto }, _predicate))
                                                             .ConfigureAwait(false);
 

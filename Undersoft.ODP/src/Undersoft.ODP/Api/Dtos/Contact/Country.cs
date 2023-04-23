@@ -13,7 +13,7 @@ namespace Undersoft.ODP.Api
         public string TimeZone { get; set; }
 
         public long LanguageId { get; set; }
-        public CountryLanguage Language { get; set; }
+        public Language Language { get; set; }
 
         public DtoSet<CountryState> States { get; set; } = new();
     }

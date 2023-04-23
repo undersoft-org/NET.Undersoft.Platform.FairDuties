@@ -18,7 +18,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 name: "Identifier");
 
             migrationBuilder.CreateTable(
-                name: "Attributes",
+                name: "Properties",
                 schema: "Local",
                 columns: table => new
                 {
@@ -41,7 +41,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Attributes", x => x.Id);
+                    table.PrimaryKey("PK_Properties", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -162,7 +162,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 });
 
             migrationBuilder.CreateTable(
-                name: "Organizations",
+                name: "Unions",
                 schema: "Local",
                 columns: table => new
                 {
@@ -171,8 +171,8 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                     ShortName = table.Column<string>(type: "varchar", maxLength: 32, nullable: false),
                     Description = table.Column<string>(type: "text", nullable: true),
                     Notices = table.Column<string>(type: "text", nullable: true),
-                    LastRateOrdinal = table.Column<int>(type: "integer", nullable: false),
-                    ConfigurationId = table.Column<long>(type: "bigint", nullable: true),
+                    LastEstimateOrdinal = table.Column<int>(type: "integer", nullable: false),
+                    SetupId = table.Column<long>(type: "bigint", nullable: true),
                     OriginName = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: true),
                     Modified = table.Column<DateTime>(type: "timestamp", nullable: false),
                     Modifier = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: true),
@@ -189,7 +189,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Organizations", x => x.Id);
+                    table.PrimaryKey("PK_Unions", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -285,7 +285,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 });
 
             migrationBuilder.CreateTable(
-                name: "ShiftTypes",
+                name: "Assets",
                 schema: "Local",
                 columns: table => new
                 {
@@ -310,11 +310,11 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ShiftTypes", x => x.Id);
+                    table.PrimaryKey("PK_Assets", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "AttributesToAttributes",
+                name: "PropertiesToProperties",
                 schema: "Relation",
                 columns: table => new
                 {
@@ -337,19 +337,19 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AttributesToAttributes", x => new { x.LeftEntityId, x.RightEntityId });
+                    table.PrimaryKey("PK_PropertiesToProperties", x => new { x.LeftEntityId, x.RightEntityId });
                     table.ForeignKey(
-                        name: "FK_AttributesToAttributes_Attributes_LeftEntityId",
+                        name: "FK_PropertiesToProperties_Properties_LeftEntityId",
                         column: x => x.LeftEntityId,
                         principalSchema: "Local",
-                        principalTable: "Attributes",
+                        principalTable: "Properties",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_AttributesToAttributes_Attributes_RightEntityId",
+                        name: "FK_PropertiesToProperties_Properties_RightEntityId",
                         column: x => x.RightEntityId,
                         principalSchema: "Local",
-                        principalTable: "Attributes",
+                        principalTable: "Properties",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -474,7 +474,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 });
 
             migrationBuilder.CreateTable(
-                name: "OrganizationsToAttributes",
+                name: "UnionsToProperties",
                 schema: "Relation",
                 columns: table => new
                 {
@@ -497,25 +497,25 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrganizationsToAttributes", x => new { x.LeftEntityId, x.RightEntityId });
+                    table.PrimaryKey("PK_UnionsToProperties", x => new { x.LeftEntityId, x.RightEntityId });
                     table.ForeignKey(
-                        name: "FK_OrganizationsToAttributes_Attributes_RightEntityId",
+                        name: "FK_UnionsToProperties_Properties_RightEntityId",
                         column: x => x.RightEntityId,
                         principalSchema: "Local",
-                        principalTable: "Attributes",
+                        principalTable: "Properties",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_OrganizationsToAttributes_Organizations_LeftEntityId",
+                        name: "FK_UnionsToProperties_Unions_LeftEntityId",
                         column: x => x.LeftEntityId,
                         principalSchema: "Local",
-                        principalTable: "Organizations",
+                        principalTable: "Unions",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "PersonalsToAttributes",
+                name: "PersonalsToProperties",
                 schema: "Relation",
                 columns: table => new
                 {
@@ -538,16 +538,16 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PersonalsToAttributes", x => new { x.LeftEntityId, x.RightEntityId });
+                    table.PrimaryKey("PK_PersonalsToProperties", x => new { x.LeftEntityId, x.RightEntityId });
                     table.ForeignKey(
-                        name: "FK_PersonalsToAttributes_Attributes_RightEntityId",
+                        name: "FK_PersonalsToProperties_Properties_RightEntityId",
                         column: x => x.RightEntityId,
                         principalSchema: "Local",
-                        principalTable: "Attributes",
+                        principalTable: "Properties",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_PersonalsToAttributes_Personals_LeftEntityId",
+                        name: "FK_PersonalsToProperties_Personals_LeftEntityId",
                         column: x => x.LeftEntityId,
                         principalSchema: "Local",
                         principalTable: "Personals",
@@ -648,8 +648,8 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                     PhoneNumber = table.Column<string>(type: "varchar", maxLength: 50, nullable: true),
                     PersonalId = table.Column<long>(type: "bigint", nullable: true),
                     UserId = table.Column<long>(type: "bigint", nullable: true),
-                    ConfigurationId = table.Column<long>(type: "bigint", nullable: true),
-                    LastRateOrdinal = table.Column<int>(type: "integer", nullable: false),
+                    SetupId = table.Column<long>(type: "bigint", nullable: true),
+                    LastEstimateOrdinal = table.Column<int>(type: "integer", nullable: false),
                     Label = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: true),
                     OriginName = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: true),
                     Modified = table.Column<DateTime>(type: "timestamp", nullable: false),
@@ -677,7 +677,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 });
 
             migrationBuilder.CreateTable(
-                name: "OrganizationsToPlans",
+                name: "UnionsToPlans",
                 schema: "Relation",
                 columns: table => new
                 {
@@ -700,16 +700,16 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrganizationsToPlans", x => new { x.LeftEntityId, x.RightEntityId });
+                    table.PrimaryKey("PK_UnionsToPlans", x => new { x.LeftEntityId, x.RightEntityId });
                     table.ForeignKey(
-                        name: "FK_OrganizationsToPlans_Organizations_LeftEntityId",
+                        name: "FK_UnionsToPlans_Unions_LeftEntityId",
                         column: x => x.LeftEntityId,
                         principalSchema: "Local",
-                        principalTable: "Organizations",
+                        principalTable: "Unions",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_OrganizationsToPlans_Plans_RightEntityId",
+                        name: "FK_UnionsToPlans_Plans_RightEntityId",
                         column: x => x.RightEntityId,
                         principalSchema: "Local",
                         principalTable: "Plans",
@@ -718,7 +718,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 });
 
             migrationBuilder.CreateTable(
-                name: "ShiftTypesToAttributes",
+                name: "AssetsToProperties",
                 schema: "Relation",
                 columns: table => new
                 {
@@ -741,25 +741,25 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ShiftTypesToAttributes", x => new { x.LeftEntityId, x.RightEntityId });
+                    table.PrimaryKey("PK_AssetsToProperties", x => new { x.LeftEntityId, x.RightEntityId });
                     table.ForeignKey(
-                        name: "FK_ShiftTypesToAttributes_Attributes_RightEntityId",
+                        name: "FK_AssetsToProperties_Properties_RightEntityId",
                         column: x => x.RightEntityId,
                         principalSchema: "Local",
-                        principalTable: "Attributes",
+                        principalTable: "Properties",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ShiftTypesToAttributes_ShiftTypes_LeftEntityId",
+                        name: "FK_AssetsToProperties_Assets_LeftEntityId",
                         column: x => x.LeftEntityId,
                         principalSchema: "Local",
-                        principalTable: "ShiftTypes",
+                        principalTable: "Assets",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ShiftTypesToOrganizations",
+                name: "AssetsToUnions",
                 schema: "Relation",
                 columns: table => new
                 {
@@ -782,25 +782,25 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ShiftTypesToOrganizations", x => new { x.LeftEntityId, x.RightEntityId });
+                    table.PrimaryKey("PK_AssetsToUnions", x => new { x.LeftEntityId, x.RightEntityId });
                     table.ForeignKey(
-                        name: "FK_ShiftTypesToOrganizations_Organizations_RightEntityId",
+                        name: "FK_AssetsToUnions_Unions_RightEntityId",
                         column: x => x.RightEntityId,
                         principalSchema: "Local",
-                        principalTable: "Organizations",
+                        principalTable: "Unions",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ShiftTypesToOrganizations_ShiftTypes_LeftEntityId",
+                        name: "FK_AssetsToUnions_Assets_LeftEntityId",
                         column: x => x.LeftEntityId,
                         principalSchema: "Local",
-                        principalTable: "ShiftTypes",
+                        principalTable: "Assets",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ShiftTypesToPlans",
+                name: "AssetsToPlans",
                 schema: "Relation",
                 columns: table => new
                 {
@@ -823,25 +823,25 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ShiftTypesToPlans", x => new { x.LeftEntityId, x.RightEntityId });
+                    table.PrimaryKey("PK_AssetsToPlans", x => new { x.LeftEntityId, x.RightEntityId });
                     table.ForeignKey(
-                        name: "FK_ShiftTypesToPlans_Plans_RightEntityId",
+                        name: "FK_AssetsToPlans_Plans_RightEntityId",
                         column: x => x.RightEntityId,
                         principalSchema: "Local",
                         principalTable: "Plans",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ShiftTypesToPlans_ShiftTypes_LeftEntityId",
+                        name: "FK_AssetsToPlans_Assets_LeftEntityId",
                         column: x => x.LeftEntityId,
                         principalSchema: "Local",
-                        principalTable: "ShiftTypes",
+                        principalTable: "Assets",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ShiftTypesToShiftTypeOptionals",
+                name: "AssetsToFrameTypeOptionals",
                 schema: "Relation",
                 columns: table => new
                 {
@@ -864,19 +864,19 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ShiftTypesToShiftTypeOptionals", x => new { x.LeftEntityId, x.RightEntityId });
+                    table.PrimaryKey("PK_AssetsToFrameTypeOptionals", x => new { x.LeftEntityId, x.RightEntityId });
                     table.ForeignKey(
-                        name: "FK_ShiftTypesToShiftTypeOptionals_ShiftTypes_LeftEntityId",
+                        name: "FK_AssetsToFrameTypeOptionals_Assets_LeftEntityId",
                         column: x => x.LeftEntityId,
                         principalSchema: "Local",
-                        principalTable: "ShiftTypes",
+                        principalTable: "Assets",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ShiftTypesToShiftTypeOptionals_ShiftTypes_RightEntityId",
+                        name: "FK_AssetsToFrameTypeOptionals_Assets_RightEntityId",
                         column: x => x.RightEntityId,
                         principalSchema: "Local",
-                        principalTable: "ShiftTypes",
+                        principalTable: "Assets",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -918,7 +918,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 });
 
             migrationBuilder.CreateTable(
-                name: "OrganizationsToUsers",
+                name: "UnionsToUsers",
                 schema: "Relation",
                 columns: table => new
                 {
@@ -941,16 +941,16 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrganizationsToUsers", x => new { x.LeftEntityId, x.RightEntityId });
+                    table.PrimaryKey("PK_UnionsToUsers", x => new { x.LeftEntityId, x.RightEntityId });
                     table.ForeignKey(
-                        name: "FK_OrganizationsToUsers_Organizations_LeftEntityId",
+                        name: "FK_UnionsToUsers_Unions_LeftEntityId",
                         column: x => x.LeftEntityId,
                         principalSchema: "Local",
-                        principalTable: "Organizations",
+                        principalTable: "Unions",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_OrganizationsToUsers_Users_RightEntityId",
+                        name: "FK_UnionsToUsers_Users_RightEntityId",
                         column: x => x.RightEntityId,
                         principalSchema: "Local",
                         principalTable: "Users",
@@ -959,7 +959,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 });
 
             migrationBuilder.CreateTable(
-                name: "ShiftTypesToUsers",
+                name: "AssetsToUsers",
                 schema: "Relation",
                 columns: table => new
                 {
@@ -982,16 +982,16 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ShiftTypesToUsers", x => new { x.LeftEntityId, x.RightEntityId });
+                    table.PrimaryKey("PK_AssetsToUsers", x => new { x.LeftEntityId, x.RightEntityId });
                     table.ForeignKey(
-                        name: "FK_ShiftTypesToUsers_ShiftTypes_LeftEntityId",
+                        name: "FK_AssetsToUsers_Assets_LeftEntityId",
                         column: x => x.LeftEntityId,
                         principalSchema: "Local",
-                        principalTable: "ShiftTypes",
+                        principalTable: "Assets",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ShiftTypesToUsers_Users_RightEntityId",
+                        name: "FK_AssetsToUsers_Users_RightEntityId",
                         column: x => x.RightEntityId,
                         principalSchema: "Local",
                         principalTable: "Users",
@@ -1000,7 +1000,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 });
 
             migrationBuilder.CreateTable(
-                name: "Teams",
+                name: "Groups",
                 schema: "Local",
                 columns: table => new
                 {
@@ -1008,17 +1008,17 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                     Name = table.Column<string>(type: "varchar", maxLength: 100, nullable: false),
                     ShortName = table.Column<string>(type: "varchar", maxLength: 32, nullable: false),
                     Description = table.Column<string>(type: "text", nullable: true),
-                    ShiftUnit = table.Column<int>(type: "integer", nullable: false),
+                    FrameUnit = table.Column<int>(type: "integer", nullable: false),
                     FrameCapacity = table.Column<float>(type: "real", nullable: false),
                     BlockCapacity = table.Column<float>(type: "real", nullable: false),
                     FrameSize = table.Column<int>(type: "integer", nullable: false),
                     BlockSize = table.Column<int>(type: "integer", nullable: false),
                     FrameSeed = table.Column<float>(type: "real", nullable: false),
-                    OrganizationId = table.Column<long>(type: "bigint", nullable: true),
+                    UnionId = table.Column<long>(type: "bigint", nullable: true),
                     LeadershipId = table.Column<long>(type: "bigint", nullable: true),
                     ScheduleId = table.Column<long>(type: "bigint", nullable: true),
-                    LastRateOrdinal = table.Column<int>(type: "integer", nullable: false),
-                    ConfigurationId = table.Column<long>(type: "bigint", nullable: true),
+                    LastEstimateOrdinal = table.Column<int>(type: "integer", nullable: false),
+                    SetupId = table.Column<long>(type: "bigint", nullable: true),
                     OriginName = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: true),
                     Modified = table.Column<DateTime>(type: "timestamp", nullable: false),
                     Modifier = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: true),
@@ -1035,16 +1035,16 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Teams", x => x.Id);
+                    table.PrimaryKey("PK_Groups", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Teams_Organizations_OrganizationId",
-                        column: x => x.OrganizationId,
+                        name: "FK_Groups_Unions_UnionId",
+                        column: x => x.UnionId,
                         principalSchema: "Local",
-                        principalTable: "Organizations",
+                        principalTable: "Unions",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Teams_Users_LeadershipId",
+                        name: "FK_Groups_Users_LeadershipId",
                         column: x => x.LeadershipId,
                         principalSchema: "Local",
                         principalTable: "Users",
@@ -1125,7 +1125,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 });
 
             migrationBuilder.CreateTable(
-                name: "UsersToAttributes",
+                name: "UsersToProperties",
                 schema: "Relation",
                 columns: table => new
                 {
@@ -1148,16 +1148,16 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UsersToAttributes", x => new { x.LeftEntityId, x.RightEntityId });
+                    table.PrimaryKey("PK_UsersToProperties", x => new { x.LeftEntityId, x.RightEntityId });
                     table.ForeignKey(
-                        name: "FK_UsersToAttributes_Attributes_RightEntityId",
+                        name: "FK_UsersToProperties_Properties_RightEntityId",
                         column: x => x.RightEntityId,
                         principalSchema: "Local",
-                        principalTable: "Attributes",
+                        principalTable: "Properties",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UsersToAttributes_Users_LeftEntityId",
+                        name: "FK_UsersToProperties_Users_LeftEntityId",
                         column: x => x.LeftEntityId,
                         principalSchema: "Local",
                         principalTable: "Users",
@@ -1263,14 +1263,14 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 });
 
             migrationBuilder.CreateTable(
-                name: "Configurations",
+                name: "Setups",
                 schema: "Local",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false),
-                    OrganizationId = table.Column<long>(type: "bigint", nullable: true),
-                    TeamId = table.Column<long>(type: "bigint", nullable: true),
-                    ConfigurationId = table.Column<long>(type: "bigint", nullable: true),
+                    UnionId = table.Column<long>(type: "bigint", nullable: true),
+                    GroupId = table.Column<long>(type: "bigint", nullable: true),
+                    SetupId = table.Column<long>(type: "bigint", nullable: true),
                     UserId = table.Column<long>(type: "bigint", nullable: true),
                     AttributeId = table.Column<long>(type: "bigint", nullable: true),
                     OriginName = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: true),
@@ -1289,31 +1289,31 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Configurations", x => x.Id);
+                    table.PrimaryKey("PK_Setups", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Configurations_Attributes_AttributeId",
+                        name: "FK_Setups_Properties_AttributeId",
                         column: x => x.AttributeId,
                         principalSchema: "Local",
-                        principalTable: "Attributes",
+                        principalTable: "Properties",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Configurations_Organizations_ConfigurationId",
-                        column: x => x.ConfigurationId,
+                        name: "FK_Setups_Unions_SetupId",
+                        column: x => x.SetupId,
                         principalSchema: "Local",
-                        principalTable: "Organizations",
+                        principalTable: "Unions",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Configurations_Teams_ConfigurationId",
-                        column: x => x.ConfigurationId,
+                        name: "FK_Setups_Groups_SetupId",
+                        column: x => x.SetupId,
                         principalSchema: "Local",
-                        principalTable: "Teams",
+                        principalTable: "Groups",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Configurations_Users_ConfigurationId",
-                        column: x => x.ConfigurationId,
+                        name: "FK_Setups_Users_SetupId",
+                        column: x => x.SetupId,
                         principalSchema: "Local",
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -1331,9 +1331,9 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                     StartTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     EndTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     IsView = table.Column<bool>(type: "boolean", nullable: false),
-                    TeamId = table.Column<long>(type: "bigint", nullable: true),
+                    GroupId = table.Column<long>(type: "bigint", nullable: true),
                     ScheduleId = table.Column<long>(type: "bigint", nullable: true),
-                    TeamViewId = table.Column<long>(type: "bigint", nullable: true),
+                    GroupViewId = table.Column<long>(type: "bigint", nullable: true),
                     OriginName = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: true),
                     Modified = table.Column<DateTime>(type: "timestamp", nullable: false),
                     Modifier = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: true),
@@ -1352,23 +1352,23 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 {
                     table.PrimaryKey("PK_Schedules", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Schedules_Teams_ScheduleId",
+                        name: "FK_Schedules_Groups_ScheduleId",
                         column: x => x.ScheduleId,
                         principalSchema: "Local",
-                        principalTable: "Teams",
+                        principalTable: "Groups",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Schedules_Teams_TeamViewId",
-                        column: x => x.TeamViewId,
+                        name: "FK_Schedules_Groups_GroupViewId",
+                        column: x => x.GroupViewId,
                         principalSchema: "Local",
-                        principalTable: "Teams",
+                        principalTable: "Groups",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ShiftRates",
+                name: "FrameRates",
                 schema: "Local",
                 columns: table => new
                 {
@@ -1385,16 +1385,16 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                     Yearly = table.Column<int>(type: "integer", nullable: false),
                     Weekends = table.Column<int>(type: "integer", nullable: false),
                     Holidays = table.Column<int>(type: "integer", nullable: false),
-                    OnShifts = table.Column<int>(type: "integer", nullable: false),
-                    OffShifts = table.Column<int>(type: "integer", nullable: false),
-                    FreeShifts = table.Column<int>(type: "integer", nullable: false),
+                    OnFrames = table.Column<int>(type: "integer", nullable: false),
+                    OffFrames = table.Column<int>(type: "integer", nullable: false),
+                    FreeFrames = table.Column<int>(type: "integer", nullable: false),
                     Exchanges = table.Column<int>(type: "integer", nullable: false),
                     DependentByAny = table.Column<bool>(type: "boolean", nullable: false),
                     OptionalFromAny = table.Column<bool>(type: "boolean", nullable: false),
-                    OrganizationId = table.Column<long>(type: "bigint", nullable: true),
-                    TeamId = table.Column<long>(type: "bigint", nullable: true),
+                    UnionId = table.Column<long>(type: "bigint", nullable: true),
+                    GroupId = table.Column<long>(type: "bigint", nullable: true),
                     UserId = table.Column<long>(type: "bigint", nullable: true),
-                    ShiftTypeId = table.Column<long>(type: "bigint", nullable: true),
+                    FrameTypeId = table.Column<long>(type: "bigint", nullable: true),
                     OriginName = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: true),
                     Modified = table.Column<DateTime>(type: "timestamp", nullable: false),
                     Modifier = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: true),
@@ -1411,30 +1411,30 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ShiftRates", x => x.Id);
+                    table.PrimaryKey("PK_FrameRates", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ShiftRates_Organizations_OrganizationId",
-                        column: x => x.OrganizationId,
+                        name: "FK_FrameRates_Unions_UnionId",
+                        column: x => x.UnionId,
                         principalSchema: "Local",
-                        principalTable: "Organizations",
+                        principalTable: "Unions",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_ShiftRates_ShiftTypes_ShiftTypeId",
-                        column: x => x.ShiftTypeId,
+                        name: "FK_FrameRates_Assets_FrameTypeId",
+                        column: x => x.FrameTypeId,
                         principalSchema: "Local",
-                        principalTable: "ShiftTypes",
+                        principalTable: "Assets",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_ShiftRates_Teams_TeamId",
-                        column: x => x.TeamId,
+                        name: "FK_FrameRates_Groups_GroupId",
+                        column: x => x.GroupId,
                         principalSchema: "Local",
-                        principalTable: "Teams",
+                        principalTable: "Groups",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_ShiftRates_Users_UserId",
+                        name: "FK_FrameRates_Users_UserId",
                         column: x => x.UserId,
                         principalSchema: "Local",
                         principalTable: "Users",
@@ -1443,7 +1443,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 });
 
             migrationBuilder.CreateTable(
-                name: "ShiftRequests",
+                name: "Requests",
                 schema: "Local",
                 columns: table => new
                 {
@@ -1452,7 +1452,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                     Description = table.Column<string>(type: "text", nullable: true),
                     Type = table.Column<int>(type: "integer", nullable: false),
                     Status = table.Column<int>(type: "integer", nullable: false),
-                    TeamId = table.Column<long>(type: "bigint", nullable: true),
+                    GroupId = table.Column<long>(type: "bigint", nullable: true),
                     UserId = table.Column<long>(type: "bigint", nullable: true),
                     OriginName = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: true),
                     Modified = table.Column<DateTime>(type: "timestamp", nullable: false),
@@ -1470,16 +1470,16 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ShiftRequests", x => x.Id);
+                    table.PrimaryKey("PK_Requests", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ShiftRequests_Teams_TeamId",
-                        column: x => x.TeamId,
+                        name: "FK_Requests_Groups_GroupId",
+                        column: x => x.GroupId,
                         principalSchema: "Local",
-                        principalTable: "Teams",
+                        principalTable: "Groups",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_ShiftRequests_Users_UserId",
+                        name: "FK_Requests_Users_UserId",
                         column: x => x.UserId,
                         principalSchema: "Local",
                         principalTable: "Users",
@@ -1488,7 +1488,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 });
 
             migrationBuilder.CreateTable(
-                name: "ShiftTypesToTeams",
+                name: "AssetsToGroups",
                 schema: "Relation",
                 columns: table => new
                 {
@@ -1511,25 +1511,25 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ShiftTypesToTeams", x => new { x.LeftEntityId, x.RightEntityId });
+                    table.PrimaryKey("PK_AssetsToGroups", x => new { x.LeftEntityId, x.RightEntityId });
                     table.ForeignKey(
-                        name: "FK_ShiftTypesToTeams_ShiftTypes_LeftEntityId",
+                        name: "FK_AssetsToGroups_Assets_LeftEntityId",
                         column: x => x.LeftEntityId,
                         principalSchema: "Local",
-                        principalTable: "ShiftTypes",
+                        principalTable: "Assets",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ShiftTypesToTeams_Teams_RightEntityId",
+                        name: "FK_AssetsToGroups_Groups_RightEntityId",
                         column: x => x.RightEntityId,
                         principalSchema: "Local",
-                        principalTable: "Teams",
+                        principalTable: "Groups",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "TeamsToAttributes",
+                name: "GroupsToProperties",
                 schema: "Relation",
                 columns: table => new
                 {
@@ -1552,25 +1552,25 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TeamsToAttributes", x => new { x.LeftEntityId, x.RightEntityId });
+                    table.PrimaryKey("PK_GroupsToProperties", x => new { x.LeftEntityId, x.RightEntityId });
                     table.ForeignKey(
-                        name: "FK_TeamsToAttributes_Attributes_RightEntityId",
+                        name: "FK_GroupsToProperties_Properties_RightEntityId",
                         column: x => x.RightEntityId,
                         principalSchema: "Local",
-                        principalTable: "Attributes",
+                        principalTable: "Properties",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_TeamsToAttributes_Teams_LeftEntityId",
+                        name: "FK_GroupsToProperties_Groups_LeftEntityId",
                         column: x => x.LeftEntityId,
                         principalSchema: "Local",
-                        principalTable: "Teams",
+                        principalTable: "Groups",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "TeamsToPlans",
+                name: "GroupsToPlans",
                 schema: "Relation",
                 columns: table => new
                 {
@@ -1593,25 +1593,25 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TeamsToPlans", x => new { x.LeftEntityId, x.RightEntityId });
+                    table.PrimaryKey("PK_GroupsToPlans", x => new { x.LeftEntityId, x.RightEntityId });
                     table.ForeignKey(
-                        name: "FK_TeamsToPlans_Plans_RightEntityId",
+                        name: "FK_GroupsToPlans_Plans_RightEntityId",
                         column: x => x.RightEntityId,
                         principalSchema: "Local",
                         principalTable: "Plans",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_TeamsToPlans_Teams_LeftEntityId",
+                        name: "FK_GroupsToPlans_Groups_LeftEntityId",
                         column: x => x.LeftEntityId,
                         principalSchema: "Local",
-                        principalTable: "Teams",
+                        principalTable: "Groups",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "UsersToTeams",
+                name: "UsersToGroups",
                 schema: "Relation",
                 columns: table => new
                 {
@@ -1634,16 +1634,16 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UsersToTeams", x => new { x.LeftEntityId, x.RightEntityId });
+                    table.PrimaryKey("PK_UsersToGroups", x => new { x.LeftEntityId, x.RightEntityId });
                     table.ForeignKey(
-                        name: "FK_UsersToTeams_Teams_RightEntityId",
+                        name: "FK_UsersToGroups_Groups_RightEntityId",
                         column: x => x.RightEntityId,
                         principalSchema: "Local",
-                        principalTable: "Teams",
+                        principalTable: "Groups",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UsersToTeams_Users_LeftEntityId",
+                        name: "FK_UsersToGroups_Users_LeftEntityId",
                         column: x => x.LeftEntityId,
                         principalSchema: "Local",
                         principalTable: "Users",
@@ -1652,7 +1652,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 });
 
             migrationBuilder.CreateTable(
-                name: "ConfigurationsToSettings",
+                name: "SetupsToSettings",
                 schema: "Relation",
                 columns: table => new
                 {
@@ -1675,16 +1675,16 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ConfigurationsToSettings", x => new { x.LeftEntityId, x.RightEntityId });
+                    table.PrimaryKey("PK_SetupsToSettings", x => new { x.LeftEntityId, x.RightEntityId });
                     table.ForeignKey(
-                        name: "FK_ConfigurationsToSettings_Configurations_LeftEntityId",
+                        name: "FK_SetupsToSettings_Setups_LeftEntityId",
                         column: x => x.LeftEntityId,
                         principalSchema: "Local",
-                        principalTable: "Configurations",
+                        principalTable: "Setups",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ConfigurationsToSettings_Settings_RightEntityId",
+                        name: "FK_SetupsToSettings_Settings_RightEntityId",
                         column: x => x.RightEntityId,
                         principalTable: "Settings",
                         principalColumn: "Id",
@@ -1692,17 +1692,17 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 });
 
             migrationBuilder.CreateTable(
-                name: "Shifts",
+                name: "Frames",
                 schema: "Local",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false),
-                    OrganizationId = table.Column<long>(type: "bigint", nullable: true),
-                    TeamId = table.Column<long>(type: "bigint", nullable: true),
+                    UnionId = table.Column<long>(type: "bigint", nullable: true),
+                    GroupId = table.Column<long>(type: "bigint", nullable: true),
                     UserId = table.Column<long>(type: "bigint", nullable: true),
-                    ShiftTypeId = table.Column<long>(type: "bigint", nullable: true),
+                    FrameTypeId = table.Column<long>(type: "bigint", nullable: true),
                     ScheduleId = table.Column<long>(type: "bigint", nullable: true),
-                    ShiftRateId = table.Column<long>(type: "bigint", nullable: true),
+                    FrameRateId = table.Column<long>(type: "bigint", nullable: true),
                     StartTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     EndTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     WorkMode = table.Column<int>(type: "integer", nullable: false),
@@ -1725,37 +1725,37 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Shifts", x => x.Id);
+                    table.PrimaryKey("PK_Frames", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Shifts_Organizations_OrganizationId",
-                        column: x => x.OrganizationId,
+                        name: "FK_Frames_Unions_UnionId",
+                        column: x => x.UnionId,
                         principalSchema: "Local",
-                        principalTable: "Organizations",
+                        principalTable: "Unions",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Shifts_Schedules_ScheduleId",
+                        name: "FK_Frames_Schedules_ScheduleId",
                         column: x => x.ScheduleId,
                         principalSchema: "Local",
                         principalTable: "Schedules",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Shifts_ShiftTypes_ShiftTypeId",
-                        column: x => x.ShiftTypeId,
+                        name: "FK_Frames_Assets_FrameTypeId",
+                        column: x => x.FrameTypeId,
                         principalSchema: "Local",
-                        principalTable: "ShiftTypes",
+                        principalTable: "Assets",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Shifts_Teams_TeamId",
-                        column: x => x.TeamId,
+                        name: "FK_Frames_Groups_GroupId",
+                        column: x => x.GroupId,
                         principalSchema: "Local",
-                        principalTable: "Teams",
+                        principalTable: "Groups",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Shifts_Users_UserId",
+                        name: "FK_Frames_Users_UserId",
                         column: x => x.UserId,
                         principalSchema: "Local",
                         principalTable: "Users",
@@ -1764,7 +1764,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 });
 
             migrationBuilder.CreateTable(
-                name: "ShiftRatesToShiftRateOptionals",
+                name: "FrameRatesToFrameRateOptionals",
                 schema: "Relation",
                 columns: table => new
                 {
@@ -1787,25 +1787,25 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ShiftRatesToShiftRateOptionals", x => new { x.LeftEntityId, x.RightEntityId });
+                    table.PrimaryKey("PK_FrameRatesToFrameRateOptionals", x => new { x.LeftEntityId, x.RightEntityId });
                     table.ForeignKey(
-                        name: "FK_ShiftRatesToShiftRateOptionals_ShiftRates_LeftEntityId",
+                        name: "FK_FrameRatesToFrameRateOptionals_FrameRates_LeftEntityId",
                         column: x => x.LeftEntityId,
                         principalSchema: "Local",
-                        principalTable: "ShiftRates",
+                        principalTable: "FrameRates",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ShiftRatesToShiftRateOptionals_ShiftRates_RightEntityId",
+                        name: "FK_FrameRatesToFrameRateOptionals_FrameRates_RightEntityId",
                         column: x => x.RightEntityId,
                         principalSchema: "Local",
-                        principalTable: "ShiftRates",
+                        principalTable: "FrameRates",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ShiftsToSchedules",
+                name: "FramesToSchedules",
                 schema: "Relation",
                 columns: table => new
                 {
@@ -1828,25 +1828,25 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ShiftsToSchedules", x => new { x.LeftEntityId, x.RightEntityId });
+                    table.PrimaryKey("PK_FramesToSchedules", x => new { x.LeftEntityId, x.RightEntityId });
                     table.ForeignKey(
-                        name: "FK_ShiftsToSchedules_Schedules_RightEntityId",
+                        name: "FK_FramesToSchedules_Schedules_RightEntityId",
                         column: x => x.RightEntityId,
                         principalSchema: "Local",
                         principalTable: "Schedules",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ShiftsToSchedules_Shifts_LeftEntityId",
+                        name: "FK_FramesToSchedules_Frames_LeftEntityId",
                         column: x => x.LeftEntityId,
                         principalSchema: "Local",
-                        principalTable: "Shifts",
+                        principalTable: "Frames",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ShiftsToShiftRequests",
+                name: "FramesToRequests",
                 schema: "Relation",
                 columns: table => new
                 {
@@ -1869,19 +1869,19 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ShiftsToShiftRequests", x => new { x.LeftEntityId, x.RightEntityId });
+                    table.PrimaryKey("PK_FramesToRequests", x => new { x.LeftEntityId, x.RightEntityId });
                     table.ForeignKey(
-                        name: "FK_ShiftsToShiftRequests_ShiftRequests_RightEntityId",
+                        name: "FK_FramesToRequests_Requests_RightEntityId",
                         column: x => x.RightEntityId,
                         principalSchema: "Local",
-                        principalTable: "ShiftRequests",
+                        principalTable: "Requests",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ShiftsToShiftRequests_Shifts_LeftEntityId",
+                        name: "FK_FramesToRequests_Frames_LeftEntityId",
                         column: x => x.LeftEntityId,
                         principalSchema: "Local",
-                        principalTable: "Shifts",
+                        principalTable: "Frames",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -1911,40 +1911,40 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 column: "StateId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Attributes_Ordinal",
+                name: "IX_Properties_Ordinal",
                 schema: "Local",
-                table: "Attributes",
+                table: "Properties",
                 column: "Ordinal");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AttributesToAttributes_RightEntityId",
+                name: "IX_PropertiesToProperties_RightEntityId",
                 schema: "Relation",
-                table: "AttributesToAttributes",
+                table: "PropertiesToProperties",
                 column: "RightEntityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Configurations_AttributeId",
+                name: "IX_Setups_AttributeId",
                 schema: "Local",
-                table: "Configurations",
+                table: "Setups",
                 column: "AttributeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Configurations_ConfigurationId",
+                name: "IX_Setups_SetupId",
                 schema: "Local",
-                table: "Configurations",
-                column: "ConfigurationId",
+                table: "Setups",
+                column: "SetupId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Configurations_Ordinal",
+                name: "IX_Setups_Ordinal",
                 schema: "Local",
-                table: "Configurations",
+                table: "Setups",
                 column: "Ordinal");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ConfigurationsToSettings_RightEntityId",
+                name: "IX_SetupsToSettings_RightEntityId",
                 schema: "Relation",
-                table: "ConfigurationsToSettings",
+                table: "SetupsToSettings",
                 column: "RightEntityId");
 
             migrationBuilder.CreateIndex(
@@ -2032,27 +2032,27 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 column: "Ordinal");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Organizations_Ordinal",
+                name: "IX_Unions_Ordinal",
                 schema: "Local",
-                table: "Organizations",
+                table: "Unions",
                 column: "Ordinal");
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrganizationsToAttributes_RightEntityId",
+                name: "IX_UnionsToProperties_RightEntityId",
                 schema: "Relation",
-                table: "OrganizationsToAttributes",
+                table: "UnionsToProperties",
                 column: "RightEntityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrganizationsToPlans_RightEntityId",
+                name: "IX_UnionsToPlans_RightEntityId",
                 schema: "Relation",
-                table: "OrganizationsToPlans",
+                table: "UnionsToPlans",
                 column: "RightEntityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrganizationsToUsers_RightEntityId",
+                name: "IX_UnionsToUsers_RightEntityId",
                 schema: "Relation",
-                table: "OrganizationsToUsers",
+                table: "UnionsToUsers",
                 column: "RightEntityId");
 
             migrationBuilder.CreateIndex(
@@ -2062,9 +2062,9 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 column: "Ordinal");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PersonalsToAttributes_RightEntityId",
+                name: "IX_PersonalsToProperties_RightEntityId",
                 schema: "Relation",
-                table: "PersonalsToAttributes",
+                table: "PersonalsToProperties",
                 column: "RightEntityId");
 
             migrationBuilder.CreateIndex(
@@ -2099,10 +2099,10 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Schedules_TeamViewId",
+                name: "IX_Schedules_GroupViewId",
                 schema: "Local",
                 table: "Schedules",
-                column: "TeamViewId");
+                column: "GroupViewId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Settings_Ordinal",
@@ -2110,177 +2110,177 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 column: "Ordinal");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ShiftRates_Ordinal",
+                name: "IX_FrameRates_Ordinal",
                 schema: "Local",
-                table: "ShiftRates",
+                table: "FrameRates",
                 column: "Ordinal");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ShiftRates_OrganizationId",
+                name: "IX_FrameRates_UnionId",
                 schema: "Local",
-                table: "ShiftRates",
-                column: "OrganizationId");
+                table: "FrameRates",
+                column: "UnionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ShiftRates_ShiftTypeId",
+                name: "IX_FrameRates_FrameTypeId",
                 schema: "Local",
-                table: "ShiftRates",
-                column: "ShiftTypeId");
+                table: "FrameRates",
+                column: "FrameTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ShiftRates_TeamId",
+                name: "IX_FrameRates_GroupId",
                 schema: "Local",
-                table: "ShiftRates",
-                column: "TeamId");
+                table: "FrameRates",
+                column: "GroupId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ShiftRates_UserId",
+                name: "IX_FrameRates_UserId",
                 schema: "Local",
-                table: "ShiftRates",
+                table: "FrameRates",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ShiftRatesToShiftRateOptionals_RightEntityId",
+                name: "IX_FrameRatesToFrameRateOptionals_RightEntityId",
                 schema: "Relation",
-                table: "ShiftRatesToShiftRateOptionals",
+                table: "FrameRatesToFrameRateOptionals",
                 column: "RightEntityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ShiftRequests_Ordinal",
+                name: "IX_Requests_Ordinal",
                 schema: "Local",
-                table: "ShiftRequests",
+                table: "Requests",
                 column: "Ordinal");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ShiftRequests_TeamId",
+                name: "IX_Requests_GroupId",
                 schema: "Local",
-                table: "ShiftRequests",
-                column: "TeamId");
+                table: "Requests",
+                column: "GroupId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ShiftRequests_UserId",
+                name: "IX_Requests_UserId",
                 schema: "Local",
-                table: "ShiftRequests",
+                table: "Requests",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Shifts_Ordinal",
+                name: "IX_Frames_Ordinal",
                 schema: "Local",
-                table: "Shifts",
+                table: "Frames",
                 column: "Ordinal");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Shifts_OrganizationId",
+                name: "IX_Frames_UnionId",
                 schema: "Local",
-                table: "Shifts",
-                column: "OrganizationId");
+                table: "Frames",
+                column: "UnionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Shifts_ScheduleId",
+                name: "IX_Frames_ScheduleId",
                 schema: "Local",
-                table: "Shifts",
+                table: "Frames",
                 column: "ScheduleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Shifts_ShiftTypeId",
+                name: "IX_Frames_FrameTypeId",
                 schema: "Local",
-                table: "Shifts",
-                column: "ShiftTypeId");
+                table: "Frames",
+                column: "FrameTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Shifts_TeamId",
+                name: "IX_Frames_GroupId",
                 schema: "Local",
-                table: "Shifts",
-                column: "TeamId");
+                table: "Frames",
+                column: "GroupId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Shifts_UserId",
+                name: "IX_Frames_UserId",
                 schema: "Local",
-                table: "Shifts",
+                table: "Frames",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ShiftsToSchedules_RightEntityId",
+                name: "IX_FramesToSchedules_RightEntityId",
                 schema: "Relation",
-                table: "ShiftsToSchedules",
+                table: "FramesToSchedules",
                 column: "RightEntityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ShiftsToShiftRequests_RightEntityId",
+                name: "IX_FramesToRequests_RightEntityId",
                 schema: "Relation",
-                table: "ShiftsToShiftRequests",
+                table: "FramesToRequests",
                 column: "RightEntityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ShiftTypes_Ordinal",
+                name: "IX_Assets_Ordinal",
                 schema: "Local",
-                table: "ShiftTypes",
+                table: "Assets",
                 column: "Ordinal");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ShiftTypesToAttributes_RightEntityId",
+                name: "IX_AssetsToProperties_RightEntityId",
                 schema: "Relation",
-                table: "ShiftTypesToAttributes",
+                table: "AssetsToProperties",
                 column: "RightEntityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ShiftTypesToOrganizations_RightEntityId",
+                name: "IX_AssetsToUnions_RightEntityId",
                 schema: "Relation",
-                table: "ShiftTypesToOrganizations",
+                table: "AssetsToUnions",
                 column: "RightEntityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ShiftTypesToPlans_RightEntityId",
+                name: "IX_AssetsToPlans_RightEntityId",
                 schema: "Relation",
-                table: "ShiftTypesToPlans",
+                table: "AssetsToPlans",
                 column: "RightEntityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ShiftTypesToShiftTypeOptionals_RightEntityId",
+                name: "IX_AssetsToFrameTypeOptionals_RightEntityId",
                 schema: "Relation",
-                table: "ShiftTypesToShiftTypeOptionals",
+                table: "AssetsToFrameTypeOptionals",
                 column: "RightEntityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ShiftTypesToTeams_RightEntityId",
+                name: "IX_AssetsToGroups_RightEntityId",
                 schema: "Relation",
-                table: "ShiftTypesToTeams",
+                table: "AssetsToGroups",
                 column: "RightEntityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ShiftTypesToUsers_RightEntityId",
+                name: "IX_AssetsToUsers_RightEntityId",
                 schema: "Relation",
-                table: "ShiftTypesToUsers",
+                table: "AssetsToUsers",
                 column: "RightEntityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Teams_LeadershipId",
+                name: "IX_Groups_LeadershipId",
                 schema: "Local",
-                table: "Teams",
+                table: "Groups",
                 column: "LeadershipId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Teams_Ordinal",
+                name: "IX_Groups_Ordinal",
                 schema: "Local",
-                table: "Teams",
+                table: "Groups",
                 column: "Ordinal");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Teams_OrganizationId",
+                name: "IX_Groups_UnionId",
                 schema: "Local",
-                table: "Teams",
-                column: "OrganizationId");
+                table: "Groups",
+                column: "UnionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TeamsToAttributes_RightEntityId",
+                name: "IX_GroupsToProperties_RightEntityId",
                 schema: "Relation",
-                table: "TeamsToAttributes",
+                table: "GroupsToProperties",
                 column: "RightEntityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TeamsToPlans_RightEntityId",
+                name: "IX_GroupsToPlans_RightEntityId",
                 schema: "Relation",
-                table: "TeamsToPlans",
+                table: "GroupsToPlans",
                 column: "RightEntityId");
 
             migrationBuilder.CreateIndex(
@@ -2327,9 +2327,9 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_UsersToAttributes_RightEntityId",
+                name: "IX_UsersToProperties_RightEntityId",
                 schema: "Relation",
-                table: "UsersToAttributes",
+                table: "UsersToProperties",
                 column: "RightEntityId");
 
             migrationBuilder.CreateIndex(
@@ -2339,9 +2339,9 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 column: "RightEntityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UsersToTeams_RightEntityId",
+                name: "IX_UsersToGroups_RightEntityId",
                 schema: "Relation",
-                table: "UsersToTeams",
+                table: "UsersToGroups",
                 column: "RightEntityId");
         }
 
@@ -2352,11 +2352,11 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 schema: "Local");
 
             migrationBuilder.DropTable(
-                name: "AttributesToAttributes",
+                name: "PropertiesToProperties",
                 schema: "Relation");
 
             migrationBuilder.DropTable(
-                name: "ConfigurationsToSettings",
+                name: "SetupsToSettings",
                 schema: "Relation");
 
             migrationBuilder.DropTable(
@@ -2368,19 +2368,19 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 schema: "Local");
 
             migrationBuilder.DropTable(
-                name: "OrganizationsToAttributes",
+                name: "UnionsToProperties",
                 schema: "Relation");
 
             migrationBuilder.DropTable(
-                name: "OrganizationsToPlans",
+                name: "UnionsToPlans",
                 schema: "Relation");
 
             migrationBuilder.DropTable(
-                name: "OrganizationsToUsers",
+                name: "UnionsToUsers",
                 schema: "Relation");
 
             migrationBuilder.DropTable(
-                name: "PersonalsToAttributes",
+                name: "PersonalsToProperties",
                 schema: "Relation");
 
             migrationBuilder.DropTable(
@@ -2392,47 +2392,47 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 schema: "Relation");
 
             migrationBuilder.DropTable(
-                name: "ShiftRatesToShiftRateOptionals",
+                name: "FrameRatesToFrameRateOptionals",
                 schema: "Relation");
 
             migrationBuilder.DropTable(
-                name: "ShiftsToSchedules",
+                name: "FramesToSchedules",
                 schema: "Relation");
 
             migrationBuilder.DropTable(
-                name: "ShiftsToShiftRequests",
+                name: "FramesToRequests",
                 schema: "Relation");
 
             migrationBuilder.DropTable(
-                name: "ShiftTypesToAttributes",
+                name: "AssetsToProperties",
                 schema: "Relation");
 
             migrationBuilder.DropTable(
-                name: "ShiftTypesToOrganizations",
+                name: "AssetsToUnions",
                 schema: "Relation");
 
             migrationBuilder.DropTable(
-                name: "ShiftTypesToPlans",
+                name: "AssetsToPlans",
                 schema: "Relation");
 
             migrationBuilder.DropTable(
-                name: "ShiftTypesToShiftTypeOptionals",
+                name: "AssetsToFrameTypeOptionals",
                 schema: "Relation");
 
             migrationBuilder.DropTable(
-                name: "ShiftTypesToTeams",
+                name: "AssetsToGroups",
                 schema: "Relation");
 
             migrationBuilder.DropTable(
-                name: "ShiftTypesToUsers",
+                name: "AssetsToUsers",
                 schema: "Relation");
 
             migrationBuilder.DropTable(
-                name: "TeamsToAttributes",
+                name: "GroupsToProperties",
                 schema: "Relation");
 
             migrationBuilder.DropTable(
-                name: "TeamsToPlans",
+                name: "GroupsToPlans",
                 schema: "Relation");
 
             migrationBuilder.DropTable(
@@ -2444,7 +2444,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 schema: "Local");
 
             migrationBuilder.DropTable(
-                name: "UsersToAttributes",
+                name: "UsersToProperties",
                 schema: "Relation");
 
             migrationBuilder.DropTable(
@@ -2452,7 +2452,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 schema: "Relation");
 
             migrationBuilder.DropTable(
-                name: "UsersToTeams",
+                name: "UsersToGroups",
                 schema: "Relation");
 
             migrationBuilder.DropTable(
@@ -2460,7 +2460,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 schema: "Local");
 
             migrationBuilder.DropTable(
-                name: "Configurations",
+                name: "Setups",
                 schema: "Local");
 
             migrationBuilder.DropTable(
@@ -2475,15 +2475,15 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 schema: "Local");
 
             migrationBuilder.DropTable(
-                name: "ShiftRates",
+                name: "FrameRates",
                 schema: "Local");
 
             migrationBuilder.DropTable(
-                name: "ShiftRequests",
+                name: "Requests",
                 schema: "Local");
 
             migrationBuilder.DropTable(
-                name: "Shifts",
+                name: "Frames",
                 schema: "Local");
 
             migrationBuilder.DropTable(
@@ -2495,7 +2495,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 schema: "Local");
 
             migrationBuilder.DropTable(
-                name: "Attributes",
+                name: "Properties",
                 schema: "Local");
 
             migrationBuilder.DropTable(
@@ -2503,7 +2503,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 schema: "Local");
 
             migrationBuilder.DropTable(
-                name: "ShiftTypes",
+                name: "Assets",
                 schema: "Local");
 
             migrationBuilder.DropTable(
@@ -2515,11 +2515,11 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                 schema: "Local");
 
             migrationBuilder.DropTable(
-                name: "Teams",
+                name: "Groups",
                 schema: "Local");
 
             migrationBuilder.DropTable(
-                name: "Organizations",
+                name: "Unions",
                 schema: "Local");
 
             migrationBuilder.DropTable(

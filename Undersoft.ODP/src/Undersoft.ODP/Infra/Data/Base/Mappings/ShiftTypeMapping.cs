@@ -6,37 +6,37 @@ namespace Undersoft.ODP.Infra.Data.Base.Mappings
 {
     using Domain;
 
-    public class ShiftTypeMapping : EntityTypeMapping<ShiftType>
+    public class AssetMapping : EntityTypeMapping<Asset>
     {
-        const string TABLE_NAME = "ShiftTypes";
+        const string TABLE_NAME = "Assets";
 
-        public override void Configure(EntityTypeBuilder<ShiftType> builder)
+        public override void Configure(EntityTypeBuilder<Asset> builder)
         {
             builder.ToTable(TABLE_NAME, DataBaseSchema.LocalSchema);
 
             modelBuilder
-                .LinkSetToSet<ShiftType, Attribute>(ExpandSite.OnRight)
-                .LinkSetToSet<ShiftType, User>(ExpandSite.OnLeft)
-                .LinkSetToSet<ShiftType, Team>(ExpandSite.OnLeft)
-                .LinkSetToSet<ShiftType, Organization>(ExpandSite.OnLeft)
-                .LinkToSet<ShiftType, Shift>(ExpandSite.OnLeft)
-                .LinkSetToSet<ShiftType, ShiftType>(
-                    nameof(ShiftType.RelatedTo),
-                    nameof(ShiftType.RelatedFrom),
+                .LinkSetToSet<Asset, Property>(ExpandSite.OnRight)
+                .LinkSetToSet<Asset, Member>(ExpandSite.OnLeft)
+                .LinkSetToSet<Asset, Group>(ExpandSite.OnLeft)
+                .LinkSetToSet<Asset, Union>(ExpandSite.OnLeft)
+                .LinkToSet<Asset, Duty>(ExpandSite.OnLeft)
+                .LinkSetToSet<Asset, Asset>(
+                    nameof(Asset.RelatedTo),
+                    nameof(Asset.RelatedFrom),
                     ExpandSite.OnRight
                 )
-                 .LinkSetToSet<ShiftType, ShiftType>(
-                    nameof(ShiftType.DependentOn),
-                    "ShiftTypes",
-                    nameof(ShiftType.DependentBy),
-                    "ShiftTypeDependencies",
+                 .LinkSetToSet<Asset, Asset>(
+                    nameof(Asset.DependentOn),
+                    "Assets",
+                    nameof(Asset.DependentBy),
+                    "FrameTypeDependencies",
                     ExpandSite.OnRight
                 )
-                   .LinkSetToSet<ShiftType, ShiftType>(
-                    nameof(ShiftType.OptionalTo),
-                    "ShiftTypes",
-                    nameof(ShiftType.OptionalFrom),
-                    "ShiftTypeOptionals",
+                   .LinkSetToSet<Asset, Asset>(
+                    nameof(Asset.OptionalTo),
+                    "Assets",
+                    nameof(Asset.OptionalFrom),
+                    "FrameTypeOptionals",
                     ExpandSite.OnRight
                 );
         }

@@ -20,7 +20,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Contexts
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyIdentity<TContext>();
-            modelBuilder.ApplyConfiguration(new EventStoreMapping());
+            modelBuilder.ApplyMapping(new EventStoreMapping());
             base.OnModelCreating(modelBuilder);
         }
 

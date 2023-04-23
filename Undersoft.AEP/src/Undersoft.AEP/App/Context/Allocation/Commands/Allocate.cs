@@ -1,7 +1,7 @@
 ﻿namespace Undersoft.AEP.Api.Contracts.Services
 {
-    public class Allocate
+    public class Usageate
     {
-        public Allocate() { }
+        public Usageate() { }
     }
 }

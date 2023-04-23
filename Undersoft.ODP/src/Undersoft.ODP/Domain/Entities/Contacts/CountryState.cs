@@ -1,6 +1,6 @@
+using RadicalR;
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
-using RadicalR;
 
 namespace Undersoft.ODP.Domain
 {
@@ -18,6 +18,6 @@ namespace Undersoft.ODP.Domain
 
         [JsonIgnore]
         [IgnoreDataMember]
-        public virtual EntityOnSet<Address> Addresses { get; set; }
+        public virtual EntitySet<Address> Addresses { get; set; }
     }
 }

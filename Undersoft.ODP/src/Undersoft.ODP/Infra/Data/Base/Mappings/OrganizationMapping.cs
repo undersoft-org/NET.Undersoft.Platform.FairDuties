@@ -6,11 +6,11 @@ namespace Undersoft.ODP.Infra.Data.Base.Mappings
 {
     using Domain;
 
-    public class OrganizationMapping : EntityTypeMapping<Organization>
+    public class UnionMapping : EntityTypeMapping<Union>
     {
-        const string TABLE_NAME = "Organizations";
+        const string TABLE_NAME = "Unions";
 
-        public override void Configure(EntityTypeBuilder<Organization> builder)
+        public override void Configure(EntityTypeBuilder<Union> builder)
         {
             builder.ToTable(TABLE_NAME, DataBaseSchema.LocalSchema);
 
@@ -25,11 +25,11 @@ namespace Undersoft.ODP.Infra.Data.Base.Mappings
              .IsRequired();
 
             modelBuilder
-                .LinkSetToSet<Organization, Attribute>(ExpandSite.OnRight)
-                .LinkSetToSet<Organization, User>(ExpandSite.OnRight)
-                .LinkToSet<Organization, Team>(ExpandSite.OnRight)
-                .LinkToSet<Organization, Shift>(ExpandSite.OnRight)
-                .LinkToSingle<Organization, Configuration>(ExpandSite.OnRight);
+                .LinkSetToSet<Union, Property>(ExpandSite.OnRight)
+                .LinkSetToSet<Union, Member>(ExpandSite.OnRight)
+                .LinkToSet<Union, Group>(ExpandSite.OnRight)
+                .LinkToSet<Union, Duty>(ExpandSite.OnRight)
+                .LinkToSingle<Union, Setup>(ExpandSite.OnRight);
         }
     }
 }

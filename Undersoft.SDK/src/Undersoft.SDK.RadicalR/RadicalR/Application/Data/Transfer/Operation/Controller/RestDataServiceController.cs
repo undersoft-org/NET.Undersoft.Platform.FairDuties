@@ -16,18 +16,18 @@ namespace RadicalR
         protected Func<TKey, Func<TDto, object>> _keysetter = k => e => e.SetId(k);
         protected Func<TKey, Expression<Func<TEntity, bool>>> _keymatcher;
         protected Func<TDto, Expression<Func<TEntity, bool>>> _predicate;
-        protected readonly IRadicalr _ultimatr;
+        protected readonly IRadicalr _radicalr;
         protected readonly PublishMode _publishMode;
 
         protected RestDataServiceController() { }
 
         protected RestDataServiceController(
-            IRadicalr ultimatr,
+            IRadicalr radicalr,
             PublishMode publishMode = PublishMode.PropagateCommand
-        ) : this(ultimatr, null, k => e => e.SetId(k), null, publishMode) { }
+        ) : this(radicalr, null, k => e => e.SetId(k), null, publishMode) { }
 
         protected RestDataServiceController(
-            IRadicalr ultimatr,
+            IRadicalr radicalr,
             Func<TDto, Expression<Func<TEntity, bool>>> predicate,
             Func<TKey, Func<TDto, object>> keysetter,
             Func<TKey, Expression<Func<TEntity, bool>>> keymatcher,
@@ -36,7 +36,7 @@ namespace RadicalR
         {
             _keymatcher = keymatcher;
             _keysetter = keysetter;
-            _ultimatr = ultimatr;
+            _radicalr = radicalr;
             _publishMode = publishMode;
         }
 
@@ -44,14 +44,14 @@ namespace RadicalR
         public virtual async Task<IActionResult> Get()
         {
             return Ok(
-                await _ultimatr.Send(new GetAll<TReport, TEntity, TDto>(0, 0)).ConfigureAwait(true)
+                await _radicalr.Send(new GetAll<TReport, TEntity, TDto>(0, 0)).ConfigureAwait(true)
             );
         }
 
         [HttpGet("count")]
         public virtual async Task<IActionResult> Count()
         {
-            return Ok(await Task.Run(() => _ultimatr.use<TReport, TEntity>().Count()));
+            return Ok(await Task.Run(() => _radicalr.use<TReport, TEntity>().Count()));
         }
 
         [HttpGet("{key}")]
@@ -59,8 +59,8 @@ namespace RadicalR
         {
             Task<TDto> query =
                 (_keymatcher == null)
-                    ? _ultimatr.Send(new FindOne<TReport, TEntity, TDto>(key))
-                    : _ultimatr.Send(new FindOne<TReport, TEntity, TDto>(_keymatcher(key)));
+                    ? _radicalr.Send(new FindOne<TReport, TEntity, TDto>(key))
+                    : _radicalr.Send(new FindOne<TReport, TEntity, TDto>(_keymatcher(key)));
 
             return Ok(await query.ConfigureAwait(false));
         }
@@ -69,7 +69,7 @@ namespace RadicalR
         public virtual async Task<IActionResult> Get(int offset, int limit)
         {
             return Ok(
-                await _ultimatr
+                await _radicalr
                     .Send(new GetAll<TReport, TEntity, TDto>(offset, limit))
                     .ConfigureAwait(true)
             );
@@ -87,7 +87,7 @@ namespace RadicalR
             );
 
             return Ok(
-                await _ultimatr
+                await _radicalr
                     .Send(
                         new FilterData<TReport, TEntity, TDto>(offset, limit,
                             new FilterExpression<TEntity>(query.Filter).Create(),
@@ -106,7 +106,7 @@ namespace RadicalR
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var result = await _ultimatr.Send(new CreateDtoSet<TEntry, TEntity, TDto>
+            var result = await _radicalr.Send(new CreateDtoSet<TEntry, TEntity, TDto>
                                                         (_publishMode, dtos)).ConfigureAwait(false);
 
             object[] response = result.ForEach(c => (isValid = c.IsValid) ? (c.Id as object) : c.ErrorMessages)
@@ -124,7 +124,7 @@ namespace RadicalR
 
             _keysetter(key).Invoke(dto);
 
-            var result = await _ultimatr.Send(new CreateDtoSet<TEntry, TEntity, TDto>
+            var result = await _radicalr.Send(new CreateDtoSet<TEntry, TEntity, TDto>
                                                     (_publishMode, new[] { dto }))
                                                         .ConfigureAwait(false);
 
@@ -144,7 +144,7 @@ namespace RadicalR
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var result = await _ultimatr.Send(new ChangeDtoSet<TEntry, TEntity, TDto>
+            var result = await _radicalr.Send(new ChangeDtoSet<TEntry, TEntity, TDto>
                                                                     (_publishMode, dtos, _predicate))
                                                                         .ConfigureAwait(false);
             var response = result.ForEach(c => (isValid = c.IsValid)
@@ -164,7 +164,7 @@ namespace RadicalR
 
             _keysetter(key).Invoke(dto);
 
-            var result = await _ultimatr.Send(new ChangeDtoSet<TEntry, TEntity, TDto>
+            var result = await _radicalr.Send(new ChangeDtoSet<TEntry, TEntity, TDto>
                                                   (_publishMode, new[] { dto }, _predicate))
                                                      .ConfigureAwait(false);
 
@@ -184,7 +184,7 @@ namespace RadicalR
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var result = await _ultimatr.Send(new UpdateDtoSet<TEntry, TEntity, TDto>
+            var result = await _radicalr.Send(new UpdateDtoSet<TEntry, TEntity, TDto>
                                                                         (_publishMode, dtos, _predicate))
                                                                                     .ConfigureAwait(false);
 
@@ -203,7 +203,7 @@ namespace RadicalR
 
             _keysetter(key).Invoke(dto);
 
-            var result = await _ultimatr.Send(new UpdateDtoSet<TEntry, TEntity, TDto>
+            var result = await _radicalr.Send(new UpdateDtoSet<TEntry, TEntity, TDto>
                                                         (_publishMode, new[] { dto }, _predicate))
                                                             .ConfigureAwait(false);
 
@@ -223,7 +223,7 @@ namespace RadicalR
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var result = await _ultimatr.Send(new DeleteDtoSet<TEntry, TEntity, TDto>
+            var result = await _radicalr.Send(new DeleteDtoSet<TEntry, TEntity, TDto>
                                                                 (_publishMode, dtos))
                                                                  .ConfigureAwait(false);
 
@@ -245,7 +245,7 @@ namespace RadicalR
 
             _keysetter(key).Invoke(dto);
 
-            var result = await _ultimatr.Send(new DeleteDtoSet<TEntry, TEntity, TDto>
+            var result = await _radicalr.Send(new DeleteDtoSet<TEntry, TEntity, TDto>
                                                                  (_publishMode, new[] { dto }))
                                                                         .ConfigureAwait(false);
 

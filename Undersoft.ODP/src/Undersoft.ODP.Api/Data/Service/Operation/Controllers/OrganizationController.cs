@@ -8,7 +8,7 @@ namespace Undersoft.ODP.Api.Data.Service.Operation.Controllers.Entries
 
     [AllowAnonymous]
     [ODataRouteComponent(StoreRoutes.Constant.EntryStore)]
-    public class OrganizationController : DsoController<long, IEntryStore, Organization>
+    public class OrganizationController : DsoController<long, IEntryStore, Union>
     {
         public OrganizationController(IRadicalr ultimatr) : base(ultimatr) { }
     }
@@ -20,7 +20,7 @@ namespace Undersoft.ODP.Api.Data.Service.Operation.Controllers.Reports
 
     [AllowAnonymous]
     [ODataRouteComponent(StoreRoutes.Constant.ReportStore)]
-    public class OrganizationController : DsoController<long, IReportStore, Organization>
+    public class OrganizationController : DsoController<long, IReportStore, Union>
     {
         public OrganizationController(IRadicalr ultimatr) : base(ultimatr) { }
     }

@@ -8,7 +8,7 @@ namespace Undersoft.ODP.Api.Data.Service.Operation.Controllers.Entries
 
     [AllowAnonymous]
     [ODataRouteComponent(StoreRoutes.Constant.EntryStore)]
-    public class PlanController : DsoController<long, IEntryStore, Plan>
+    public class PlanController : DsoController<long, IEntryStore, Vertex>
     {
         public PlanController(IRadicalr ultimatr) : base(ultimatr) { }
     }
@@ -20,7 +20,7 @@ namespace Undersoft.ODP.Api.Data.Service.Operation.Controllers.Reports
 
     [AllowAnonymous]
     [ODataRouteComponent(StoreRoutes.Constant.ReportStore)]
-    public class PlanController : DsoController<long, IReportStore, Plan>
+    public class PlanController : DsoController<long, IReportStore, Vertex>
     {
         public PlanController(IRadicalr ultimatr) : base(ultimatr) { }
     }

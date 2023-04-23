@@ -8,7 +8,7 @@ namespace Undersoft.ODP.Api.Data.Service.Operation.Controllers.Entries
 
     [AllowAnonymous]
     [ODataRouteComponent(StoreRoutes.Constant.EntryStore)]
-    public class DeviceController : DsoController<long, IEntryStore, Device>
+    public class DeviceController : DsoController<long, IEntryStore, Client>
     {
         public DeviceController(IRadicalr ultimatr) : base(ultimatr) { }
     }
@@ -20,7 +20,7 @@ namespace Undersoft.ODP.Api.Data.Service.Operation.Controllers.Reports
 
     [AllowAnonymous]
     [ODataRouteComponent(StoreRoutes.Constant.ReportStore)]
-    public class DeviceController : DsoController<long, IReportStore, Device>
+    public class DeviceController : DsoController<long, IReportStore, Client>
     {
         public DeviceController(IRadicalr ultimatr) : base(ultimatr) { }
     }
