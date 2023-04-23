@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace RadicalR
 {
-    public class EntityLinkOnSingle<TParent, TChild>
+    public class EntityLinkOneToOne<TParent, TChild>
         where TParent : Entity
         where TChild : Entity
     {
@@ -19,13 +19,13 @@ namespace RadicalR
         private readonly EntityTypeBuilder<TParent> _firstBuilder;
         private readonly EntityTypeBuilder<TChild> _secondBuilder;
 
-        public EntityLinkOnSingle(
+        public EntityLinkOneToOne(
             ModelBuilder modelBuilder,
             ExpandSite expandSite = ExpandSite.None,
             string parentSchema = null
         ) : this(modelBuilder, null, null, null, null, expandSite, parentSchema, parentSchema) { }
 
-        public EntityLinkOnSingle(
+        public EntityLinkOneToOne(
             ModelBuilder modelBuilder,
             string parentName,
             string childName,
@@ -44,7 +44,7 @@ namespace RadicalR
             )
         { }
 
-        public EntityLinkOnSingle(
+        public EntityLinkOneToOne(
             ModelBuilder modelBuilder,
             string parentName,
             string parentTableName,

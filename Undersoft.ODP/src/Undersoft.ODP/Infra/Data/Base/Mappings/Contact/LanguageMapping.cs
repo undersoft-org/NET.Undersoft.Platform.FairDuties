@@ -14,7 +14,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Mappings
         {
             builder.ToTable(TABLE_NAME, DataBaseSchema.LocalSchema);
 
-            modelBuilder.LinkToSet<Language, Country>(
+            modelBuilder.LinkOneToSet<Language, Country>(
                 nameof(Country.Language),
                 nameof(Language.Countries), ExpandSite.OnLeft);
         }

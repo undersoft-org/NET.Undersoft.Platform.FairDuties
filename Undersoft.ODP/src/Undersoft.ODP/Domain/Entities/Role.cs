@@ -11,9 +11,9 @@ namespace Undersoft.ODP.Domain
 
         public RoleType Type { get; set; }
 
-        public long? UserId { get; set; }
+        public long? MemberId { get; set; }
         [JsonIgnore]
         [IgnoreDataMember]
-        public virtual Member User { get; set; }
+        public virtual Member Member { get; set; }
     }
 }

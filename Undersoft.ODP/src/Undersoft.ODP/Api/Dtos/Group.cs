@@ -11,12 +11,12 @@ namespace Undersoft.ODP.Api
         public string Description { get; set; }
 
         public long? LeadershipId { get; set; }
-        public virtual BasicUser Leadership { get; set; }
+        public virtual BasicMember Leadership { get; set; }
 
         public long? ScheduleId { get; set; }
         public virtual Vector Schedule { get; set; }
 
-        public virtual DtoSet<BasicUser> Users { get; set; }
+        public virtual DtoSet<BasicMember> Members { get; set; }
 
         public virtual DtoSet<Property> Properties { get; set; }
 

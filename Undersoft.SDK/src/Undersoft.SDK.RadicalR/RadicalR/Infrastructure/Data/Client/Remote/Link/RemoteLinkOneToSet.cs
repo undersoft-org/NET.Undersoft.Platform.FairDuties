@@ -2,20 +2,19 @@
 
 namespace RadicalR
 {
-    public class RemoteLinkOnSingle<TOrigin, TTarget> : RemoteLink<TOrigin, TTarget, TTarget> where TOrigin : class, IIdentifiable where TTarget : class, IIdentifiable
+    public class RemoteLinkOneToSet<TOrigin, TTarget> : RemoteLink<TOrigin, TTarget, RemoteOnSet<TTarget>> where TOrigin : class, IIdentifiable where TTarget : class, IIdentifiable
     {
-
         private Func<TTarget, object> targetKey;
         private Func<TOrigin, object> originKey;
 
-        public RemoteLinkOnSingle() : base()
+        public RemoteLinkOneToSet() : base()
         {
         }
-        public RemoteLinkOnSingle(Expression<Func<TOrigin, object>> originkey,
-                                   Expression<Func<TTarget, object>> targetkey)
-                                   : base()
+        public RemoteLinkOneToSet(Expression<Func<TOrigin, object>> originkey,
+                                Expression<Func<TTarget, object>> targetkey)
+                                    : base()
         {
-            Towards = Towards.ToSingle;
+            Towards = Towards.ToSet;
             OriginKey = originkey;
             TargetKey = targetkey;
 

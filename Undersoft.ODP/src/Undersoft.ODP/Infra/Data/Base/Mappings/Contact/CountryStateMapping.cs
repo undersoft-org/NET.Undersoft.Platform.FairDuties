@@ -14,11 +14,11 @@ namespace Undersoft.ODP.Infra.Data.Base.Mappings
         {
             builder.ToTable(TABLE_NAME, DataBaseSchema.LocalSchema);
 
-            modelBuilder.LinkToSet<Country, CountryState>(
+            modelBuilder.LinkOneToSet<Country, CountryState>(
                 nameof(CountryState.Country),
                 nameof(Country.States), ExpandSite.OnRight);
 
-            modelBuilder.LinkToSet<CountryState, Address>(
+            modelBuilder.LinkOneToSet<CountryState, Address>(
                 nameof(Address.State),
                 nameof(CountryState.Addresses), ExpandSite.OnLeft);
         }

@@ -13,7 +13,7 @@ namespace RadicalR
                                                               where TTarget : class, IIdentifiable
                                                                where TMiddle : class, IIdentifiable
         {
-            new RemoteLinkOnSets<TOrigin, TTarget, TMiddle>(middleSet, middlekey, targetkey);
+            new RemoteLinkSetToSet<TOrigin, TTarget, TMiddle>(middleSet, middlekey, targetkey);
             return builder;
         }
 
@@ -23,7 +23,7 @@ namespace RadicalR
                                                              where TOrigin : class, IIdentifiable
                                                              where TTarget : class, IIdentifiable
         {
-            new RemoteLinkOnSet<TOrigin, TTarget>(originkey, targetkey);
+            new RemoteLinkOneToSet<TOrigin, TTarget>(originkey, targetkey);
             return builder;
         }
 
@@ -33,7 +33,7 @@ namespace RadicalR
                                                             where TOrigin : class, IIdentifiable
                                                             where TTarget : class, IIdentifiable
         {
-            new RemoteLinkOnSingle<TOrigin, TTarget>(originkey, targetkey);
+            new RemoteLinkOneToOne<TOrigin, TTarget>(originkey, targetkey);
             return builder;
         }
 

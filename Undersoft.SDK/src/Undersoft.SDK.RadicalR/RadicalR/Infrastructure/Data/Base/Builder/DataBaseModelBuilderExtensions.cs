@@ -60,7 +60,7 @@ namespace RadicalR
             where TLeft : Entity
             where TRight : Entity
         {
-            return new EntityLinkOnSets<TLeft, TRight>(
+            return new EntityLinkSetToSet<TLeft, TRight>(
                 builder,
                 expandSite,
                 dbSchema
@@ -78,7 +78,7 @@ namespace RadicalR
             where TLeft : Entity
             where TRight : Entity
         {
-            return new EntityLinkOnSets<TLeft, TRight>(
+            return new EntityLinkSetToSet<TLeft, TRight>(
                 builder,
                 leftName,
                 rightName,
@@ -101,7 +101,7 @@ namespace RadicalR
             where TLeft : Entity
             where TRight : Entity
         {
-            return new EntityLinkOnSets<TLeft, TRight>(
+            return new EntityLinkSetToSet<TLeft, TRight>(
                 builder,
                 leftName,
                 leftTableName,
@@ -121,7 +121,7 @@ namespace RadicalR
             where TLeft : Entity
             where TRight : Entity
         {
-            return new EnetityLinkOnRemoteSets<TLeft, TRight>(
+            return new EnetityLinkSetToRemoteSet<TLeft, TRight>(
                 builder,
                 expandSite,
                 dbSchema
@@ -138,7 +138,7 @@ namespace RadicalR
             where TLeft : Entity
             where TRight : Entity
         {
-            return new EnetityLinkOnRemoteSets<TLeft, TRight>(
+            return new EnetityLinkSetToRemoteSet<TLeft, TRight>(
                 builder,
                 leftName,
                 rightName,
@@ -160,7 +160,7 @@ namespace RadicalR
             where TLeft : Entity
             where TRight : Entity
         {
-            return new EnetityLinkOnRemoteSets<TLeft, TRight>(
+            return new EnetityLinkSetToRemoteSet<TLeft, TRight>(
                 builder,
                 leftName,
                 leftTableName,
@@ -172,7 +172,7 @@ namespace RadicalR
             ).Configure();
         }
 
-        public static ModelBuilder LinkToSet<TLeft, TRight>(
+        public static ModelBuilder LinkOneToSet<TLeft, TRight>(
             this ModelBuilder builder,
             ExpandSite expandSite = ExpandSite.None,
               bool autoinclude = false,
@@ -181,10 +181,10 @@ namespace RadicalR
             where TLeft : Entity
             where TRight : Entity
         {
-            return new EntityLinkOnSet<TLeft, TRight>(builder, expandSite).Configure(autoinclude);
+            return new EntityLinkOneToSet<TLeft, TRight>(builder, expandSite).Configure(autoinclude);
         }
 
-        public static ModelBuilder LinkToSet<TLeft, TRight>(
+        public static ModelBuilder LinkOneToSet<TLeft, TRight>(
             this ModelBuilder builder,
             string leftName,
             string rightName,
@@ -195,7 +195,7 @@ namespace RadicalR
             where TLeft : Entity
             where TRight : Entity
         {
-            return new EntityLinkOnSet<TLeft, TRight>(
+            return new EntityLinkOneToSet<TLeft, TRight>(
                 builder,
                 leftName,
                 rightName,
@@ -204,7 +204,7 @@ namespace RadicalR
             ).Configure(autoinclude);
         }
 
-        public static ModelBuilder LinkToSet<TLeft, TRight>(
+        public static ModelBuilder LinkOneToSet<TLeft, TRight>(
             this ModelBuilder builder,
             string leftName,
             string leftTableName,
@@ -218,7 +218,7 @@ namespace RadicalR
             where TLeft : Entity
             where TRight : Entity
         {
-            return new EntityLinkOnSet<TLeft, TRight>(
+            return new EntityLinkOneToSet<TLeft, TRight>(
                 builder,
                 leftName,
                 leftTableName,
@@ -228,7 +228,7 @@ namespace RadicalR
             ).Configure(autoinclude);
         }
 
-        public static ModelBuilder LinkToSingle<TLeft, TRight>(
+        public static ModelBuilder LinkOneToOne<TLeft, TRight>(
             this ModelBuilder builder,
             ExpandSite expandSite = ExpandSite.None,
             bool autoinclude = false,
@@ -237,14 +237,14 @@ namespace RadicalR
             where TLeft : Entity
             where TRight : Entity
         {
-            return new EntityLinkOnSingle<TLeft, TRight>(
+            return new EntityLinkOneToOne<TLeft, TRight>(
                 builder,
                 expandSite,
                 dbSchema
             ).Configure(autoinclude);
         }
 
-        public static ModelBuilder LinkToSingle<TLeft, TRight>(
+        public static ModelBuilder LinkOneToOne<TLeft, TRight>(
             this ModelBuilder builder,
             string leftName,
             string rightName,
@@ -255,7 +255,7 @@ namespace RadicalR
             where TLeft : Entity
             where TRight : Entity
         {
-            return new EntityLinkOnSingle<TLeft, TRight>(
+            return new EntityLinkOneToOne<TLeft, TRight>(
                 builder,
                 leftName,
                 rightName,
@@ -264,7 +264,7 @@ namespace RadicalR
             ).Configure(autoinclude);
         }
 
-        public static ModelBuilder LinkToSingle<TLeft, TRight>(
+        public static ModelBuilder LinkOneToOne<TLeft, TRight>(
             this ModelBuilder builder,
             string leftName,
             string leftTableName,
@@ -278,7 +278,7 @@ namespace RadicalR
             where TLeft : Entity
             where TRight : Entity
         {
-            return new EntityLinkOnSingle<TLeft, TRight>(
+            return new EntityLinkOneToOne<TLeft, TRight>(
                 builder,
                 leftName,
                 leftTableName,

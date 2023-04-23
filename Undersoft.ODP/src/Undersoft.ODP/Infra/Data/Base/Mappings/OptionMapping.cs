@@ -6,19 +6,15 @@ namespace Undersoft.ODP.Infra.Data.Base.Mappings
 {
     using Domain;
 
-    public class ClientMapping : EntityTypeMapping<Client>
+    public class OptionMapping : EntityTypeMapping<Option>
     {
-        const string TABLE_NAME = "Clients";
+        const string TABLE_NAME = "Options";
 
-        public override void Configure(EntityTypeBuilder<Client> builder)
+        public override void Configure(EntityTypeBuilder<Option> builder)
         {
             builder.ToTable(TABLE_NAME, DataBaseSchema.LocalSchema);
 
             builder.Property(p => p.Name).HasMaxLength(100).HasColumnType("varchar").IsRequired();
-
-            modelBuilder.ApplyIdentifiers<Client>();
-
-            modelBuilder.LinkToSet<Client, Session>(nameof(Session.Device), nameof(Client.Sessions), ExpandSite.OnRight);
         }
     }
 }

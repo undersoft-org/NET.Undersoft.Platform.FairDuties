@@ -14,7 +14,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Mappings
         {
             builder.ToTable(TABLE_NAME, DataBaseSchema.LocalSchema);
 
-            modelBuilder.LinkToSet<Contact, Address>(
+            modelBuilder.LinkOneToSet<Contact, Address>(
                 nameof(Address.Contact),
                 nameof(Contact.Addresses), ExpandSite.OnRight);
         }

@@ -39,10 +39,10 @@ namespace Undersoft.ODP.Domain
         public long? LeadershipId { get; set; }
         public virtual Member Leadership { get; set; }
 
-        public long? ScheduleId { get; set; }
-        public virtual Vector Schedule { get; set; }
+        public long? VectorId { get; set; }
+        public virtual Vector Vector { get; set; }
 
-        public virtual EntityOnSets<Member> Users { get; set; }
+        public virtual EntityOnSets<Member> Members { get; set; }
 
         [JsonIgnore]
         [IgnoreDataMember]
@@ -84,13 +84,13 @@ namespace Undersoft.ODP.Domain
 
         [JsonIgnore]
         [IgnoreDataMember]
-        public virtual EntitySet<Vertex> Plans { get; set; }
+        public virtual EntitySet<Vertex> Vertices { get; set; }
 
-        public virtual EntitySet<Vector> ScheduleViews { get; set; }
+        public virtual EntitySet<Vector> VectorViews { get; set; }
 
         [JsonIgnore]
         [IgnoreDataMember]
-        public virtual EntitySet<Duty> Frames { get; set; }
+        public virtual EntitySet<Duty> Duties { get; set; }
 
         public virtual EntitySet<Property> Properties { get; set; }
 
@@ -109,7 +109,7 @@ namespace Undersoft.ODP.Domain
         [JsonIgnore]
         [IgnoreDataMember]
         [IgnoreClientProperty]
-        IEnumerable<ILink> IUsageSet.SourceLinks => Users.Select(i => new Link<Group, Member>() { SourceId = Id, TargetId = i.Id });
+        IEnumerable<ILink> IUsageSet.SourceLinks => Members.Select(i => new Link<Group, Member>() { SourceId = Id, TargetId = i.Id });
 
         [JsonIgnore]
         [IgnoreDataMember]

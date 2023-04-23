@@ -17,7 +17,7 @@ namespace Undersoft.ODP.Domain
 
         [JsonIgnore]
         [IgnoreDataMember]
-        public virtual EntitySet<Member> Users { get; set; }
+        public virtual EntitySet<Member> Members { get; set; }
 
         [JsonIgnore]
         [IgnoreDataMember]

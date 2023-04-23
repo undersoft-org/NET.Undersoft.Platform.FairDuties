@@ -3,17 +3,10 @@ using RadicalR;
 
 namespace Undersoft.ODP.Infra.Data.Base.Contexts
 {
-    public class EventDbContext : EventDbContext<IEventStore, EventDbContext>
-    {
-        public EventDbContext(DbContextOptions<EventDbContext> options) : base(options)
-        {
-        }
-    }
-
-    public partial class EventDbContext<TStore, TContext> : DataBaseContext<TStore> where TStore : IDataStore
+    public partial class EventDb<TStore, TContext> : DataBaseContext<TStore> where TStore : IDataStore
         where TContext : DbContext
     {
-        public EventDbContext(DbContextOptions<TContext> options) : base(options)
+        public EventDb(DbContextOptions<TContext> options) : base(options)
         {
         }
 

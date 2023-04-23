@@ -16,7 +16,7 @@ namespace Undersoft.ODP.Api
 
         public virtual DtoSet<BasicUnion> Unions { get; set; }
 
-        public virtual DtoSet<BasicUser> Users { get; set; }
+        public virtual DtoSet<BasicMember> Members { get; set; }
 
         public virtual DtoSet<BasicGroup> Groups { get; set; }
 

@@ -6,9 +6,9 @@ namespace Undersoft.ODP.Infra.Data.Base.Mappings
 {
     using Domain;
 
-    public class PlanMapping : EntityTypeMapping<Vertex>
+    public class VertexMapping : EntityTypeMapping<Vertex>
     {
-        const string TABLE_NAME = "Plans";
+        const string TABLE_NAME = "Vertices";
 
         public override void Configure(EntityTypeBuilder<Vertex> builder)
         {

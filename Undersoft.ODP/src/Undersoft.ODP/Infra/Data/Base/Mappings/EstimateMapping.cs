@@ -8,29 +8,29 @@ namespace Undersoft.ODP.Infra.Data.Base.Mappings
 
     public class EstamteMapping : EntityTypeMapping<Estimate>
     {
-        const string TABLE_NAME = "FrameRates";
+        const string TABLE_NAME = "Estimates";
 
         public override void Configure(EntityTypeBuilder<Estimate> builder)
         {
             builder.ToTable(TABLE_NAME, DataBaseSchema.LocalSchema);
 
             modelBuilder
-                .LinkToSet<Group, Estimate>(ExpandSite.OnRight)
-                .LinkToSet<Member, Estimate>(ExpandSite.OnRight)
-                .LinkToSet<Union, Estimate>(ExpandSite.OnRight)
-                .LinkToSet<Asset, Estimate>(ExpandSite.OnLeft)
-                  .LinkSetToSet<Estimate, Estimate>(
+                .LinkOneToSet<Group, Estimate>(ExpandSite.OnRight)
+                .LinkOneToSet<Member, Estimate>(ExpandSite.OnRight)
+                .LinkOneToSet<Union, Estimate>(ExpandSite.OnRight)
+                .LinkOneToSet<Asset, Estimate>(ExpandSite.OnLeft)
+                .LinkSetToSet<Estimate, Estimate>(
                     nameof(Estimate.DependentOn),
-                    "FrameRates",
+                    "Estimates",
                     nameof(Estimate.DependentBy),
-                    "FrameRateDependencies",
+                    "EstimateDependencies",
                     ExpandSite.OnRight
                 )
-                   .LinkSetToSet<Estimate, Estimate>(
+                .LinkSetToSet<Estimate, Estimate>(
                     nameof(Estimate.OptionalTo),
-                    "FrameRates",
+                    "Estimates",
                     nameof(Estimate.OptionalFrom),
-                    "FrameRateOptionals",
+                    "EstimateOptionals",
                     ExpandSite.OnRight
                 );
         }

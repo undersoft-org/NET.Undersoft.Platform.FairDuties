@@ -2,16 +2,16 @@
 
 namespace RadicalR
 {
-    public class RemoteLinkOnSets<TOrigin, TTarget, TMiddle> : RemoteLink<TOrigin, TTarget, TMiddle> where TOrigin : class, IIdentifiable where TMiddle : class, IIdentifiable where TTarget : class, IIdentifiable
+    public class RemoteLinkSetToSet<TOrigin, TTarget, TMiddle> : RemoteLink<TOrigin, TTarget, TMiddle> where TOrigin : class, IIdentifiable where TMiddle : class, IIdentifiable where TTarget : class, IIdentifiable
     {
         private Expression<Func<TTarget, object>> targetKey;
         private Func<TMiddle, object> middleKey;
         private Func<TOrigin, IEnumerable<TMiddle>> middleSet;
 
-        public RemoteLinkOnSets() : base()
+        public RemoteLinkSetToSet() : base()
         {
         }
-        public RemoteLinkOnSets(Expression<Func<TOrigin, IEnumerable<TMiddle>>> middleset,
+        public RemoteLinkSetToSet(Expression<Func<TOrigin, IEnumerable<TMiddle>>> middleset,
                                    Expression<Func<TMiddle, object>> middlekey,
                                    Expression<Func<TTarget, object>> targetkey) : base()
         {

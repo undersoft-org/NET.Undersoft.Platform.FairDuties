@@ -4,10 +4,10 @@ using RadicalR;
 namespace Undersoft.ODP.Api
 {
     [DataContract]
-    public class BasicUser : Dto
+    public class BasicMember : Dto
     {
         [DataMember(Order = 0)]
-        public string UserName { get; set; }
+        public string MemberName { get; set; }
 
         [DataMember(Order = 1)]
         public string Email { get; set; }

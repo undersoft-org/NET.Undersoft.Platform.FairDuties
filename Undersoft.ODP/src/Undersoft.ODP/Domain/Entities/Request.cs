@@ -1,10 +1,7 @@
 ﻿using RadicalR;
-using System.Runtime.Serialization;
-using System.Text.Json.Serialization;
 
 namespace Undersoft.ODP.Domain
 {
-    [DataContract]
     public class Request : Entity
     {
         public string Reason { get; set; }
@@ -16,17 +13,11 @@ namespace Undersoft.ODP.Domain
         public RequestStatus Status { get; set; }
 
         public long? GroupId { get; set; }
-        [JsonIgnore]
-        [IgnoreDataMember]
         public virtual Group Group { get; set; }
 
-        public long? UserId { get; set; }
-        [JsonIgnore]
-        [IgnoreDataMember]
-        public virtual Member User { get; set; }
+        public long? MemberId { get; set; }
+        public virtual Member Member { get; set; }
 
-        [JsonIgnore]
-        [IgnoreDataMember]
-        public virtual EntityOnSets<Duty> Frames { get; set; }
+        public virtual EntitySet<Duty> Duties { get; set; }
     }
 }

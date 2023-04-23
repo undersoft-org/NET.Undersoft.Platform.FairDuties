@@ -12,37 +12,36 @@ namespace Undersoft.ODP.Infra.Data.Base.Mappings
 
         public override void Configure(EntityTypeBuilder<Member> builder)
         {
-            builder
-                .ToTable(TABLE_NAME, DataBaseSchema.LocalSchema);
+            builder.ToTable(TABLE_NAME, DataBaseSchema.LocalSchema);
 
-            builder
-                .Property(p => p.UserName)
-                .HasMaxLength(64)
-                .HasColumnType("varchar")
-                .IsRequired();
+            builder.Property(p => p.Name).HasMaxLength(64).HasColumnType("varchar").IsRequired();
 
-            builder.Property(p => p.Email)
-                .HasMaxLength(100)
-                .HasColumnType("varchar")
-                .IsRequired();
+            builder.Property(p => p.Email).HasMaxLength(100).HasColumnType("varchar").IsRequired();
 
-            builder.Property(p => p.PhoneNumber)
-                .HasMaxLength(50)
-                .HasColumnType("varchar");
+            builder.Property(p => p.PhoneNumber).HasMaxLength(50).HasColumnType("varchar");
 
             modelBuilder
                 .ApplyIdentifiers<Member>()
-
-                .LinkSetToSet<Member, Property>(ExpandSite.OnRight, true)
+                .LinkSetToSet<Member, Property>(
+                    nameof(Property.Members),
+                    nameof(Member.Properties),
+                    ExpandSite.OnRight
+                )
                 .LinkSetToSet<Member, Group>(ExpandSite.OnLeft)
-                .LinkToSingle<Member, Setup>(ExpandSite.OnRight)
-                .LinkToSet<Member, Role>(ExpandSite.OnRight)
-                .LinkToSet<Member, Duty>(ExpandSite.OnRight)
-                .LinkToSet<Member, Request>(ExpandSite.OnRight)
-                .LinkToSingle<Profile, Member>(ExpandSite.OnLeft)
-                .LinkToSet<Member, Group>(
-                nameof(Group.Leadership),
-                nameof(Member.Leaderships), ExpandSite.OnRight);
+                .LinkOneToOne<Member, Setup>(ExpandSite.OnRight)
+                .LinkOneToSet<Member, Role>(ExpandSite.OnRight)
+                .LinkOneToSet<Member, Duty>(
+                    nameof(Duty.Member),
+                    nameof(Member.Duties),
+                    ExpandSite.OnRight
+                )
+                .LinkOneToSet<Member, Request>(ExpandSite.OnRight)
+                .LinkOneToOne<Profile, Member>(ExpandSite.OnLeft)
+                .LinkOneToSet<Member, Group>(
+                    nameof(Group.Leadership),
+                    nameof(Member.Leaderships),
+                    ExpandSite.OnRight
+                );
         }
     }
 }

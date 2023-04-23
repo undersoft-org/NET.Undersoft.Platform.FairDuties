@@ -26,9 +26,14 @@ namespace RadicalR
 {
     public partial class ServiceSetup : IServiceSetup
     {
-        string[] apiVersions = new string[1] { "1" };
-        Assembly[] Assemblies;
-        IMvcBuilder mvc;
+        private string[] apiVersions = new string[1] { "1" };
+        private Assembly[] Assemblies;
+        private IMvcBuilder mvc;
+
+        private IServiceConfiguration configuration => manager.Configuration;
+        private IServiceManager manager { get; }
+        private IServiceRegistry registry { get; set; }
+        private IServiceCollection services => registry.Services;
 
         public ServiceSetup(IServiceCollection services, IMvcBuilder mvcBuilder = null)
         {
@@ -46,6 +51,51 @@ namespace RadicalR
             : this(services)
         {
             manager.Configuration = new ServiceConfiguration(configuration, services);
+        }     
+      
+        public IServiceRegistry Services => registry;
+
+        public IServiceSetup AddCaching()
+        {
+            registry.AddObject(GlobalCache.Catalog);
+
+            Type[] stores = new Type[]
+            {
+                typeof(IEntryStore),
+                typeof(IReportStore),
+                typeof(IEventStore)
+            };
+            foreach (Type item in stores)
+            {
+                AddStoreCache(item);
+            }
+
+            return this;
+        }
+
+        public IServiceSetup AddDataServices<TServiceStore>(DataServiceTypes dataServiceTypes, Action<DataServiceBuilder> builder) where TServiceStore : IDataServiceStore
+        {
+            DataServiceBuilder.ServiceTypes = dataServiceTypes;
+            if ((dataServiceTypes & DataServiceTypes.OData) > 0)
+            {
+                var ds = new DataServiceBuilder<TServiceStore>();
+                builder.Invoke(ds);
+                ds.Build();
+                ds.AddOData(mvc);
+            }
+            if ((dataServiceTypes & DataServiceTypes.Grpc) > 0)
+            {
+                var ds = new GrpcServiceBuilder<TServiceStore>();
+                builder.Invoke(ds);
+                ds.Build();
+            }
+            //if ((dataServiceTypes & DataServiceTypes.Rest) > 0)
+            //{
+            //    var ds = new RestServiceBuilder<TServiceStore>();
+            //    builder.Invoke(ds);
+            //    ds.Build();
+            //}
+            return this;
         }
 
         public void AddJsonSerializerDefaults()
@@ -62,10 +112,8 @@ namespace RadicalR
                         .GetValue(null)
             );
 
-            //opt.PropertyNameCaseInsensitive = true;
             opt.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
             opt.ReferenceHandler = ReferenceHandler.IgnoreCycles;
-            opt.WriteIndented = true;
 #endif
 #if NET7_0
 
@@ -75,26 +123,6 @@ namespace RadicalR
             flds.Single(f => f.Name == "_referenceHandler")
                 .SetValue(JsonSerializerOptions.Default, ReferenceHandler.IgnoreCycles);
 #endif
-        }
-
-        void AddDataBaseConfiguration(IDataBaseContext context)
-        {
-            DataBaseContext _context = context as DataBaseContext;
-            _context.ChangeTracker.AutoDetectChangesEnabled = true;
-            _context.ChangeTracker.LazyLoadingEnabled = true;
-            _context.Database.AutoTransactionsEnabled = false;
-        }
-
-        string AddDataClientPrefix(Type contextType, string routePrefix = null)
-        {
-            Type iface = DataClientRegistry.GetRemoteStore(contextType);
-            return GetStoreRoutes(iface, routePrefix);
-        }
-
-        string AddDataServiceEndpointPrefix(Type contextType, string routePrefix = null)
-        {
-            Type iface = DataBaseRegistry.GetDbStore(contextType);
-            return GetStoreRoutes(iface, routePrefix);
         }
 
         public IServiceSetup AddMvcDataServiceSupport()
@@ -123,108 +151,6 @@ namespace RadicalR
                     );
                 }
             });
-            return this;
-        }
-
-        string GetStoreRoutes(Type iface, string routePrefix = null)
-        {
-            if (iface == typeof(IEntryStore))
-            {
-                return (routePrefix != null)
-                    ? (StoreRoutes.EntryStore = routePrefix)
-                    : StoreRoutes.EntryStore;
-            }
-            else if (iface == typeof(IEventStore))
-            {
-                return (routePrefix != null)
-                    ? (StoreRoutes.EventStore = routePrefix)
-                    : StoreRoutes.EventStore;
-            }
-            else if (iface == typeof(IReportStore))
-            {
-                return (routePrefix != null)
-                    ? (StoreRoutes.ReportStore = routePrefix)
-                    : StoreRoutes.ReportStore;
-            }
-            else if (iface == typeof(ICqrsStore))
-            {
-                return (routePrefix != null)
-                    ? (StoreRoutes.CqrsStore = routePrefix)
-                    : StoreRoutes.CqrsStore;
-            }
-            else
-            {
-                return (routePrefix != null)
-                    ? (StoreRoutes.CqrsStore = routePrefix)
-                    : StoreRoutes.CqrsStore;
-            }
-        }
-
-        IServiceConfiguration configuration => manager.Configuration;
-
-        IServiceManager manager { get; }
-
-        IServiceRegistry registry { get; set; }
-
-        IServiceCollection services => registry.Services;
-
-        public IServiceRegistry Services => registry;
-
-        public IServiceSetup AddCaching()
-        {
-            registry.AddObject(GlobalCache.Catalog);
-
-            Type[] stores = new Type[]
-            {
-                typeof(IEntryStore),
-                typeof(IReportStore),
-                typeof(IEventStore)
-            };
-            foreach (Type item in stores)
-            {
-                AddStoreCache(item);
-            }
-
-            return this;
-        }
-
-        public IServiceSetup AddStoreCache(Type tstore)
-        {
-            Type idatacache = typeof(IStoreCache<>).MakeGenericType(tstore);
-            Type datacache = typeof(StoreCache<>).MakeGenericType(tstore);
-
-            object cache = datacache.New(registry.GetObject<IDataCache>());
-            registry.AddObject(idatacache, cache);
-            registry.AddObject(datacache, cache);
-
-            return this;
-        }
-
-        public IServiceSetup AddDataServices<TServiceStore>(
-            DataServiceTypes dataServiceTypes,
-            Action<DataServiceBuilder> builder
-        ) where TServiceStore : IDataServiceStore
-        {
-            DataServiceBuilder.ServiceTypes = dataServiceTypes;
-            if ((dataServiceTypes & DataServiceTypes.OData) > 0)
-            {
-                var ds = new DataServiceBuilder<TServiceStore>();
-                builder.Invoke(ds);
-                ds.Build();
-                ds.AddOData(mvc);
-            }
-            if ((dataServiceTypes & DataServiceTypes.Grpc) > 0)
-            {
-                var ds = new GrpcServiceBuilder<TServiceStore>();
-                builder.Invoke(ds);
-                ds.Build();
-            }
-            //if ((dataServiceTypes & DataServiceTypes.Rest) > 0)
-            //{
-            //    var ds = new RestServiceBuilder<TServiceStore>();
-            //    builder.Invoke(ds);
-            //    ds.Build();
-            //}
             return this;
         }
 
@@ -514,7 +440,7 @@ namespace RadicalR
                         }
                     }
                 );
-                //options.OperationFilter<AuthorizeCheckOperationFilter>();
+                options.OperationFilter<AuthorizeCheckOperationFilter>();
             });
             return this;
         }
@@ -571,6 +497,8 @@ namespace RadicalR
                     {
                         routePrefix = routePrefix.Substring(1);
                     }
+
+                    routePrefix = routePrefix + "/" + provider.ToString().ToLower();
 
                     string _connectionString = $"{connectionString}{routePrefix}";
 
@@ -782,6 +710,72 @@ namespace RadicalR
             registry.MergeServices();
 
             return this;
+        }
+
+        private IServiceSetup AddStoreCache(Type tstore)
+        {
+            Type idatacache = typeof(IStoreCache<>).MakeGenericType(tstore);
+            Type datacache = typeof(StoreCache<>).MakeGenericType(tstore);
+
+            object cache = datacache.New(registry.GetObject<IDataCache>());
+            registry.AddObject(idatacache, cache);
+            registry.AddObject(datacache, cache);
+
+            return this;
+        }
+
+        private void AddDataBaseConfiguration(IDataBaseContext context)
+        {
+            DataBaseContext _context = context as DataBaseContext;
+            _context.ChangeTracker.AutoDetectChangesEnabled = true;
+            _context.ChangeTracker.LazyLoadingEnabled = true;
+            _context.Database.AutoTransactionsEnabled = false;
+        }
+
+        private string AddDataClientPrefix(Type contextType, string routePrefix = null)
+        {
+            Type iface = DataClientRegistry.GetRemoteStore(contextType);
+            return GetStoreRoutes(iface, routePrefix);
+        }
+
+        private string AddDataServiceEndpointPrefix(Type contextType, string routePrefix = null)
+        {
+            Type iface = DataBaseRegistry.GetDbStore(contextType);
+            return GetStoreRoutes(iface, routePrefix);
+        }
+
+        private string GetStoreRoutes(Type iface, string routePrefix = null)
+        {
+            if (iface == typeof(IEntryStore))
+            {
+                return (routePrefix != null)
+                    ? (StoreRoutes.EntryStore = routePrefix)
+                    : StoreRoutes.EntryStore;
+            }
+            else if (iface == typeof(IEventStore))
+            {
+                return (routePrefix != null)
+                    ? (StoreRoutes.EventStore = routePrefix)
+                    : StoreRoutes.EventStore;
+            }
+            else if (iface == typeof(IReportStore))
+            {
+                return (routePrefix != null)
+                    ? (StoreRoutes.ReportStore = routePrefix)
+                    : StoreRoutes.ReportStore;
+            }
+            else if (iface == typeof(ICqrsStore))
+            {
+                return (routePrefix != null)
+                    ? (StoreRoutes.CqrsStore = routePrefix)
+                    : StoreRoutes.CqrsStore;
+            }
+            else
+            {
+                return (routePrefix != null)
+                    ? (StoreRoutes.CqrsStore = routePrefix)
+                    : StoreRoutes.CqrsStore;
+            }
         }
     }
 }

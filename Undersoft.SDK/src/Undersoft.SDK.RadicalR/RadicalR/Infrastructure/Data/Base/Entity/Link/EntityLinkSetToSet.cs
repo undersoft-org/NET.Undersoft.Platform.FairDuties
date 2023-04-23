@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace RadicalR
 {
-    public class EnetityLinkOnRemoteSets<TLeft, TRight>
+    public class EntityLinkSetToSet<TLeft, TRight>
         where TLeft : Entity
         where TRight : Entity
     {
@@ -12,7 +12,9 @@ namespace RadicalR
         private readonly string RIGHT_TABLE_NAME = typeof(TRight).Name + "s";
         private readonly string LEFT_NAME = typeof(TLeft).Name + "s";
         private readonly string RIGHT_NAME =
-            typeof(TRight).Name.Replace(typeof(TLeft).Name, "") + "s";
+            typeof(TRight).Name != typeof(TLeft).Name
+                ? typeof(TRight).Name.Replace(typeof(TLeft).Name, "") + "s"
+                : typeof(TRight).Name + "s";
         private readonly string LEFT_SCHEMA = null;
         private readonly string RIGHT_SCHEMA = null;
 
@@ -22,13 +24,13 @@ namespace RadicalR
         private readonly EntityTypeBuilder<TRight> _secondBuilder;
         private readonly EntityTypeBuilder<EntityLink<TLeft, TRight>> _relationBuilder;
 
-        public EnetityLinkOnRemoteSets(
+        public EntityLinkSetToSet(
             ModelBuilder modelBuilder,
             ExpandSite expandSite = ExpandSite.None,
             string dbSchema = null
         ) : this(modelBuilder, null, null, null, null, expandSite, dbSchema, dbSchema) { }
 
-        public EnetityLinkOnRemoteSets(
+        public EntityLinkSetToSet(
             ModelBuilder modelBuilder,
             string leftName,
             string rightName,
@@ -38,16 +40,16 @@ namespace RadicalR
             : this(
                 modelBuilder,
                 leftName,
-                leftName,
+                null,
                 rightName,
-                rightName,
+                null,
                 expandSite,
                 dbSchema,
                 dbSchema
             )
         { }
 
-        public EnetityLinkOnRemoteSets(
+        public EntityLinkSetToSet(
             ModelBuilder modelBuilder,
             string leftName,
             string leftTableName,
@@ -77,38 +79,61 @@ namespace RadicalR
             if (childSchema != null)
                 RIGHT_SCHEMA = childSchema;
 
-            RELATION_TABLE_NAME = LEFT_NAME + "To" + RIGHT_NAME;
+            RELATION_TABLE_NAME = LEFT_TABLE_NAME + "To" + RIGHT_TABLE_NAME;
         }
 
-        public ModelBuilder Configure()
+        public ModelBuilder Configure(bool autoinclude = false)
         {
+            //if (LEFT_SCHEMA != null && RIGHT_NAME != null)
+            //{
+            //    _firstBuilder.ToTable(LEFT_TABLE_NAME, LEFT_SCHEMA);
+            //    _secondBuilder.ToTable(RIGHT_TABLE_NAME, RIGHT_SCHEMA);
+            //}
             _relationBuilder.ToTable(RELATION_TABLE_NAME, DataBaseSchema.RelationSchema);
-            _relationBuilder.HasKey(k => new { k.LeftEntityId, k.RightEntityId });
-
-            _relationBuilder
-                .HasOne(a => a.RightEntity)
-                .WithMany(RELATION_TABLE_NAME)
-                .HasForeignKey(a => a.RightEntityId);
-
-            _relationBuilder
-                .HasOne(a => a.LeftEntity)
-                .WithMany(RELATION_TABLE_NAME)
-                .HasForeignKey(a => a.LeftEntityId);
 
             _firstBuilder
-                .HasMany<EntityLink<TLeft, TRight>>(RELATION_TABLE_NAME)
-                .WithOne(p => p.LeftEntity)
-                .HasForeignKey(k => k.LeftEntityId);
+                .HasMany<TRight>(RIGHT_NAME)
+                .WithMany(LEFT_NAME)
+                .UsingEntity<EntityLink<TLeft, TRight>>(
+                    j => j.HasOne(a => a.RightEntity).WithMany(),
+                    //.WithMany(RELATION_TABLE_NAME)
+                    //.HasForeignKey(a => a.RightEntityId),
 
-            _secondBuilder
-                .HasMany<EntityLink<TLeft, TRight>>(RELATION_TABLE_NAME)
-                .WithOne(p => p.RightEntity)
-                .HasForeignKey(k => k.RightEntityId);
+                    j => j.HasOne(a => a.LeftEntity).WithMany(),
+                    //.WithMany(RELATION_TABLE_NAME)
+                    //.HasForeignKey(a => a.LeftEntityId),
 
-            if ((_expandSite & (ExpandSite.OnRight | ExpandSite.WithMany)) > 0)
-                _firstBuilder.Navigation(RELATION_TABLE_NAME);
-            else
-                _secondBuilder.Navigation(RELATION_TABLE_NAME);
+                    j =>
+                    {
+                        j.HasKey(k => new { k.LeftEntityId, k.RightEntityId });
+                    }
+                );
+
+            if (_expandSite != ExpandSite.None)
+            {
+                if ((_expandSite & (ExpandSite.OnRight | ExpandSite.WithMany)) > 0)
+                {
+                    if (!autoinclude)
+                    {
+                        _firstBuilder.Navigation(RIGHT_NAME);
+                    }
+                    else
+                    {
+                        _firstBuilder.Navigation(RIGHT_NAME).AutoInclude();
+                    }
+                }
+                if ((_expandSite & (ExpandSite.OnLeft | ExpandSite.WithMany)) > 0)
+                {
+                    if (!autoinclude)
+                    {
+                        _secondBuilder.Navigation(LEFT_NAME);
+                    }
+                    else
+                    {
+                        _secondBuilder.Navigation(LEFT_NAME).AutoInclude();
+                    }
+                }
+            }
 
             return _modelBuilder;
         }

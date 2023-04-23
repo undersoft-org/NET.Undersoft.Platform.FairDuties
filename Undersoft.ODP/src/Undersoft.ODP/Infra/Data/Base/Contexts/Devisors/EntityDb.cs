@@ -6,21 +6,11 @@ namespace Undersoft.ODP.Infra.Data.Base.Contexts
     using Domain;
     using Mappings;
 
-    public class EntryDbContext : EntityDbContext<IEntryStore, EntryDbContext>
-    {
-        public EntryDbContext(DbContextOptions<EntryDbContext> options) : base(options) { }
-    }
-
-    public class ReportDbContext : EntityDbContext<IReportStore, ReportDbContext>
-    {
-        public ReportDbContext(DbContextOptions<ReportDbContext> options) : base(options) { }
-    }
-
-    public partial class EntityDbContext<TStore, TContext> : DataBaseContext<TStore>
+    public class EntityDb<TStore, TContext> : DataBaseContext<TStore>
         where TStore : IDataStore
         where TContext : DbContext
     {
-        public EntityDbContext(DbContextOptions<TContext> options) : base(options) { }
+        public EntityDb(DbContextOptions<TContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -31,7 +21,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Contexts
                 .ApplyMapping(new EstamteMapping())
                 .ApplyMapping(new DutyMapping())
                 .ApplyMapping(new RequestMapping())
-                .ApplyMapping(new PlanMapping())
+                .ApplyMapping(new VertexMapping())
                 .ApplyMapping(new VectorMapping())
                 .ApplyMapping(new SetupMapping())
                 .ApplyMapping(new UnionMapping())

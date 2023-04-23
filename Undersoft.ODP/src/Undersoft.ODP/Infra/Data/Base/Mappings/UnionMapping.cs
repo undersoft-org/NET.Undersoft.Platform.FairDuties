@@ -27,9 +27,9 @@ namespace Undersoft.ODP.Infra.Data.Base.Mappings
             modelBuilder
                 .LinkSetToSet<Union, Property>(ExpandSite.OnRight)
                 .LinkSetToSet<Union, Member>(ExpandSite.OnRight)
-                .LinkToSet<Union, Group>(ExpandSite.OnRight)
-                .LinkToSet<Union, Duty>(ExpandSite.OnRight)
-                .LinkToSingle<Union, Setup>(ExpandSite.OnRight);
+                .LinkOneToSet<Union, Group>(ExpandSite.OnRight)
+                .LinkOneToSet<Union, Duty>(ExpandSite.OnRight)
+                .LinkOneToOne<Union, Setup>(ExpandSite.OnRight);
         }
     }
 }

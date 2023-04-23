@@ -9,7 +9,7 @@ namespace Undersoft.ODP.Api
 
         public long? GroupId { get; set; }
 
-        public long? UserId { get; set; }
+        public long? MemberId { get; set; }
 
         public virtual DtoSet<Option> Settings { get; set; }
     }

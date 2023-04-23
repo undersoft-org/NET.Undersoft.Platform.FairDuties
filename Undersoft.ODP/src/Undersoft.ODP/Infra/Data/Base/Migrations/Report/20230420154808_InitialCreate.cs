@@ -208,7 +208,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     FullName = table.Column<string>(type: "varchar", maxLength: 100, nullable: true),
                     Birthdate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     Age = table.Column<int>(type: "integer", nullable: false),
-                    UserId = table.Column<long>(type: "bigint", nullable: true),
+                    MemberId = table.Column<long>(type: "bigint", nullable: true),
                     OriginName = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: true),
                     Modified = table.Column<DateTime>(type: "timestamp", nullable: false),
                     Modifier = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: true),
@@ -638,16 +638,16 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                 });
 
             migrationBuilder.CreateTable(
-                name: "Users",
+                name: "Members",
                 schema: "Local",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false),
-                    UserName = table.Column<string>(type: "varchar", maxLength: 64, nullable: false),
+                    MemberName = table.Column<string>(type: "varchar", maxLength: 64, nullable: false),
                     Email = table.Column<string>(type: "varchar", maxLength: 100, nullable: false),
                     PhoneNumber = table.Column<string>(type: "varchar", maxLength: 50, nullable: true),
                     PersonalId = table.Column<long>(type: "bigint", nullable: true),
-                    UserId = table.Column<long>(type: "bigint", nullable: true),
+                    MemberId = table.Column<long>(type: "bigint", nullable: true),
                     SetupId = table.Column<long>(type: "bigint", nullable: true),
                     LastEstimateOrdinal = table.Column<int>(type: "integer", nullable: false),
                     Label = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: true),
@@ -666,10 +666,10 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.Id);
+                    table.PrimaryKey("PK_Members", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Users_Personals_UserId",
-                        column: x => x.UserId,
+                        name: "FK_Members_Personals_MemberId",
+                        column: x => x.MemberId,
                         principalSchema: "Local",
                         principalTable: "Personals",
                         principalColumn: "Id",
@@ -918,7 +918,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                 });
 
             migrationBuilder.CreateTable(
-                name: "UnionsToUsers",
+                name: "UnionsToMembers",
                 schema: "Relation",
                 columns: table => new
                 {
@@ -941,25 +941,25 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UnionsToUsers", x => new { x.LeftEntityId, x.RightEntityId });
+                    table.PrimaryKey("PK_UnionsToMembers", x => new { x.LeftEntityId, x.RightEntityId });
                     table.ForeignKey(
-                        name: "FK_UnionsToUsers_Unions_LeftEntityId",
+                        name: "FK_UnionsToMembers_Unions_LeftEntityId",
                         column: x => x.LeftEntityId,
                         principalSchema: "Local",
                         principalTable: "Unions",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UnionsToUsers_Users_RightEntityId",
+                        name: "FK_UnionsToMembers_Members_RightEntityId",
                         column: x => x.RightEntityId,
                         principalSchema: "Local",
-                        principalTable: "Users",
+                        principalTable: "Members",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "AssetsToUsers",
+                name: "AssetsToMembers",
                 schema: "Relation",
                 columns: table => new
                 {
@@ -982,19 +982,19 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AssetsToUsers", x => new { x.LeftEntityId, x.RightEntityId });
+                    table.PrimaryKey("PK_AssetsToMembers", x => new { x.LeftEntityId, x.RightEntityId });
                     table.ForeignKey(
-                        name: "FK_AssetsToUsers_Assets_LeftEntityId",
+                        name: "FK_AssetsToMembers_Assets_LeftEntityId",
                         column: x => x.LeftEntityId,
                         principalSchema: "Local",
                         principalTable: "Assets",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_AssetsToUsers_Users_RightEntityId",
+                        name: "FK_AssetsToMembers_Members_RightEntityId",
                         column: x => x.RightEntityId,
                         principalSchema: "Local",
-                        principalTable: "Users",
+                        principalTable: "Members",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -1044,16 +1044,16 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Groups_Users_LeadershipId",
+                        name: "FK_Groups_Members_LeadershipId",
                         column: x => x.LeadershipId,
                         principalSchema: "Local",
-                        principalTable: "Users",
+                        principalTable: "Members",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserIdentifiers",
+                name: "MemberIdentifiers",
                 schema: "Identifier",
                 columns: table => new
                 {
@@ -1079,25 +1079,25 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserIdentifiers", x => x.Id);
+                    table.PrimaryKey("PK_MemberIdentifiers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UserIdentifiers_Users_EntityId",
+                        name: "FK_MemberIdentifiers_Members_EntityId",
                         column: x => x.EntityId,
                         principalSchema: "Local",
-                        principalTable: "Users",
+                        principalTable: "Members",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserRoles",
+                name: "MemberRoles",
                 schema: "Local",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false),
                     Name = table.Column<string>(type: "varchar", maxLength: 64, nullable: false),
                     Type = table.Column<int>(type: "integer", nullable: false),
-                    UserId = table.Column<long>(type: "bigint", nullable: true),
+                    MemberId = table.Column<long>(type: "bigint", nullable: true),
                     OriginName = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: true),
                     Modified = table.Column<DateTime>(type: "timestamp", nullable: false),
                     Modifier = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: true),
@@ -1114,18 +1114,18 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserRoles", x => x.Id);
+                    table.PrimaryKey("PK_MemberRoles", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UserRoles_Users_UserId",
-                        column: x => x.UserId,
+                        name: "FK_MemberRoles_Members_MemberId",
+                        column: x => x.MemberId,
                         principalSchema: "Local",
-                        principalTable: "Users",
+                        principalTable: "Members",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "UsersToProperties",
+                name: "MembersToProperties",
                 schema: "Relation",
                 columns: table => new
                 {
@@ -1148,25 +1148,25 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UsersToProperties", x => new { x.LeftEntityId, x.RightEntityId });
+                    table.PrimaryKey("PK_MembersToProperties", x => new { x.LeftEntityId, x.RightEntityId });
                     table.ForeignKey(
-                        name: "FK_UsersToProperties_Properties_RightEntityId",
+                        name: "FK_MembersToProperties_Properties_RightEntityId",
                         column: x => x.RightEntityId,
                         principalSchema: "Local",
                         principalTable: "Properties",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UsersToProperties_Users_LeftEntityId",
+                        name: "FK_MembersToProperties_Members_LeftEntityId",
                         column: x => x.LeftEntityId,
                         principalSchema: "Local",
-                        principalTable: "Users",
+                        principalTable: "Members",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "UsersToPlans",
+                name: "MembersToPlans",
                 schema: "Relation",
                 columns: table => new
                 {
@@ -1189,19 +1189,19 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UsersToPlans", x => new { x.LeftEntityId, x.RightEntityId });
+                    table.PrimaryKey("PK_MembersToPlans", x => new { x.LeftEntityId, x.RightEntityId });
                     table.ForeignKey(
-                        name: "FK_UsersToPlans_Plans_RightEntityId",
+                        name: "FK_MembersToPlans_Plans_RightEntityId",
                         column: x => x.RightEntityId,
                         principalSchema: "Local",
                         principalTable: "Plans",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UsersToPlans_Users_LeftEntityId",
+                        name: "FK_MembersToPlans_Members_LeftEntityId",
                         column: x => x.LeftEntityId,
                         principalSchema: "Local",
-                        principalTable: "Users",
+                        principalTable: "Members",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -1271,7 +1271,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     UnionId = table.Column<long>(type: "bigint", nullable: true),
                     GroupId = table.Column<long>(type: "bigint", nullable: true),
                     SetupId = table.Column<long>(type: "bigint", nullable: true),
-                    UserId = table.Column<long>(type: "bigint", nullable: true),
+                    MemberId = table.Column<long>(type: "bigint", nullable: true),
                     AttributeId = table.Column<long>(type: "bigint", nullable: true),
                     OriginName = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: true),
                     Modified = table.Column<DateTime>(type: "timestamp", nullable: false),
@@ -1312,10 +1312,10 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Setups_Users_SetupId",
+                        name: "FK_Setups_Members_SetupId",
                         column: x => x.SetupId,
                         principalSchema: "Local",
-                        principalTable: "Users",
+                        principalTable: "Members",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -1393,7 +1393,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     OptionalFromAny = table.Column<bool>(type: "boolean", nullable: false),
                     UnionId = table.Column<long>(type: "bigint", nullable: true),
                     GroupId = table.Column<long>(type: "bigint", nullable: true),
-                    UserId = table.Column<long>(type: "bigint", nullable: true),
+                    MemberId = table.Column<long>(type: "bigint", nullable: true),
                     FrameTypeId = table.Column<long>(type: "bigint", nullable: true),
                     OriginName = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: true),
                     Modified = table.Column<DateTime>(type: "timestamp", nullable: false),
@@ -1434,10 +1434,10 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_FrameRates_Users_UserId",
-                        column: x => x.UserId,
+                        name: "FK_FrameRates_Members_MemberId",
+                        column: x => x.MemberId,
                         principalSchema: "Local",
-                        principalTable: "Users",
+                        principalTable: "Members",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -1453,7 +1453,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     Type = table.Column<int>(type: "integer", nullable: false),
                     Status = table.Column<int>(type: "integer", nullable: false),
                     GroupId = table.Column<long>(type: "bigint", nullable: true),
-                    UserId = table.Column<long>(type: "bigint", nullable: true),
+                    MemberId = table.Column<long>(type: "bigint", nullable: true),
                     OriginName = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: true),
                     Modified = table.Column<DateTime>(type: "timestamp", nullable: false),
                     Modifier = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: true),
@@ -1479,10 +1479,10 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Requests_Users_UserId",
-                        column: x => x.UserId,
+                        name: "FK_Requests_Members_MemberId",
+                        column: x => x.MemberId,
                         principalSchema: "Local",
-                        principalTable: "Users",
+                        principalTable: "Members",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -1611,7 +1611,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                 });
 
             migrationBuilder.CreateTable(
-                name: "UsersToGroups",
+                name: "MembersToGroups",
                 schema: "Relation",
                 columns: table => new
                 {
@@ -1634,19 +1634,19 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UsersToGroups", x => new { x.LeftEntityId, x.RightEntityId });
+                    table.PrimaryKey("PK_MembersToGroups", x => new { x.LeftEntityId, x.RightEntityId });
                     table.ForeignKey(
-                        name: "FK_UsersToGroups_Groups_RightEntityId",
+                        name: "FK_MembersToGroups_Groups_RightEntityId",
                         column: x => x.RightEntityId,
                         principalSchema: "Local",
                         principalTable: "Groups",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UsersToGroups_Users_LeftEntityId",
+                        name: "FK_MembersToGroups_Members_LeftEntityId",
                         column: x => x.LeftEntityId,
                         principalSchema: "Local",
-                        principalTable: "Users",
+                        principalTable: "Members",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -1699,7 +1699,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                     Id = table.Column<long>(type: "bigint", nullable: false),
                     UnionId = table.Column<long>(type: "bigint", nullable: true),
                     GroupId = table.Column<long>(type: "bigint", nullable: true),
-                    UserId = table.Column<long>(type: "bigint", nullable: true),
+                    MemberId = table.Column<long>(type: "bigint", nullable: true),
                     FrameTypeId = table.Column<long>(type: "bigint", nullable: true),
                     ScheduleId = table.Column<long>(type: "bigint", nullable: true),
                     FrameRateId = table.Column<long>(type: "bigint", nullable: true),
@@ -1755,10 +1755,10 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Frames_Users_UserId",
-                        column: x => x.UserId,
+                        name: "FK_Frames_Members_MemberId",
+                        column: x => x.MemberId,
                         principalSchema: "Local",
-                        principalTable: "Users",
+                        principalTable: "Members",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -2050,9 +2050,9 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                 column: "RightEntityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UnionsToUsers_RightEntityId",
+                name: "IX_UnionsToMembers_RightEntityId",
                 schema: "Relation",
-                table: "UnionsToUsers",
+                table: "UnionsToMembers",
                 column: "RightEntityId");
 
             migrationBuilder.CreateIndex(
@@ -2134,10 +2134,10 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                 column: "GroupId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_FrameRates_UserId",
+                name: "IX_FrameRates_MemberId",
                 schema: "Local",
                 table: "FrameRates",
-                column: "UserId");
+                column: "MemberId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_FrameRatesToFrameRateOptionals_RightEntityId",
@@ -2158,10 +2158,10 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                 column: "GroupId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Requests_UserId",
+                name: "IX_Requests_MemberId",
                 schema: "Local",
                 table: "Requests",
-                column: "UserId");
+                column: "MemberId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Frames_Ordinal",
@@ -2194,10 +2194,10 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                 column: "GroupId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Frames_UserId",
+                name: "IX_Frames_MemberId",
                 schema: "Local",
                 table: "Frames",
-                column: "UserId");
+                column: "MemberId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_FramesToSchedules_RightEntityId",
@@ -2248,9 +2248,9 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                 column: "RightEntityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AssetsToUsers_RightEntityId",
+                name: "IX_AssetsToMembers_RightEntityId",
                 schema: "Relation",
-                table: "AssetsToUsers",
+                table: "AssetsToMembers",
                 column: "RightEntityId");
 
             migrationBuilder.CreateIndex(
@@ -2284,64 +2284,64 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                 column: "RightEntityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserIdentifiers_EntityId",
+                name: "IX_MemberIdentifiers_EntityId",
                 schema: "Identifier",
-                table: "UserIdentifiers",
+                table: "MemberIdentifiers",
                 column: "EntityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserIdentifiers_Key",
+                name: "IX_MemberIdentifiers_Key",
                 schema: "Identifier",
-                table: "UserIdentifiers",
+                table: "MemberIdentifiers",
                 column: "Key");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserIdentifiers_Ordinal",
+                name: "IX_MemberIdentifiers_Ordinal",
                 schema: "Identifier",
-                table: "UserIdentifiers",
+                table: "MemberIdentifiers",
                 column: "Ordinal");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserRoles_Ordinal",
+                name: "IX_MemberRoles_Ordinal",
                 schema: "Local",
-                table: "UserRoles",
+                table: "MemberRoles",
                 column: "Ordinal");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserRoles_UserId",
+                name: "IX_MemberRoles_MemberId",
                 schema: "Local",
-                table: "UserRoles",
-                column: "UserId");
+                table: "MemberRoles",
+                column: "MemberId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Users_Ordinal",
+                name: "IX_Members_Ordinal",
                 schema: "Local",
-                table: "Users",
+                table: "Members",
                 column: "Ordinal");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Users_UserId",
+                name: "IX_Members_MemberId",
                 schema: "Local",
-                table: "Users",
-                column: "UserId",
+                table: "Members",
+                column: "MemberId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_UsersToProperties_RightEntityId",
+                name: "IX_MembersToProperties_RightEntityId",
                 schema: "Relation",
-                table: "UsersToProperties",
+                table: "MembersToProperties",
                 column: "RightEntityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UsersToPlans_RightEntityId",
+                name: "IX_MembersToPlans_RightEntityId",
                 schema: "Relation",
-                table: "UsersToPlans",
+                table: "MembersToPlans",
                 column: "RightEntityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UsersToGroups_RightEntityId",
+                name: "IX_MembersToGroups_RightEntityId",
                 schema: "Relation",
-                table: "UsersToGroups",
+                table: "MembersToGroups",
                 column: "RightEntityId");
         }
 
@@ -2376,7 +2376,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                 schema: "Relation");
 
             migrationBuilder.DropTable(
-                name: "UnionsToUsers",
+                name: "UnionsToMembers",
                 schema: "Relation");
 
             migrationBuilder.DropTable(
@@ -2424,7 +2424,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                 schema: "Relation");
 
             migrationBuilder.DropTable(
-                name: "AssetsToUsers",
+                name: "AssetsToMembers",
                 schema: "Relation");
 
             migrationBuilder.DropTable(
@@ -2436,23 +2436,23 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                 schema: "Relation");
 
             migrationBuilder.DropTable(
-                name: "UserIdentifiers",
+                name: "MemberIdentifiers",
                 schema: "Identifier");
 
             migrationBuilder.DropTable(
-                name: "UserRoles",
+                name: "MemberRoles",
                 schema: "Local");
 
             migrationBuilder.DropTable(
-                name: "UsersToProperties",
+                name: "MembersToProperties",
                 schema: "Relation");
 
             migrationBuilder.DropTable(
-                name: "UsersToPlans",
+                name: "MembersToPlans",
                 schema: "Relation");
 
             migrationBuilder.DropTable(
-                name: "UsersToGroups",
+                name: "MembersToGroups",
                 schema: "Relation");
 
             migrationBuilder.DropTable(
@@ -2523,7 +2523,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Report
                 schema: "Local");
 
             migrationBuilder.DropTable(
-                name: "Users",
+                name: "Members",
                 schema: "Local");
 
             migrationBuilder.DropTable(
