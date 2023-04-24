@@ -1,0 +1,36 @@
+name: Build project
+
+on:
+  push:
+    branches:
+      - master
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup .NET Core 7
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 7.0.x
+
+    - name: Build
+      env: 
+        NUGET_API_KEY: ${{secrets.NUGET_API_KEY}}
+        Bundle: True
+      run: |
+        dotnet restore src/BootstrapBlazor --no-cache
+        dotnet build src/BootstrapBlazor
+
+    - name: Test
+      run: |
+        dotnet test test/UnitTest -c Release --collect:"XPlat Code Coverage"
+
+    - name: Upload to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}

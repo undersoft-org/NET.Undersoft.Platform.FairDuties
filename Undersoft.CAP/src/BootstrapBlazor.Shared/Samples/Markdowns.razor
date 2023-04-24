@@ -1,0 +1,78 @@
+﻿@page "/markdowns"
+@using Microsoft.Extensions.DependencyInjection
+@inject IStringLocalizer<Markdowns> Localizer
+
+<h3>@Localizer["MarkdownsTitle"]</h3>
+
+<h4>@Localizer["MarkdownsDescription"]</h4>
+
+<p>@((MarkupString)Localizer["MarkdownsNote"].Value)</p>
+
+<Pre class="no-highlight">builder.Services.Configure&lt;HubOptions&gt;(option => option.MaximumReceiveMessageSize = null);</Pre>
+
+<PackageTips Name="BootstrapBlazor.Markdown" />
+
+<h4>@Localizer["MarkdownsCss"]</h4>
+
+<p>@Localizer["MarkdownsCssText"]</p>
+
+<h4>@Localizer["MarkdownsJs"]</h4>
+
+<p>@Localizer["MarkdownsJsText"]</p>
+
+<h4>@Localizer["MarkdownsLocalizationTipsTitle"]</h4>
+
+<Tips>@Localizer["MarkdownsLocalizationTips"]</Tips>
+
+<DemoBlock Title="@Localizer["MarkdownsNormalTitle"]"
+           Introduction="@Localizer["MarkdownsNormalIntro"]"
+           Name="Normal"
+           Demo="typeof(Demos.Markdowns.MarkdownsNormal)">
+    <p>@((MarkupString)Localizer["MarkdownsNormalDescription"].Value)</p>
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["MarkdownsAsyncTitle"]"
+           Introduction="@Localizer["MarkdownsAsyncIntro"]"
+           Name="Async"
+           Demo="typeof(Demos.Markdowns.MarkdownsAsync)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["MarkdownsCommonPropertyTitle"]"
+           Introduction="@Localizer["MarkdownsCommonPropertyIntro"]"
+           Name="CommonProperty"
+           Demo="typeof(Demos.Markdowns.MarkdownsCommonProperty)">
+    <p>@((MarkupString)Localizer["MarkdownsCommonPropertyDescription"].Value)</p>
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["MarkdownsIsViewerTitle"]"
+           Introduction="@Localizer["MarkdownsIsViewerIntro"]"
+           Name="IsViewer"
+           Demo="typeof(Demos.Markdowns.MarkdownsIsViewer)">
+    <p>@((MarkupString)Localizer["MarkdownsIsViewerDescription"].Value)</p>
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["MarkdownsIsDarkTitle"]"
+           Introduction="@Localizer["MarkdownsIsDarkTitle"]"
+           Name="IsDark"
+           Demo="typeof(Demos.Markdowns.MarkdownsIsDark)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["MarkdownsEnableHighlightTitle"]"
+           Introduction="@Localizer["MarkdownsEnableHighlightIntro"]"
+           Name="EnableHighlight"
+           Demo="typeof(Demos.Markdowns.MarkdownsEnableHighlight)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["MarkdownsBrowserTitle"]"
+           Introduction="@Localizer["MarkdownsBrowserIntro"]"
+           Name="Browser"
+           Demo="typeof(Demos.Markdowns.MarkdownsBrowser)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["MarkdownsValidateTitle"]"
+           Introduction="@Localizer["MarkdownsValidateIntro"]"
+           Name="Validate"
+           Demo="typeof(Demos.Markdowns.MarkdownsValidate)">
+</DemoBlock>
+
+<AttributeTable Items="GetAttributes()"></AttributeTable>

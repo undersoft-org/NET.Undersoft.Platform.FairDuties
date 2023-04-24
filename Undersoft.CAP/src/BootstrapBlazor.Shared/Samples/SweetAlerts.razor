@@ -1,0 +1,79 @@
+﻿@page "/swals"
+@inject IStringLocalizer<SweetAlerts> Localizer
+
+<h3>@Localizer["SweetAlertsTitle"]</h3>
+<h4>@Localizer["SweetAlertsDescription"]</h4>
+
+<p>@Localizer["SweetAlertsTipsTitle"]：</p>
+
+<p class="code-label">@((MarkupString)Localizer["SweetAlertsTips1"].Value)</p>
+<Pre>@@inject SwalService SwalService</Pre>
+<Pre>[Inject]
+[NotNull]
+private SwalService? SwalService { get; set; }
+</Pre>
+<p class="code-label">@((MarkupString)Localizer["SweetAlertsTips2"].Value)</p>
+<Pre>var op = new SwalOption()
+{
+    Category = SwalCategory.Success,
+    Title = "@Localizer["SweetAlertsPreTitleText"]",
+    Content = "@Localizer["SweetAlertsPreContentText"]",
+    ShowClose = false
+};
+await SwalService.Show(op);</Pre>
+
+<DemoBlock Title="@Localizer["SweetAlertsNormalTitle"]"
+           Introduction="@Localizer["SweetAlertsNormalIntro"]"
+           Name="Normal"
+           Demo="typeof(Demos.SweetAlerts.SweetAlertsNormal)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["SweetAlertsDispalyTitle"]"
+           Introduction="@Localizer["SweetAlertsDispalyIntro"]"
+           Name="Dispaly"
+           Demo="typeof(Demos.SweetAlerts.SweetAlertsDispaly)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["SweetAlertsButtonTitle"]"
+           Introduction="@Localizer["SweetAlertsButtonIntro"]"
+           Name="Button"
+           Demo="typeof(Demos.SweetAlerts.SweetAlertsButton)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["SweetAlertsComponentTitle"]"
+           Introduction="@Localizer["SweetAlertsComponentIntro"]"
+           Name="Component"
+           Demo="typeof(Demos.SweetAlerts.SweetAlertsComponent)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["SweetAlertsModalTitle"]" Introduction="@Localizer["SweetAlertsModalIntro"]" Name="Modal" Demo="typeof(Demos.SweetAlerts.SweetAlertsModal)">
+    <p>@((MarkupString)Localizer["SweetAlertsModalDescription"].Value)</p>
+    <p>@((MarkupString)Localizer["SweetAlertsModalTips"].Value)</p>
+    <Pre class="no-highlight">var ret = await SwalService.ShowModal(op);
+
+Logger.Log(ret);
+</Pre>
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["SweetAlertsFooterTitle"]"
+           Introduction="@Localizer["SweetAlertsFooterIntro"]"
+           Name="Footer"
+           Demo="typeof(Demos.SweetAlerts.SweetAlertsFooter)">
+    <p>@((MarkupString)Localizer["SweetAlertsFooterDescription"].Value)</p>
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["SweetAlertsAutoCloseTitle"]"
+           Introduction="@Localizer["SweetAlertsAutoCloseIntro"]"
+           Name="Close"
+           Demo="typeof(Demos.SweetAlerts.SweetAlertsAutoClose)">
+    <p>@((MarkupString)Localizer["SweetAlertsAutoCloseDescription"].Value)</p>
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["SweetAlertsCloseTitle"]"
+           Introduction="@Localizer["SweetAlertsCloseIntro"]"
+           Name="Close"
+           Demo="typeof(Demos.SweetAlerts.SweetAlertsClose)">
+    <p>@((MarkupString)Localizer["SweetAlertsCloseDescription"].Value)</p>
+</DemoBlock>
+
+<AttributeTable Items="@GetAttributes()" />

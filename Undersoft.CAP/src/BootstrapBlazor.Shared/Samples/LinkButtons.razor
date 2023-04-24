@@ -1,0 +1,69 @@
+﻿@page "/linkbuttons"
+@inject IStringLocalizer<LinkButtons> Localizer
+
+<h3>@Localizer["LinkButtonsComTitle"]</h3>
+
+<h4>@Localizer["LinkButtonsSubTitle"]</h4>
+
+<DemoBlock Title="@Localizer["LinkButtonTextTitle"]"
+           Introduction="@Localizer["LinkButtonTextIntro"]"
+           Name="Text"
+           Demo="typeof(Demos.LinkButtons.LinkButtonsText)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["LinkButtonUrlTitle"]"
+           Introduction="@Localizer["LinkButtonUrlIntro"]"
+           Name="Url"
+           Demo="typeof(Demos.LinkButtons.LinkButtonsUrl)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["LinkButtonTitleTitle"]"
+           Introduction="@Localizer["LinkButtonTitleIntro"]"
+           Name="Title"
+           Demo="typeof(Demos.LinkButtons.LinkButtonsTitle)">
+    <p>@((MarkupString)Localizer["LinkButtonTitleDetail"].Value)</p>
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["LinkButtonImageTitle"]"
+           Introduction="@Localizer["LinkButtonImageIntro"]"
+           Name="Image"
+           Demo="typeof(Demos.LinkButtons.LinkButtonsImage)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["LinkButtonIconTitle"]"
+           Introduction="@Localizer["LinkButtonIconIntro"]"
+           Name="Icon"
+           Demo="typeof(Demos.LinkButtons.LinkButtonsIcon)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["LinkButtonChildTitle"]"
+           Introduction="@Localizer["LinkButtonChildIntro"]"
+           Name="ChildContent"
+           Demo="typeof(Demos.LinkButtons.LinkButtonsChildContent)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["LinkButtonOnClickTitle"]"
+           Introduction="@Localizer["LinkButtonOnClickIntro"]"
+           Name="OnClick"
+           Demo="typeof(Demos.LinkButtons.LinkButtonsOnClick)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["LinkButtonIsDisabledTitle"]"
+           Introduction="@Localizer["LinkButtonIsDisabledIntro"]"
+           Name="IsDisabled"
+           Demo="typeof(Demos.LinkButtons.LinkButtonsIsDisabled)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["LinkButtonColorTitle"]"
+           Introduction="@Localizer["LinkButtonColorIntro"]"
+           Name="Color"
+           Demo="typeof(Demos.LinkButtons.LinkButtonsColor)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["LinkButtonVerticalTitle"]"
+           Introduction="@Localizer["LinkButtonVerticalIntro"]"
+           Name="IsVertical"
+           Demo="typeof(Demos.LinkButtons.LinkButtonsIsVertical)">
+</DemoBlock>
+
+<AttributeTable Items="GetAttributes()"></AttributeTable>

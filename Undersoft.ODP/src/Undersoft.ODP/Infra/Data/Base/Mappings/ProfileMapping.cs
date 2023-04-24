@@ -18,16 +18,28 @@ namespace Undersoft.ODP.Infra.Data.Base.Mappings
 
             builder.Property(p => p.PhoneNumber).HasMaxLength(50).HasColumnType("varchar");
 
-            builder.Property(p => p.FirstName).HasMaxLength(50).HasColumnType("varchar").IsRequired();
+            builder
+                .Property(p => p.FirstName)
+                .HasMaxLength(50)
+                .HasColumnType("varchar")
+                .IsRequired();
 
-            builder.Property(p => p.LastName).HasMaxLength(50).HasColumnType("varchar").IsRequired();
+            builder
+                .Property(p => p.LastName)
+                .HasMaxLength(50)
+                .HasColumnType("varchar")
+                .IsRequired();
 
             builder.Property(p => p.FullName).HasMaxLength(100).HasColumnType("varchar");
 
             modelBuilder
-               .LinkSetToSet<Profile, Property>(ExpandSite.OnRight)
-               .LinkSetToSet<Profile, Contact>(ExpandSite.OnRight)
-               .LinkSetToSet<Profile, Client>(ExpandSite.OnRight);
+                .LinkSetToSet<Profile, Property>(
+                    nameof(Property.Profiles),
+                    nameof(Profile.Properties),
+                    ExpandSite.OnRight
+                )
+                .LinkSetToSet<Profile, Contact>(ExpandSite.OnRight)
+                .LinkSetToSet<Profile, Client>(ExpandSite.OnRight);
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Undersoft.ODP.Api.Grpc.Data.Service.Controllers
 {
     using Domain;
 
-    public class UserStreamController : GrpcDataServiceController<long, IEntryStore, IReportStore, Member, BasicUser>
+    public class UserStreamController : GrpcDataServiceController<long, IEntryStore, IReportStore, Member, BasicMember>
     {
         public UserStreamController() : base() { }
     }

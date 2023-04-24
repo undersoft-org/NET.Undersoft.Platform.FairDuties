@@ -1,5 +1,4 @@
-﻿using Microsoft.OData.Client;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
@@ -11,7 +10,6 @@ namespace System.Instant
     [StructLayout(LayoutKind.Sequential)]
     public abstract class ValueProxy : Origin, IValueProxy
     {
-        [NotMapped]
         [JsonIgnore]
         [IgnoreDataMember]
         private ISleeve sleeve;
@@ -27,16 +25,16 @@ namespace System.Instant
             set { sleeve[id] = value; }
         }
 
-        [NotMapped]
         [JsonIgnore]
         [IgnoreDataMember]
-        [IgnoreClientProperty]
         object[] IFigure.ValueArray
         {
             get => sleeve.ValueArray;
             set => sleeve.ValueArray = value;
         }
 
+        [JsonIgnore]
+        [IgnoreDataMember]
         Uscn IFigure.UniqueCode
         {
             get => sleeve.UniqueCode;
@@ -45,12 +43,10 @@ namespace System.Instant
 
         [JsonIgnore]
         [IgnoreDataMember]
-        [IgnoreClientProperty]
         IRubrics IValueProxy.Rubrics => sleeve.Rubrics;
 
         [JsonIgnore]
         [IgnoreDataMember]
-        [IgnoreClientProperty]
         ISleeve IValueProxy.Valuator
         {
             get => sleeve;
@@ -59,7 +55,6 @@ namespace System.Instant
 
         [JsonIgnore]
         [IgnoreDataMember]
-        [IgnoreClientProperty]
         public virtual ulong UniqueKey
         {
             get => sleeve.UniqueKey;
@@ -68,7 +63,6 @@ namespace System.Instant
 
         [JsonIgnore]
         [IgnoreDataMember]
-        [IgnoreClientProperty]
         public virtual ulong UniqueType
         {
             get => sleeve.UniqueType;

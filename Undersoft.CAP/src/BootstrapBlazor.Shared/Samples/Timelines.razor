@@ -1,0 +1,43 @@
+﻿@page "/timelines"
+@inject IStringLocalizer<Timelines> Localizer
+
+<h3>@Localizer["TimelinesTitle"]</h3>
+
+<h4>@Localizer["TimelinesSubTitle"]</h4>
+
+<DemoBlock Title="@Localizer["TimelinesNormalTitle"]"
+           Introduction="@Localizer["TimelinesNormalIntro"]"
+           Name="Normal"
+           Demo="typeof(Demos.Timelines.TimelinesNormal)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["TimelinesCutomNodeStyleTitle"]"
+           Introduction="@Localizer["TimelinesCutomNodeStyleIntro"]"
+           Name="CutomNodeStyle"
+           Demo="typeof(Demos.Timelines.TimelinesCutomNodeStyle)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["TimelinesLeftTitle"]"
+           Introduction="@Localizer["TimelinesLeftIntro"]"
+           Name="Left"
+           Demo="typeof(Demos.Timelines.TimelinesLeft)">
+    <p>@((MarkupString)Localizer["TimelinesLeftDescription"].Value)</p>
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["TimelinesAlternateTitle"]"
+           Introduction="@Localizer["TimelinesAlternateIntro"]"
+           Name="Alternate"
+           Demo="typeof(Demos.Timelines.TimelinesAlternate)">
+    <p>@((MarkupString)Localizer["TimelinesAlternateDescription"].Value)</p>
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["TimelinesDispalyCustomComponentTitle"]"
+           Introduction="@Localizer["TimelinesDispalyCustomComponentIntro"]"
+           Name="DispalyCustomComponent"
+           Demo="typeof(Demos.Timelines.TimelinesDispalyCustomComponent)">
+    <p>@((MarkupString)Localizer["TimelinesDispalyCustomComponentDescription"].Value)</p>
+</DemoBlock>
+
+<AttributeTable Items="GetAttributes()" />
+
+<AttributeTable Items="GetTimelineItemAttributes()" Title="@Localizer["AttributeTitle"]" />

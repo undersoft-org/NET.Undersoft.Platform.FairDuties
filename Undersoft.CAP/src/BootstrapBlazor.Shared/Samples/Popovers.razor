@@ -1,0 +1,33 @@
+﻿@page "/popovers"
+@inject IStringLocalizer<Popovers> Localizer
+
+<h3>@Localizer["PopoversTitle"]</h3>
+<h4>@Localizer["PopoversDescription"]</h4>
+
+<DemoBlock Title="@Localizer["PopoversNormalTitle"]"
+           Introduction="@Localizer["PopoversNormalIntro"]"
+           Name="Normal"
+           Demo="typeof(Demos.Popovers.PopoversNormal)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["PopoversButtonTitle"]"
+           Introduction="@Localizer["PopoversButtonIntro"]"
+           Name="Button"
+           Demo="typeof(Demos.Popovers.PopoversButton)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["PopoversCssClassTitle"]"
+           Introduction="@Localizer["PopoversCssClassIntro"]"
+           Name="CssClass"
+           Demo="typeof(Demos.Popovers.PopoversCssClass)">
+    <p>@((MarkupString)Localizer["PopoversCssClassDescription"].Value)</p>
+    <Pre class="mb-3">.custom-popover {
+    --bs-popover-border-color: var(--bs-primary);
+    --bs-popover-header-bg: var(--bs-primary);
+    --bs-popover-header-color: var(--bs-white);
+    --bs-popover-body-padding-x: 1rem;
+    --bs-popover-body-padding-y: 1rem;
+}</Pre>
+</DemoBlock>
+
+<AttributeTable Items="@GetAttributes()" />

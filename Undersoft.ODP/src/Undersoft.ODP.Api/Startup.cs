@@ -20,7 +20,9 @@ namespace Undersoft.ODP.Api
                 .AddDataServices<ICqrsStore>(
                     DataServiceTypes.All,
                     builder =>
-                        builder.AddDataService<EntryDbContext>().AddDataService<ReportDbContext>()
+                        builder
+                            .AddDataService<EntryDb>()
+                            .AddDataService<ReportDb>()
                 //)
                 //.AddDataServices<IEventStore>(
                 //    DataServiceTypes.All,

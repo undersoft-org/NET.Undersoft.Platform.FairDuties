@@ -6,13 +6,13 @@ namespace Undersoft.AEP.Raw
 {
     public class Link<TSource, TTarget> : Link
     {
-        public Link(string typeSuffix = "")
+        public Link(string suffix = null)
         {
             var sourceType = typeof(TSource);
             var targetType = typeof(TTarget);
             SourceType = sourceType.FullName;
-            SourceType = targetType.FullName;
-            Label = this.GetType().FullName;
+            TargetType = targetType.FullName;
+            Label = sourceType.Name + "To" + targetType.Name + suffix;
         }
     }
 

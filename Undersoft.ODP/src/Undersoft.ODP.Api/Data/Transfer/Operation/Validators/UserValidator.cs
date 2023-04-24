@@ -1,7 +1,7 @@
 ﻿using RadicalR;
 
 namespace Undersoft.ODP.Api
-{
+{   
     public class UserValidator : DtoCommandSetValidator<Member>
     {
         public UserValidator(IRadicalr ultimatr) : base(ultimatr)
@@ -12,7 +12,7 @@ namespace Undersoft.ODP.Api
             {
                 ValidateNotExist<IEntryStore, Domain.Member>((cmd) =>
                 (e) => e.Email == cmd.Email
-                || e.UserName == cmd.Name
+                || e.Name == cmd.Name
                 || e.PhoneNumber == cmd.PhoneNumber, "same Name, Email or PhoneNumber");
             });
             ValidationScope(CommandMode.Create | CommandMode.Upsert | CommandMode.Update, () =>

@@ -1,0 +1,42 @@
+﻿@page "/tooltips"
+@inject IStringLocalizer<Tooltips> Localizer
+
+<h3>@Localizer["TooltipsTitle"]</h3>
+<h4>@Localizer["TooltipsDescription"]</h4>
+
+<DemoBlock Title="@Localizer["TooltipsNomalTitle"]"
+           Introduction="@Localizer["TooltipsNomalIntro"]"
+           Name="Nomal"
+           Demo="typeof(Demos.Tooltips.TooltipsNomal)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["TooltipsButtonTitle"]"
+           Introduction="@Localizer["TooltipsButtonIntro"]"
+           Name="Button"
+           Demo="typeof(Demos.Tooltips.TooltipsButton)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["BootstrapTooltipTitle"]"
+           Introduction="@Localizer["BootstrapTooltipIntro"]"
+           Name="BootstrapTooltip"
+           Demo="typeof(Demos.Tooltips.BootstrapTooltip )">
+    <p>@((MarkupString)Localizer["BootstrapTooltipTips1"].Value)</p>
+    <p>@((MarkupString)Localizer["BootstrapTooltipTips2"].Value)</p>
+    <Pre>&lt;BootstrapTooltip Title="Test tooltip"&gt;
+    &lt;i class="fa-solid fa-flag" /&gt;
+&lt;/BootstrapTooltip&gt;</Pre>
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["TooltipsSelectorTitle"]"
+           Introduction="@Localizer["TooltipsSelectorIntro"]"
+           Name="Selector"
+           Demo="typeof(Demos.Tooltips.TooltipsSelector)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["TooltipsCustomClassTitle"]"
+           Introduction="@Localizer["TooltipsCustomClassIntro"]"
+           Name="CustomClass"
+           Demo="typeof(Demos.Tooltips.TooltipsCustomClass)">
+</DemoBlock>
+
+<AttributeTable Items="@GetAttributes()" />

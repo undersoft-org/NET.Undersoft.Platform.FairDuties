@@ -7,8 +7,8 @@ namespace Undersoft.ODP.Domain
     [DataContract]
     public partial class Session : Entity
     {
-        public long? DeviceId { get; set; }
-        [JsonIgnore] public virtual Client Device { get; set; }
+        public long? ClientId { get; set; }
+        [JsonIgnore] public virtual Client Client { get; set; }
 
         public string Host { get; set; }
 

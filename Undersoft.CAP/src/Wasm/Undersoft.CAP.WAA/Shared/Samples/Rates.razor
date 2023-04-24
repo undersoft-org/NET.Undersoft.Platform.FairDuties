@@ -1,0 +1,34 @@
+﻿@page "/rates"
+@inject IStringLocalizer<Rates> Localizer
+
+<h3>@Localizer["RatesTitle"]</h3>
+
+<h4>@Localizer["RatesDescription"]</h4>
+
+<DemoBlock Title="@Localizer["RatesNormalTitle"]"
+           Introduction="@Localizer["RatesNormalIntro"]"
+           Name="Normal"
+           Demo="typeof(Demos.Rates.RatesNormal)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["RatesIconTitle"]"
+           Introduction="@Localizer["RatesIconIntro"]"
+           Name="Icon"
+           Demo="typeof(Demos.Rates.RatesIcon)">
+    <Pre>.custom-rate {
+    --bb-rate-font-size: 1.7rem;
+    --bb-rate-height: 30px;
+    --bb-rate-width: 30px;
+    --bb-rate-active-color: var(--bs-primary);
+}</Pre>
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["RatesDisableTitle"]"
+           Introduction="@Localizer["RatesDisableIntro"]"
+           Name="Disable"
+           Demo="typeof(Demos.Rates.RatesDisable)">
+</DemoBlock>
+
+<AttributeTable Items="@GetAttributes()" />
+
+<EventTable Items="@GetEvents()" />

@@ -1,0 +1,32 @@
+﻿@page "/ribbontabs"
+@inject IStringLocalizer<RibbonTabs> Localizer
+
+<h3>@Localizer["RibbonTabsTitle"]</h3>
+
+<h4>@Localizer["RibbonTabsDescription"]</h4>
+
+<DemoBlock Title="@Localizer["RibbonTabsNormalTitle"]"
+           Introduction="@Localizer["RibbonTabsNormalIntro"]"
+           Name="Normal"
+           Demo="typeof(Demos.RibbonTabs.RibbonTabsNormal)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["RibbonTabsFloatTitle"]"
+           Introduction="@Localizer["RibbonTabsFloatIntro"]"
+           Name="Float"
+           Demo="typeof(Demos.RibbonTabs.RibbonTabsFloat)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["RibbonTabsRightButtonsTemplateTitle"]"
+           Introduction="@Localizer["RibbonTabsRightButtonsTemplateIntro"]"
+           Name="RightButtonsTemplate"
+           Demo="typeof(Demos.RibbonTabs.RibbonTabsRightButtonsTemplate)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["RibbonTabsHeaderClickTitle"]"
+           Introduction="@Localizer["RibbonTabsHeaderClickIntro"]"
+           Name="HeaderClick"
+           Demo="typeof(Demos.RibbonTabs.RibbonTabsHeaderClick)">
+</DemoBlock>
+
+<AttributeTable Items="@GetAttributes()" />

@@ -17,7 +17,7 @@ namespace Undersoft.ODP.Domain
 
         public DutyUnit Unit { get; set; }
 
-        public float Size { get; set; }
+        public double Value { get; set; }
 
         public virtual EntityOnSets<Property> Properties { get; set; }
 
@@ -30,7 +30,7 @@ namespace Undersoft.ODP.Domain
         public virtual EntityOnSets<Asset> RelatedTo { get; set; }
 
         public virtual EntityOnSets<Asset> OptionalFrom { get; set; }
-
+         
         public virtual EntityOnSets<Asset> OptionalTo { get; set; }
 
         public virtual EntityOnSet<Duty> Duties { get; set; }
@@ -43,7 +43,7 @@ namespace Undersoft.ODP.Domain
 
         public virtual EntityOnSets<Member> Members { get; set; }
 
-        public virtual EntityOnSet<Vertex> Plans { get; set; }
+        public virtual EntityOnSet<Vertex> Vertices { get; set; }
 
         IEnumerable<ILink> IAsset.DependentOn => DependentOn.Select(i => new Link<Asset, Asset>("Dependencies") { SourceId = Id, TargetId = i.Id });
 
@@ -54,14 +54,15 @@ namespace Undersoft.ODP.Domain
 
     public enum DutyUnit
     {
-        Unknown = 0,
-        Byte = 1,
-        KB = 1024,
+        Piece = 1,
+        Kilogram = 1000, 
+        Centimeter = 10,
+        Meter = 100 * 10,
         MB = 1024 * 1024,
-        GB = 1024 * 1024 * 1024,
-        Hour = 1,
-        Day = 24,
-        TwelveHours = 12,
-        EightHours = 8,
+        MFLOPS = 1024 * 1024 * 4, 
+        Hour = 60,
+        Day = 1440,
+        TwelveHours = 720,
+        EightHours = 480,
     }
 }

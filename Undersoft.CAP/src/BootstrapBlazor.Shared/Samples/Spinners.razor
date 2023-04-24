@@ -1,0 +1,61 @@
+﻿@page "/spinners"
+@inject IStringLocalizer<Spinners> Localizer
+
+<h3>@Localizer["SpinnersTitle"]</h3>
+<h4>@Localizer["SpinnersDescription"]</h4>
+
+<p>
+    <b>@Localizer["SpinnersTipsTitle"]</b>
+    <br />
+    @Localizer["SpinnersTips"]
+</p>
+
+<DemoBlock Title="@Localizer["SpinnersNormalTitle"]"
+           Introduction="@Localizer["SpinnersNormalIntro"]"
+           Name="Normal"
+           Demo="typeof(Demos.Spinners.SpinnerNormal)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["SpinnersColorTitle"]"
+           Introduction="@Localizer["SpinnersColorIntro"]"
+           Name="Color"
+           Demo="typeof(Demos.Spinners.SpinnerColor)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["SpinnersGrowingTitle"]"
+           Introduction="@Localizer["SpinnersGrowingIntro"]"
+           Name="Growing"
+           Demo="typeof(Demos.Spinners.SpinnerGrowing)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["SpinnersGrowingColorTitle"]"
+           Introduction="@Localizer["SpinnersGrowingColorIntro"]"
+           Name="GrowingColor"
+           Demo="typeof(Demos.Spinners.SpinnerGrowingColor)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["SpinnersSizeTitle"]"
+           Introduction="@Localizer["SpinnersSizeIntro"]"
+           Name="Size"
+           Demo="typeof(Demos.Spinners.SpinnerSize)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["SpinnersFlexTitle"]"
+           Introduction="@Localizer["SpinnersFlexIntro"]"
+           Name="Flex"
+           Demo="typeof(Demos.Spinners.SpinnerFlex)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["SpinnersCustomTitle"]"
+           Introduction="@Localizer["SpinnersCustomIntro"]"
+           Name="Custom"
+           Demo="typeof(Demos.Spinners.SpinnerCustom)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["SpinnersFloatTitle"]"
+           Introduction="@Localizer["SpinnersFloatIntro"]"
+           Name="Float"
+           Demo="typeof(Demos.Spinners.SpinnerFloat)">
+</DemoBlock>
+
+<AttributeTable Items="@GetAttributes()" />

@@ -1,0 +1,51 @@
+﻿@page "/floatinglabels"
+@inject IStringLocalizer<FloatingLabels> Localizer
+
+<h3>@Localizer["FloatingLabelsTitle"]</h3>
+
+<h4>@Localizer["FloatingLabelsSubtitle"]</h4>
+
+<DemoBlock Title="@Localizer["FloatingLabelNormalTitle"]"
+           Introduction="@Localizer["FloatingLabelNormalIntro"]"
+           Name="Normal"
+           Demo="typeof(Demos.FloatingLabels.FloatingLabelNormal)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["FloatingLabelDisplayTextTitle"]"
+           Introduction="@Localizer["FloatingLabelDisplayTextIntro"]"
+           Name="DisplayText"
+           Demo="typeof(Demos.FloatingLabels.FloatingLabelDisplayText)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["FloatingLabelBindValueTitle"]"
+           Introduction="@Localizer["FloatingLabelBindValueIntro"]"
+           Name="BindValue"
+           Demo="typeof(Demos.FloatingLabels.FloatingLabelBindValue)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["FloatingLabelPasswordTitle"]"
+           Introduction="@Localizer["FloatingLabelPasswordIntro"]"
+           Name="Password"
+           Demo="typeof(Demos.FloatingLabels.FloatingLabelPassword)">
+    <p>@((MarkupString)Localizer["FloatingLabelPasswordDescription"].Value)</p>
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["FloatingLabelFormatStringTitle"]"
+           Introduction="@Localizer["FloatingLabelFormatStringIntro"]"
+           Name="FormatString"
+           Demo="typeof(Demos.FloatingLabels.FloatingLabelFormatString)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["FloatingLabelDisabledTitle"]"
+           Introduction="@Localizer["FloatingLabelDisabledIntro"]"
+           Name="Disabled"
+           Demo="typeof(Demos.FloatingLabels.FloatingLabelDisabled)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["FloatingLabelFormatterTitle"]"
+           Introduction="@Localizer["FloatingLabelFormatterTitle"]"
+           Name="Formatter"
+           Demo="typeof(Demos.FloatingLabels.FloatingLabelFormatter)">
+</DemoBlock>
+
+<AttributeTable Items="@GetAttributes()" />

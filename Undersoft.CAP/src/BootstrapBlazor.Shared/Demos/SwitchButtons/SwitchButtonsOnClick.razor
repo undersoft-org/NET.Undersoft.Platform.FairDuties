@@ -1,0 +1,12 @@
+﻿<SwitchButton OnClick="OnClick" />
+<ConsoleLogger @ref="Logger" class="mt-3" />
+
+@code {
+    [NotNull]
+    private ConsoleLogger? Logger { get; set; }
+
+    private void OnClick()
+    {
+        Logger.Log("Clicked");
+    }
+}

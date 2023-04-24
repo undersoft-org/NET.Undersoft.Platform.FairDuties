@@ -89,7 +89,7 @@ namespace Undersoft.AEP.Core
         public virtual IEnumerable<ILink> SourceLinks => UsageSet.SourceLinks;
 
         public virtual IDeck<IResource> Resources =>
-            _resources ??= new Catalog<IResource>(Sources.OrderBy(a => a.Ordinal).SelectMany(a => a.Resources).Select(r => r.PatchTo(new ResourceModel())));
+            _resources ??= new Catalog<IResource>(Sources.OrderBy(a => a.Ordinal).SelectMany(a => a.Resources).Select(r => r.PatchTo(new Resource())));
 
         public long SetupId => UsageSet.SetupId;
         public ISetup Setup => UsageSet.Setup;

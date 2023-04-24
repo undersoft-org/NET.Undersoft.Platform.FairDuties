@@ -13,11 +13,11 @@ namespace System.Deal
         {
             try
             {
-                MemoryStream ms = new MemoryStream(buffer.DeserialBlock);
-                BinaryFormatter binform = new BinaryFormatter();
-                EthMessage _bank = (EthMessage)binform.Deserialize(ms);
-                ms.Dispose();
-                return _bank;
+                //MemoryStream ms = new MemoryStream(buffer.DeserialBlock);
+                //BinaryFormatter binform = new BinaryFormatter();
+                //EthMessage _bank = (EthMessage)binform.Deserialize(ms);
+                //ms.Dispose();
+                return null;//_bank;
             }
             catch (Exception ex)
             {
@@ -29,8 +29,9 @@ namespace System.Deal
         {
             try
             {
-                BinaryFormatter binform = new BinaryFormatter();
-                return (EthMessage)binform.Deserialize(fromstream);
+                //BinaryFormatter binform = new BinaryFormatter();
+                //return (EthMessage)binform.Deserialize(fromstream);
+                return null;
             }
             catch (Exception ex)
             {
@@ -40,23 +41,25 @@ namespace System.Deal
 
         public static int SetBinary(this EthMessage bank, ISerialBuffer buffer)
         {
-            int offset = buffer.BlockOffset;
-            MemoryStream ms = new MemoryStream();
-            ms.Write(new byte[offset], 0, offset);
-            BinaryFormatter binform = new BinaryFormatter();
-            binform.Serialize(ms, bank);
-            buffer.SerialBlock = ms.ToArray();
-            ms.Dispose();
-            return buffer.SerialBlock.Length;
+            //int offset = buffer.BlockOffset;
+            //MemoryStream ms = new MemoryStream();
+            //ms.Write(new byte[offset], 0, offset);
+            //BinaryFormatter binform = new BinaryFormatter();
+            //binform.Serialize(ms, bank);
+            //buffer.SerialBlock = ms.ToArray();
+            //ms.Dispose();
+            //return buffer.SerialBlock.Length;
+            return default;
         }
 
         public static int SetBinary(this EthMessage bank, Stream tostream)
         {
-            if (tostream == null)
-                tostream = new MemoryStream();
-            BinaryFormatter binform = new BinaryFormatter();
-            binform.Serialize(tostream, bank);
-            return (int)tostream.Length;
+            //if (tostream == null)
+            //    tostream = new MemoryStream();
+            //BinaryFormatter binform = new BinaryFormatter();
+            //binform.Serialize(tostream, bank);
+            //return (int)tostream.Length;
+            return default;
         }
     }
 

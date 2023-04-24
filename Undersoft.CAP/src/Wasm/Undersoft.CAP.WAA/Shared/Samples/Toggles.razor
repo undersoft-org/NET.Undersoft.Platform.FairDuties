@@ -1,0 +1,30 @@
+﻿@page "/toggles"
+@inject IStringLocalizer<Toggles> Localizer
+
+<h3>@Localizer["TogglesTitle"]</h3>
+
+<h4>@((MarkupString)Localizer["TogglesSubTitle"].Value)</h4>
+
+<DemoBlock Title="@Localizer["TogglesNormalTitle"]"
+           Introduction="@Localizer["TogglesNormalIntro"]"
+           Name="Normal"
+           Demo="typeof(Demos.Toggles.TogglesNormal)">
+    <p>@Localizer["BasicUsageP"]</p>
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["TogglesDisableTitle"]"
+           Introduction="@Localizer["TogglesDisableIntro"]"
+           Name="Disable"
+           Demo="typeof(Demos.Toggles.TogglesDisable)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["TogglesBindToWayTitle"]"
+           Introduction="@Localizer["TogglesBindToWayIntro"]"
+           Name="BindToWay"
+           Demo="typeof(Demos.Toggles.TogglesBindToWay)">
+    <p>@((MarkupString)Localizer["BindToWayP1"].Value)</p>
+</DemoBlock>
+
+<AttributeTable Items="@GetAttributes()" />
+
+<EventTable Items="@GetEvents()" />

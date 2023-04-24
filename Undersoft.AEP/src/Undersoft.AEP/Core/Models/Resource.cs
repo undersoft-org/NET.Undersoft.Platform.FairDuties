@@ -1,6 +1,6 @@
 ﻿namespace Undersoft.AEP.Core
 {
-    public class Resource<TType, TEstimate, TObject> : ResourceModel
+    public class Resource<TType, TEstimate, TObject> : Resource
         where TObject : ISource
         where TType : IAsset
         where TEstimate : IEstimate
@@ -14,9 +14,9 @@
         }
     }
 
-    public class ResourceModel : Raw.Resource, IResource
+    public class Resource : Raw.Resource, IResource
     {
-        public ResourceModel() { }
+        public Resource() { }
 
         public virtual IAsset Asset { get; set; }
 

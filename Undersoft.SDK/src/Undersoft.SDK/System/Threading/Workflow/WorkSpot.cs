@@ -129,7 +129,8 @@ namespace RadicalR
         public static T Remove<T>()
         {
             int id = Thread.CurrentThread.ManagedThreadId;
-            return Target<T>(spots.Remove(id));
+            var key = typeof(T).FullName.UniqueKey64((uint)id);
+            return Target<T>(spots.Remove(key));
         }
 
         public static T Remove<T>(long key)

@@ -67,7 +67,7 @@ namespace Undersoft.AEP.Core
             _resources ??= Estimates
                 .Select(
                     (ar, i) =>
-                        new ResourceModel()
+                        new Resource()
                         {
                             AssetId = (long)ar.AssetId,
                             Asset = Assets[ar.AssetId],

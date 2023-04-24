@@ -11,7 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Undersoft.SDK\Undersoft.SDK.csproj" />
+    <ProjectReference Include="..\..\src\Undersoft.SDK.EstimatR\Undersoft.SDK.EstimatR.csproj" />
+    <ProjectReference Include="..\..\src\Undersoft.SDK.RadicalR\Undersoft.SDK.RadicalR.csproj" />
   </ItemGroup>
 
 </Project>

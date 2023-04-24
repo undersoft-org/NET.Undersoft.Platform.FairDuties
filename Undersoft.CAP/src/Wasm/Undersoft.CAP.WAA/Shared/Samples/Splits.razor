@@ -1,0 +1,32 @@
+﻿@page "/splits"
+@inject IStringLocalizer<Splits> Localizer
+
+<h3>@Localizer["SplitsTitle"]</h3>
+
+<div>
+    <DemoBlock Title="@Localizer["SplitsNormalTitle"]"
+               Introduction="@Localizer["SplitsNormalIntro"]"
+               Name="Normal"
+               Demo="typeof(Demos.Splits.SplitsNormal)">
+    </DemoBlock>
+
+    <DemoBlock Title="@Localizer["SplitsPercentTitle"]"
+               Introduction="@Localizer["SplitsPercentIntro"]"
+               Name="Percent"
+               Demo="typeof(Demos.Splits.SplitsPercent)">
+    </DemoBlock>
+
+    <DemoBlock Title="@Localizer["SplitsVerticalTitle"]"
+               Introduction="@Localizer["SplitsVerticalIntro"]"
+               Name="Vertical"
+               Demo="typeof(Demos.Splits.SplitsVertical)">
+    </DemoBlock>
+
+    <DemoBlock Title="@Localizer["SplitsNestedTitle"]"
+               Introduction="@Localizer["SplitsNestedIntro"]"
+               Name="Nested"
+               Demo="typeof(Demos.Splits.SplitsNested)">
+    </DemoBlock>
+</div>
+
+<AttributeTable Items="@GetAttributes()" />

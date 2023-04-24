@@ -1,0 +1,38 @@
+name: Deploy to Github Pages
+
+on:
+  push:
+    branches:
+      - publish
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup .NET Core 7
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 7.0.x
+
+    - name: Publish wasm
+      run: |
+        dotnet publish -c Release -o deploy src/Wasm/BootstrapBlazor.WebAssembly.ClientHost
+
+    - name: Deploy to GitHub Pages
+      uses: JamesIves/github-pages-deploy-action@3.7.1
+      with:
+        GITHUB_TOKEN: ${{ secrets.GH_PUSH_TOKEN }}
+        BRANCH: gh-pages
+        FOLDER: deploy/wwwroot
+        CLEAN: true
+
+    - name: Deploy to Github.io
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        personal_token: ${{ secrets.GH_PUSH_TOKEN }}
+        external_repository: ArgoZhang/ArgoZhang.github.io
+        publish_branch: master
+        publish_dir: ./deploy/wwwroot

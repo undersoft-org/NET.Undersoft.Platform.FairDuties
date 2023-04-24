@@ -18,7 +18,11 @@ namespace Undersoft.ODP.Infra.Data.Base.Mappings
 
             modelBuilder.ApplyIdentifiers<Client>();
 
-            modelBuilder.LinkOneToSet<Client, Session>(nameof(Session.Device), nameof(Client.Sessions), ExpandSite.OnRight);
+            modelBuilder.LinkOneToSet<Client, Session>(
+                nameof(Session.Client),
+                nameof(Client.Sessions),
+                ExpandSite.OnRight
+            );
         }
     }
 }

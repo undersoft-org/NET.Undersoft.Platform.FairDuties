@@ -1,0 +1,30 @@
+﻿@page "/inputgroups"
+@inject IStringLocalizer<InputGroups> Localizer
+
+<h3>@Localizer["InputGroupsTitle"]</h3>
+
+<h4>@Localizer["InputGroupsDescription"]</h4>
+
+<DemoBlock Title="@Localizer["InputGroupsNormalTitle"]"
+           Introduction="@Localizer["InputGroupsNormalIntro"]"
+           Name="Normal"
+           Demo="typeof(Demos.InputGroups.InputGroupsNormal)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["InputGroupsMultipleTitle"]"
+           Introduction="@Localizer["InputGroupsMultipleIntro"]"
+           Name="Multiple"
+           Demo="typeof(Demos.InputGroups.InputGroupsMultiple)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["InputGroupsSelectTitle"]"
+           Introduction="@Localizer["InputGroupsSelectIntro"]"
+           Name="Select"
+           Demo="typeof(Demos.InputGroups.InputGroupsSelect)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["InputGroupsValidateFormTitle"]"
+           Introduction="@Localizer["InputGroupsValidateFormIntro"]"
+           Name="ValidateForm"
+           Demo="typeof(Demos.InputGroups.InputGroupsValidateForm)">
+</DemoBlock>

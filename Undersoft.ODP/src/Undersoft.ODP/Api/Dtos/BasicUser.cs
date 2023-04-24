@@ -7,7 +7,7 @@ namespace Undersoft.ODP.Api
     public class BasicMember : Dto
     {
         [DataMember(Order = 0)]
-        public string MemberName { get; set; }
+        public string Name { get; set; }
 
         [DataMember(Order = 1)]
         public string Email { get; set; }

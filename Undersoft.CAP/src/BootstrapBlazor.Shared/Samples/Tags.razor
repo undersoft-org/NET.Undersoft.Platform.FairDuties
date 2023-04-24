@@ -1,0 +1,28 @@
+﻿@page "/tags"
+@inject IStringLocalizer<Tags> Localizer
+
+<h3>@Localizer["TagsTitle"]</h3>
+
+<h4>@Localizer["TagsSubTitle"]</h4>
+
+<DemoBlock Title="@Localizer["TagsNormalTitle"]"
+           Introduction="@Localizer["TagsNormalIntro"]"
+           Name="Normal"
+           Demo="typeof(Demos.Tags.TagsNormal)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["TagsCloseButtonTitle"]"
+           Introduction="@Localizer["TagsCloseButtonIntro"]"
+           Name="CloseButton"
+           Demo="typeof(Demos.Tags.TagsCloseButton)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["TagsIconTitle"]"
+           Introduction="@Localizer["TagsIconIntro"]"
+           Name="Icon"
+           Demo="typeof(Demos.Tags.TagsIcon)">
+</DemoBlock>
+
+<AttributeTable Items="@GetAttributes()" />
+
+<EventTable Items="@GetEvents()" />

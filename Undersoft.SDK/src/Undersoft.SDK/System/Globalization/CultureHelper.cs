@@ -1,6 +1,6 @@
 ﻿namespace System
 {
-    using Castle.Core.Internal;
+    using Microsoft.IdentityModel.Tokens;
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
 

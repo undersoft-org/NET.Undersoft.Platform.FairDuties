@@ -1,0 +1,50 @@
+﻿@page "/paginations"
+@inject IStringLocalizer<Paginations> Localizer
+
+<h3>@Localizer["PaginationsTitle"]</h3>
+
+<h4>@Localizer["PaginationsDescription"]</h4>
+
+<DemoBlock Title="@Localizer["PaginationsNormalTitle"]"
+           Introduction="@Localizer["PaginationsNormalIntro"]"
+           Name="Normal"
+           Demo="typeof(Demos.Paginations.PaginationsNormal)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["PaginationsDispalyTextTitle"]"
+           Introduction="@Localizer["PaginationsDispalyTextIntro"]"
+           Name="DispalyText"
+           Demo="typeof(Demos.Paginations.PaginationsDispalyText)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["PaginationsMaxPageLinkCountTitle"]"
+           Introduction="@Localizer["PaginationsMaxPageLinkCountIntro"]"
+           Name="MaxPageLinkCount"
+           Demo="typeof(Demos.Paginations.PaginationsMaxPageLinkCount)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["PaginationsAlignmentTitle"]"
+           Introduction="@Localizer["PaginationsAlignmentIntro"]"
+           Name="Alignment"
+           Demo="typeof(Demos.Paginations.PaginationsAlignment)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["PaginationsGotoTitle"]"
+           Introduction="@Localizer["PaginationsGotoIntro"]"
+           Name="Goto"
+           Demo="typeof(Demos.Paginations.PaginationsGoto)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["PaginationsPageInfoTextTitle"]"
+           Introduction="@Localizer["PaginationsPageInfoTextIntro"]"
+           Name="PageInfoText"
+           Demo="typeof(Demos.Paginations.PaginationsPageInfoText)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["PaginationsInfoTemplateTitle"]"
+           Introduction="@Localizer["PaginationsInfoTemplateIntro"]"
+           Name="InfoTemplate"
+           Demo="typeof(Demos.Paginations.PaginationsInfoTemplate)">
+</DemoBlock>
+
+<AttributeTable Items="@GetAttributes()" />

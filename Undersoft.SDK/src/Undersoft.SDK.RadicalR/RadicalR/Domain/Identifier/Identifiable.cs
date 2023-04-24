@@ -1,13 +1,11 @@
-using Newtonsoft.Json;
-using System;
 using System.Collections.Specialized;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Extract;
 using System.Instant;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 using System.Uniques;
 
 namespace RadicalR
@@ -91,6 +89,7 @@ namespace RadicalR
         public virtual string TargetType { get; set; }
 
         [Required]
+        [FigureIdentity]
         [StringLength(32)]
         [ConcurrencyCheck]
         [DataMember(Order = 255)]

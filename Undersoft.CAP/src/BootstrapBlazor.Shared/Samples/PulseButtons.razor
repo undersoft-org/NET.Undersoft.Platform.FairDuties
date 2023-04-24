@@ -1,0 +1,13 @@
+﻿@page "/pulsebuttons"
+@inject IStringLocalizer<Buttons> Localizer
+
+<h3>@Localizer["PluseButtonHeader"]</h3>
+
+<h4>@Localizer["PluseButtonPara"]</h4>
+
+<DemoBlock Title="@Localizer["Block1Title"]"
+           Introduction="@Localizer["Block1Intro"]"
+           Name="Normal"
+           Demo="typeof(Demos.PulseButtons.PulseButtonNormal)">
+    <p>@Localizer["PluseButtonPara2"]</p>
+</DemoBlock>

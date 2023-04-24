@@ -22,21 +22,21 @@ namespace Undersoft.ODP.Infra.Data.Base.Mappings
 
             modelBuilder
                 .ApplyIdentifiers<Member>()
+                .LinkOneToSet<Member, Request>(ExpandSite.OnRight)
+                .LinkOneToOne<Profile, Member>(ExpandSite.OnLeft)
+                .LinkSetToSet<Member, Group>(ExpandSite.OnLeft)
+                .LinkOneToOne<Member, Setup>(ExpandSite.OnRight)
+                .LinkOneToSet<Member, Role>(ExpandSite.OnRight)
                 .LinkSetToSet<Member, Property>(
                     nameof(Property.Members),
                     nameof(Member.Properties),
                     ExpandSite.OnRight
                 )
-                .LinkSetToSet<Member, Group>(ExpandSite.OnLeft)
-                .LinkOneToOne<Member, Setup>(ExpandSite.OnRight)
-                .LinkOneToSet<Member, Role>(ExpandSite.OnRight)
                 .LinkOneToSet<Member, Duty>(
                     nameof(Duty.Member),
                     nameof(Member.Duties),
                     ExpandSite.OnRight
                 )
-                .LinkOneToSet<Member, Request>(ExpandSite.OnRight)
-                .LinkOneToOne<Profile, Member>(ExpandSite.OnLeft)
                 .LinkOneToSet<Member, Group>(
                     nameof(Group.Leadership),
                     nameof(Member.Leaderships),

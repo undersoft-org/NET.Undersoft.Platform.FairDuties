@@ -1,0 +1,66 @@
+﻿@page "/downloads"
+@inject IStringLocalizer<Downloads> Localizer
+
+<h3>@Localizer["DownloadsTitle"]</h3>
+<h4>@Localizer["DownloadsSubTitle"]</h4>
+
+<Tips>
+    <b>@Localizer["DownloadsTips1"]：</b>
+    <div>
+        @((@MarkupString)Localizer["DownloadsTips2"].Value)
+    </div>
+</Tips>
+
+<div class="mb-3">
+    @((@MarkupString)Localizer["DownloadsExample"].Value)：
+    <Button Icon="fa-solid fa-download" Text="@Localizer["DownloadsExampleButtonText"]" OnClick="@DownloadFileAsync"></Button>
+</div>
+<div class="mb-2">@((@MarkupString)Localizer["DownloadsExampleRazorCodeTitle"].Value)</div>
+<Pre>@Localizer["DownloadsExampleRazorCodeContent"]</Pre>
+<div class="mb-2">@((@MarkupString)Localizer["DownloadsExampleCodeTitle"].Value)</div>
+<Pre>private async Task DownloadFileAsync()
+{
+    using var stream = await GenerateFileAsync();
+    await DownloadService.DownloadFromStreamAsync("@Localizer["DownloadsExampleTestFile"]", stream);
+
+    static async Task&lt;Stream&gt; GenerateFileAsync()
+    {
+        var ms = new MemoryStream();
+        var writer = new StreamWriter(ms);
+        await writer.WriteLineAsync("@Localizer["DownloadsExampleContent"]");
+        await writer.FlushAsync();
+        ms.Position = 0;
+        return ms;
+    }
+}</Pre>
+
+@if (!IsWasm)
+{
+    <DemoBlock Title="@Localizer["DownloadNormalTitle"]"
+               Introduction="@Localizer["DownloadNormalIntro"]"
+               Name="Normal"
+               Demo="typeof(Demos.Downloads.DownloadNormal)">
+    </DemoBlock>
+
+    <DemoBlock Title="@Localizer["DownloadFolderTitle"]"
+               Introduction="@Localizer["DownloadFolderIntro"]"
+               Name="Folder"
+               Demo="typeof(Demos.Downloads.DownloadFolder)">
+    </DemoBlock>
+}
+
+<DemoBlock Title="@Localizer["DownloadBigFileTitle"]"
+           Introduction="@Localizer["DownloadBigFileIntro"]"
+           Name="BigFile"
+           Demo="typeof(Demos.Downloads.DownloadBigFile)">
+    <p>@((MarkupString)Localizer["DownloadBigFileButtonText"].Value)</p>
+</DemoBlock>
+
+@if (!IsWasm)
+{
+    <DemoBlock Title="@Localizer["DownloadImageTitle"]"
+               Introduction="@Localizer["DownloadImageIntro"]"
+               Name="Image"
+               Demo="typeof(Demos.Downloads.DownloadImage)">
+    </DemoBlock>
+}

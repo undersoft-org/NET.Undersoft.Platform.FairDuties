@@ -6,7 +6,7 @@ namespace Undersoft.AEP.Core
     {
         string Name { get; set; }
 
-        float Size { get; set; }
+        double Value { get; set; }
 
         IEnumerable<ILink> RelatedTo { get; }
 

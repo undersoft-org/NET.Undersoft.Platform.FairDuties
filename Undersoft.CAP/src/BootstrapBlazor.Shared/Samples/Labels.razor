@@ -1,0 +1,41 @@
+﻿@layout ComponentLayout
+@page "/labels"
+@inject IStringLocalizer<Labels> Localizer
+
+<h3>@Localizer["LabelsTitle"]</h3>
+
+<p>@((MarkupString)Localizer["LabelsDescription"].Value)</p>
+
+<ul class="ul-demo">
+    <li>@((MarkupString)Localizer["LabelsDescriptionTips1"].Value)</li>
+    <li>@((MarkupString)Localizer["LabelsDescriptionTips2"].Value)</li>
+</ul>
+
+<p>@((MarkupString)Localizer["LabelsDescriptionTips3"].Value)</p>
+
+<Tips>
+    <p>@((MarkupString)Localizer["LabelsTips"].Value)</p>
+</Tips>
+
+<DemoBlock Title="@Localizer["LabelsNormalTitle"]"
+           Introduction="@Localizer["LabelsNormalIntro"]"
+           Name="Normal" Demo="typeof(Demos.Labels.LabelsNormal)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["LabelsEditorFormTitle"]"
+           Introduction="@(((MarkupString)Localizer["LabelsEditorFormIntro"].Value).ToString())"
+           Name="EditorForm"
+           Demo="typeof(Demos.Labels.LabelsEditorForm)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["LabelsValidateForm1Title"]"
+           Introduction="@(((MarkupString)Localizer["LabelsValidateForm1Intro"].Value).ToString())"
+           Name="ValidateForm1"
+           Demo="typeof(Demos.Labels.LabelsValidateForm1)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["LabelsValidateForm2Title"]"
+           Introduction="@Localizer["LabelsValidateForm2Intro"]"
+           Name="ValidateForm2"
+           Demo="typeof(Demos.Labels.LabelsValidateForm2)">
+</DemoBlock>

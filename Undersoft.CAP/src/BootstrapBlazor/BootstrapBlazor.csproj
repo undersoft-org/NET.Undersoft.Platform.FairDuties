@@ -1,0 +1,81 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <Version>7.5.5</Version>
+    <GenerateDocumentationFile>False</GenerateDocumentationFile>
+    <SignAssembly>False</SignAssembly>
+    <Authors />
+    <Company />
+    <Description />
+    <Copyright />
+    <PackageReleaseNotes />
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net5.0'">
+    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="5.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="5.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="5.0" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Localization" Version="5.0" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="5.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
+    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="6.0" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="6.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="6.0" />
+    <PackageReference Include="Microsoft.Extensions.Localization" Version="6.0" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="6.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net7.0'">
+    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="7.0" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="7.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="7.0" />
+    <PackageReference Include="Microsoft.Extensions.Localization" Version="7.0" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Locales\*.json" />
+    <EmbeddedResource Include="Locales\*.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="bundleconfig.json" />
+    <Content Remove="wwwroot\core\**\*.*" />
+    <Content Remove="wwwroot\lib\**\*.*" />
+    <Content Remove="wwwroot\bundle\*.*" />
+    <Content Remove="wwwroot\src\**\*.*" />
+    <None Include="bundleconfig.json" />
+    <None Include="wwwroot\core\**\*.*" />
+    <None Include="wwwroot\lib\**\*.*" />
+    <None Include="wwwroot\bundle\*.*" />
+    <None Include="wwwroot\src\**\*.*" />
+    <Content Include="wwwroot\lib\countUp\*.js" />
+    <None Remove="wwwroot\lib\countUp\*.js" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(Configuration)' == 'Release'">
+    <Content Remove="wwwroot\js\bootstrap.blazor.bundle.js" />
+    <None Include="wwwroot\js\bootstrap.blazor.bundle.js" />
+    <Content Remove="wwwroot\modules\**\*.map" />
+    <None Include="wwwroot\modules\**\*.map" />
+  </ItemGroup>
+
+
+
+  <ItemGroup>
+    <Using Include="BootstrapBlazor.Components" />
+    <Using Include="Microsoft.AspNetCore.Components" />
+    <Using Include="Microsoft.Extensions.Options" />
+    <Using Include="Microsoft.JSInterop" />
+    <Using Include="System.ComponentModel.DataAnnotations" />
+  </ItemGroup>
+
+</Project>

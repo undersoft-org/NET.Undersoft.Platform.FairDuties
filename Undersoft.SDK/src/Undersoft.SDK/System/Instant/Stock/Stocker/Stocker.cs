@@ -1,4 +1,3 @@
-using Google.Protobuf.WellKnownTypes;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;

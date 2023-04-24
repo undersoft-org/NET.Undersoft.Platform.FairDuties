@@ -1,0 +1,87 @@
+﻿@page "/menus"
+@inject IStringLocalizer<Menus> Localizer
+
+<h3>@Localizer["MenusTitle"]</h3>
+
+<h4>@Localizer["MenusDescription"]</h4>
+
+<Tips class="mt-3">
+    <p>@((MarkupString)Localizer["MenusTips1"].Value)</p>
+</Tips>
+
+<DemoBlock Title="@Localizer["MenusTopBarTitle"]"
+           Introduction="@Localizer["MenusTopBarIntro"]"
+           Name="TopBar"
+           Demo="typeof(Demos.Menus.MenusTopBar)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["MenusBottomBarTitle"]"
+           Introduction="@Localizer["MenusBottomBarIntro"]"
+           Name="BottomBar"
+           Demo="typeof(Demos.Menus.MenusBottomBar)">
+    <Tips>
+        <div>@((MarkupString)Localizer["MenusBottomBarTips"].Value)</div>
+    </Tips>
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["MenusIconTopTitle"]"
+           Introduction="@Localizer["MenusIconTopIntro"]"
+           Name="IconTop"
+           Demo="typeof(Demos.Menus.MenusIconTop)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["MenusLeftRightLayoutTitle"]"
+           Introduction="@Localizer["MenusLeftRightLayoutIntro"]"
+           Name="LeftRightLayout"
+           Demo="typeof(Demos.Menus.MenusLeftRightLayout)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["MenusIconLeftTitle"]"
+           Introduction="@Localizer["MenusIconLeftIntro"]"
+           Name="IconLeft"
+           Demo="typeof(Demos.Menus.MenusIconLeft)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["MenusAccordionTitle"]"
+           Introduction="@Localizer["MenusAccordionIntro"]"
+           Name="Accordion"
+           Demo="typeof(Demos.Menus.MenusAccordion)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["MenusClickShrinkTitle"]"
+           Introduction="@Localizer["MenusClickShrinkIntro"]"
+           Name="ClickShrink"
+           Demo="typeof(Demos.Menus.MenusClickShrink)">
+    <Tips>
+        <p>@(new MarkupString(Localizer["MenusClickShrinkAlertText"].Value))</p>
+    </Tips>
+    <p>@((MarkupString)Localizer["MenusClickShrinkDescription"].Value)</p>
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["MenusWigetTitle"]"
+           Introduction="@Localizer["MenusWigetIntro"]"
+           Name="Wiget"
+           Demo="typeof(Demos.Menus.MenusWiget)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["MenusCustomNodeTitle"]"
+           Introduction="@Localizer["MenusCustomNodeIntro"]"
+           Name="CustomNode"
+           Demo="typeof(Demos.Menus.MenusCustomNode)">
+    <p>@((MarkupString)Localizer["MenusCustomNodeDescription"].Value)</p>
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["MenusDynamicTitle"]"
+           Introduction="@Localizer["MenusDynamicIntro"]"
+           Name="Dynamic"
+           Demo="typeof(Demos.Menus.MenusDynamic)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["MenusPartDisableTitle"]"
+           Introduction="@Localizer["MenusPartDisableIntro"]"
+           Name="PartDisable"
+           Demo="typeof(Demos.Menus.MenusPartDisable)">
+    <p>@((MarkupString)Localizer["MenusPartDisableDescription1"].Value)</p>
+</DemoBlock>
+
+<AttributeTable Items="@GetAttributes()" />

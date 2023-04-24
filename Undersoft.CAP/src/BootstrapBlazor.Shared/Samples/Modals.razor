@@ -1,0 +1,61 @@
+﻿@page "/modals"
+@inject IStringLocalizer<Modals> Localizer
+
+<h3>@Localizer["ModalsTitle"]</h3>
+<h4>@Localizer["ModalsDescription"]</h4>
+
+<DemoBlock Title="@Localizer["ModalsNormalTitle"]"
+           Introduction="@Localizer["ModalsNormalIntro"]"
+           Name="Normal"
+           Demo="typeof(Demos.Modals.ModalsNormal)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["ModalsIsBackdropTitle"]"
+           Introduction="@Localizer["ModalsIsBackdropIntro"]"
+           Name="IsBackdrop"
+           Demo="typeof(Demos.Modals.ModalsIsBackdrop)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["ModalsDialogSizeTitle"]"
+           Introduction="@Localizer["ModalsDialogSizeIntro"]"
+           Name="DialogSize"
+           Demo="typeof(Demos.Modals.ModalsDialogSize)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["ModalsFullScreenSizeTitle"]"
+           Introduction="@Localizer["ModalsFullScreenSizeIntro"]"
+           Name="FullScreenSize"
+           Demo="typeof(Demos.Modals.ModalsFullScreenSize)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["ModalsCenterVerticallyTitle"]"
+           Introduction="@Localizer["ModalsCenterVerticallyIntro"]"
+           Name="CenterVertically"
+           Demo="typeof(Demos.Modals.ModalsCenterVertically)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["ModalsLongContentTitle"]"
+           Introduction="@Localizer["ModalsLongContentIntro"]"
+           Name="LongContent"
+           Demo="typeof(Demos.Modals.ModalsLongContent)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["ModalsIsDraggableTitle"]"
+           Introduction="@Localizer["ModalsIsDraggableIntro"]"
+           Name="IsDraggable"
+           Demo="typeof(Demos.Modals.ModalsIsDraggable)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["ModalsMaximizeTitle"]"
+           Introduction="@Localizer["ModalsMaximizeIntro"]"
+           Name="Maximize"
+           Demo="typeof(Demos.Modals.ModalsMaximize)">
+</DemoBlock>
+
+<DemoBlock Title="@Localizer["ModalsShownCallbackAsyncTitle"]"
+           Introduction="@Localizer["ModalsShownCallbackAsyncIntro"]"
+           Name="ShownCallbackAsync"
+           Demo="typeof(Demos.Modals.ModalsShownCallbackAsync)">
+</DemoBlock>
+
+<AttributeTable Items="@GetAttributes()" />

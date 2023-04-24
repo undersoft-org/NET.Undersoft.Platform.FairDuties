@@ -1,0 +1,113 @@
+﻿@page "/treeviews"
+@inject IStringLocalizer<TreeViews> Localizer
+
+<h3>@Localizer["TreeViewsTitle"]</h3>
+<h4>@Localizer["TreeViewsDescription"]</h4>
+
+<Tips class="mt-3">
+    <div><code>Tree</code> @((MarkupString)Localizer["TreeViewsTips1"].Value) <code>TItem="TreeFoo"</code></div>
+    <ul class="ul-demo mt-3">
+        <li>@((MarkupString)Localizer["TreeViewsTips2"].Value)</li>
+        <li>@((MarkupString)Localizer["TreeViewsTips3"].Value)</li>
+        <li>@((MarkupString)Localizer["TreeViewsTips4"].Value)</li>
+        <li>@((MarkupString)Localizer["TreeViewsTips5"].Value)</li>
+        <li>@((MarkupString)Localizer["TreeViewsTips6"].Value)</li>
+        <li>@((MarkupString)Localizer["TreeViewsTips7"].Value)</li>
+        <li>@((MarkupString)Localizer["TreeViewsTips8"].Value)</li>
+    </ul>
+</Tips>
+
+<p>@((MarkupString)Localizer["TreeViewsTips9"].Value)</p>
+<p>@((MarkupString)Localizer["TreeViewsTips10"].Value)</p>
+<p>@((MarkupString)Localizer["TreeViewsTips11"].Value)</p>
+<p>@((MarkupString)Localizer["TreeViewsTips12"].Value)</p>
+
+<DemoBlock Title="@Localizer["TreeViewNormalTitle"]"
+           Introduction="@Localizer["TreeViewNormalIntro"]"
+           Name="Normal"
+           Demo="typeof(Demos.TreeViews.TreeViewNormal)">
+    <p>@((MarkupString)Localizer["TreeViewNormalDescription"].Value)</p>
+</DemoBlock>
+<DemoBlock Title="@Localizer["TreeViewCheckboxTitle"]"
+           Introduction="@Localizer["TreeViewCheckboxIntro"]"
+           Name="Checkbox"
+           Demo="typeof(Demos.TreeViews.TreeViewCheckbox)">
+    <p>
+        <div>@((MarkupString)Localizer["TreeViewCheckboxTips1"].Value)</div>
+        <div>@((MarkupString)Localizer["TreeViewCheckboxTips2"].Value)</div>
+    </p>
+</DemoBlock>
+<DemoBlock Title="@Localizer["TreeViewTreeDisableTitle"]"
+           Introduction="@Localizer["TreeViewTreeDisableIntro"]"
+           Name="TreeDisable"
+           Demo="typeof(Demos.TreeViews.TreeViewTreeDisable)">
+    <p>@((MarkupString)Localizer["TreeViewTreeDisableDescription"].Value)</p>
+</DemoBlock>
+<DemoBlock Title="@Localizer["TreeViewAccordionModelTitle"]"
+           Introduction="@Localizer["TreeViewAccordionModelIntro"]"
+           Name="AccordionModel"
+           Demo="typeof(Demos.TreeViews.TreeViewAccordionModel)">
+    <p>@((MarkupString)Localizer["TreeViewAccordionModelDescription"].Value)</p>
+</DemoBlock>
+<DemoBlock Title="@Localizer["TreeViewDefauleExpandTitle"]"
+           Introduction="@Localizer["TreeViewDefauleExpandIntro"]"
+           Name="DefauleExpand"
+           Demo="typeof(Demos.TreeViews.TreeViewDefauleExpand)">
+    <p>
+        @((MarkupString)Localizer["TreeViewDefauleExpandDescription"].Value)
+    </p>
+</DemoBlock>
+<DemoBlock Title="@Localizer["TreeViewTreeDisplayIconTitle"]"
+           Introduction="@Localizer["TreeViewTreeDisplayIconIntro"]"
+           Name="TreeDisplayIcon"
+           Demo="typeof(Demos.TreeViews.TreeViewTreeDisplayIcon)">
+    <p>
+        @((MarkupString)Localizer["TreeViewTreeDisplayIconDescription"].Value)
+    </p>
+</DemoBlock>
+<DemoBlock Title="@Localizer["TreeViewTreeClickExpandTitle"]"
+           Introduction="@Localizer["TreeViewTreeClickExpandIntro"]"
+           Name="TreeClickExpand"
+           Demo="typeof(Demos.TreeViews.TreeViewTreeClickExpand)">
+    <p>
+        @((MarkupString)Localizer["TreeViewTreeClickExpandDescription"].Value)
+    </p>
+</DemoBlock>
+<DemoBlock Title="@Localizer["TreeViewTreeValidationFormTitle"]"
+           Introduction="@Localizer["TreeViewTreeValidationFormIntro"]"
+           Name="TreeValidationForm"
+           Demo="typeof(Demos.TreeViews.TreeViewTreeValidationForm)">
+    <p>@((MarkupString)Localizer["TreeViewTreeValidationFormDescription"].Value)</p>
+</DemoBlock>
+<DemoBlock Title="@Localizer["TreeViewTreeLazyLoadingTitle"]"
+           Introduction="@Localizer["TreeViewTreeLazyLoadingIntro"]"
+           Name="TreeLazyLoading"
+           Demo="typeof(Demos.TreeViews.TreeViewTreeLazyLoading)">
+    <p>
+        @((MarkupString)Localizer["TreeViewTreeLazyLoadingDescription"].Value)
+    </p>
+</DemoBlock>
+<DemoBlock Title="@Localizer["TreeViewTreeCustomNodeTitle"]"
+           Introduction="@Localizer["TreeViewTreeCustomNodeIntro"]"
+           Name="TreeCustomNode"
+           Demo="typeof(Demos.TreeViews.TreeViewTreeCustomNode)">
+</DemoBlock>
+<DemoBlock Title="@Localizer["TreeViewTreeNodeColorTitle"]"
+           Introduction="@Localizer["TreeViewTreeNodeColorIntro"]"
+           Name="TreeNodeColor"
+           Demo="typeof(Demos.TreeViews.TreeViewTreeNodeColor)">
+</DemoBlock>
+<DemoBlock Title="@Localizer["TreeViewCheckedItemsTitle"]"
+           Introduction="@Localizer["TreeViewCheckedItemsIntro"]"
+           Name="CheckedItems"
+           Demo="typeof(Demos.TreeViews.TreeViewCheckedItems)">
+</DemoBlock>
+<DemoBlock Title="@Localizer["TreeViewShowSkeletonTitle"]"
+           Introduction="@Localizer["TreeViewShowSkeletonIntro"]"
+           Name="ShowSkeleton"
+           Demo="typeof(Demos.TreeViews.TreeViewShowSkeleton)">
+</DemoBlock>
+
+<AttributeTable Items="@GetAttributes()" />
+
+<AttributeTable Items="@GetTreeItemAttributes()" Title="@Localizer["TreeViewsAttrs"]" />

@@ -10,6 +10,6 @@ namespace Undersoft.AEP.Raw
         public string Name { get; set; }
 
         [DataMember(Order = 12)]
-        public float Size { get; set; }
+        public double Value { get; set; }
     }
 }

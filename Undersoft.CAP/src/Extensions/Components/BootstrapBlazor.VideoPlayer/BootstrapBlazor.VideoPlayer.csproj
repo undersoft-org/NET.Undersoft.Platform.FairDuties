@@ -1,0 +1,86 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+    <PropertyGroup>
+        <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <Version>7.0.4</Version>
+        <PackageProjectUrl>https://github.com/densen2014/BootstrapBlazor.VideoPlayer</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/densen2014/BootstrapBlazor.VideoPlayer</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <SignAssembly>False</SignAssembly>
+        <PackageTags>Bootstrap Blazor VideoPlayer 视频播放器 组件 </PackageTags>
+        <Description>Bootstrap UI VideoPlayer components experience</Description>
+        <AssemblyName>BootstrapBlazor.VideoPlayer</AssemblyName>
+        <RootNamespace>BootstrapBlazor.VideoPlayer</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.10" />
+    </ItemGroup>
+
+    <ItemGroup Condition="'$(TargetFramework)' == 'net7.0'">
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0" />
+    </ItemGroup>
+    
+    <!-- 通过移除正常的引用并替换成固定版本的引用，达到无论如何更新都无法生效的目的。 -->
+    <Target Condition="'$(TargetFramework)' == 'net6.0'" Name="ReferenceStaticLegacyPackage" BeforeTargets="CollectPackageReferences">
+        <ItemGroup>
+            <PackageReference Remove="Microsoft.AspNetCore.Components.Web" />
+            <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0" />
+        </ItemGroup>
+    </Target>
+    <ItemGroup>
+      <None Include="wwwroot\lang\ar.js" />
+      <None Include="wwwroot\lang\ba.js" />
+      <None Include="wwwroot\lang\bg.js" />
+      <None Include="wwwroot\lang\bn.js" />
+      <None Include="wwwroot\lang\ca.js" />
+      <None Include="wwwroot\lang\cs.js" />
+      <None Include="wwwroot\lang\cy.js" />
+      <None Include="wwwroot\lang\da.js" />
+      <None Include="wwwroot\lang\de.js" />
+      <None Include="wwwroot\lang\el.js" />
+      <None Include="wwwroot\lang\en.js" />
+      <None Include="wwwroot\lang\es.js" />
+      <None Include="wwwroot\lang\et.js" />
+      <None Include="wwwroot\lang\eu.js" />
+      <None Include="wwwroot\lang\fa.js" />
+      <None Include="wwwroot\lang\fi.js" />
+      <None Include="wwwroot\lang\fr.js" />
+      <None Include="wwwroot\lang\gd.js" />
+      <None Include="wwwroot\lang\gl.js" />
+      <None Include="wwwroot\lang\he.js" />
+      <None Include="wwwroot\lang\hi.js" />
+      <None Include="wwwroot\lang\hr.js" />
+      <None Include="wwwroot\lang\hu.js" />
+      <None Include="wwwroot\lang\it.js" />
+      <None Include="wwwroot\lang\ja.js" />
+      <None Include="wwwroot\lang\ko.js" />
+      <None Include="wwwroot\lang\lv.js" />
+      <None Include="wwwroot\lang\nb.js" />
+      <None Include="wwwroot\lang\nl.js" />
+      <None Include="wwwroot\lang\nn.js" />
+      <None Include="wwwroot\lang\oc.js" />
+      <None Include="wwwroot\lang\pl.js" />
+      <None Include="wwwroot\lang\pt-BR.js" />
+      <None Include="wwwroot\lang\pt-PT.js" />
+      <None Include="wwwroot\lang\ro.js" />
+      <None Include="wwwroot\lang\ru.js" />
+      <None Include="wwwroot\lang\sk.js" />
+      <None Include="wwwroot\lang\sl.js" />
+      <None Include="wwwroot\lang\sr.js" />
+      <None Include="wwwroot\lang\sv.js" />
+      <None Include="wwwroot\lang\te.js" />
+      <None Include="wwwroot\lang\th.js" />
+      <None Include="wwwroot\lang\tr.js" />
+      <None Include="wwwroot\lang\uk.js" />
+      <None Include="wwwroot\lang\vi.js" />
+      <None Include="wwwroot\lang\zh-CN.js" />
+      <None Include="wwwroot\lang\zh-Hans.js" />
+      <None Include="wwwroot\lang\zh-Hant.js" />
+      <None Include="wwwroot\lang\zh-TW.js" />
+    </ItemGroup>
+</Project>

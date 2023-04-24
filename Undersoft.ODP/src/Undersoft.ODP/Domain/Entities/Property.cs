@@ -37,6 +37,6 @@ namespace Undersoft.ODP.Domain
 
         [JsonIgnore]
         [IgnoreDataMember]
-        public virtual EntitySet<Profile> Personals { get; set; }
+        public virtual EntitySet<Profile> Profiles { get; set; }
     }
 }
