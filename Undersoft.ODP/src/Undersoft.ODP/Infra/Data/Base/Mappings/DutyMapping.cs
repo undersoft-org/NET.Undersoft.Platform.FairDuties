@@ -25,9 +25,9 @@ namespace Undersoft.ODP.Infra.Data.Base.Mappings
                     nameof(Duty.VectorViews),
                     ExpandSite.OnLeft
                 )
-                .LinkSetToSet<Duty, Request>(
-                    nameof(Duty.Requests),
+                .LinkSetToSet<Duty, Request>(                   
                     nameof(Request.Duties),
+                    nameof(Duty.Requests),
                     ExpandSite.OnLeft
                 );
         }

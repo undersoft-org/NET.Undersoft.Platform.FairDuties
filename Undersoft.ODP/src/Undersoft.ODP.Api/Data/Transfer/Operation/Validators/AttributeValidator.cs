@@ -2,7 +2,7 @@
 
 namespace Undersoft.ODP.Api
 {
-    public class AttributeValidator : DtoCommandSetValidator<Property>
+    public class AttributeValidator : CommandSetValidatorBase<Property>
     {
         public AttributeValidator(IRadicalr ultimatr) : base(ultimatr)
         {

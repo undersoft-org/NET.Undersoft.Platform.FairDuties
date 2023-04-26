@@ -366,6 +366,16 @@ namespace RadicalR
             return HashMapTo<TDto>(this[skip, take, sortTerms, expanders]);
         }
 
+        public virtual IAsyncEnumerable<TDto> FilterAsync<TDto>(
+          int skip,
+          int take,
+          SortExpression<TEntity> sortTerms,
+          params Expression<Func<TEntity, object>>[] expanders
+      )
+        {
+            return MapToAsync<TDto>(this[skip, take, sortTerms, expanders]);
+        }
+
         public virtual Task<IList<TDto>> Filter<TDto, TResult>(
             int skip,
             int take,
@@ -441,6 +451,17 @@ namespace RadicalR
         )
         {
             return HashMapTo<TDto>(base[skip, take, predicate, sortTerms, expanders]);
+        }
+
+        public virtual IAsyncEnumerable<TDto> FilterAsync<TDto>(
+            int skip,
+            int take,
+            Expression<Func<TEntity, bool>> predicate,
+            SortExpression<TEntity> sortTerms,
+            params Expression<Func<TEntity, object>>[] expanders
+        )
+        {
+            return MapToAsync<TDto>(base[skip, take, predicate, sortTerms, expanders]);
         }
 
         public virtual Task<IList<TDto>> Filter<TDto, TResult>(
@@ -522,6 +543,22 @@ namespace RadicalR
         ) where TResult : class
         {
             return MapTo<TDto>(base.Find(predicate, selector, expanders));
+        }
+
+        public virtual Task<UniqueOne<TDto>> FindOneAsync<TDto>(
+        Expression<Func<TEntity, bool>> predicate,
+        params Expression<Func<TEntity, object>>[] expanders
+        ) where TDto : class, IUnique
+        {
+            return UniqueOneMapAsyncTo<TDto>(base[predicate, expanders]);
+        }
+
+        public virtual Task<UniqueOne<TDto>> FindOneAsync<TDto>(
+            object[] keys,
+            params Expression<Func<TEntity, object>>[] expanders
+        ) where TDto : class, IUnique
+        {
+            return UniqueOneMapAsyncTo<TDto>(this[keys, expanders].ToQueryable());
         }
 
         public virtual Task<IList<TDto>> Get<TDto, TResult>(
@@ -610,20 +647,19 @@ namespace RadicalR
             return QueryMapAsyncTo<TDto>(base[sortTerms, expanders]);
         }
 
-        public virtual Task<UniqueOne<TDto>> FindOneAsync<TDto>(
-            Expression<Func<TEntity, bool>> predicate,
-            params Expression<Func<TEntity, object>>[] expanders
-        ) where TDto : class, IUnique
+        public virtual IAsyncEnumerable<TDto> GetAsync<TDto>(int skip, int take,
+         params Expression<Func<TEntity, object>>[] expanders
+        ) where TDto : class
         {
-            return UniqueOneMapAsyncTo<TDto>(base[predicate, expanders]);
+            return MapToAsync<TDto>(base[skip, take, expanders]);
         }
 
-        public virtual Task<UniqueOne<TDto>> FindOneAsync<TDto>(
-            object[] keys,
+        public virtual IAsyncEnumerable<TDto> GetAsync<TDto>(int skip, int take,
+            SortExpression<TEntity> sortTerms,
             params Expression<Func<TEntity, object>>[] expanders
-        ) where TDto : class, IUnique
+        ) where TDto : class
         {
-            return UniqueOneMapAsyncTo<TDto>(this[keys, expanders].ToQueryable());
+            return MapToAsync<TDto>(base[skip, take, sortTerms, expanders]);
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Undersoft.ODP.Api
 {
-    public class ShiftTypeValidator : DtoCommandSetValidator<Asset>
+    public class ShiftTypeValidator : CommandSetValidatorBase<Asset>
     {
         public ShiftTypeValidator(IRadicalr ultimatr) : base(ultimatr)
         {

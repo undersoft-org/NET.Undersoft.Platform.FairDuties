@@ -208,6 +208,9 @@ namespace RadicalR
             lock (buildHolder)
             {
                 configuration = new MapperConfiguration(expression);
+                expression.ShouldMapMethod = (m => false);
+                expression.ShouldMapProperty = (m => true);
+                expression.ShouldMapField = (m => false);
                 mapper = configuration.CreateMapper();
             }
             return this;

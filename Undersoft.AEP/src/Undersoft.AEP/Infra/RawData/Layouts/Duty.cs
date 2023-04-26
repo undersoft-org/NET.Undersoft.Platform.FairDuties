@@ -37,9 +37,6 @@ namespace Undersoft.AEP.Raw
         [DataMember(Order = 21)]
         public long SocketId { get; set; }
 
-        [DataMember(Order = 22)]
-        public long TargetId { get; set; }
-
         [DataMember(Order = 23)]
         public long ResourceId { get; set; }
 

@@ -78,14 +78,14 @@ namespace RadicalR
             DataServiceBuilder.ServiceTypes = dataServiceTypes;
             if ((dataServiceTypes & DataServiceTypes.OData) > 0)
             {
-                var ds = new DataServiceBuilder<TServiceStore>();
+                var ds = new OpenServiceBuilder<TServiceStore>();
                 builder.Invoke(ds);
                 ds.Build();
                 ds.AddOData(mvc);
             }
             if ((dataServiceTypes & DataServiceTypes.Grpc) > 0)
             {
-                var ds = new GrpcServiceBuilder<TServiceStore>();
+                var ds = new StreamServiceBuilder<TServiceStore>();
                 builder.Invoke(ds);
                 ds.Build();
             }
@@ -100,28 +100,33 @@ namespace RadicalR
 
         public void AddJsonSerializerDefaults()
         {
-#if NET6_0
-            var opt = (
-                (JsonSerializerOptions)
+#if NET6_0            
+            var newopts = new JsonSerializerOptions();
+            newopts.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+            newopts.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+            newopts.NumberHandling = JsonNumberHandling.AllowReadingFromString;
+            newopts.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase));
+
+            var fld = (                
                     typeof(JsonSerializerOptions)
                         .GetField(
                             "s_defaultOptions",
                             System.Reflection.BindingFlags.Static
                                 | System.Reflection.BindingFlags.NonPublic
-                        )
-                        .GetValue(null)
-            );
+                        ));
 
-            opt.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
-            opt.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+            var opt = (JsonSerializerOptions)fld.GetValue(newopts);
+            if (opt == null)
+                fld.SetValue(newopts, newopts);
+            else
+                manager.Mapper.Map(newopts, opt);
 #endif
 #if NET7_0
-
             var flds = typeof(JsonSerializerOptions).GetRuntimeFields();
             flds.Single(f => f.Name == "_defaultIgnoreCondition")
                 .SetValue(JsonSerializerOptions.Default, JsonIgnoreCondition.WhenWritingNull);
             flds.Single(f => f.Name == "_referenceHandler")
-                .SetValue(JsonSerializerOptions.Default, ReferenceHandler.IgnoreCycles);
+                .SetValue(JsonSerializerOptions.Default, ReferenceHandler.IgnoreCycles);          
 #endif
         }
 
@@ -508,8 +513,8 @@ namespace RadicalR
                     IRepositoryClient repoClient = (IRepositoryClient)
                         repoType.New(provider, _connectionString);
 
-                    Type storeDbType = typeof(DataClientContext<>).MakeGenericType(
-                        DataClientRegistry.GetRemoteStore(contextType)
+                    Type storeDbType = typeof(OpenClientContext<>).MakeGenericType(
+                        OpenClientRegistry.GetRemoteStore(contextType)
                     );
                     Type storeRepoType = typeof(RepositoryClient<>).MakeGenericType(storeDbType);
 
@@ -734,7 +739,7 @@ namespace RadicalR
 
         private string AddDataClientPrefix(Type contextType, string routePrefix = null)
         {
-            Type iface = DataClientRegistry.GetRemoteStore(contextType);
+            Type iface = OpenClientRegistry.GetRemoteStore(contextType);
             return GetStoreRoutes(iface, routePrefix);
         }
 
@@ -767,14 +772,14 @@ namespace RadicalR
             else if (iface == typeof(ICqrsStore))
             {
                 return (routePrefix != null)
-                    ? (StoreRoutes.CqrsStore = routePrefix)
-                    : StoreRoutes.CqrsStore;
+                    ? (StoreRoutes.DataStore = routePrefix)
+                    : StoreRoutes.DataStore;
             }
             else
             {
                 return (routePrefix != null)
-                    ? (StoreRoutes.CqrsStore = routePrefix)
-                    : StoreRoutes.CqrsStore;
+                    ? (StoreRoutes.DataStore = routePrefix)
+                    : StoreRoutes.DataStore;
             }
         }
     }

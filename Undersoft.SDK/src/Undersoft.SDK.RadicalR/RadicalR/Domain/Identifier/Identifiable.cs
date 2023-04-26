@@ -1,3 +1,4 @@
+using AutoMapper;
 using System.Collections.Specialized;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -39,6 +40,7 @@ namespace RadicalR
         [NotMapped]
         [JsonIgnore]
         [IgnoreDataMember]
+        [IgnoreMap]
         [FigureAs(UnmanagedType.ByValTStr, SizeConst = 32)]
         public Uscn UniqueCode
         {
@@ -60,7 +62,7 @@ namespace RadicalR
         [DataMember(Order = 2)]
         [Column(Order = 2)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public virtual int Ordinal { get; set; } = -1;
+        public virtual int Ordinal { get; set; }
 
         [Column(Order = 3)]
         [StringLength(32)]
@@ -70,7 +72,7 @@ namespace RadicalR
 
         [Column(Order = 4)]
         [DataMember(Order = 4)]
-        public virtual long SourceId { get; set; } = -1;
+        public virtual long SourceId { get; set; }
 
         [Column(Order = 5)]
         [StringLength(128)]
@@ -80,7 +82,7 @@ namespace RadicalR
 
         [Column(Order = 6)]
         [DataMember(Order = 6)]
-        public virtual long TargetId { get; set; } = -1;
+        public virtual long TargetId { get; set; }
 
         [Column(Order = 7)]
         [StringLength(128)]
@@ -119,6 +121,7 @@ namespace RadicalR
         [NotMapped]
         [JsonIgnore]
         [IgnoreDataMember]
+        [IgnoreMap]
         public virtual bool Inactive
         {
             get => GetFlag(1);
@@ -128,6 +131,7 @@ namespace RadicalR
         [NotMapped]
         [JsonIgnore]
         [IgnoreDataMember]
+        [IgnoreMap]
         public virtual bool Locked
         {
             get => GetFlag(0);
@@ -137,6 +141,7 @@ namespace RadicalR
         [NotMapped]
         [JsonIgnore]
         [IgnoreDataMember]
+        [IgnoreMap]
         public virtual int TypeKey
         {
             get => (int)UniqueType;
@@ -146,6 +151,7 @@ namespace RadicalR
         [NotMapped]
         [JsonIgnore]
         [IgnoreDataMember]
+        [IgnoreMap]
         public override int OriginKey
         {
             get { return (int)uniquecode.UniqueOrigin; }
@@ -155,6 +161,7 @@ namespace RadicalR
         [NotMapped]
         [JsonIgnore]
         [IgnoreDataMember]
+        [IgnoreMap]
         public virtual bool Obsolete
         {
             get => GetFlag(2);
@@ -164,6 +171,7 @@ namespace RadicalR
         [NotMapped]
         [JsonIgnore]
         [IgnoreDataMember]
+        [IgnoreMap]
         public virtual byte Priority
         {
             get => GetPriority();
@@ -173,6 +181,7 @@ namespace RadicalR
         [NotMapped]
         [JsonIgnore]
         [IgnoreDataMember]
+        [IgnoreMap]
         public virtual DateTime Time
         {
             get => DateTime.FromBinary(uniquecode.Time);
@@ -182,6 +191,7 @@ namespace RadicalR
         [NotMapped]
         [JsonIgnore]
         [IgnoreDataMember]
+        [IgnoreMap]
         public override ulong UniqueKey
         {
             get => uniquecode.UniqueKey;
@@ -198,6 +208,7 @@ namespace RadicalR
         [NotMapped]
         [JsonIgnore]
         [IgnoreDataMember]
+        [IgnoreMap]
         public override ulong UniqueType
         {
             get =>

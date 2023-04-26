@@ -2,7 +2,7 @@
 
 namespace Undersoft.ODP.Api
 {
-    public class SettingValidator : DtoCommandSetValidator<Option>
+    public class SettingValidator : CommandSetValidatorBase<Option>
     {
         public SettingValidator(IRadicalr ultimatr) : base(ultimatr)
         {

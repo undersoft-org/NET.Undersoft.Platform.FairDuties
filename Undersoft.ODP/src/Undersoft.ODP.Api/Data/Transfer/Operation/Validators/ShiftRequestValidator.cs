@@ -2,7 +2,7 @@
 
 namespace Undersoft.ODP.Api
 {
-    public class ShiftRequestValidator : DtoCommandSetValidator<Request>
+    public class ShiftRequestValidator : CommandSetValidatorBase<Request>
     {
         public ShiftRequestValidator(IRadicalr ultimatr) : base(ultimatr)
         {

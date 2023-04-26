@@ -2,7 +2,7 @@
 
 namespace Undersoft.ODP.Api
 {
-    public class DeviceValidator : DtoCommandSetValidator<Client>
+    public class DeviceValidator : CommandSetValidatorBase<Client>
     {
         public DeviceValidator(IRadicalr ultimatr) : base(ultimatr)
         {

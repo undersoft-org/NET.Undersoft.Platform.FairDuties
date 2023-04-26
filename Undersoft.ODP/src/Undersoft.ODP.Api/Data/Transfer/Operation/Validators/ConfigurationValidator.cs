@@ -3,7 +3,7 @@
 namespace Undersoft.ODP.Api
 {
     using Domain;
-    public class ConfigurationValidator : DtoCommandSetValidator<Setup>
+    public class ConfigurationValidator : CommandSetValidatorBase<Setup>
     {
         public ConfigurationValidator(IRadicalr ultimatr) : base(ultimatr)
         {

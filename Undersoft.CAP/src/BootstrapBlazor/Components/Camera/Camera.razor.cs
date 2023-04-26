@@ -1,15 +1,8 @@
-﻿// Copyright (c) Argo Zhang (argo@163.com). All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
-// Website: https://www.blazor.zone or https://argozhang.github.io/
-
-using Microsoft.Extensions.Localization;
+﻿using Microsoft.Extensions.Localization;
 using System.Text;
 
 namespace BootstrapBlazor.Components;
 
-/// <summary>
-/// 
-/// </summary>
 public partial class Camera : IAsyncDisposable
 {
     private ElementReference CameraElement { get; set; }
@@ -29,133 +22,73 @@ public partial class Camera : IAsyncDisposable
 
     private SelectedItem? ActiveCamera { get; set; }
 
-    /// <summary>
-    /// 获得/设置 是否自动开启摄像头 默认为 false
-    /// </summary>
     [Parameter]
     public bool AutoStart { get; set; }
 
-    /// <summary>
-    /// 获得/设置 前置摄像头显示文本 默认前置
-    /// </summary>
     [Parameter]
     [NotNull]
     public string? FrontText { get; set; }
 
-    /// <summary>
-    /// 获得/设置 后置摄像头显示文本 默认后置
-    /// </summary>
     [Parameter]
     [NotNull]
     public string? BackText { get; set; }
 
-    /// <summary>
-    /// 获得/设置 是否显示 照片预览 默认为 false 不预览
-    /// </summary>
     [Parameter]
     public bool ShowPreview { get; set; }
 
-    /// <summary>
-    /// 获得/设置 设备列表前置标签文字 默认为 摄像头
-    /// </summary>
     [Parameter]
     [NotNull]
     public string? DeviceLabel { get; set; }
 
-    /// <summary>
-    /// 获得/设置 初始化设备列表文字 默认为 正在识别摄像头
-    /// </summary>
     [Parameter]
     [NotNull]
     public string? InitDevicesString { get; set; }
 
-    /// <summary>
-    /// 获得/设置 摄像头视频宽度
-    /// </summary>
     [Parameter]
     public int VideoWidth { get; set; } = 320;
 
-    /// <summary>
-    /// 获得/设置 摄像头视频高度
-    /// </summary>
     [Parameter]
     public int VideoHeight { get; set; } = 240;
 
-    /// <summary>
-    /// 获得/设置 初始化摄像头回调方法
-    /// </summary>
     [Parameter]
     public Func<IEnumerable<DeviceItem>, Task>? OnInit { get; set; }
 
-    /// <summary>
-    /// 获得/设置 扫码出错回调方法
-    /// </summary>
     [Parameter]
     public Func<string, Task>? OnError { get; set; }
 
-    /// <summary>
-    /// 获得/设置 开始扫码回调方法
-    /// </summary>
     [Parameter]
     public Func<Task>? OnStart { get; set; }
 
-    /// <summary>
-    /// 获得/设置 关闭扫码回调方法
-    /// </summary>
     [Parameter]
     public Func<Task>? OnClose { get; set; }
 
-    /// <summary>
-    /// 获得/设置 扫码成功回调方法
-    /// </summary>
     [Parameter]
     public Func<string, Task>? OnCapture { get; set; }
 
-    /// <summary>
-    /// 获得/设置 开始按钮图标
-    /// </summary>
     [Parameter]
     [NotNull]
     public string? PlayIcon { get; set; }
 
-    /// <summary>
-    /// 获得/设置 停止按钮图标
-    /// </summary>
     [Parameter]
     [NotNull]
     public string? StopIcon { get; set; }
 
-    /// <summary>
-    /// 获得/设置 拍照按钮图标
-    /// </summary>
     [Parameter]
     [NotNull]
     public string? PhotoIcon { get; set; }
 
-    /// <summary>
-    /// 获得/设置 开启按钮显示文本 默认为开启
-    /// </summary>
     [Parameter]
     [NotNull]
     public string? PlayText { get; set; }
 
-    /// <summary>
-    /// 获得/设置 关闭按钮显示文本 默认为关闭
-    /// </summary>
     [Parameter]
     [NotNull]
     public string? StopText { get; set; }
 
-    /// <summary>
-    /// 获得/设置 拍照按钮显示文本 默认为拍照
-    /// </summary>
     [Parameter]
     [NotNull]
     public string? PhotoText { get; set; }
 
-    /// <summary>
-    /// 获得/设置 未找到视频相关设备文字 默认为 未找到视频相关设备
-    /// </summary>
     [Parameter]
     [NotNull]
     public string? NotFoundDevicesString { get; set; }
@@ -172,9 +105,6 @@ public partial class Camera : IAsyncDisposable
 
     private string VideoHeightString => $"{VideoHeight}px;";
 
-    /// <summary>
-    /// OnInitialized 方法
-    /// </summary>
     protected override void OnInitialized()
     {
         base.OnInitialized();
@@ -195,9 +125,6 @@ public partial class Camera : IAsyncDisposable
         };
     }
 
-    /// <summary>
-    /// OnParametersSet 方法
-    /// </summary>
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
@@ -217,11 +144,6 @@ public partial class Camera : IAsyncDisposable
         }
     }
 
-    /// <summary>
-    /// OnAfterRenderAsync 方法
-    /// </summary>
-    /// <param name="firstRender"></param>
-    /// <returns></returns>
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         await base.OnAfterRenderAsync(firstRender);
@@ -233,11 +155,6 @@ public partial class Camera : IAsyncDisposable
         }
     }
 
-    /// <summary>
-    /// 初始化设备方法
-    /// </summary>
-    /// <param name="devices"></param>
-    /// <returns></returns>
     [JSInvokable]
     public async Task InitDevices(IEnumerable<DeviceItem> devices)
     {
@@ -270,11 +187,6 @@ public partial class Camera : IAsyncDisposable
         StateHasChanged();
     }
 
-    /// <summary>
-    /// 扫描发生错误回调方法
-    /// </summary>
-    /// <param name="err"></param>
-    /// <returns></returns>
     [JSInvokable]
     public async Task GetError(string err)
     {
@@ -284,10 +196,6 @@ public partial class Camera : IAsyncDisposable
         }
     }
 
-    /// <summary>
-    /// 开启摄像头回调方法
-    /// </summary>
-    /// <returns></returns>
     [JSInvokable]
     public async Task Start()
     {
@@ -300,10 +208,6 @@ public partial class Camera : IAsyncDisposable
         StateHasChanged();
     }
 
-    /// <summary>
-    /// 停止摄像头回调方法
-    /// </summary>
-    /// <returns></returns>
     [JSInvokable]
     public async Task Stop()
     {
@@ -317,10 +221,6 @@ public partial class Camera : IAsyncDisposable
     }
 
     private readonly StringBuilder _sb = new();
-    /// <summary>
-    /// 拍照回调方法
-    /// </summary>
-    /// <returns></returns>
     [JSInvokable]
     public async Task Capture(string payload)
     {
@@ -339,11 +239,6 @@ public partial class Camera : IAsyncDisposable
         }
     }
 
-    /// <summary>
-    /// DisposeAsyncCore 方法
-    /// </summary>
-    /// <param name="disposing"></param>
-    /// <returns></returns>
     protected virtual async ValueTask DisposeAsyncCore(bool disposing)
     {
         if (disposing)
@@ -357,9 +252,6 @@ public partial class Camera : IAsyncDisposable
         }
     }
 
-    /// <summary>
-    /// DisposeAsync 方法
-    /// </summary>
     public async ValueTask DisposeAsync()
     {
         await DisposeAsyncCore(true).ConfigureAwait(false);

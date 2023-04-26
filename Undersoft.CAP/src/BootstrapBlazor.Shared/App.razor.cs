@@ -1,14 +1,7 @@
-﻿// Copyright (c) Argo Zhang (argo@163.com). All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
-// Website: https://www.blazor.zone or https://argozhang.github.io/
-
-using BootstrapBlazor.Shared.Extensions;
+﻿using BootstrapBlazor.Shared.Extensions;
 
 namespace BootstrapBlazor.Shared;
 
-/// <summary>
-/// App 组件
-/// </summary>
 public partial class App
 {
     [Inject]
@@ -23,9 +16,6 @@ public partial class App
     [NotNull]
     private ToastService? Toast { get; set; }
 
-    /// <summary>
-    /// OnInitialized 方法
-    /// </summary>
     protected override void OnInitialized()
     {
         base.OnInitialized();
@@ -33,9 +23,6 @@ public partial class App
         DispatchService.Subscribe(Notify);
     }
 
-    /// <summary>
-    /// <inheritdoc/>
-    /// </summary>
     protected override Task InvokeInitAsync() => InvokeVoidAsync("init", Localizer["ErrorMessage"].Value, Localizer["Reload"].Value);
 
     private async Task Notify(DispatchEntry<GiteePostBody> payload)
@@ -57,10 +44,6 @@ public partial class App
         }
     }
 
-    /// <summary>
-    /// <inheritdoc/>
-    /// </summary>
-    /// <param name="disposing"></param>
     protected override async ValueTask DisposeAsync(bool disposing)
     {
         if (disposing)

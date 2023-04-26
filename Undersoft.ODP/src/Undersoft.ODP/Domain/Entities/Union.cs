@@ -20,8 +20,6 @@ namespace Undersoft.ODP.Domain
 
         public virtual EntitySet<Property> Properties { get; set; }
 
-        [JsonIgnore]
-        [IgnoreDataMember]
         public virtual EntitySet<Asset> Assets { get; set; }
 
         private EntityOnSet<Estimate> estimates;
@@ -56,55 +54,29 @@ namespace Undersoft.ODP.Domain
 
         public int LastEstimateOrdinal { get; set; }
 
-        [JsonIgnore]
-        [IgnoreDataMember]
         public virtual EntitySet<Member> Members { get; set; }
 
-        [JsonIgnore]
-        [IgnoreDataMember]
         public virtual EntityOnSet<Vertex> Vertices { get; set; }
 
-        [JsonIgnore]
-        [IgnoreDataMember]
         public virtual EntityOnSet<Group> Groups { get; set; }
 
-        [JsonIgnore]
-        [IgnoreDataMember]
         public virtual EntityOnSet<Duty> Duties { get; set; }
 
         public long? SetupId { get; set; }
         public virtual Setup Setup { get; set; }
 
         private IFindable<ISource> sources;
-        [JsonIgnore]
-        [IgnoreDataMember]
-        [IgnoreClientProperty]
         public IFindable<ISource> Sources => sources ??= Members.ToAlbum<ISource>();
 
         private IFindable<IUsageSet> usageSets;
-        [JsonIgnore]
-        [IgnoreDataMember]
-        [IgnoreClientProperty]
         public IFindable<IUsageSet> UsageSets => usageSets ??= Groups.ToAlbum<IUsageSet>();
 
-        [JsonIgnore]
-        [IgnoreDataMember]
-        [IgnoreClientProperty]
         ISetup IVertex.Setup => Setup;
 
-        [JsonIgnore]
-        [IgnoreDataMember]
-        [IgnoreClientProperty]
         int IVertex.LastResourceOrdinal { get; set; }
 
-        [JsonIgnore]
-        [IgnoreDataMember]
-        [IgnoreClientProperty]
         int IVertex.LastLiabilityOrdinal { get; set; }
 
-        [JsonIgnore]
-        [IgnoreDataMember]
-        [IgnoreClientProperty]
         IFindable<IAsset> IVertex.Assets => Members.Cast<IAsset>().ToAlbum();
     }
 }

@@ -48,67 +48,42 @@ namespace Undersoft.ODP.Domain
 
         public bool OptionalFromAny { get; set; }
 
+        [FigureIdentity]
         public long? UnionId { get; set; }
-
-        [JsonIgnore]
-        [IgnoreDataMember]
         public virtual Union Union { get; set; }
-
+        
+        [FigureIdentity]
         public long? GroupId { get; set; }
-
-        [JsonIgnore]
-        [IgnoreDataMember]
         public virtual Group Group { get; set; }
-
+        
+        [FigureIdentity]
         public long? MemberId { get; set; }
-
-        [JsonIgnore]
-        [IgnoreDataMember]
         public virtual Member Member { get; set; }
 
-        [FigureKey]
-        [IgnoreDataMember]
+        [FigureIdentity]
         public long? AssetId { get; set; }
-
-        [JsonIgnore]
-        [IgnoreDataMember]
         public virtual Asset Asset { get; set; }
 
-        [JsonIgnore]
-        [IgnoreDataMember]
         public virtual EntityOnSets<Estimate> DependentBy { get; set; }
 
         public virtual EntityOnSets<Estimate> DependentOn { get; set; }
 
-        [JsonIgnore]
-        [IgnoreDataMember]
         public virtual EntityOnSets<Estimate> OptionalFrom { get; set; }
 
         public virtual EntityOnSets<Estimate> OptionalTo { get; set; }
 
-        [JsonIgnore]
-        [IgnoreDataMember]
-        [IgnoreClientProperty]
         long IEstimate.UsageSetId
         {
             get => GroupId ?? default;
             set => GroupId = value;
         }
 
-
-        [JsonIgnore]
-        [IgnoreDataMember]
-        [IgnoreClientProperty]
         public new long SourceId
         {
             get => MemberId ?? default;
             set => MemberId = value;
         }
 
-
-        [JsonIgnore]
-        [IgnoreDataMember]
-        [IgnoreClientProperty]
         IEnumerable<ILink> IEstimate.DependentOn =>
             DependentOn.Select(
                 i =>
@@ -119,9 +94,6 @@ namespace Undersoft.ODP.Domain
                     }
             );
 
-        [JsonIgnore]
-        [IgnoreDataMember]
-        [IgnoreClientProperty]
         IEnumerable<ILink> IEstimate.OptionalTo =>
             OptionalTo.Select(
                 i =>

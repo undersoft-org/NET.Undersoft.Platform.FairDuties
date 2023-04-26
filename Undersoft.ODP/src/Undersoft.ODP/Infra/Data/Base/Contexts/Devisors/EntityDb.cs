@@ -47,7 +47,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Contexts
 
         public virtual DbSet<Property> Properties { get; set; }
 
-        public virtual DbSet<Contact> Contacts { get; set; }
+        public virtual DbSet<Locale> Contacts { get; set; }
 
         public virtual DbSet<Country> Countries { get; set; }
 

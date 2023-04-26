@@ -3,7 +3,7 @@
 namespace Undersoft.ODP.Api
 {
     using Domain;
-    public class OrganizationValidator : DtoCommandSetValidator<Union>
+    public class OrganizationValidator : CommandSetValidatorBase<Union>
     {
         public OrganizationValidator(IRadicalr ultimatr) : base(ultimatr)
         {

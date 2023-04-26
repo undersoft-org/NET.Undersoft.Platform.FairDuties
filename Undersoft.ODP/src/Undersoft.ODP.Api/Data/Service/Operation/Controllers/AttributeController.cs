@@ -5,7 +5,7 @@ using RadicalR;
 namespace Undersoft.ODP.Api.Data.Service.Operation.Controllers.Entries
 {
     [AllowAnonymous]
-    [ODataRouteComponent(StoreRoutes.Constant.CqrsStore)]
+    [ODataRouteComponent(StoreRoutes.Constant.DataStore)]
     public class AttributeController : DsoController<long, ICqrsStore, Domain.Property>
     {
         public AttributeController(IRadicalr ultimatr) : base(ultimatr) { }

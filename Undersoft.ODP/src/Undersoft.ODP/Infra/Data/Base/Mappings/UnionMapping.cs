@@ -27,7 +27,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Mappings
                 .LinkOneToSet<Union, Group>(ExpandSite.OnRight)
                 .LinkOneToOne<Union, Setup>(ExpandSite.OnRight)
                 .LinkSetToSet<Union, Property>(
-                    nameof(Property.Profiles),
+                    nameof(Property.Unions),
                     nameof(Union.Properties),
                     ExpandSite.OnRight
                 )

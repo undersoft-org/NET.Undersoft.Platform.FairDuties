@@ -6,17 +6,17 @@ namespace Undersoft.ODP.Infra.Data.Base.Mappings
 {
    using Domain;
     
-    public class ContactMapping : EntityTypeMapping<Contact>
+    public class ContactMapping : EntityTypeMapping<Locale>
     {
-        private const string TABLE_NAME = "Contacts";
+        private const string TABLE_NAME = "Locales";
 
-        public override void Configure(EntityTypeBuilder<Contact> builder)
+        public override void Configure(EntityTypeBuilder<Locale> builder)
         {
             builder.ToTable(TABLE_NAME, DataBaseSchema.LocalSchema);
 
-            modelBuilder.LinkOneToSet<Contact, Address>(
+            modelBuilder.LinkOneToSet<Locale, Address>(
                 nameof(Address.Contact),
-                nameof(Contact.Addresses), ExpandSite.OnRight);
+                nameof(Locale.Addresses), ExpandSite.OnRight);
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Undersoft.ODP.Api
 {
-    public class PlanCreatedHandler : CreatedDtoHandler<IReportStore, Domain.Vertex, Vertex>
+    public class PlanCreatedHandler : CreatedHandler<IReportStore, Domain.Vertex, Vertex>
     {
         private IRadicalr _ultimatr;
 
@@ -12,7 +12,7 @@ namespace Undersoft.ODP.Api
         }
 
 
-        public override Task Handle(CreatedDto<IReportStore, Domain.Vertex, Vertex> request, CancellationToken cancellationToken)
+        public override Task Handle(Created<IReportStore, Domain.Vertex, Vertex> request, CancellationToken cancellationToken)
         {
 
             return null;

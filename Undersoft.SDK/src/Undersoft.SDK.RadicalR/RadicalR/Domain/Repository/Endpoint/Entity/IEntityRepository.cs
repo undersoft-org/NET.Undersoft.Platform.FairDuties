@@ -20,12 +20,18 @@ namespace RadicalR
         void CommitTransaction(IDbContextTransaction transaction);
         Task CommitTransaction(Task<IDbContextTransaction> transaction);
 
+        IAsyncEnumerable<TEntity> AddByAsync<TModel>(IEnumerable<TModel> model);
+        IAsyncEnumerable<TEntity> AddByAsync<TModel>(IEnumerable<TModel> model, Func<TEntity, Expression<Func<TEntity, bool>>> predicate);
+
         Task<IEnumerable<TEntity>> AddBy<TModel>(IEnumerable<TModel> model);
         Task<IEnumerable<TEntity>> AddBy<TModel>(IEnumerable<TModel> model, Func<TEntity, Expression<Func<TEntity, bool>>> predicate);
         Task<TEntity> AddBy<TModel>(TModel model);
         Task<TEntity> AddBy<TModel>(TModel model, Func<TEntity, Expression<Func<TEntity, bool>>> predicate);
 
         new IPage<TEntity> AsPage(int pageIndex, int pageSize, int indexFrom = 0);
+
+        IAsyncEnumerable<TEntity> DeleteByAsync<TModel>(IEnumerable<TModel> model);
+        IAsyncEnumerable<TEntity> DeleteByAsync<TModel>(IEnumerable<TModel> model, Func<TEntity, Expression<Func<TEntity, bool>>> predicate);
 
         IEnumerable<TEntity> DeleteBy<TModel>(IEnumerable<TModel> model);
         IEnumerable<TEntity> DeleteBy<TModel>(IEnumerable<TModel> model, Func<TEntity, Expression<Func<TEntity, bool>>> predicate);
@@ -62,6 +68,9 @@ namespace RadicalR
         Task<IDeck<TModel>> Filter<TModel>(int skip, int take, SortExpression<TEntity> sortTerms);
         Task<IDeck<TModel>> Filter<TModel>(int skip, int take, SortExpression<TEntity> sortTerms, params Expression<Func<TEntity, object>>[] expanders);
 
+        IAsyncEnumerable<TModel> FilterAsync<TModel>(int skip, int take, SortExpression<TEntity> sortTerms, params Expression<Func<TEntity, object>>[] expanders);
+        IAsyncEnumerable<TModel> FilterAsync<TModel>(int skip, int take, Expression<Func<TEntity, bool>> predicate, SortExpression<TEntity> sortTerms, params Expression<Func<TEntity, object>>[] expanders);
+
         Task<IList<TModel>> Filter<TModel>(IQueryable<TEntity> query);
         Task<IList<TEntity>> Filter<TModel>(IQueryable<TModel> query);
 
@@ -93,6 +102,8 @@ namespace RadicalR
         IQueryable<TModel> GetQuery<TModel>(SortExpression<TEntity> sortTerms, params Expression<Func<TEntity, object>>[] expanders) where TModel : class;
         Task<IQueryable<TModel>> GetQueryAsync<TModel>(params Expression<Func<TEntity, object>>[] expanders) where TModel : class;
         Task<IQueryable<TModel>> GetQueryAsync<TModel>(SortExpression<TEntity> sortTerms, params Expression<Func<TEntity, object>>[] expanders) where TModel : class;
+        IAsyncEnumerable<TModel> GetAsync<TModel>(int skip, int take, params Expression<Func<TEntity, object>>[] expanders) where TModel : class;
+        IAsyncEnumerable<TModel> GetAsync<TModel>(int skip, int take, SortExpression<TEntity> sortTerms, params Expression<Func<TEntity, object>>[] expanders) where TModel : class;
 
         Task<IDeck<TModel>> HashMap<TModel>(IEnumerable<TEntity> entity, IEnumerable<TModel> model);
         Task<IDeck<TEntity>> HashMap<TModel>(IEnumerable<TModel> model, IEnumerable<TEntity> entity);
@@ -111,11 +122,17 @@ namespace RadicalR
         Task<TModel> MapTo<TModel>(object entity);
         Task<TModel> MapTo<TModel>(TEntity entity);
 
+        IAsyncEnumerable<TEntity> PatchByAsync<TModel>(IEnumerable<TModel> entity) where TModel : class, IIdentifiable;
+        IAsyncEnumerable<TEntity> PatchByAsync<TModel>(IEnumerable<TModel> models, Func<TModel, Expression<Func<TEntity, bool>>> predicate) where TModel : class, IIdentifiable;
+
         IEnumerable<TEntity> PatchBy<TModel>(IEnumerable<TModel> entity) where TModel : class, IIdentifiable;
         IEnumerable<TEntity> PatchBy<TModel>(IEnumerable<TModel> models, Func<TModel, Expression<Func<TEntity, bool>>> predicate) where TModel : class, IIdentifiable;
         Task<TEntity> PatchBy<TModel>(TModel model) where TModel : class, IIdentifiable;
         Task<TEntity> PatchBy<TModel>(TModel model, Func<TModel, Expression<Func<TEntity, bool>>> predicate) where TModel : class, IIdentifiable;
         Task<TEntity> PatchBy<TModel>(TModel model, params object[] keys) where TModel : class, IIdentifiable;
+
+        IAsyncEnumerable<TEntity> SetByAsync<TModel>(IEnumerable<TModel> entity) where TModel : class, IIdentifiable;
+        IAsyncEnumerable<TEntity> SetByAsync<TModel>(IEnumerable<TModel> model, Func<TModel, Expression<Func<TEntity, bool>>> predicate, params Func<TModel, Expression<Func<TEntity, bool>>>[] conditions) where TModel : class, IIdentifiable;
 
         IEnumerable<TEntity> SetBy<TModel>(IEnumerable<TModel> entity) where TModel : class, IIdentifiable;
         IEnumerable<TEntity> SetBy<TModel>(IEnumerable<TModel> model, Func<TModel, Expression<Func<TEntity, bool>>> predicate, params Func<TModel, Expression<Func<TEntity, bool>>>[] conditions) where TModel : class, IIdentifiable;
@@ -125,5 +142,7 @@ namespace RadicalR
 
         IEnumerable<TEntity> PutBy<TModel>(IEnumerable<TModel> model, Func<TEntity, Expression<Func<TEntity, bool>>> predicate, params Func<TEntity, Expression<Func<TEntity, bool>>>[] conditions);
         Task<TEntity> PutBy<TModel>(TModel model, Func<TEntity, Expression<Func<TEntity, bool>>> predicate, params Func<TEntity, Expression<Func<TEntity, bool>>>[] conditions);
+
+        IAsyncEnumerable<TEntity> PutByAsync<TModel>(IEnumerable<TModel> model, Func<TEntity, Expression<Func<TEntity, bool>>> predicate, params Func<TEntity, Expression<Func<TEntity, bool>>>[] conditions);
     }
 }

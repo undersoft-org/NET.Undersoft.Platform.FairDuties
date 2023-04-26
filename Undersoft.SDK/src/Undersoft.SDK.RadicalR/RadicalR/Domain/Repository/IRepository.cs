@@ -60,11 +60,10 @@ namespace RadicalR
 
         IEnumerable<TEntity> Add(IEnumerable<TEntity> entity);
         IEnumerable<TEntity> Add(IEnumerable<TEntity> entities, Func<TEntity, Expression<Func<TEntity, bool>>> predicate);
-        Task AddAsync(IEnumerable<TEntity> entity);
-        Task AddAsync(IEnumerable<TEntity> entities, Func<TEntity, Expression<Func<TEntity, bool>>> predicate);
+        IAsyncEnumerable<TEntity> AddAsync(IEnumerable<TEntity> entity);
+        IAsyncEnumerable<TEntity> AddAsync(IEnumerable<TEntity> entities, Func<TEntity, Expression<Func<TEntity, bool>>> predicate);
         TEntity Add(TEntity entity);
         TEntity Add(TEntity entity, Func<TEntity, Expression<Func<TEntity, bool>>> predicate);
-
 
         TEntity Delete(Expression<Func<TEntity, bool>> predicate);
         IEnumerable<TEntity> Delete(IEnumerable<TEntity> entity);
@@ -73,6 +72,9 @@ namespace RadicalR
         Task<TEntity> Delete(params object[] key);
         TEntity Delete(TEntity entity);
         TEntity Delete(TEntity entity, Func<TEntity, Expression<Func<TEntity, bool>>> predicate);
+
+        IAsyncEnumerable<TEntity> DeleteAsync(IEnumerable<TEntity> entity);
+        IAsyncEnumerable<TEntity> DeleteAsync(IEnumerable<TEntity> entity, Func<TEntity, Expression<Func<TEntity, bool>>> predicate);
 
         Task<bool> Exist(Expression<Func<TEntity, bool>> predicate);
         Task<bool> Exist(Type exceptionType, Expression<Func<TEntity, bool>> predicate, string message);
@@ -125,8 +127,13 @@ namespace RadicalR
         Task<TEntity> Patch<TModel>(TModel delta, Func<TModel, Expression<Func<TEntity, bool>>> predicate) where TModel : class, IIdentifiable;
         Task<TEntity> Patch<TModel>(TModel delta, params object[] key) where TModel : class, IIdentifiable;
 
+        IAsyncEnumerable<TEntity> PatchAsync<TModel>(IEnumerable<TModel> entity, params Expression<Func<TEntity, object>>[] expanders) where TModel : class, IIdentifiable;
+        IAsyncEnumerable<TEntity> PatchAsync<TModel>(IEnumerable<TModel> entities, Func<TModel, Expression<Func<TEntity, bool>>> predicate, params Expression<Func<TEntity, object>>[] expanders) where TModel : class, IIdentifiable;
+
         IEnumerable<TEntity> Put(IEnumerable<TEntity> entities, Func<TEntity, Expression<Func<TEntity, bool>>> predicate, params Func<TEntity, Expression<Func<TEntity, bool>>>[] conditions);
         Task<TEntity> Put(TEntity entity, Func<TEntity, Expression<Func<TEntity, bool>>> predicate, params Func<TEntity, Expression<Func<TEntity, bool>>>[] conditions);
+
+        IAsyncEnumerable<TEntity> PutAsync(IEnumerable<TEntity> entities, Func<TEntity, Expression<Func<TEntity, bool>>> predicate, params Func<TEntity, Expression<Func<TEntity, bool>>>[] conditions);
 
         IEnumerable<TEntity> Set<TModel>(IEnumerable<TModel> entity) where TModel : class, IIdentifiable;
         IEnumerable<TEntity> Set<TModel>(IEnumerable<TModel> entities, Func<TModel, Expression<Func<TEntity, bool>>> predicate, params Func<TModel, Expression<Func<TEntity, bool>>>[] conditions) where TModel : class, IIdentifiable;
@@ -135,6 +142,9 @@ namespace RadicalR
         Task<TEntity> Set<TModel>(TModel entity, Func<TModel, Expression<Func<TEntity, bool>>> predicate, params Func<TModel, Expression<Func<TEntity, bool>>>[] conditions) where TModel : class, IIdentifiable;
         Task<TEntity> Set<TModel>(TModel entity, object key, Func<TEntity, Expression<Func<TEntity, bool>>> condition) where TModel : class, IIdentifiable;
         Task<TEntity> Set<TModel>(TModel entity, object[] key) where TModel : class;
+
+        IAsyncEnumerable<TEntity> SetAsync<TModel>(IEnumerable<TModel> entity) where TModel : class, IIdentifiable;
+        IAsyncEnumerable<TEntity> SetAsync<TModel>(IEnumerable<TModel> entities, Func<TModel, Expression<Func<TEntity, bool>>> predicate, params Func<TModel, Expression<Func<TEntity, bool>>>[] conditions) where TModel : class, IIdentifiable;
 
         TEntity Sign(TEntity entity);
 

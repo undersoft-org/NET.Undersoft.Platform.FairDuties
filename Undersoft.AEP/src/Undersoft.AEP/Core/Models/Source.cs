@@ -5,10 +5,10 @@ namespace Undersoft.AEP.Core
 {
     public class Source : Raw.Source, ISource
     {
-        public IFindable<IEstimate> Estimates { get; }
+        public IFindable<IEstimate> Estimates { get; set; }
 
-        public IEnumerable<ILink> AssetLinks { get; }
+        public IEnumerable<ILink> AssetLinks { get; set; }
 
-        public ISetup Setup { get; }
+        public ISetup Setup { get; set; }
     }
 }

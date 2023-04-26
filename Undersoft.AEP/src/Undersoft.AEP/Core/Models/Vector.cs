@@ -2,10 +2,10 @@
 
 namespace Undersoft.AEP.Core
 {
-    public class Vector<TSlot, TUsage> : Spectrum<IUsage>, IUnique, IVector<TSlot, TUsage>
-        where TSlot : ISocket where TUsage : IUsage
+    public class Vector<TSocket, TUsage> : Spectrum<IUsage>, IUnique, IVector<TSocket, TUsage>
+        where TSocket : ISocket where TUsage : IUsage
     {
-        public Sectors<TSlot, TUsage> Sectors { get; set; }
+        public Sectors<TSocket, TUsage> Sectors { get; set; }
 
         public Vector(IVector vector)
             : this(vector.UsageSet, vector.SectorOffset, vector.BlockOffset, vector.BlockCount)
@@ -29,7 +29,7 @@ namespace Undersoft.AEP.Core
             Liabilities = proxy.Liabilities;
             Resources = proxy.Resources;
             Resources.ForEach(x => x.Ordinal = LastResourceOrdinal++).Commit();
-            Sectors = new Sectors<TSlot, TUsage>(this);
+            Sectors = new Sectors<TSocket, TUsage>(this);
             Usages = new Catalog<IUsage>();
         }
 

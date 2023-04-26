@@ -15,7 +15,7 @@
         public new V Target
         {
             get => (V)base.Target;
-            set => base.Target = (V)value;
+            set => base.Target = value;
         }
 
         public new Usage<V> Used

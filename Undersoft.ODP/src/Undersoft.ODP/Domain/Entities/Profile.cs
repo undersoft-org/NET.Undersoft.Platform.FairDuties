@@ -28,14 +28,12 @@ namespace Undersoft.ODP.Domain
         public int Age { get; set; }
 
         public long? MemberId { get; set; }
-        [JsonIgnore]
-        [IgnoreDataMember]
         public virtual Member Member { get; set; }
 
         public virtual EntityOnSets<Property> Properties { get; set; }
 
-        public virtual EntityOnSets<Contact> Contacts { get; set; }
+        public virtual EntityOnSets<Locale> Locales { get; set; }
 
-        public virtual EntityOnSets<Client> Devices { get; set; }
+        public virtual EntityOnSets<Client> Clients { get; set; }
     }
 }

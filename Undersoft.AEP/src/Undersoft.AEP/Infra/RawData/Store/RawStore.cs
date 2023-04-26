@@ -32,7 +32,7 @@ public class RawStore
 
     public virtual Stocker<Vertex> Vertex { get; set; }
 
-    public virtual Stocker<Link<UsageSet, Vertex>> UsageSetToUniverse { get; set; }
+    public virtual Stocker<Link<UsageSet, Vertex>> UsageSetToVertex { get; set; }
 
     public virtual Stocker<Link<UsageSet, Source>> UsageSetToSource { get; set; }
 
@@ -40,10 +40,25 @@ public class RawStore
 
     public virtual Stocker<Link<UsageSet, Asset>> UsageSetToAsset { get; set; }
 
+    public virtual Stocker<Link<Source, Asset>> SourceToAsset { get; set; } 
+
+    public virtual Stocker<Link<Source, Estimate>> SourceToEstimate { get; set; }
+
+    public virtual Stocker<Link<Estimate, Estimate>> EstimateDependentOn { get; set; }
+
+    public virtual Stocker<Link<Estimate, Estimate>> EstimateOptionalTo { get; set; }
+
+    public virtual Stocker<Link<Asset, Asset>> AssetDependentOn { get; set; }
+
+    public virtual Stocker<Link<Asset, Asset>> AssetOptionalTo { get; set; }
+
+    public virtual Stocker<Link<Asset, Asset>> AssetRelatedTo { get; set; }
+    
     protected void OnConfigure()
     {
 
     }
+   
     protected void OnModelConfigure(StockOptions builder)
     {
 

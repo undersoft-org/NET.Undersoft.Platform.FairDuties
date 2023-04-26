@@ -2,7 +2,7 @@
 
 namespace Undersoft.ODP.Api
 {
-    public class ShiftRatingValidator : DtoCommandSetValidator<Estimate>
+    public class ShiftRatingValidator : CommandSetValidatorBase<Estimate>
     {
         public ShiftRatingValidator(IRadicalr ultimatr) : base(ultimatr)
         {

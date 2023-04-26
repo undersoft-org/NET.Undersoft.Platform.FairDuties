@@ -22,7 +22,7 @@ namespace Undersoft.ODP.Api
 
         public virtual DtoSet<Property> Properties { get; set; }
 
-        public virtual DtoSet<Contact> Contacts { get; set; }
+        public virtual DtoSet<Locale> Contacts { get; set; }
 
         public virtual DtoSet<Client> Devices { get; set; }
     }

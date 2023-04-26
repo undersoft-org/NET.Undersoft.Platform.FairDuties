@@ -6,7 +6,7 @@ namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Events
 {
     [Authorize(Roles = "Administrator")]
     [Route("/events")]
-    public class EventsController : RestDataEventController<long, IEventStore, Event, EventDto>
+    public class EventsController : CrudEventService<long, IEventStore, Event, EventDto>
     {
         public EventsController(IRadicalr ultimatr) : base(ultimatr)
         {

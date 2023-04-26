@@ -29,7 +29,7 @@ namespace RadicalR
             }
             else
             {
-                return StoreRoutes.CqrsStore + RoutePrefix;
+                return StoreRoutes.DataStore + RoutePrefix;
             }
         }
 

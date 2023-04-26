@@ -5,7 +5,6 @@ using System.Text.Json.Serialization;
 
 namespace Undersoft.ODP.Domain
 {
-    [DataContract]
     public partial class Client : Entity
     {
         public string Name { get; set; }
@@ -22,8 +21,6 @@ namespace Undersoft.ODP.Domain
 
         public string ClientDoamin { get; set; }
 
-        [JsonIgnore]
-        [IgnoreDataMember]
         public virtual EntitySet<Profile> Profiles { get; set; }
 
         public virtual EntityOnSet<Session> Sessions { get; set; }

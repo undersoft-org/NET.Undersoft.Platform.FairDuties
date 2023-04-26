@@ -1,4 +1,5 @@
 ﻿using RadicalR;
+using Undersoft.ODP.Domain;
 
 namespace Undersoft.ODP.Api
 {
@@ -8,7 +9,9 @@ namespace Undersoft.ODP.Api
 
         public string Description { get; set; }
 
-        public float Size { get; set; }
+        public DutyUnit Unit { get; set; }
+
+        public double Value { get; set; }
 
         public virtual DtoSet<Asset> DependentOn { get; set; }
 

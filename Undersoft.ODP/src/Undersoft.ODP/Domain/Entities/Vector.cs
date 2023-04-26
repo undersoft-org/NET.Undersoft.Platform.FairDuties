@@ -23,28 +23,16 @@ namespace Undersoft.ODP.Domain
 
         public long? GroupId { get; set; }
 
-        [JsonIgnore]
-        [IgnoreDataMember]
-        [IgnoreClientProperty]
         public virtual Group Group { get; set; }
 
         public long? GroupViewId { get; set; }
 
-        [JsonIgnore]
-        [IgnoreDataMember]
-        [IgnoreClientProperty]
         public virtual Group GroupView { get; set; }
 
         public virtual EntitySet<Duty> Duties { get; set; }
 
-        [JsonIgnore]
-        [IgnoreDataMember]
-        [IgnoreClientProperty]
         public virtual EntitySet<Duty> DutyViews { get; set; }
 
-        [JsonIgnore]
-        [IgnoreDataMember]
-        [IgnoreClientProperty]
         IFindable<IUsage> IVector.Usages
         {
             get =>
@@ -58,89 +46,50 @@ namespace Undersoft.ODP.Domain
                 );
         }
 
-        [JsonIgnore]
-        [IgnoreDataMember]
-        [IgnoreClientProperty]
         IUsageSet IVector.UsageSet
         {
             get => new UsageSetProxy(GroupId ?? default, Group.Union);
             set => Group = (Group)(value);
         }
 
-        [JsonIgnore]
-        [IgnoreDataMember]
-        [IgnoreClientProperty]
         long IVector.UsageSetId
         {
             get => GroupId ?? default;
             set => GroupId = value;
         }
 
-        [JsonIgnore]
-        [IgnoreDataMember]
-        [IgnoreClientProperty]
         int IVector.BlockOffset
         {
             get => new DateTimeOffset(StartTime).Offset.Days;
             set => throw new NotImplementedException();
         }
 
-        [JsonIgnore]
-        [IgnoreDataMember]
-        [IgnoreClientProperty]
         int IVector.BlockCount
         {
             get => new DateTimeOffset(EndTime).Offset.Days - ((IVector)this).BlockOffset;
             set => throw new NotImplementedException();
         }
 
-        [JsonIgnore]
-        [IgnoreDataMember]
-        [IgnoreClientProperty]
         int IVector.SectorOffset
         {
             get => (int)Calendarium.CreateItem(StartTime).DayOfWeek;
             set => throw new NotImplementedException();
         }
 
-        [JsonIgnore]
-        [IgnoreDataMember]
-        [IgnoreClientProperty]
         int IVector.LastSectorId { get; set; }
 
-        [JsonIgnore]
-        [IgnoreDataMember]
-        [IgnoreClientProperty]
         int IVector.LastBlockId { get; set; }
 
-        [JsonIgnore]
-        [IgnoreDataMember]
-        [IgnoreClientProperty]
         int IVector.LastSocketId { get; set; }
 
-        [JsonIgnore]
-        [IgnoreDataMember]
-        [IgnoreClientProperty]
         int IVector.LastUsageId { get; set; }
 
-        [JsonIgnore]
-        [IgnoreDataMember]
-        [IgnoreClientProperty]
         int IVector.LastAssetOrdinal { get; set; }
 
-        [JsonIgnore]
-        [IgnoreDataMember]
-        [IgnoreClientProperty]
         int IVector.LastEstimateOrdinal { get; set; }
 
-        [JsonIgnore]
-        [IgnoreDataMember]
-        [IgnoreClientProperty]
         int IVector.LastResourceOrdinal { get; set; }
 
-        [JsonIgnore]
-        [IgnoreDataMember]
-        [IgnoreClientProperty]
         int IVector.LastLiabilityOrdinal { get; set; }
     }
 }

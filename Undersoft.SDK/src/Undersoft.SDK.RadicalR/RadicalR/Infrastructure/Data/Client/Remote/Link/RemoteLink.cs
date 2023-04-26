@@ -31,9 +31,9 @@ namespace RadicalR
             serialcode = new Uscn(key, seed);
             Name = typeof(TOrigin).Name + '_' + typeof(TTarget).Name;
 
-            DataClientRegistry.Relations.Add(UniqueType, this);
+            OpenClientRegistry.Relations.Add(UniqueType, this);
 
-            DataClientRegistry.Relations.Add(typeof(TTarget).Name.UniqueKey64(seed), this);
+            OpenClientRegistry.Relations.Add(typeof(TTarget).Name.UniqueKey64(seed), this);
 
             ServiceManager.GetManager().Registry.AddObject<IRemoteLink<TOrigin, TTarget>>(this);
         }

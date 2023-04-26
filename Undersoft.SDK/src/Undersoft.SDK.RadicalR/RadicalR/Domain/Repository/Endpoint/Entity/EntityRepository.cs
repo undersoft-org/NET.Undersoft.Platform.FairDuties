@@ -175,9 +175,9 @@ namespace RadicalR
             return dbSet.Update(Stamp(entity)).Entity;
         }
 
-        public override Task AddAsync(IEnumerable<TEntity> entity)
+        public override IAsyncEnumerable<TEntity> AddAsync(IEnumerable<TEntity> entity)
         {
-            return Task.Run(() => dbSet.AddRange(entity.ForEach(e => Sign(e))));
+            return entity.ForEachAsync((e) => dbSet.Add(Sign(e)).Entity);            
         }
 
         public void AutoTransaction(bool enable)

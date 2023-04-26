@@ -255,7 +255,7 @@ namespace RadicalR
                 yield return Add(e);
         }
 
-        public override Task AddAsync(IEnumerable<TEntity> entity) { return Task.Run(() => Add(entity)); }
+        public override IAsyncEnumerable<TEntity> AddAsync(IEnumerable<TEntity> entity) { return entity.ForEachAsync((e) => Add(e)); }
 
         public override TEntity Delete(TEntity entity)
         {

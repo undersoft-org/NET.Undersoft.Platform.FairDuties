@@ -53,7 +53,7 @@ namespace RadicalR
             app.UseEndpoints(endpoints =>
             {
                 var method = typeof(GrpcEndpointRouteBuilderExtensions).GetMethods().Where(m => m.Name.Contains("MapGrpcService")).FirstOrDefault().GetGenericMethodDefinition();
-                IDeck<Type> serviceContracts = GrpcServiceRegistry.ServiceContracts;
+                IDeck<Type> serviceContracts = StreamServiceRegistry.ServiceContracts;
                 foreach (var serviceContract in serviceContracts)
                     method.MakeGenericMethod(serviceContract).Invoke(endpoints, new object[] { endpoints });
 

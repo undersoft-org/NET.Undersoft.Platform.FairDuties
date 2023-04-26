@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using RadicalR;
 using System.Instant.Linking;
 using System.Series;
@@ -32,6 +33,7 @@ namespace Undersoft.ODP.Domain
 
         public virtual EntityOnSets<Asset> Assets { get; set; }
 
+        [BackingField("estimates")]
         public virtual EntityOnSet<Estimate> Estimates
         {
             get
@@ -59,7 +61,7 @@ namespace Undersoft.ODP.Domain
                 return estimates;
             }
             set => estimates = value;
-        }
+        }    
         private EntityOnSet<Estimate> estimates;
 
         public virtual EntityOnSets<Vertex> Vertices { get; set; }

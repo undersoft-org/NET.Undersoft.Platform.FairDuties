@@ -74,13 +74,13 @@ namespace RadicalR
 
         public IRemoteRepository<TEntity> Load<TEntity>() where TEntity : Entity
         {
-            return Load<TEntity>(DataClientRegistry.GetContexts<TEntity>().FirstOrDefault());
+            return Load<TEntity>(OpenClientRegistry.GetContexts<TEntity>().FirstOrDefault());
         }
         public IRemoteRepository<TEntity> Load<TEntity>(Type contextType)
            where TEntity : Entity
         {
             return (IRemoteRepository<TEntity>)Services.GetService(typeof(IRemoteRepository<,>)
-                                                     .MakeGenericType(DataClientRegistry
+                                                     .MakeGenericType(OpenClientRegistry
                                                      .Stores[contextType],
                                                       typeof(TEntity)));
         }
@@ -100,7 +100,7 @@ namespace RadicalR
         public IRepositoryClient GetClient<TStore, TEntity>()
         where TEntity : Entity
         {
-            var contextType = DataClientRegistry.GetContext<TStore, TEntity>();
+            var contextType = OpenClientRegistry.GetContext<TStore, TEntity>();
 
             return Clients.Get(contextType);
         }

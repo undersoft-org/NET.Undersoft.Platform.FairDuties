@@ -8,11 +8,9 @@ namespace Undersoft.ODP.Api
 
         public string Description { get; set; }
 
-        public DateTime StartTime { get; set; }
+        public int StartBlock { get; set; }
 
-        public DateTime EndTime { get; set; }
-
-        public TimeSpan Interval { get; set; }
+        public int EndBlock { get; set; }
 
         public virtual DtoSet<BasicUnion> Unions { get; set; }
 
@@ -22,6 +20,6 @@ namespace Undersoft.ODP.Api
 
         public virtual DtoSet<Asset> Assets { get; set; }
 
-        public virtual DtoSet<Duty> Frames { get; set; }
+        public virtual DtoSet<Duty> Duties { get; set; }
     }
 }

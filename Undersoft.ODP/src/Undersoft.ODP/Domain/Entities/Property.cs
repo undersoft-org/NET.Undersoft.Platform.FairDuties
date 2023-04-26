@@ -15,28 +15,16 @@ namespace Undersoft.ODP.Domain
 
         public virtual EntityOnSets<Property> RelatedTo { get; set; }
 
-        [JsonIgnore]
-        [IgnoreDataMember]
         public virtual EntitySet<Member> Members { get; set; }
 
-        [JsonIgnore]
-        [IgnoreDataMember]
         public virtual EntitySet<Group> Groups { get; set; }
 
-        [JsonIgnore]
-        [IgnoreDataMember]
         public virtual EntitySet<Asset> Assets { get; set; }
 
-        [JsonIgnore]
-        [IgnoreDataMember]
         public virtual EntitySet<Union> Unions { get; set; }
 
-        [JsonIgnore]
-        [IgnoreDataMember]
         public virtual EntitySet<Setup> Setups { get; set; }
 
-        [JsonIgnore]
-        [IgnoreDataMember]
         public virtual EntitySet<Profile> Profiles { get; set; }
     }
 }

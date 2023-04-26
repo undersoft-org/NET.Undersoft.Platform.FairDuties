@@ -4,7 +4,7 @@ namespace Undersoft.ODP.Api
 {
     public class BasicSession : Dto
     {
-        public long DeviceId { get; set; }
+        public long? ClientId { get; set; }
 
         public ushort Port { get; set; }
 

@@ -35,7 +35,7 @@ namespace Undersoft.ODP.Domain
 
         public virtual EntityOnSet<Duty> Duties { get; set; }
 
-        public virtual EntityOnSet<Estimate> Rates { get; set; }
+        public virtual EntityOnSet<Estimate> Estimates { get; set; }
 
         public virtual EntityOnSets<Union> Unions { get; set; }
 
@@ -54,15 +54,15 @@ namespace Undersoft.ODP.Domain
 
     public enum DutyUnit
     {
-        Piece = 1,
-        Kilogram = 1000, 
-        Centimeter = 10,
-        Meter = 100 * 10,
-        MB = 1024 * 1024,
-        MFLOPS = 1024 * 1024 * 4, 
-        Hour = 60,
-        Day = 1440,
-        TwelveHours = 720,
-        EightHours = 480,
+        Piece = 0,
+        Kilogram = 1, 
+        Centimeter = 2,
+        Meter = 3,
+        MB = 4,
+        MFLOPS = 5, 
+        Hour = 6,
+        Day = 7,
+        TwelveHours = 8,
+        EightHours = 9,
     }
 }

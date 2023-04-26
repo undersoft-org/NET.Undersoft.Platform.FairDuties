@@ -12,6 +12,46 @@
     <Version>2.1.2</Version>
     <NeutralLanguage>en-US</NeutralLanguage>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="RadicalR\Application\.old\DtoQueryController.cs" />
+    <Compile Include="RadicalR\Application\.old\Service\Operation\Command\Base\DsoCommand.cs" />
+    <Compile Include="RadicalR\Application\.old\Service\Operation\Command\ChangeDso.cs" />
+    <Compile Include="RadicalR\Application\.old\Service\Operation\Command\Controller\DsoCommandController.cs" />
+    <Compile Include="RadicalR\Application\.old\Service\Operation\Command\CreateDso.cs" />
+    <Compile Include="RadicalR\Application\.old\Service\Operation\Command\DeleteDso.cs" />
+    <Compile Include="RadicalR\Application\.old\Service\Operation\Command\Event\ChangedDso.cs" />
+    <Compile Include="RadicalR\Application\.old\Service\Operation\Command\Event\Controller\OLD\DsoEventController.cs" />
+    <Compile Include="RadicalR\Application\.old\Service\Operation\Command\Event\CreatedDso.cs" />
+    <Compile Include="RadicalR\Application\.old\Service\Operation\Command\Event\DeletedDso.cs" />
+    <Compile Include="RadicalR\Application\.old\Service\Operation\Command\Event\Handler\ChangedDsoHandler.cs" />
+    <Compile Include="RadicalR\Application\.old\Service\Operation\Command\Event\Handler\CreatedDsoHandler.cs" />
+    <Compile Include="RadicalR\Application\.old\Service\Operation\Command\Event\Handler\DeletedDsoHandler.cs" />
+    <Compile Include="RadicalR\Application\.old\Service\Operation\Command\Event\Handler\UpdatedDsoHandler.cs" />
+    <Compile Include="RadicalR\Application\.old\Service\Operation\Command\Event\Handler\UpsertedDsoHandler.cs" />
+    <Compile Include="RadicalR\Application\.old\Service\Operation\Command\Event\UpdatedDso.cs" />
+    <Compile Include="RadicalR\Application\.old\Service\Operation\Command\Event\UpsertedDso.cs" />
+    <Compile Include="RadicalR\Application\.old\Service\Operation\Command\Handler\ChangeDsoHandler.cs" />
+    <Compile Include="RadicalR\Application\.old\Service\Operation\Command\Handler\CreateDsoHandler.cs" />
+    <Compile Include="RadicalR\Application\.old\Service\Operation\Command\Handler\DeleteDsoHandler.cs" />
+    <Compile Include="RadicalR\Application\.old\Service\Operation\Command\Handler\UpdateDsoHandler.cs" />
+    <Compile Include="RadicalR\Application\.old\Service\Operation\Command\Handler\UpsertDsoHandler.cs" />
+    <Compile Include="RadicalR\Application\.old\Service\Operation\Command\UpdateDso.cs" />
+    <Compile Include="RadicalR\Application\.old\Service\Operation\Command\UpsertDso.cs" />
+    <Compile Include="RadicalR\Application\.old\Service\Operation\Command\Validator\DsoCommandValidator.cs" />
+    <Compile Include="RadicalR\Application\.old\Service\Operation\Controller\OLD\DsoController.cs" />
+    <Compile Include="RadicalR\Application\.old\Service\Operation\Controller\OLD\IDsoController.cs" />
+    <Compile Include="RadicalR\Application\.old\Service\Operation\Query\Controller\DsoQueryController.cs" />
+    <Compile Include="RadicalR\Application\.old\Service\Operation\Query\FilterDso.cs" />
+    <Compile Include="RadicalR\Application\.old\Service\Operation\Query\FindDso.cs" />
+    <Compile Include="RadicalR\Application\.old\Service\Operation\Query\GetDso.cs" />
+    <Compile Include="RadicalR\Application\.old\Service\Operation\Query\Handler\FilterDsoHandler.cs" />
+    <Compile Include="RadicalR\Application\.old\Service\Operation\Query\Handler\FindDsoHandler.cs" />
+    <Compile Include="RadicalR\Application\.old\Service\Operation\Query\Handler\GetDsoHandler.cs" />
+    <Compile Include="RadicalR\Application\Data\Operation\Command\.old\Controller\.old\DtoCommandController.cs" />
+    <Compile Include="RadicalR\Application\.old\DtoEventController.cs" />
+    <Compile Include="RadicalR\Application\.old\DtoController.cs" />
+  </ItemGroup>
   
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />

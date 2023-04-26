@@ -18,7 +18,7 @@ namespace RadicalR
         IRemoteLink<TOrigin, TTarget> relation;
 
         public RemoteRepositoryLink(
-            IRepositoryContextPool<DataClientContext<TStore>> pool,
+            IRepositoryContextPool<OpenClientContext<TStore>> pool,
             IEntityCache<TStore, TTarget> cache,
             IRemoteLink<TOrigin, TTarget> relation,
             ILinkSynchronizer synchronizer) : base(pool, cache)

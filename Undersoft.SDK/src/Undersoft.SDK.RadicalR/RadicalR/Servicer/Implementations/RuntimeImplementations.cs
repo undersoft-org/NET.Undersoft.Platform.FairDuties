@@ -17,11 +17,11 @@ namespace RadicalR
             Type[] stores = new Type[] { typeof(IEntryStore), typeof(IReportStore) };
 
             /**************************************** DataService Entity Type Routines ***************************************/
-            foreach (IDeck<IEdmEntityType> contextEntityTypes in DataClientRegistry.Entities)
+            foreach (IDeck<IEdmEntityType> contextEntityTypes in OpenClientRegistry.Entities)
             {
                 foreach (IEdmEntityType _entityType in contextEntityTypes)
                 {
-                    Type entityType = DataClientRegistry.Mappings[_entityType.Name];
+                    Type entityType = OpenClientRegistry.Mappings[_entityType.Name];
 
                     if (duplicateCheck.Add(entityType))
                     {
@@ -30,7 +30,7 @@ namespace RadicalR
                         /*****************************************************************************************/
                         foreach (Type store in stores)
                         {
-                            if ((entityType != null) && (DataClientRegistry.GetContext(store, entityType) != null))
+                            if ((entityType != null) && (OpenClientRegistry.GetContext(store, entityType) != null))
                             {
                                 /*****************************************************************************************/
                                 service.AddScoped(

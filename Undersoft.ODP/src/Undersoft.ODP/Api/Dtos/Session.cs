@@ -8,7 +8,7 @@ namespace Undersoft.ODP.Api
         public long DeviceId { get; set; }
 
         [JsonIgnore]
-        public virtual Client Device { get; set; }
+        public virtual Client CLient { get; set; }
 
         public ushort Port { get; set; }
 

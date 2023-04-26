@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Razor.Hosting;
+using Microsoft.EntityFrameworkCore;
 using System.Series;
 using System.Uniques;
 
@@ -83,9 +84,21 @@ namespace RadicalR
             return Task.Run(() => Mapper.Map<IList<TDto>>(entity.Commit()), Cancellation);
         }
 
+        public virtual async IAsyncEnumerable<TDto> MapToAsync<TDto>(IEnumerable<TEntity> entity)
+        {
+            foreach (var item in entity)
+                yield return await Task.Run(() => Mapper.Map<TDto>(item));
+        }
+
         public virtual Task<IList<TEntity>> MapFrom<TDto>(IEnumerable<TDto> model)
         {
             return Task.Run(() => Mapper.Map<TDto[], IList<TEntity>>(model.Commit()), Cancellation);
+        }
+
+        public virtual async IAsyncEnumerable<TEntity> MapFromAsync<TDto>(IEnumerable<TDto> model)
+        {
+            foreach (var item in model)
+                yield return await Task.Run(() => Mapper.Map<TDto, TEntity>(item));          
         }
 
         public virtual Task<IDeck<TDto>> HashMapTo<TDto>(IEnumerable<object> entity)

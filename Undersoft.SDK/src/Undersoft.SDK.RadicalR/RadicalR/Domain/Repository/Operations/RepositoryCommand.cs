@@ -36,18 +36,25 @@ namespace RadicalR
             }
         }
 
-        public abstract Task AddAsync(IEnumerable<TEntity> entity);
-        public virtual Task AddAsync(IEnumerable<TEntity> entities, Func<TEntity, Expression<Func<TEntity, bool>>> predicate)
+        public virtual IAsyncEnumerable<TEntity> AddAsync(IEnumerable<TEntity> entity)
         {
-            return Task.Run(() =>
-            {
-                var addin = entities;
-                if (predicate != null)
-                    addin = entities.Where(e => !Query.Any(predicate.Invoke(e)));
-                if (addin.Any())
-                    AddAsync(addin);
-            });
+            return entity.ForEachAsync((e) => Add(e));
         }
+        public virtual IAsyncEnumerable<TEntity> AddAsync(IEnumerable<TEntity> entities, Func<TEntity, Expression<Func<TEntity, bool>>> predicate)
+        {
+            var addin = entities;
+            if (predicate != null)
+                addin = entities.Where(e => !Query.Any(predicate.Invoke(e)));
+            if (addin.Any())
+                return AddAsync(addin);
+            return null;
+        }
+
+        public virtual IAsyncEnumerable<TEntity> AddAsync(IAsyncEnumerable<TEntity> entity)
+        {
+            return entity.ForEachAsync((e) => Add(e));
+        }
+    
         public virtual TEntity Add(TEntity entity, Func<TEntity, Expression<Func<TEntity, bool>>> predicate)
         {
             if (predicate != null && Query.Any(predicate.Invoke(entity))) return null;
@@ -96,6 +103,19 @@ namespace RadicalR
             yield return null;
         }
 
+        public virtual async IAsyncEnumerable<TEntity> DeleteAsync(IEnumerable<TEntity> entity)
+        {
+            foreach (var e in entity)
+                yield return await Task.Run(() => Delete(e));
+        }
+        public virtual async IAsyncEnumerable<TEntity> DeleteAsync(IEnumerable<TEntity> entities, Func<TEntity, Expression<Func<TEntity, bool>>> predicate)
+        {
+            if (predicate != null)
+                foreach (var entity in entities)
+                    yield return await Task.Run(() => Delete(predicate.Invoke(entity)));
+            yield return null;
+        }
+
         protected virtual TEntity InnerSet(TEntity entity)
         {
             return Stamp(entity);
@@ -139,6 +159,7 @@ namespace RadicalR
                 return Update((TEntity)entity.PutTo(_entity.Valuator, PatchingEvent).Devisor);
             return null;
         }
+        
         public virtual IEnumerable<TEntity> Set<TModel>(IEnumerable<TModel> models) where TModel : class, IIdentifiable
         {
             var dtos = models.ToDeck();
@@ -153,7 +174,7 @@ namespace RadicalR
                     yield return InnerSet((TEntity)model.PatchTo(entity.Valuator, PatchingEvent).Devisor);
                 }
             }
-        }
+        }       
         public virtual async Task<TEntity> Set<TModel>(TModel entity, Func<TModel, Expression<Func<TEntity, bool>>> predicate, params Func<TModel, Expression<Func<TEntity, bool>>>[] conditions) where TModel : class, IIdentifiable
         {
             return await Task.Run(async () =>
@@ -175,7 +196,7 @@ namespace RadicalR
 
                 return InnerSet((TEntity)entity.PutTo(_entity.Valuator, PatchingEvent).Devisor);
             });
-        }
+        }        
         public virtual IEnumerable<TEntity> Set<TModel>(IEnumerable<TModel> entities, Func<TModel, Expression<Func<TEntity, bool>>> predicate, params Func<TModel, Expression<Func<TEntity, bool>>>[] conditions) where TModel : class, IIdentifiable
         {
             IDeck<TEntity> deck = null;
@@ -207,6 +228,52 @@ namespace RadicalR
             }
         }
 
+        public virtual async IAsyncEnumerable<TEntity> SetAsync<TModel>(IEnumerable<TModel> entities, Func<TModel, Expression<Func<TEntity, bool>>> predicate, params Func<TModel, Expression<Func<TEntity, bool>>>[] conditions) where TModel : class, IIdentifiable
+        {
+            IDeck<TEntity> deck = null;
+            if (predicate != null)
+                deck = entities.Select(e => Query
+                                  .FirstOrDefault(predicate.Invoke(e)))
+                                  .Where(e => e != null).ToDeck();
+            if (deck == null)
+            {
+                var dtos = entities.ToDeck();
+                deck = lookup<TModel>(entities).ToDeck();
+                if (deck.Count < dtos.Count)
+                    deck.Add(this[Query.WhereIn(p => p.Id, dtos.Where(id => !deck.ContainsKey(id)).Select(id => id.Id))]);
+            }
+            if (deck == null)
+                yield return null;
+
+            foreach (var entity in entities)
+            {
+                if (conditions != null)
+                {
+                    foreach (var condition in conditions)
+                    {
+                        if (!Query.Any(condition.Invoke(entity)))
+                            yield return null;
+                    }
+                }
+                yield return await Task.Run(() => InnerSet(((TEntity)entity.PutTo(deck.Get(entity).Valuator, PatchingEvent).Devisor)));
+            }
+        }
+        public virtual async IAsyncEnumerable<TEntity> SetAsync<TModel>(IEnumerable<TModel> models) where TModel : class, IIdentifiable
+        {
+            var dtos = models.ToDeck();
+            var deck = lookup<TModel>(models).ToDeck();
+            if (deck.Count < dtos.Count)
+                deck.Add(this[Query.WhereIn(p => p.Id, dtos.Where(id => !deck.ContainsKey(id)).Select(id => id.Id))]);
+
+            foreach (var model in models)
+            {
+                if (deck.TryGet(model.Id, out TEntity entity))
+                {
+                    yield return await Task.Run(() => InnerSet((TEntity)model.PatchTo(entity.Valuator, PatchingEvent).Devisor));
+                }
+            }
+        }
+
         public virtual Task<TEntity> Patch(Delta<TEntity> delta, params object[] key)
         {
             return Task.Run(async () =>
@@ -234,6 +301,7 @@ namespace RadicalR
                 return default;
             });
         }
+        
         public virtual async Task<TEntity> Patch<TModel>(TModel delta) where TModel : class, IIdentifiable
         {
             if (delta.Id == 0) return null;
@@ -244,7 +312,6 @@ namespace RadicalR
             }
             return null;
         }
-
 
         private IEnumerable<TEntity> lookup<TModel>(IEnumerable<TModel> entities) where TModel : class, IIdentifiable
         {
@@ -260,6 +327,7 @@ namespace RadicalR
                 ((DataBaseContext)InnerContext).Attach(item);
             return item;
         }
+        
         public virtual IEnumerable<TEntity> Patch<TModel>(IEnumerable<TModel> entities, params Expression<Func<TEntity, object>>[] expanders) where TModel : class, IIdentifiable
         {
             IDeck<TEntity> deck = null;
@@ -312,6 +380,7 @@ namespace RadicalR
                 return default;
             });
         }
+        
         public virtual IEnumerable<TEntity> Patch<TModel>(IEnumerable<TModel> entities, Func<TModel, Expression<Func<TEntity, bool>>> predicate, params Expression<Func<TEntity, object>>[] expanders) where TModel : class, IIdentifiable
         {
             IDeck<TEntity> deck = null;
@@ -333,6 +402,51 @@ namespace RadicalR
             {
                 if (deck.TryGet(entity.Id, out TEntity _entity))
                     yield return InnerSet(((TEntity)entity.PatchTo(_entity.Valuator, PatchingEvent).Devisor));
+            }
+        }
+
+        public virtual async IAsyncEnumerable<TEntity> PatchAsync<TModel>(IEnumerable<TModel> entities, params Expression<Func<TEntity, object>>[] expanders) where TModel : class, IIdentifiable
+        {
+            IDeck<TEntity> deck = null;
+            if (expanders.Any())
+                deck = this[Query.WhereIn(p => p.Id, entities.Select(e => e.Id)), expanders].ToDeck();
+            else
+            {
+                var dtos = entities.ToDeck();
+                deck = lookup<TModel>(entities).ToDeck();
+                if (deck.Count < dtos.Count)
+                    deck.Add(this[Query.WhereIn(p => p.Id, dtos.Where(id => !deck.ContainsKey(id)).Select(id => id.Id))]);
+            }
+
+            foreach (var entity in entities)
+            {
+                if (deck.TryGet(entity.Id, out TEntity _entity))
+                {
+                    yield return await Task.Run(() => InnerSet((TEntity)entity.PatchTo(_entity.Valuator, PatchingEvent).Devisor));
+                }
+            }
+        }
+        public virtual async IAsyncEnumerable<TEntity> PatchAsync<TModel>(IEnumerable<TModel> entities, Func<TModel, Expression<Func<TEntity, bool>>> predicate, params Expression<Func<TEntity, object>>[] expanders) where TModel : class, IIdentifiable
+        {
+            IDeck<TEntity> deck = null;
+            if (predicate != null)
+                if (expanders.Any())
+                    deck = entities.Select(e => this[false, predicate(e), expanders]).ToDeck();
+                else
+                    deck = entities.Select(e => this[false, predicate(e)]).ToDeck();
+            else if (expanders.Any())
+                deck = this[Query.WhereIn(q => q.Id, entities.Select(i => i.Id)), expanders].ToDeck();
+
+            if (deck == null)
+            {
+                foreach (var item in Patch(entities))
+                    yield return item;
+            }
+
+            foreach (var entity in entities)
+            {
+                if (deck.TryGet(entity.Id, out TEntity _entity))
+                    yield return await Task.Run(() => InnerSet(((TEntity)entity.PatchTo(_entity.Valuator, PatchingEvent).Devisor)));
             }
         }
 
@@ -386,6 +500,37 @@ namespace RadicalR
                 }
                 else
                     yield return Add(entity);
+            }
+        }
+
+        public virtual async IAsyncEnumerable<TEntity> PutAsync(IEnumerable<TEntity> entities, Func<TEntity, Expression<Func<TEntity, bool>>> predicate, params Func<TEntity, Expression<Func<TEntity, bool>>>[] conditions)
+        {
+            IDeck<TEntity> deck = null;
+            if (predicate != null)
+                deck = entities.Select(e =>
+                             Query.FirstOrDefault(
+                                   predicate(e)))
+                                  .ToDeck();
+            if (deck == null)
+            {
+                var dtos = entities.ToDeck();
+                deck = lookup<TEntity>(entities).ToDeck();
+                if (deck.Count < dtos.Count)
+                    deck.Add(this[Query.WhereIn(p => p.Id, dtos.Where(id => !deck.ContainsKey(id)).Select(id => id.Id))]);
+            }
+
+            foreach (var entity in entities)
+            {
+                foreach (var condition in conditions)
+                    if (!Query.Any(condition(entity)))
+                        yield return null;
+
+                if (deck.TryGet(entity.Id, out TEntity settin))
+                {
+                    yield return await Task.Run(() => InnerSet((TEntity)entity.PutTo(settin.Valuator, PatchingEvent).Devisor));
+                }
+                else
+                    yield return await Task.Run(() => Add(entity));
             }
         }
 

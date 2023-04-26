@@ -3,7 +3,7 @@
 namespace Undersoft.ODP.Api
 {
     using Domain;
-    public class PlanValidator : DtoCommandSetValidator<Vertex>
+    public class PlanValidator : CommandSetValidatorBase<Vertex>
     {
         public PlanValidator(IRadicalr ultimatr) : base(ultimatr)
         {

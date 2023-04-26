@@ -2,7 +2,7 @@
 
 namespace Undersoft.ODP.Api
 {
-    public class ScheduleValidator : DtoCommandSetValidator<Vector>
+    public class ScheduleValidator : CommandSetValidatorBase<Vector>
     {
         public ScheduleValidator(IRadicalr ultimatr) : base(ultimatr)
         {

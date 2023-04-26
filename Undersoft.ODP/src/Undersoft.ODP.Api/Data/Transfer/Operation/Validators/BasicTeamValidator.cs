@@ -2,7 +2,7 @@
 
 namespace Undersoft.ODP.Api
 {
-    public class BasicTeamValidator : DtoCommandSetValidator<BasicGroup>
+    public class BasicTeamValidator : CommandSetValidatorBase<BasicGroup>
     {
         public BasicTeamValidator(IRadicalr ultimatr) : base(ultimatr)
         {

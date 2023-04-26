@@ -55,9 +55,28 @@
             }
         }
 
-        public static Task<IEnumerable<TResult>> ForOnlyAsync<TElement, TResult>(this IEnumerable<TElement> items, Func<TElement, bool> condition, Func<TElement, int, TResult> action)
+        public static async IAsyncEnumerable<TResult> ForOnlyAsync<TElement, TResult>(this IEnumerable<TElement> items, Func<TElement, bool> condition, Func<TElement, int, TResult> action)
         {
-            return Task.Run(() => items.ForOnly(condition, action));
+            if (items.Any(r => condition(r)))
+            {
+                int i = 0;
+                foreach (var item in items)
+                {
+                    if (condition(item))
+                        yield return await Task.FromResult<TResult>(action(item, i++));
+                }
+            }
+        }
+        public static async IAsyncEnumerable<TResult> ForOnlyAsync<TElement, TResult>(this IEnumerable<TElement> items, Func<TElement, bool> condition, Func<TElement, TResult> action)
+        {
+            if (items.Any(r => condition(r)))
+            {
+                foreach (var item in items)
+                {
+                    if (condition(item))
+                        yield return await Task.FromResult<TResult>(action(item));
+                }
+            }
         }
 
         public static void ForOnly<TElement>(this IEnumerable<TElement> items, Func<TElement, bool> condition, Action<TElement> action)
@@ -121,13 +140,27 @@
             }
         }
 
-        public static Task<IEnumerable<TResult>> ForEachAsync<TElement, TResult>(this IEnumerable<TElement> items, Func<TElement, int, TResult> action)
-        {
-            return Task.Run(() => items.ForEach(action));
+        public static async IAsyncEnumerable<TResult> ForEachAsync<TElement, TResult>(this IEnumerable<TElement> items, Func<TElement, int, TResult> action)
+        {   
+            int i = 0;
+            foreach (var item in items)
+            {
+                yield return await Task.Run(() => action(item, i++));
+            }
         }
-        public static Task<IEnumerable<TResult>> ForEachAsync<TElement, TResult>(this IEnumerable<TElement> items, Func<TElement, TResult> action)
+        public static async IAsyncEnumerable<TResult> ForEachAsync<TElement, TResult>(this IEnumerable<TElement> items, Func<TElement, TResult> action)
         {
-            return Task.Run(() => items.ForEach(action));
+            foreach (var item in items)
+            {
+                yield return await Task.Run(() => action(item));
+            }
+        }
+        public static async IAsyncEnumerable<TResult> ForEachAsync<TElement, TResult>(this IAsyncEnumerable<TElement> items, Func<TElement, TResult> action)
+        {
+            await foreach (var item in items)
+            {
+                yield return await Task.Run(() => action(item));
+            }
         }
 
         public static IQueryable<TResult> ForEach<TElement, TResult>(this IQueryable<TElement> items, Func<TElement, TResult> action)

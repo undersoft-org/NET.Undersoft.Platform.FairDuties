@@ -3,7 +3,7 @@
 namespace Undersoft.ODP.Api
 {
     using Domain;
-    public class DeviceSessionValidator : DtoCommandSetValidator<Session>
+    public class DeviceSessionValidator : CommandSetValidatorBase<Session>
     {
         public DeviceSessionValidator(IRadicalr ultimatr) : base(ultimatr)
         {

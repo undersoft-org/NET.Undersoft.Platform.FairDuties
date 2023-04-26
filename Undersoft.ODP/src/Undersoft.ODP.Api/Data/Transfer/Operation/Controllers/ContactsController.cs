@@ -8,7 +8,7 @@ namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Entries
 
     [Authorize]
     [Route("/contacts")]
-    public class ContactsController : DtoCommandController<long, IEntryStore, Contact, Api.Contact>
+    public class ContactsController : DtoCommandController<long, IEntryStore, Locale, Api.Locale>
     {
         public ContactsController(IRadicalr ultimatr) : base(ultimatr)
         {
@@ -22,7 +22,7 @@ namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Reports
 
     [Authorize]
     [Route("/contacts")]
-    public class ContactsController : DtoQueryController<long, IReportStore, Contact, Api.Contact>
+    public class ContactsController : DtoQueryController<long, IReportStore, Locale, Api.Locale>
     {
         public ContactsController(IRadicalr ultimatr) : base(ultimatr)
         {

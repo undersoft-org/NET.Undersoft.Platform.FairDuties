@@ -2,7 +2,7 @@
 
 namespace Undersoft.ODP.Api
 {
-    public class UserRoleValidator : DtoCommandSetValidator<Role>
+    public class UserRoleValidator : CommandSetValidatorBase<Role>
     {
         public UserRoleValidator(IRadicalr ultimatr) : base(ultimatr)
         {

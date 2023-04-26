@@ -29,22 +29,24 @@ namespace Undersoft.ODP.Api
 
         public int Holidays { get; set; }
 
-        public int OnFrames { get; set; }
+        public int OnDuties { get; set; }
 
-        public int OffFrames { get; set; }
+        public int OffDuties { get; set; }
 
-        public int FreeFrames { get; set; }
+        public int FreeDuties { get; set; }
 
         public int Exchanges { get; set; }
 
         public bool DependentByAny { get; set; }
+
+        public bool OptionalFromAny { get; set; }
 
         public long? GroupId { get; set; }
 
         public long? MemberId { get; set; }
 
         [FigureKey]
-        public long? FrameTypeId { get; set; }
+        public long? AssetId { get; set; }
 
         public virtual DtoSet<Estimate> DependentOn { get; set; }
 

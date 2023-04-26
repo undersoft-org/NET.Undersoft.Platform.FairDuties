@@ -8,7 +8,7 @@ namespace Undersoft.ODP.Api.Data.Service.Operation.Controllers.Entries
 
     [AllowAnonymous]
     [ODataRouteComponent(StoreRoutes.Constant.EntryStore)]
-    public class ContactController : DsoController<long, IEntryStore, Contact>
+    public class ContactController : DsoController<long, IEntryStore, Locale>
     {
         public ContactController(IRadicalr ultimatr) : base(ultimatr) { }
     }
@@ -20,7 +20,7 @@ namespace Undersoft.ODP.Api.Data.Service.Operation.Controllers.Reports
 
     [AllowAnonymous]
     [ODataRouteComponent(StoreRoutes.Constant.ReportStore)]
-    public class ContactController : DsoController<long, IReportStore, Contact>
+    public class ContactController : DsoController<long, IReportStore, Locale>
     {
         public ContactController(IRadicalr ultimatr) : base(ultimatr) { }
     }

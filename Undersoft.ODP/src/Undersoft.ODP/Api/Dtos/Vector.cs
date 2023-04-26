@@ -12,12 +12,10 @@ namespace Undersoft.ODP.Api
 
         public DateTime EndTime { get; set; }
 
-        public TimeSpan Interval { get; set; }
-
         public bool IsView { get; set; }
 
         public long? GroupId { get; set; }
 
-        public virtual DtoSet<Duty> Frames { get; set; }
+        public virtual DtoSet<Duty> Duties { get; set; }
     }
 }

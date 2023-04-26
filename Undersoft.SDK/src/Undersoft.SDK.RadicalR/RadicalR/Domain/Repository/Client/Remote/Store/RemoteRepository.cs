@@ -7,7 +7,7 @@ namespace RadicalR
         where TEntity : class, IIdentifiable
         where TStore : IDataStore
     {
-        public RemoteRepository(IRepositoryContextPool<DataClientContext<TStore>> pool, IEntityCache<TStore, TEntity> cache) : base(
+        public RemoteRepository(IRepositoryContextPool<OpenClientContext<TStore>> pool, IEntityCache<TStore, TEntity> cache) : base(
             pool.ContextPool)
         {
             mapper = cache.Mapper;

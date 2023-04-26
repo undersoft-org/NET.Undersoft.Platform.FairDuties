@@ -3,7 +3,7 @@
 namespace Undersoft.ODP.Api
 {
     using Domain;
-    public class PersonalValidator : DtoCommandSetValidator<Profile>
+    public class PersonalValidator : CommandSetValidatorBase<Profile>
     {
         public PersonalValidator(IRadicalr ultimatr) : base(ultimatr)
         {

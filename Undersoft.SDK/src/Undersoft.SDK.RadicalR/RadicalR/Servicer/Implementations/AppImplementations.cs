@@ -53,186 +53,186 @@ namespace RadicalR
                                 else
                                     continue;
                             service.AddTransient(
-                                typeof(IRequest<>).MakeGenericType(typeof(DtoCommand<>).MakeGenericType(dto)),
-                                typeof(DtoCommand<>).MakeGenericType(dto));
+                                typeof(IRequest<>).MakeGenericType(typeof(Command<>).MakeGenericType(dto)),
+                                typeof(Command<>).MakeGenericType(dto));
 
                             service.AddTransient(
-                                typeof(CommandValidator<>).MakeGenericType(typeof(DtoCommand<>).MakeGenericType(dto)),
-                                typeof(DtoCommandValidator<>).MakeGenericType(dto));
+                                typeof(CommandValidatorBase<>).MakeGenericType(typeof(Command<>).MakeGenericType(dto)),
+                                typeof(CommandValidatorBase<>).MakeGenericType(dto));
                             foreach (Type store in stores)
                             {
                                 service.AddTransient(
                                     typeof(IRequestHandler<,>).MakeGenericType(
                                         new[]
                                     {
-                                        typeof(FilterData<,,>).MakeGenericType(store, entityType, dto),
+                                        typeof(FilterItems<,,>).MakeGenericType(store, entityType, dto),
                                         typeof(IDeck<>).MakeGenericType(dto)
                                     }),
-                                    typeof(FilterDataHandler<,,>).MakeGenericType(store, entityType, dto));
+                                    typeof(FilterItemsHandler<,,>).MakeGenericType(store, entityType, dto));
 
                                 service.AddTransient(
                                     typeof(IRequestHandler<,>).MakeGenericType(
-                                        typeof(FindOne<,,>).MakeGenericType(store, entityType, dto),
+                                        typeof(FindItem<,,>).MakeGenericType(store, entityType, dto),
                                         dto),
-                                    typeof(FindOneHandler<,,>).MakeGenericType(store, entityType, dto));
+                                    typeof(FindItemHandler<,,>).MakeGenericType(store, entityType, dto));
 
 
                                 service.AddTransient(
                                     typeof(IRequestHandler<,>).MakeGenericType(
-                                        typeof(FindOneQuery<,,>).MakeGenericType(store, entityType, dto),
+                                        typeof(FindQuery<,,>).MakeGenericType(store, entityType, dto),
                                         typeof(UniqueOne<>).MakeGenericType(dto)),
-                                    typeof(FindOneQueryHandler<,,>).MakeGenericType(store, entityType, dto));
+                                    typeof(FindQueryHandler<,,>).MakeGenericType(store, entityType, dto));
 
                                 service.AddTransient(
                                     typeof(IRequestHandler<,>).MakeGenericType(
-                                        typeof(GetAll<,,>).MakeGenericType(store, entityType, dto),
+                                        typeof(GetItems<,,>).MakeGenericType(store, entityType, dto),
                                         typeof(IDeck<>).MakeGenericType(dto)),
-                                    typeof(GetAllHandler<,,>).MakeGenericType(store, entityType, dto));
+                                    typeof(GetItemsHandler<,,>).MakeGenericType(store, entityType, dto));
 
                                 service.AddTransient(
                                    typeof(IRequestHandler<,>).MakeGenericType(
-                                       typeof(GetAllQuery<,,>).MakeGenericType(store, entityType, dto),
+                                       typeof(GetQuery<,,>).MakeGenericType(store, entityType, dto),
                                        typeof(IQueryable<>).MakeGenericType(dto)),
-                                   typeof(GetAllQueryHandler<,,>).MakeGenericType(store, entityType, dto));
+                                   typeof(GetQueryHandler<,,>).MakeGenericType(store, entityType, dto));
 
                                 service.AddTransient(
                                     typeof(IRequestHandler<,>).MakeGenericType(
                                         new[]
                                     {
-                                        typeof(CreateDto<,,>).MakeGenericType(store, entityType, dto),
-                                        typeof(DtoCommand<>).MakeGenericType(dto)
+                                        typeof(CreateCommand<,,>).MakeGenericType(store, entityType, dto),
+                                        typeof(Command<>).MakeGenericType(dto)
                                     }),
-                                    typeof(CreateDtoHandler<,,>).MakeGenericType(store, entityType, dto));
+                                    typeof(CreateHandler<,,>).MakeGenericType(store, entityType, dto));
 
                                 service.AddTransient(
                                     typeof(IRequestHandler<,>).MakeGenericType(
                                         new[]
                                     {
-                                        typeof(UpsertDto<,,>).MakeGenericType(store, entityType, dto),
-                                        typeof(DtoCommand<>).MakeGenericType(dto)
+                                        typeof(UpsertCommand<,,>).MakeGenericType(store, entityType, dto),
+                                        typeof(Command<>).MakeGenericType(dto)
                                     }),
-                                    typeof(RenewDtoHandler<,,>).MakeGenericType(store, entityType, dto));
+                                    typeof(UpsertHandler<,,>).MakeGenericType(store, entityType, dto));
 
                                 service.AddTransient(
                                     typeof(IRequestHandler<,>).MakeGenericType(
                                         new[]
                                     {
-                                        typeof(UpdateDto<,,>).MakeGenericType(store, entityType, dto),
-                                        typeof(DtoCommand<>).MakeGenericType(dto)
+                                        typeof(UpdateCommand<,,>).MakeGenericType(store, entityType, dto),
+                                        typeof(Command<>).MakeGenericType(dto)
                                     }),
-                                    typeof(UpdateDtoHandler<,,>).MakeGenericType(store, entityType, dto));
+                                    typeof(UpdateHandler<,,>).MakeGenericType(store, entityType, dto));
 
                                 service.AddTransient(
                                     typeof(IRequestHandler<,>).MakeGenericType(
                                         new[]
                                     {
-                                        typeof(ChangeDto<,,>).MakeGenericType(store, entityType, dto),
-                                        typeof(DtoCommand<>).MakeGenericType(dto)
+                                        typeof(ChangeCommand<,,>).MakeGenericType(store, entityType, dto),
+                                        typeof(Command<>).MakeGenericType(dto)
                                     }),
-                                    typeof(ChangeDtoHandler<,,>).MakeGenericType(store, entityType, dto));
+                                    typeof(ChangeHandler<,,>).MakeGenericType(store, entityType, dto));
 
                                 service.AddTransient(
                                     typeof(IRequestHandler<,>).MakeGenericType(
                                         new[]
                                     {
-                                        typeof(DeleteDto<,,>).MakeGenericType(store, entityType, dto),
-                                        typeof(DtoCommand<>).MakeGenericType(dto)
+                                        typeof(DeleteCommand<,,>).MakeGenericType(store, entityType, dto),
+                                        typeof(Command<>).MakeGenericType(dto)
                                     }),
-                                    typeof(DeleteDtoHandler<,,>).MakeGenericType(store, entityType, dto));
+                                    typeof(DeleteHandler<,,>).MakeGenericType(store, entityType, dto));
 
                                 service.AddScoped(
                                     typeof(IRequestHandler<,>).MakeGenericType(
                                         new[]
                                     {
-                                        typeof(ChangeDtoSet<,,>).MakeGenericType(store, entityType, dto),
-                                        typeof(DtoCommandSet<>).MakeGenericType(dto)
+                                        typeof(ChangeSet<,,>).MakeGenericType(store, entityType, dto),
+                                        typeof(CommandSet<>).MakeGenericType(dto)
                                     }),
-                                    typeof(ChangeDtoSetHandler<,,>).MakeGenericType(store, entityType, dto));
+                                    typeof(ChangeSetHandler<,,>).MakeGenericType(store, entityType, dto));
 
                                 service.AddScoped(
                                     typeof(IRequestHandler<,>).MakeGenericType(
                                         new[]
                                     {
-                                        typeof(UpdateDtoSet<,,>).MakeGenericType(store, entityType, dto),
-                                        typeof(DtoCommandSet<>).MakeGenericType(dto)
+                                        typeof(UpdateSet<,,>).MakeGenericType(store, entityType, dto),
+                                        typeof(CommandSet<>).MakeGenericType(dto)
                                     }),
-                                    typeof(UpdateDtoSetHandler<,,>).MakeGenericType(store, entityType, dto));
+                                    typeof(UpdateSetHandler<,,>).MakeGenericType(store, entityType, dto));
 
                                 service.AddScoped(
                                     typeof(IRequestHandler<,>).MakeGenericType(
                                         new[]
                                     {
-                                        typeof(CreateDtoSet<,,>).MakeGenericType(store, entityType, dto),
-                                        typeof(DtoCommandSet<>).MakeGenericType(dto)
+                                        typeof(CreateSet<,,>).MakeGenericType(store, entityType, dto),
+                                        typeof(CommandSet<>).MakeGenericType(dto)
                                     }),
-                                    typeof(CreateDtoSetHandler<,,>).MakeGenericType(store, entityType, dto));
+                                    typeof(CreateSetHandler<,,>).MakeGenericType(store, entityType, dto));
 
                                 service.AddScoped(
                                     typeof(IRequestHandler<,>).MakeGenericType(
                                         new[]
                                     {
-                                        typeof(UpsertDtoSet<,,>).MakeGenericType(store, entityType, dto),
-                                        typeof(DtoCommandSet<>).MakeGenericType(dto)
+                                        typeof(UpsertSet<,,>).MakeGenericType(store, entityType, dto),
+                                        typeof(CommandSet<>).MakeGenericType(dto)
                                     }),
-                                    typeof(UpsertDtoSetHandler<,,>).MakeGenericType(store, entityType, dto));
+                                    typeof(UpsertSetHandler<,,>).MakeGenericType(store, entityType, dto));
 
                                 service.AddScoped(
                                     typeof(IRequestHandler<,>).MakeGenericType(
                                         new[]
                                     {
-                                        typeof(DeleteDtoSet<,,>).MakeGenericType(store, entityType, dto),
-                                        typeof(DtoCommandSet<>).MakeGenericType(dto)
+                                        typeof(DeleteSet<,,>).MakeGenericType(store, entityType, dto),
+                                        typeof(CommandSet<>).MakeGenericType(dto)
                                     }),
-                                    typeof(DeleteDtoSetHandler<,,>).MakeGenericType(store, entityType, dto));
+                                    typeof(DeleteSetHandler<,,>).MakeGenericType(store, entityType, dto));
                                 service.AddScoped(
                                     typeof(INotificationHandler<>).MakeGenericType(
-                                        typeof(DeletedDtoSet<,,>).MakeGenericType(store, entityType, dto)),
-                                    typeof(DeletedDtoSetHandler<,,>).MakeGenericType(store, entityType, dto));
-
-                                service.AddScoped(
-                                    typeof(INotificationHandler<>).MakeGenericType(
-                                        typeof(RenewedDtoSet<,,>).MakeGenericType(store, entityType, dto)),
-                                    typeof(RenewedDtoSetHandler<,,>).MakeGenericType(store, entityType, dto));
+                                        typeof(DeletedSet<,,>).MakeGenericType(store, entityType, dto)),
+                                    typeof(DeletedSetHandler<,,>).MakeGenericType(store, entityType, dto));
 
                                 service.AddScoped(
                                     typeof(INotificationHandler<>).MakeGenericType(
-                                        typeof(UpdatedDtoSet<,,>).MakeGenericType(store, entityType, dto)),
-                                    typeof(UpdatedDtoSetHandler<,,>).MakeGenericType(store, entityType, dto));
+                                        typeof(UpsertedSet<,,>).MakeGenericType(store, entityType, dto)),
+                                    typeof(UpsertedSetHandler<,,>).MakeGenericType(store, entityType, dto));
 
                                 service.AddScoped(
                                     typeof(INotificationHandler<>).MakeGenericType(
-                                        typeof(CreatedDtoSet<,,>).MakeGenericType(store, entityType, dto)),
-                                    typeof(CreatedDtoSetHandler<,,>).MakeGenericType(store, entityType, dto));
+                                        typeof(UpdatedSet<,,>).MakeGenericType(store, entityType, dto)),
+                                    typeof(UpdatedSetHandler<,,>).MakeGenericType(store, entityType, dto));
 
                                 service.AddScoped(
                                     typeof(INotificationHandler<>).MakeGenericType(
-                                        typeof(ChangedDtoSet<,,>).MakeGenericType(store, entityType, dto)),
-                                    typeof(ChangedDtoSetHandler<,,>).MakeGenericType(store, entityType, dto));
+                                        typeof(CreatedSet<,,>).MakeGenericType(store, entityType, dto)),
+                                    typeof(CreatedSetHandler<,,>).MakeGenericType(store, entityType, dto));
+
+                                service.AddScoped(
+                                    typeof(INotificationHandler<>).MakeGenericType(
+                                        typeof(ChangedSet<,,>).MakeGenericType(store, entityType, dto)),
+                                    typeof(ChangedSetHandler<,,>).MakeGenericType(store, entityType, dto));
 
                                 service.AddTransient(
                                     typeof(INotificationHandler<>).MakeGenericType(
-                                        typeof(ChangedDto<,,>).MakeGenericType(store, entityType, dto)),
-                                    typeof(ChangedDtoHandler<,,>).MakeGenericType(store, entityType, dto));
+                                        typeof(Changed<,,>).MakeGenericType(store, entityType, dto)),
+                                    typeof(ChangedHandler<,,>).MakeGenericType(store, entityType, dto));
 
                                 service.AddTransient(
                                     typeof(INotificationHandler<>).MakeGenericType(
-                                        typeof(CreatedDto<,,>).MakeGenericType(store, entityType, dto)),
-                                    typeof(CreatedDtoHandler<,,>).MakeGenericType(store, entityType, dto));
+                                        typeof(Created<,,>).MakeGenericType(store, entityType, dto)),
+                                    typeof(CreatedHandler<,,>).MakeGenericType(store, entityType, dto));
 
                                 service.AddTransient(
                                     typeof(INotificationHandler<>).MakeGenericType(
-                                        typeof(DeletedDto<,,>).MakeGenericType(store, entityType, dto)),
-                                    typeof(DeletedDtoHandler<,,>).MakeGenericType(store, entityType, dto));
+                                        typeof(Deleted<,,>).MakeGenericType(store, entityType, dto)),
+                                    typeof(DeletedHandler<,,>).MakeGenericType(store, entityType, dto));
 
                                 service.AddTransient(
                                     typeof(INotificationHandler<>).MakeGenericType(
-                                        typeof(UpsertedDto<,,>).MakeGenericType(store, entityType, dto)),
-                                    typeof(UpsertedDtoHandler<,,>).MakeGenericType(store, entityType, dto));
+                                        typeof(Upserted<,,>).MakeGenericType(store, entityType, dto)),
+                                    typeof(UpsertedHandler<,,>).MakeGenericType(store, entityType, dto));
 
                                 service.AddTransient(
                                     typeof(INotificationHandler<>).MakeGenericType(
-                                        typeof(UpdatedDto<,,>).MakeGenericType(store, entityType, dto)),
-                                    typeof(UpdatedDtoHandler<,,>).MakeGenericType(store, entityType, dto));
+                                        typeof(Updated<,,>).MakeGenericType(store, entityType, dto)),
+                                    typeof(UpdatedHandler<,,>).MakeGenericType(store, entityType, dto));
                             }
                             mapper.TryCreateMap(entityType, dto);
                         }

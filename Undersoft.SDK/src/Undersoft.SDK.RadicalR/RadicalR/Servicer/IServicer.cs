@@ -20,6 +20,16 @@ namespace RadicalR
         Task<object> Send(object request, CancellationToken cancellationToken = default);
         Task<TResponse> Send<TResponse>(IRequest<TResponse> request, CancellationToken cancellationToken = default);
 
+        IAsyncEnumerable<TResponse> CreateStream<TResponse>(
+            IStreamRequest<TResponse> request,
+            CancellationToken cancellationToken = default
+        );
+
+        IAsyncEnumerable<object> CreateStream(
+            object request,
+            CancellationToken cancellationToken = default
+        );
+
         Task<R> Serve<T, R>(Func<T, Task<R>> function) where T : class;
         Task<R> Serve<T, R>(string methodname, params object[] parameters) where T : class;
 

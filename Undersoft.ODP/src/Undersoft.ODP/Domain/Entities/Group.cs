@@ -31,9 +31,6 @@ namespace Undersoft.ODP.Domain
         public float BlockSeed { get; set; } = 0.416f;
 
         public long? UnionId { get; set; }
-
-        [JsonIgnore]
-        [IgnoreDataMember]
         public virtual Union Union { get; set; }
 
         public long? LeadershipId { get; set; }
@@ -44,8 +41,6 @@ namespace Undersoft.ODP.Domain
 
         public virtual EntityOnSets<Member> Members { get; set; }
 
-        [JsonIgnore]
-        [IgnoreDataMember]
         public virtual EntityOnSet<Request> Requests { get; set; }
 
         private EntitySet<Estimate> estimates;
@@ -82,14 +77,10 @@ namespace Undersoft.ODP.Domain
 
         public virtual EntitySet<Asset> Assets { get; set; }
 
-        [JsonIgnore]
-        [IgnoreDataMember]
         public virtual EntitySet<Vertex> Vertices { get; set; }
 
         public virtual EntitySet<Vector> VectorViews { get; set; }
 
-        [JsonIgnore]
-        [IgnoreDataMember]
         public virtual EntitySet<Duty> Duties { get; set; }
 
         public virtual EntitySet<Property> Properties { get; set; }
@@ -97,43 +88,19 @@ namespace Undersoft.ODP.Domain
         public long? SetupId { get; set; }
         public virtual Setup Setup { get; set; }
 
-        [JsonIgnore]
-        [IgnoreDataMember]
-        [IgnoreClientProperty]
         long IUsageSet.VertexId { get => UnionId ?? default; set => UnionId = value; }
-        [JsonIgnore]
-        [IgnoreDataMember]
-        [IgnoreClientProperty]
         IVertex IUsageSet.Vertex { get => Union; }
 
-        [JsonIgnore]
-        [IgnoreDataMember]
-        [IgnoreClientProperty]
         IEnumerable<ILink> IUsageSet.SourceLinks => Members.Select(i => new Link<Group, Member>() { SourceId = Id, TargetId = i.Id });
 
-        [JsonIgnore]
-        [IgnoreDataMember]
-        [IgnoreClientProperty]
         IEnumerable<ILink> IUsageSet.AssetLinks => Assets.Select(i => new Link<Group, Asset>() { SourceId = Id, TargetId = i.Id });
 
-        [JsonIgnore]
-        [IgnoreDataMember]
-        [IgnoreClientProperty]
         ISetup IUsageSet.Setup => Setup;
 
-        [JsonIgnore]
-        [IgnoreDataMember]
-        [IgnoreClientProperty]
         long IUsageSet.SetupId { get => SetupId ?? default; }
 
-        [JsonIgnore]
-        [IgnoreDataMember]
-        [IgnoreClientProperty]
         int IUsageSet.LastResourceOrdinal { get; set; }
 
-        [JsonIgnore]
-        [IgnoreDataMember]
-        [IgnoreClientProperty]
         int IUsageSet.LastLiabilityOrdinal { get; set; }
 
         IFindable<IEstimate> IUsageSet.Estimates => Estimates.Cast<IEstimate>().ToCatalog();
