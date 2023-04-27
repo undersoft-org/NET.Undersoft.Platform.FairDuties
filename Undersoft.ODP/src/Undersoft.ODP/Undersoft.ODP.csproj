@@ -1,12 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net7.0;net6.0</TargetFrameworks>
+    <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>disable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
+  <!--<ItemGroup>
     <None Remove="appsettings.Development.json" />
     <None Remove="appsettings.json" />
   </ItemGroup>
@@ -22,7 +22,7 @@
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-  </ItemGroup>
+  </ItemGroup>-->
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.13">
@@ -37,6 +37,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Undersoft.AEP\src\Undersoft.AEP\Undersoft.AEP.csproj" />
+    <ProjectReference Include="..\..\..\Undersoft.SDK\src\Undersoft.SDK.RadicalR.Server\Undersoft.SDK.RadicalR.Server.csproj" />
   </ItemGroup>
 
 </Project>

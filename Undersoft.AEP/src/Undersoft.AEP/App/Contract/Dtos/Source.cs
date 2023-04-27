@@ -1,17 +1,17 @@
-﻿using RadicalR;
-using System.Runtime.Serialization;
-using Undersoft.AEP.Raw;
+﻿using System.Runtime.Serialization;
+using System.Series;
+using Undersoft.AEP.Core;
 
 namespace Undersoft.AEP.Api
 {
     [DataContract]
-    public class Source : Raw.Source
+    public class Source : Raw.Source, IDto
     {
         [DataMember(Order = 12)]
-        public virtual DtoSet<Estimate> Estimates { get; set; }
+        public virtual Listing<Estimate> Estimates { get; set; }
 
         [DataMember(Order = 13)]
-        public virtual DtoSet<Link<Asset, Asset>> AssetLinks { get; set; }
+        public virtual Listing<Link<Asset, Asset>> AssetLinks { get; set; }
 
         [DataMember(Order = 14)]
         public virtual Setup Setup { get; set; }

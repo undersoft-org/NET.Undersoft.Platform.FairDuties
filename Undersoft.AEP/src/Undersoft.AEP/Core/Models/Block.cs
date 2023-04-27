@@ -6,7 +6,7 @@ namespace Undersoft.AEP.Core
     {
         public Block() { }
 
-        public Vector<TSlot, TUsage> Vector { get; set; }
+        public IVector<TSlot, TUsage> Vector { get; set; }
 
         public float Checksum { get; set; }
 

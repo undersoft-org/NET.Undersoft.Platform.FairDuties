@@ -1,5 +1,5 @@
 using AutoMapper;
-using Microsoft.AspNetCore.Builder;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OData.Edm;
@@ -17,7 +17,7 @@ namespace RadicalR
         protected IDataMapper mapper;
 
         protected static IRepositoryEndpoints Endpoints { get; set; }
-        protected static IRepositoryClients Clients { get; set; }
+        public static IRepositoryClients Clients { get; set; }
 
         protected IServiceManager Services { get; init; }
 
@@ -242,19 +242,6 @@ namespace RadicalR
         {                        
             return ServiceManager.GetObject<IDataMapper>();
         }
-
-        public static async Task LoadClientEdms(IApplicationBuilder app)
-        {
-            await Task.Run(() =>
-            {
-                Clients.ForEach((client) =>
-                {
-                    client.BuildMetadata();
-                });
-
-                AppSetup.AddRuntimeImplementations(app);
-            });
-        }     
 
         protected override void Dispose(bool disposing)
         {

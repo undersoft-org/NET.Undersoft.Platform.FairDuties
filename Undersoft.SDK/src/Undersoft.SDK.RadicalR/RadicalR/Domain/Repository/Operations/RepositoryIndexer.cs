@@ -9,8 +9,6 @@ namespace RadicalR
 {
     public partial class Repository<TEntity>
     {
-        #region Methods
-
         public abstract TEntity this[params object[] keys] { get; set; }
         public abstract TEntity this[object[] keys, Expression<Func<TEntity, object>>[] expanders] { get; set; }
         public abstract object this[Expression<Func<TEntity, object>> selector, object[] keys, params Expression<Func<TEntity, object>>[] expanders] { get; set; }
@@ -140,6 +138,5 @@ namespace RadicalR
 
         public virtual IGrouping<dynamic, TEntity> this[Func<IQueryable<TEntity>, IGrouping<dynamic, TEntity>> groupByObject, Expression<Func<TEntity, bool>> predicate] => groupByObject(Query.Where(predicate).AsQueryable());
 
-        #endregion
     }
 }

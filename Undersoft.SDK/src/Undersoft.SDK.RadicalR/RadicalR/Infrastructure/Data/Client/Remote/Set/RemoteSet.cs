@@ -62,17 +62,40 @@ namespace RadicalR
     public class RemoteSet<TEntity> : DataServiceCollection<TEntity>, IRemote<TEntity>, IFindable where TEntity : class, IIdentifiable
     {
         protected DataServiceContext context;
-        protected IQueryable<TEntity> _query;
+        protected DataServiceQuery<TEntity> _query;
+        protected IDeck<TEntity> _deck = new Album<TEntity>();
         protected object origin;
 
         public DataServiceContext Context => context;
 
         public object this[object key]
         {
-            get => (key is long)
-                ? this.FirstOrDefault(item => item.Id == (long)key)
-                : this.FirstOrDefault(item => (ulong)item.Id == key.UniqueKey64());
-            set => SetItem(IndexOf((TEntity)this[key]), (TEntity)value);
+            get
+            {
+                if (_deck.TryGet(key, out TEntity entity))
+                    return entity;
+                var query =  context.CreateQuery<TEntity>(KeyString(key), true);
+                entity = query.FirstOrDefault();
+                if (entity != null)
+                    this.InsertItem(Count, entity);
+                return entity;                 
+            }
+            set => SetItem(_deck.GetCard(((TEntity)this[key]).Id).Index, (TEntity)value);
+        }
+
+        public object this[object[] keys]
+        {
+            get
+            {
+                if (_deck.TryGet(keys, out TEntity entity))
+                    return entity;
+                var query = context.CreateQuery<TEntity>(KeyString(keys), true);
+                entity = query.FirstOrDefault();
+                if (entity != null)
+                    this.InsertItem(Count, entity);
+                return entity;
+            }
+            set => SetItem(_deck.GetCard(((TEntity)this[keys]).Id).Index, (TEntity)value);
         }
 
         public RemoteSet() : base()
@@ -85,7 +108,7 @@ namespace RadicalR
         }
         public RemoteSet(DataServiceContext context, IQueryable<TEntity> query) : base(context)
         {
-            _query = query;
+            _query = (DataServiceQuery<TEntity>)query;
             this.context = context;
         }
 
@@ -129,7 +152,7 @@ namespace RadicalR
             _query = context.CreateQuery<TEntity>(typeof(TEntity).Name);
         }
 
-        public virtual IQueryable<TEntity> Query => _query;
+        public virtual DataServiceQuery<TEntity> Query => _query;
 
         public virtual void Load(int offset = 0, int limit = 0)
         {
@@ -188,6 +211,45 @@ namespace RadicalR
             items.DoEach(e => Add(e));
         }
 
+        protected override void InsertItem(int index, TEntity item)
+        {
+            _deck.Insert(index, item);
+            base.InsertItem(index, item);
+        }
+
+        protected override void RemoveItem(int index)
+        {
+            _deck.RemoveAt(index);
+            base.RemoveItem(index);
+        }
+
+        protected override void SetItem(int index, TEntity item)
+        {
+            _deck.Set(item.Id, item);
+            base.SetItem(index, item);
+        }
+
+        protected override void ClearItems()
+        {
+            _deck.Clear();
+            base.ClearItems();
+        }
+
+        protected override void MoveItem(int oldIndex, int newIndex)
+        {
+            var olditem = _deck[oldIndex];
+            _deck.RemoveAt(oldIndex);
+            _deck[newIndex] = olditem;
+            base.MoveItem(oldIndex, newIndex);
+        }
+
+        public bool ContainsKey(object key)
+        {
+            return _deck.ContainsKey(key);
+        }
+
+        public string KeyString(params object[] keys)
+        { return $"{typeof(TEntity).Name}({((keys.Length > 1) ? keys.Aggregate(string.Empty, (a, b) => $"{a},{b}") : keys[0])})"; }
 
     }
 }

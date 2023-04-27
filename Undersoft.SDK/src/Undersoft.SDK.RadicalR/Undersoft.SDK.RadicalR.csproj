@@ -13,50 +13,6 @@
     <NeutralLanguage>en-US</NeutralLanguage>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Include="RadicalR\Application\.old\DtoQueryController.cs" />
-    <Compile Include="RadicalR\Application\.old\Service\Operation\Command\Base\DsoCommand.cs" />
-    <Compile Include="RadicalR\Application\.old\Service\Operation\Command\ChangeDso.cs" />
-    <Compile Include="RadicalR\Application\.old\Service\Operation\Command\Controller\DsoCommandController.cs" />
-    <Compile Include="RadicalR\Application\.old\Service\Operation\Command\CreateDso.cs" />
-    <Compile Include="RadicalR\Application\.old\Service\Operation\Command\DeleteDso.cs" />
-    <Compile Include="RadicalR\Application\.old\Service\Operation\Command\Event\ChangedDso.cs" />
-    <Compile Include="RadicalR\Application\.old\Service\Operation\Command\Event\Controller\OLD\DsoEventController.cs" />
-    <Compile Include="RadicalR\Application\.old\Service\Operation\Command\Event\CreatedDso.cs" />
-    <Compile Include="RadicalR\Application\.old\Service\Operation\Command\Event\DeletedDso.cs" />
-    <Compile Include="RadicalR\Application\.old\Service\Operation\Command\Event\Handler\ChangedDsoHandler.cs" />
-    <Compile Include="RadicalR\Application\.old\Service\Operation\Command\Event\Handler\CreatedDsoHandler.cs" />
-    <Compile Include="RadicalR\Application\.old\Service\Operation\Command\Event\Handler\DeletedDsoHandler.cs" />
-    <Compile Include="RadicalR\Application\.old\Service\Operation\Command\Event\Handler\UpdatedDsoHandler.cs" />
-    <Compile Include="RadicalR\Application\.old\Service\Operation\Command\Event\Handler\UpsertedDsoHandler.cs" />
-    <Compile Include="RadicalR\Application\.old\Service\Operation\Command\Event\UpdatedDso.cs" />
-    <Compile Include="RadicalR\Application\.old\Service\Operation\Command\Event\UpsertedDso.cs" />
-    <Compile Include="RadicalR\Application\.old\Service\Operation\Command\Handler\ChangeDsoHandler.cs" />
-    <Compile Include="RadicalR\Application\.old\Service\Operation\Command\Handler\CreateDsoHandler.cs" />
-    <Compile Include="RadicalR\Application\.old\Service\Operation\Command\Handler\DeleteDsoHandler.cs" />
-    <Compile Include="RadicalR\Application\.old\Service\Operation\Command\Handler\UpdateDsoHandler.cs" />
-    <Compile Include="RadicalR\Application\.old\Service\Operation\Command\Handler\UpsertDsoHandler.cs" />
-    <Compile Include="RadicalR\Application\.old\Service\Operation\Command\UpdateDso.cs" />
-    <Compile Include="RadicalR\Application\.old\Service\Operation\Command\UpsertDso.cs" />
-    <Compile Include="RadicalR\Application\.old\Service\Operation\Command\Validator\DsoCommandValidator.cs" />
-    <Compile Include="RadicalR\Application\.old\Service\Operation\Controller\OLD\DsoController.cs" />
-    <Compile Include="RadicalR\Application\.old\Service\Operation\Controller\OLD\IDsoController.cs" />
-    <Compile Include="RadicalR\Application\.old\Service\Operation\Query\Controller\DsoQueryController.cs" />
-    <Compile Include="RadicalR\Application\.old\Service\Operation\Query\FilterDso.cs" />
-    <Compile Include="RadicalR\Application\.old\Service\Operation\Query\FindDso.cs" />
-    <Compile Include="RadicalR\Application\.old\Service\Operation\Query\GetDso.cs" />
-    <Compile Include="RadicalR\Application\.old\Service\Operation\Query\Handler\FilterDsoHandler.cs" />
-    <Compile Include="RadicalR\Application\.old\Service\Operation\Query\Handler\FindDsoHandler.cs" />
-    <Compile Include="RadicalR\Application\.old\Service\Operation\Query\Handler\GetDsoHandler.cs" />
-    <Compile Include="RadicalR\Application\Data\Operation\Command\.old\Controller\.old\DtoCommandController.cs" />
-    <Compile Include="RadicalR\Application\.old\DtoEventController.cs" />
-    <Compile Include="RadicalR\Application\.old\DtoController.cs" />
-  </ItemGroup>
-  
-  <ItemGroup>
-    <FrameworkReference Include="Microsoft.AspNetCore.App" />
-  </ItemGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
@@ -79,21 +35,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="BootstrapBlazor.FontAwesome" Version="6.3.0" />
-    <PackageReference Include="Google.Protobuf" Version="3.21.9" />
-    <PackageReference Include="Grpc.AspNetCore.Server" Version="2.44.0" />
+    <PackageReference Include="Google.Protobuf" Version="3.21.9" />    
     <PackageReference Include="Grpc.Core" Version="2.44.0" />
     <PackageReference Include="Grpc.Core.Api" Version="2.44.0" />
     <PackageReference Include="Grpc.Net.ClientFactory" Version="2.44.0" />
     <PackageReference Include="IdentityModel" Version="6.0.0" />
-    <PackageReference Include="IdentityModel.AspNetCore.OAuth2Introspection" Version="4.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.15" />
     <PackageReference Include="Polly" Version="7.0.3" />
     <PackageReference Include="protobuf-net" Version="3.1.22" />
     <PackageReference Include="protobuf-net.Core" Version="3.1.22" />
     <PackageReference Include="protobuf-net.Grpc" Version="1.0.177" />
-    <PackageReference Include="protobuf-net.Grpc.AspNetCore" Version="1.0.177" />
-    <PackageReference Include="protobuf-net.Grpc.AspNetCore.Reflection" Version="1.0.177" />
     <PackageReference Include="protobuf-net.Grpc.ClientFactory" Version="1.0.177" />
     <PackageReference Include="protobuf-net.Grpc.Native" Version="1.0.177" />
     <PackageReference Include="protobuf-net.Grpc.Reflection" Version="1.0.177" />
@@ -102,19 +52,13 @@
     <PackageReference Include="protobuf-net.ServiceModel" Version="3.1.17" />
     <PackageReference Include="RabbitMQ.Client" Version="6.4.0" />
     <PackageReference Include="Serilog" Version="2.12.0" />
-    <PackageReference Include="Serilog.AspNetCore" Version="6.1.0" />
     <PackageReference Include="Serilog.Formatting.Compact" Version="1.1.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.2.3" />
 	  <PackageReference Include="AutoMapper" Version="10.1.1" />
 	  <PackageReference Include="FluentValidation" Version="10.3.4" />
 	  <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="10.3.4" />
 	  <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="3.0.1" />
 	  <PackageReference Include="MediatR" Version="10.0.1" />
 	  <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
-	  <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
-	  <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.13" />
-	  <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
-	  <PackageReference Include="Microsoft.AspNetCore.OData" Version="8.0.0" />
 	  <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.13" />
 	  <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="5.0.13" />
 	  <PackageReference Include="Microsoft.EntityFrameworkCore.Cosmos" Version="5.0.13" />
@@ -136,7 +80,6 @@
 	  <PackageReference Include="Oracle.EntityFrameworkCore" Version="5.21.4" />
 	  <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="5.0.2" />
 	  <PackageReference Include="Pomelo.EntityFrameworkCore.MySql.Design" Version="1.1.2" />
-	  <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
     <PackageReference Include="OpenTelemetry" Version="1.4.0" />
     <PackageReference Include="OpenTelemetry.Api" Version="1.4.0" />
     <PackageReference Include="OpenTelemetry.Exporter.Jaeger" Version="1.4.0" />
@@ -145,7 +88,6 @@
     <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.4.0" />
 	  <PackageReference Include="OpenTelemetry.Exporter.Prometheus" Version="1.3.0-rc.2" />
     <PackageReference Include="OpenTelemetry.Instrumentation.Runtime" Version="1.0.0" />
-	  <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.0.0-rc9.14" />
 	  <PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="1.0.0-rc9.14" />
     <PackageReference Include="OpenTelemetry.Exporter.Zipkin" Version="1.4.0" />
   </ItemGroup>

@@ -23,17 +23,19 @@ namespace Undersoft.ODP.Api
                         builder
                             .AddDataService<EntryDb>()
                             .AddDataService<ReportDb>()
-                //)
-                //.AddDataServices<IEventStore>(
-                //    DataServiceTypes.All,
-                //    builder =>
-                //        builder.AddDataService<EventDbContext>()
+                )
+                .AddDataServices<IEventStore>(
+                    DataServiceTypes.All,
+                    builder =>
+                        builder.AddDataService<EventDb>()
                 );
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseAppSetup(env).UseInternalProvider().UseDataMigrations();
+            app.UseAppSetup(env)
+                .UseInternalProvider()
+                .UseDataMigrations();
         }
     }
 }

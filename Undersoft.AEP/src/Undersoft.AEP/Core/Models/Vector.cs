@@ -5,7 +5,7 @@ namespace Undersoft.AEP.Core
     public class Vector<TSocket, TUsage> : Spectrum<IUsage>, IUnique, IVector<TSocket, TUsage>
         where TSocket : ISocket where TUsage : IUsage
     {
-        public Sectors<TSocket, TUsage> Sectors { get; set; }
+        public IMassDeck<ISector<TSocket, TUsage>> Sectors { get; set; }
 
         public Vector(IVector vector)
             : this(vector.UsageSet, vector.SectorOffset, vector.BlockOffset, vector.BlockCount)

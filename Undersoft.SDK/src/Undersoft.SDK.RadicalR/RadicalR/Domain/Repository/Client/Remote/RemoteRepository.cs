@@ -18,13 +18,18 @@ namespace RadicalR
         IDeck<DataServiceRequest> _batchset;
         protected DataServiceQuery<TEntity> dsQuery;
 
+        protected RemoteSet<TEntity> dsSet;
+
+
         public RemoteRepository()
         {
         }
 
         public RemoteRepository(IRepositoryClient repositorySource) : base(repositorySource)
         {
-            dsQuery = dsContext.CreateQuery<TEntity>(typeof(TEntity).Name, false);
+            dsSet = new RemoteSet<TEntity>(dsContext);
+            dsQuery = dsSet.Query;
+
             Expression = Expression.Constant(this);
             Provider = new LinkedRepositoryQueryProvider<TEntity>(Query);
         }
@@ -33,7 +38,8 @@ namespace RadicalR
         {
             if (dsContext != null)
             {
-                dsQuery = dsContext.CreateQuery<TEntity>(typeof(TEntity).Name, false);
+                dsSet = new RemoteSet<TEntity>(dsContext);
+                dsQuery = dsSet.Query;
                 Expression = Expression.Constant(this.AsEnumerable());
                 Provider = new LinkedRepositoryQueryProvider<TEntity>(dsQuery);
             }
@@ -60,9 +66,14 @@ namespace RadicalR
                 {
                     value.PatchTo(entity, PatchingEvent);
                     //dsContext.UpdateObject(Stamp(entity), keys);
+                    if (dsSet.ContainsKey(keys))
+                        dsSet[keys] = Stamp(entity);
+                    else
+                        dsSet.Add(Stamp(entity));
                 }
                 else
-                    dsContext.AddObject(Name, Sign(value));
+                    dsSet.Add(Sign(entity));
+                //dsContext.AddObject(Name, Sign(value));
             }
         }
 
@@ -73,12 +84,14 @@ namespace RadicalR
                 DataServiceQuery<TEntity> query = dsContext.CreateQuery<TEntity>(KeyString(keys), true);
                 if (expanders != null)
                     foreach (Expression<Func<TEntity, object>> expander in expanders)
-                        query = query.Expand(expander);
+                       query = query.Expand(expander);
 
                 var entity = query.FirstOrDefault();
                 if (entity != null)
-                    dsContext.AttachTo(Name, entity);
-
+                    if (dsSet.ContainsKey(keys))
+                        dsSet[keys] = entity;
+                    else
+                        dsSet.Add(entity);
                 return entity;
             }
             set
@@ -92,8 +105,11 @@ namespace RadicalR
                 TEntity entity = query.FirstOrDefault();
                 if (entity != null)
                 {
-                    dsContext.AttachTo(Name, entity);
                     value.PatchTo(Stamp(entity), PatchingEvent);
+                    if (dsSet.ContainsKey(keys))
+                        dsSet[keys] = Stamp(entity);
+                    else
+                        dsSet.Add(Stamp(entity));                   
                 }
             }
         }
@@ -107,9 +123,12 @@ namespace RadicalR
                     foreach (Expression<Func<TEntity, object>> expander in expanders)
                         query = query.Expand(expander);
 
-                var entity = query.Select(selector).FirstOrDefault();
+                object entity = query.Select(selector).FirstOrDefault();
                 if (entity != null)
-                    dsContext.AttachTo(Name, entity);
+                    if (dsSet.ContainsKey(keys))
+                        dsSet[keys] = entity;
+                    else
+                        dsSet.Add((TEntity)entity);
 
                 return entity;
             }
@@ -123,8 +142,11 @@ namespace RadicalR
                 TEntity entity = query.Select(selector).Cast<TEntity>().FirstOrDefault();
                 if (entity != null)
                 {
-                    dsContext.AttachTo(Name, entity);
                     value.PatchTo(Stamp(entity), PatchingEvent);
+                    if (dsSet.ContainsKey(keys))
+                        dsSet[keys] = entity;
+                    else
+                        dsSet.Add(entity);
                 }
             }
         }
@@ -145,7 +167,8 @@ namespace RadicalR
                 if (item == null)
                 {
                     item = dsContext.CreateFunctionQuerySingle<TEntity>(string.Empty, KeyString(keys), true).GetValue();
-                    dsContext.AttachTo(Name, item);
+                    dsSet.Add(Stamp(item));
+                    //dsContext.AttachTo(Name, item);
                 }
                 return item;
             }
@@ -162,7 +185,7 @@ namespace RadicalR
                     if (item == null)
                     {
                         item = await dsContext.CreateFunctionQuerySingle<TEntity>(string.Empty, KeyString(keys), true).GetValueAsync();
-                        dsContext.AttachTo(Name, item);
+                        dsSet.Add(Stamp(item));
                     }
                     return item;
                 }
@@ -184,8 +207,10 @@ namespace RadicalR
 
         protected override TEntity InnerSet(TEntity entity)
         {
-            //dsContext.UpdateObject(Stamp(entity));
             Stamp(entity);
+            //dsContext.UpdateObject(Stamp(entity));           
+            var _entity = dsSet[entity.Id];
+            entity.PatchTo(_entity); 
             return entity;
         }
 
@@ -227,17 +252,16 @@ namespace RadicalR
         {
             if (type == null)
             {
-                dsContext.AttachTo(item.GetType().Name, item);
+                dsContext.AttachTo(item.GetType().Name, item);                
                 return item;
             }
             else
             {
+                var qor = dsContext.LoadProperty(item, propertyName);
                 var source = (ISleeve)item;
                 var target = source[propertyName];
                 if (target == null)
-                    target = type.New();
-
-                dsContext.AttachLink(item, propertyName, target);
+                    source[propertyName] = target = type.New();
                 return target;
             }
         }
@@ -245,7 +269,7 @@ namespace RadicalR
         public override TEntity Add(TEntity entity)
         {
             TEntity _entity = Sign(entity);
-            dsContext.AddObject(Name, _entity);
+            dsSet.Add(_entity);
             return entity;
         }
 
@@ -259,7 +283,10 @@ namespace RadicalR
 
         public override TEntity Delete(TEntity entity)
         {
-            dsContext.DeleteObject(entity);
+            if (dsSet.ContainsKey(entity.Id))
+                dsSet.Remove(entity);
+            else
+                dsContext.DeleteObject(entity);
             return entity;
         }
 
@@ -284,7 +311,8 @@ namespace RadicalR
         public override TEntity NewEntry(params object[] parameters)
         {
             TEntity entity = Sign(typeof(TEntity).New<TEntity>(parameters));
-            dsContext.AddObject(Name, entity);
+            dsSet.Add(entity);
+            //dsContext.AddObject(Name, entity);
             return entity;
         }
 
@@ -303,5 +331,7 @@ namespace RadicalR
         public DataClientContext Context => dsContext;
 
         public override DataServiceQuery<TEntity> Query => dsContext.CreateQuery<TEntity>(Name, true);
+
+
     }
 }

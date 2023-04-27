@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OData.Edm;
 using Microsoft.OData.ModelBuilder;
 using System.Reflection;
+using System.Series;
 
 namespace RadicalR
 {

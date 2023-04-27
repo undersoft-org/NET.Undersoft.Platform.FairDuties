@@ -1,9 +1,11 @@
 ﻿using System.Instant.Stock;
 
-namespace Undersoft.AEP.Raw;
-
-public class RawStore
+namespace Undersoft.AEP.Raw
 {
+    using Core;
+
+    public class RawStore
+    {
     public RawStore() { }
 
     public virtual Stocker<Usage> Usage { get; set; }
@@ -40,7 +42,7 @@ public class RawStore
 
     public virtual Stocker<Link<UsageSet, Asset>> UsageSetToAsset { get; set; }
 
-    public virtual Stocker<Link<Source, Asset>> SourceToAsset { get; set; } 
+    public virtual Stocker<Link<Source, Asset>> SourceToAsset { get; set; }
 
     public virtual Stocker<Link<Source, Estimate>> SourceToEstimate { get; set; }
 
@@ -53,14 +55,15 @@ public class RawStore
     public virtual Stocker<Link<Asset, Asset>> AssetOptionalTo { get; set; }
 
     public virtual Stocker<Link<Asset, Asset>> AssetRelatedTo { get; set; }
-    
+
     protected void OnConfigure()
     {
 
     }
-   
+
     protected void OnModelConfigure(StockOptions builder)
     {
 
+    }
     }
 }

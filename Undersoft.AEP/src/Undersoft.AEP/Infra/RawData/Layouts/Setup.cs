@@ -1,10 +1,10 @@
-using RadicalR;
 using System.Runtime.Serialization;
+using System.Uniques;
 
 namespace Undersoft.AEP.Raw
 {
     [DataContract]
-    public class Setup : Identifiable
+    public class Setup : UniqueObject
     {
         [DataMember(Order = 11)]
         public long VertexId { get; set; }

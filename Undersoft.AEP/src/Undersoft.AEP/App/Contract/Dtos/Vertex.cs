@@ -1,22 +1,22 @@
-﻿using RadicalR;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
+using System.Series;
 
 namespace Undersoft.AEP.Api
 {
     [DataContract]
-    public class Vertex : Raw.Vertex
+    public class Vertex : Raw.Vertex, IDto
     {
         [DataMember(Order = 12)]
         public virtual string Name { get; set; }
 
         [DataMember(Order = 13)]
-        public virtual DtoSet<UsageSet> UsageSets { get; set; }
+        public virtual Listing<UsageSet> UsageSets { get; set; }
 
         [DataMember(Order = 14)]
-        public virtual DtoSet<Asset> Assets { get; set; }
+        public virtual Listing<Asset> Assets { get; set; }
 
         [DataMember(Order = 15)]
-        public virtual DtoSet<Source> Sources { get; set; }
+        public virtual Listing<Source> Sources { get; set; }
 
         [DataMember(Order = 16)]
         public virtual Setup Setup { get; set; }

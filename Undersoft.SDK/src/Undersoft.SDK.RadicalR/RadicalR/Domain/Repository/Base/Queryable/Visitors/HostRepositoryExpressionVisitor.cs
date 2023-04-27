@@ -5,22 +5,12 @@ namespace RadicalR
 {
     internal class HostRepositoryExpressionVisitor : ExpressionVisitor
     {
-        #region Fields
-
         private readonly IQueryable newRoot;
-
-        #endregion
-
-        #region Constructors
 
         public HostRepositoryExpressionVisitor(IQueryable newRoot)
         {
             this.newRoot = newRoot;
         }
-
-        #endregion
-
-        #region Methods
 
         protected override Expression VisitConstant(ConstantExpression node) =>
              node.Type.BaseType != null && 
@@ -28,6 +18,5 @@ namespace RadicalR
              node.Type.BaseType.GetGenericTypeDefinition() == typeof(EntityRepository<>) ? 
              Expression.Constant(newRoot) : node;
 
-        #endregion
     }
 }

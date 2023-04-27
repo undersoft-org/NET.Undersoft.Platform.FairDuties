@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace RadicalR
@@ -48,8 +47,6 @@ namespace RadicalR
         public virtual IServiceProviderFactory<IServiceCollection> BuildServiceProviderFactory(IServiceRegistry registry)
         {
             var options = new ServiceProviderOptions();
-
-            Action<WebHostBuilderContext, ServiceProviderOptions> configure = (context, options) => options.ValidateOnBuild = true;
 
             var factory = new DefaultServiceProviderFactory(options);
 

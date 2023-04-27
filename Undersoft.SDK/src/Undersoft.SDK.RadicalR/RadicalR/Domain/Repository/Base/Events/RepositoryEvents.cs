@@ -21,14 +21,14 @@ namespace RadicalR
         public override Task Publish(params object[] parameters)
         {
             if (RepositoryEvents.Registry.TryGet("On" + StateOn.ToString(), out ICard<IDeputy> card))
-                return card.ForEachAsync((c) => c.Publish(true, TargetObject, parameters));
+                return card.ForEachAsync((c) => { c.Publish(true, TargetObject, parameters); });
             return null;
         }
 
         public override Task Execute(params object[] parameters)
         {
             if (RepositoryEvents.Registry.TryGet("On" + StateOn.ToString(), out ICard<IDeputy> card))
-                return card.ForEachAsync((c) => c.Publish(true, TargetObject, parameters));
+                return card.ForEachAsync((c) => { c.Publish(true, TargetObject, parameters); });
             return null;
         }
     }

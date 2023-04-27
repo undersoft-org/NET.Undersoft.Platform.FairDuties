@@ -18,7 +18,9 @@ namespace Undersoft.ODP.Api
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseConfiguration(ConfigurationHelper.BuildConfiguration())
                 .UseKestrel()
-                .ConfigureKestrel(options => options.AddServerHeader = true)
+                .ConfigureKestrel((c, o) => o
+                    .Configure(c.Configuration
+                    .GetSection("Kestrel")))
                 .UseIISIntegration()
                 .UseStartup<Startup>()
                 .UseNLog()

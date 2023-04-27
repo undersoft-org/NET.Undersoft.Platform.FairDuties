@@ -8,7 +8,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Mappings
 
     public class VectorMapping : EntityTypeMapping<Vector>
     {
-        const string TABLE_NAME = "Schedules";
+        const string TABLE_NAME = "Vectors";
 
         public override void Configure(EntityTypeBuilder<Vector> builder)
         {

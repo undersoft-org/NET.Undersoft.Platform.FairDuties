@@ -2,13 +2,13 @@
 
 namespace Undersoft.AEP.Core
 {
-    public class Sector<TSlot, TUsage> : CatalogBase<Block<TSlot, TUsage>> where TSlot : ISocket where TUsage : IUsage
+    public class Sector<TSlot, TUsage> : CatalogBase<Block<TSlot, TUsage>>, ISector<TSlot, TUsage> where TSlot : ISocket where TUsage : IUsage
     {
         public Sector() { }
 
         public float Capacity { get; set; }
 
-        public Vector<TSlot, TUsage> Vector { get; set; }
+        public IVector<TSlot, TUsage> Vector { get; set; }
 
         public IDeck<IUsage> Usages { get; set; }
 

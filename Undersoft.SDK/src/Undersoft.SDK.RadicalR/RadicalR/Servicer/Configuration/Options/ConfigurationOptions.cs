@@ -1,10 +1,4 @@
-﻿//-----------------------------------------------------------------------
-// <copyright file="ConfigurationOptions.cs" company="Undersoft">
-//     Author: Dariusz Hanc
-//     Copyright (c) Undersoft. All rights reserved.
-// </copyright>
-//-----------------------------------------------------------------------
-using System.Reflection;
+﻿using System.Reflection;
 
 namespace Microsoft.Extensions.Configuration
 {

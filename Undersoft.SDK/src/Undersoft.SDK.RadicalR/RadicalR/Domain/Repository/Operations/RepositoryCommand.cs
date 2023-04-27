@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.OData.Deltas;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Instant;
 using System.Linq;
@@ -272,34 +271,6 @@ namespace RadicalR
                     yield return await Task.Run(() => InnerSet((TEntity)model.PatchTo(entity.Valuator, PatchingEvent).Devisor));
                 }
             }
-        }
-
-        public virtual Task<TEntity> Patch(Delta<TEntity> delta, params object[] key)
-        {
-            return Task.Run(async () =>
-            {
-                if (key == null) return null;
-                var entity = await Find(key);
-                if (entity == null) return null;
-                delta.Patch(entity);
-                return InnerSet(entity);
-            });
-        }
-        public virtual Task<TEntity> Patch(Delta<TEntity> delta, Func<TEntity, Expression<Func<TEntity, bool>>> predicate)
-        {
-            return Task.Run(() =>
-            {
-                TEntity entity = null;
-                if (predicate != null)
-                    entity = this[false, predicate.Invoke(delta.GetInstance())];
-
-                if (entity != null)
-                {
-                    delta.Patch(entity);
-                    return InnerSet(entity);
-                }
-                return default;
-            });
         }
         
         public virtual async Task<TEntity> Patch<TModel>(TModel delta) where TModel : class, IIdentifiable

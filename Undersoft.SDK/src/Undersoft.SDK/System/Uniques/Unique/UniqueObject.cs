@@ -9,7 +9,7 @@ namespace System.Uniques
 {
     [DataContract]
     [StructLayout(LayoutKind.Sequential, Pack = 2, CharSet = CharSet.Ansi)]
-    public class UniqueObject : IUniqueObject
+    public class UniqueObject : ValueProxy, IUniqueObject
     {
         private Uscn uniquecode;
 
@@ -119,6 +119,18 @@ namespace System.Uniques
         {
             get => uniquecode.UniqueType;
             set => uniquecode.UniqueType = value;
+        }
+
+        public long AutoId()
+        {
+            ulong key = uniquecode.UniqueKey;
+            if (key != 0)
+                return (long)key;
+
+            ulong id = Unique.New;
+            uniquecode.UniqueKey = id;
+            uniquecode.UniqueType = this.GetType().UniqueKey();
+            return (long)id;
         }
 
         public int CompareTo(IUnique other)

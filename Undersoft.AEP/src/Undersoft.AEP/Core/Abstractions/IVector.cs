@@ -2,9 +2,9 @@
 
 namespace Undersoft.AEP.Core
 {
-    public interface IVector<TSlot, TUsage> : IVector where TSlot : ISocket where TUsage : IUsage
+    public interface IVector<TSocket, TUsage> : IVector where TSocket : ISocket where TUsage : IUsage
     {
-        Sectors<TSlot, TUsage> Sectors { get; }
+        IMassDeck<ISector<TSocket, TUsage>> Sectors { get; }
 
         IDeck<ILiability> Liabilities { get; set; }
 

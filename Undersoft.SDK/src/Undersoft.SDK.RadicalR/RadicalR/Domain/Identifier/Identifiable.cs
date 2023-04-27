@@ -12,7 +12,6 @@ using System.Uniques;
 namespace RadicalR
 {
     [DataContract]
-    [Microsoft.OData.Client.Key("Id")]
     [StructLayout(LayoutKind.Sequential, Pack = 2, CharSet = CharSet.Ansi)]
     public class Identifiable : ValueProxy, IIdentifiable
     {
@@ -50,7 +49,7 @@ namespace RadicalR
 
         [FigureKey]
         [DataMember(Order = 1)]
-        [Column(Order = 0)]
+        [Column(Order = 1)]
         [System.ComponentModel.DataAnnotations.Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public virtual long Id
@@ -342,9 +341,9 @@ namespace RadicalR
             return Sign(this);
         }
 
-        public TEntity Sign<TEntity>() where TEntity : Identifiable
+        public TEntity Sign<TEntity>() where TEntity : class, IIdentifiable
         {
-            return Sign((TEntity)this);
+            return Sign((TEntity)((object)this));
         }
 
         public TEntity Sign<TEntity>(TEntity entity) where TEntity : class, IIdentifiable
@@ -360,9 +359,9 @@ namespace RadicalR
             return Sign(this, id);
         }
 
-        public TEntity Sign<TEntity>(object id) where TEntity : Identifiable
+        public TEntity Sign<TEntity>(object id) where TEntity : class, IIdentifiable
         {
-            return Sign((TEntity)this, id);
+            return Sign((TEntity)((object)this));
         }
 
         public TEntity Sign<TEntity>(TEntity entity, object id) where TEntity : class, IIdentifiable
@@ -378,9 +377,9 @@ namespace RadicalR
             return Stamp(this);
         }
 
-        public TEntity Stamp<TEntity>() where TEntity : Identifiable
+        public TEntity Stamp<TEntity>() where TEntity : class, IIdentifiable
         {
-            return Stamp((TEntity)this);
+            return Stamp((TEntity)((object)this));
         }
 
         public TEntity Stamp<TEntity>(TEntity entity) where TEntity : class, IIdentifiable

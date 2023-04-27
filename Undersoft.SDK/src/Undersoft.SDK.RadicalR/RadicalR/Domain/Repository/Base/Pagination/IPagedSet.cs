@@ -3,12 +3,8 @@ using System.Linq;
 
 namespace RadicalR
 {
-    #region Interfaces
-
     public interface IPagedSet<T> 
     {
-        #region Properties
-
         bool HasNextPage { get; }
 
         bool HasPreviousPage { get; }
@@ -24,9 +20,6 @@ namespace RadicalR
         int TotalCount { get; }
 
         int TotalPages { get; }
-
-        #endregion
     }
 
-    #endregion
 }

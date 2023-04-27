@@ -1,4 +1,4 @@
-﻿using RadicalR;
+﻿using System.Uniques;
 
 namespace Undersoft.AEP.Core
 {
@@ -22,14 +22,14 @@ namespace Undersoft.AEP.Core
             set => base.Resource = value;
         }
 
-        public new Usage<TItem> Exploit
+        public new Usage<TItem> Usage
         {
-            get => (Usage<TItem>)base.Exploit;
-            set => base.Exploit = value;
+            get => (Usage<TItem>)base.Usage;
+            set => base.Usage = value;
         }
     }
 
-    public class Socket : Identifiable, ISocket
+    public class Socket : UniqueObject, ISocket
     {
         public Socket() { }
 
@@ -41,13 +41,13 @@ namespace Undersoft.AEP.Core
         public long ResourceId { get; set; }
         public virtual IResource Resource { get; set; }
 
-        public long ExploitId { get; set; }
-        public virtual IUsage Exploit { get; set; }
+        public long UsageId { get; set; }
+        public virtual IUsage Usage { get; set; }
 
         public long VectorId { get; set; }
 
-        public long BockId { get; set; }
+        public long SectorId { get; set; }
 
-        public long FrameId { get; set; }
+        public long BlockId { get; set; }
     }
 }

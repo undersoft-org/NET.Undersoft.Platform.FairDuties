@@ -1,10 +1,4 @@
-﻿//-----------------------------------------------------------------------
-// <copyright file="ConfigurationHelper.cs" company="Undersoft">
-//     Author: Dariusz Hanc
-//     Copyright (c) Undersoft. All rights reserved.
-// </copyright>
-//-----------------------------------------------------------------------
-using System;
+﻿using System;
 using System.IO;
 using System.Linq;
 

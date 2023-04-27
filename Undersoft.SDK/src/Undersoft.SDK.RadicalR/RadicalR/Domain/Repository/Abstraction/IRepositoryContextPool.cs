@@ -4,8 +4,6 @@ using System.Threading.Tasks;
 
 namespace RadicalR
 {
-    #region Interfaces
-
     public interface IRepositoryContextPool : IDeck<IRepositoryContext>, IRepositoryContextFactory
     {
         int PoolSize { get; set; }
@@ -22,5 +20,4 @@ namespace RadicalR
     public interface IRepositoryContextPool<TContext> : IRepositoryContextPool, IRepositoryContextFactory<TContext>
         where TContext : class { }
 
-    #endregion
 }

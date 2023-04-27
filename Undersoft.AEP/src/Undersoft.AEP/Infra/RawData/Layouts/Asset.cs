@@ -1,10 +1,11 @@
 ﻿using RadicalR;
 using System.Runtime.Serialization;
+using System.Uniques;
 
 namespace Undersoft.AEP.Raw
 {
     [DataContract]
-    public class Asset : Identifiable
+    public class Asset : UniqueObject
     {
         [DataMember(Order = 11)]
         public string Name { get; set; }

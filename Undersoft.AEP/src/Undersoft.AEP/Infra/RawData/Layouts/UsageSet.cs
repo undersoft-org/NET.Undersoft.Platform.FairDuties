@@ -1,10 +1,10 @@
-﻿using RadicalR;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
+using System.Uniques;
 
 namespace Undersoft.AEP.Raw
 {
     [DataContract]
-    public class UsageSet : Identifiable
+    public class UsageSet : UniqueObject
     {
         [DataMember(Order = 11)]
         public float SectorCapacity { get; set; }

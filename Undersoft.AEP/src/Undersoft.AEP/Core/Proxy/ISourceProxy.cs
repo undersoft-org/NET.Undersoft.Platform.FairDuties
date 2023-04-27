@@ -1,10 +1,10 @@
-﻿using RadicalR;
-using System.Instant.Linking;
+﻿using System.Instant.Linking;
 using System.Series;
+using System.Uniques;
 
 namespace Undersoft.AEP.Core
 {
-    public interface ISourceProxy : IIdentifiable
+    public interface ISourceProxy : IUniqueObject
     {
         IFindable<IEstimate> Estimates { get; }
         IUsageSet UsageSet { get; }

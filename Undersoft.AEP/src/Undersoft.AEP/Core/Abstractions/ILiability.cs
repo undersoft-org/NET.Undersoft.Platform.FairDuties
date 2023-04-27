@@ -1,6 +1,8 @@
-﻿namespace Undersoft.AEP.Core
+﻿using System.Uniques;
+
+namespace Undersoft.AEP.Core
 {
-    public interface ILiability
+    public interface ILiability : IUniqueObject
     {
         double Checksum { get; set; }
 

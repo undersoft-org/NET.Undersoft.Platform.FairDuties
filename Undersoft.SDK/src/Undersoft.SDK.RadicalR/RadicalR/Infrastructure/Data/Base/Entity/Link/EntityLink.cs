@@ -12,11 +12,5 @@ namespace RadicalR
         public virtual long LeftEntityId { get; set; }
 
         public virtual TLeft LeftEntity { get; set; }
-
-        [NotMapped] public long LeftId { get => LeftEntityId; set => LeftEntityId = value; }
-        [NotMapped] public long RightId { get => RightEntityId; set => RightEntityId = value; }
-
-        [NotMapped] public long FromId { get => LeftEntityId; set => LeftEntityId = value; }
-        [NotMapped] public long ToId { get => RightEntityId; set => RightEntityId = value; }
     }
 }

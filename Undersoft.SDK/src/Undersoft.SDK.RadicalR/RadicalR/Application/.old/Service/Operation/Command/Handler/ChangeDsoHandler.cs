@@ -28,8 +28,6 @@ namespace RadicalR
                 {                    
                     if(request.Keys != null)
                         request.Entity = await _repository.Patch(request.Data, request.Keys).ConfigureAwait(false);
-                    else if (request.Delta != null)
-                        request.Entity = await _repository.Patch(request.Delta, request.Predicate).ConfigureAwait(false);
                     else
                         request.Entity = await _repository.Patch(request.Data, request.Predicate).ConfigureAwait(false); 
 

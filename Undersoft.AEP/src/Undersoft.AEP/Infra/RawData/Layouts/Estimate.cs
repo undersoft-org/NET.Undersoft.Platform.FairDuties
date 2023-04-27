@@ -1,10 +1,10 @@
-﻿using RadicalR;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
+using System.Uniques;
 
 namespace Undersoft.AEP.Raw
 {
     [DataContract]
-    public class Estimate : Identifiable
+    public class Estimate : UniqueObject
     {
         [DataMember(Order = 11)]
         public double Rank { get; set; }

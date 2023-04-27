@@ -31,5 +31,8 @@
         string Creator { get; set; }
 
         string CodeNumber { get; set; }
+
+        long AutoId();
+
     }
 }

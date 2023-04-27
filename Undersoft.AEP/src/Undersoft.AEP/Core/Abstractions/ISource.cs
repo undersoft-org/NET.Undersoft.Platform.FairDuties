@@ -1,10 +1,11 @@
 ﻿using RadicalR;
 using System.Instant.Linking;
 using System.Series;
+using System.Uniques;
 
 namespace Undersoft.AEP.Core
 {
-    public interface ISource : IIdentifiable
+    public interface ISource : IUniqueObject
     {
         public int LastEstimateOrdinal { get; set; }
 

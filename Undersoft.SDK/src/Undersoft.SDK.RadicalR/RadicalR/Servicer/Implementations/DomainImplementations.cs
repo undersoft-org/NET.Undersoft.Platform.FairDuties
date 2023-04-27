@@ -40,85 +40,85 @@ namespace RadicalR
                                 typeof(IEntityCache<,>).MakeGenericType(store, entityType),
                                 typeof(EntityCache<,>).MakeGenericType(store, entityType));
 
-                            service.AddTransient(
-                                typeof(IRequest<>).MakeGenericType(entityType),
-                                typeof(FilterDso<,>).MakeGenericType(store, entityType));
+                            //service.AddTransient(
+                            //    typeof(IRequest<>).MakeGenericType(entityType),
+                            //    typeof(FilterDso<,>).MakeGenericType(store, entityType));
 
-                            service.AddTransient(
-                                typeof(IRequestHandler<,>).MakeGenericType(
-                                    typeof(FilterDso<,>).MakeGenericType(store, entityType),
-                                    typeof(IDeck<>).MakeGenericType(entityType)),
-                                typeof(FilterDsoHandler<,>).MakeGenericType(store, entityType));
+                            //service.AddTransient(
+                            //    typeof(IRequestHandler<,>).MakeGenericType(
+                            //        typeof(FilterDso<,>).MakeGenericType(store, entityType),
+                            //        typeof(IDeck<>).MakeGenericType(entityType)),
+                            //    typeof(FilterDsoHandler<,>).MakeGenericType(store, entityType));
 
-                            service.AddTransient(
-                                typeof(IRequest<>).MakeGenericType(typeof(UniqueOne<>).MakeGenericType(entityType)),
-                                typeof(FindDso<,>).MakeGenericType(store, entityType));
+                            //service.AddTransient(
+                            //    typeof(IRequest<>).MakeGenericType(typeof(UniqueOne<>).MakeGenericType(entityType)),
+                            //    typeof(FindDso<,>).MakeGenericType(store, entityType));
 
-                            service.AddTransient(
-                                typeof(IRequestHandler<,>).MakeGenericType(
-                                    typeof(FindDso<,>).MakeGenericType(store, entityType),
-                                    typeof(UniqueOne<>).MakeGenericType(entityType)),
-                                typeof(FindDsoHandler<,>).MakeGenericType(store, entityType));
+                            //service.AddTransient(
+                            //    typeof(IRequestHandler<,>).MakeGenericType(
+                            //        typeof(FindDso<,>).MakeGenericType(store, entityType),
+                            //        typeof(UniqueOne<>).MakeGenericType(entityType)),
+                            //    typeof(FindDsoHandler<,>).MakeGenericType(store, entityType));
 
-                            service.AddTransient(
-                                typeof(IRequest<>).MakeGenericType(typeof(IQueryable<>).MakeGenericType(entityType)),
-                                typeof(GetDso<,>).MakeGenericType(store, entityType));
+                            //service.AddTransient(
+                            //    typeof(IRequest<>).MakeGenericType(typeof(IQueryable<>).MakeGenericType(entityType)),
+                            //    typeof(GetDso<,>).MakeGenericType(store, entityType));
 
-                            service.AddTransient(
-                                typeof(IRequestHandler<,>).MakeGenericType(
-                                    typeof(GetDso<,>).MakeGenericType(store, entityType),
-                                    typeof(IQueryable<>).MakeGenericType(entityType)),
-                                typeof(GetDsoHandler<,>).MakeGenericType(store, entityType));
+                            //service.AddTransient(
+                            //    typeof(IRequestHandler<,>).MakeGenericType(
+                            //        typeof(GetDso<,>).MakeGenericType(store, entityType),
+                            //        typeof(IQueryable<>).MakeGenericType(entityType)),
+                            //    typeof(GetDsoHandler<,>).MakeGenericType(store, entityType));
 
-                            service.AddTransient(
-                                typeof(IRequestHandler<,>).MakeGenericType(
-                                    new[] { typeof(CreateDso<,>).MakeGenericType(store, entityType), entityType }),
-                                typeof(CreateDsoHandler<,>).MakeGenericType(store, entityType));
+                            //service.AddTransient(
+                            //    typeof(IRequestHandler<,>).MakeGenericType(
+                            //        new[] { typeof(CreateDso<,>).MakeGenericType(store, entityType), entityType }),
+                            //    typeof(CreateDsoHandler<,>).MakeGenericType(store, entityType));
 
-                            service.AddTransient(
-                                typeof(IRequestHandler<,>).MakeGenericType(
-                                    new[] { typeof(UpsertDso<,>).MakeGenericType(store, entityType), entityType }),
-                                typeof(UpsertDsoHandler<,>).MakeGenericType(store, entityType));
+                            //service.AddTransient(
+                            //    typeof(IRequestHandler<,>).MakeGenericType(
+                            //        new[] { typeof(UpsertDso<,>).MakeGenericType(store, entityType), entityType }),
+                            //    typeof(UpsertDsoHandler<,>).MakeGenericType(store, entityType));
 
-                            service.AddTransient(
-                                typeof(IRequestHandler<,>).MakeGenericType(
-                                    new[] { typeof(UpdateDso<,>).MakeGenericType(store, entityType), entityType }),
-                                typeof(UpdateDsoHandler<,>).MakeGenericType(store, entityType));
+                            //service.AddTransient(
+                            //    typeof(IRequestHandler<,>).MakeGenericType(
+                            //        new[] { typeof(UpdateDso<,>).MakeGenericType(store, entityType), entityType }),
+                            //    typeof(UpdateDsoHandler<,>).MakeGenericType(store, entityType));
 
-                            service.AddTransient(
-                                typeof(IRequestHandler<,>).MakeGenericType(
-                                    new[] { typeof(ChangeDso<,>).MakeGenericType(store, entityType), entityType }),
-                                typeof(ChangeDsoHandler<,>).MakeGenericType(store, entityType));
+                            //service.AddTransient(
+                            //    typeof(IRequestHandler<,>).MakeGenericType(
+                            //        new[] { typeof(ChangeDso<,>).MakeGenericType(store, entityType), entityType }),
+                            //    typeof(ChangeDsoHandler<,>).MakeGenericType(store, entityType));
 
-                            service.AddTransient(
-                                typeof(IRequestHandler<,>).MakeGenericType(
-                                    new[] { typeof(DeleteDso<,>).MakeGenericType(store, entityType), entityType }),
-                                typeof(DeleteDsoHandler<,>).MakeGenericType(store, entityType));
+                            //service.AddTransient(
+                            //    typeof(IRequestHandler<,>).MakeGenericType(
+                            //        new[] { typeof(DeleteDso<,>).MakeGenericType(store, entityType), entityType }),
+                            //    typeof(DeleteDsoHandler<,>).MakeGenericType(store, entityType));
 
-                            service.AddTransient(
-                                typeof(INotificationHandler<>).MakeGenericType(
-                                    typeof(ChangedDso<,>).MakeGenericType(store, entityType)),
-                                typeof(ChangedDsoHandler<,>).MakeGenericType(store, entityType));
+                            //service.AddTransient(
+                            //    typeof(INotificationHandler<>).MakeGenericType(
+                            //        typeof(ChangedDso<,>).MakeGenericType(store, entityType)),
+                            //    typeof(ChangedDsoHandler<,>).MakeGenericType(store, entityType));
 
-                            service.AddTransient(
-                                typeof(INotificationHandler<>).MakeGenericType(
-                                    typeof(CreatedDso<,>).MakeGenericType(store, entityType)),
-                                typeof(CreatedDsoHandler<,>).MakeGenericType(store, entityType));
+                            //service.AddTransient(
+                            //    typeof(INotificationHandler<>).MakeGenericType(
+                            //        typeof(CreatedDso<,>).MakeGenericType(store, entityType)),
+                            //    typeof(CreatedDsoHandler<,>).MakeGenericType(store, entityType));
 
-                            service.AddTransient(
-                                typeof(INotificationHandler<>).MakeGenericType(
-                                    typeof(DeletedDso<,>).MakeGenericType(store, entityType)),
-                                typeof(DeletedDsoHandler<,>).MakeGenericType(store, entityType));
+                            //service.AddTransient(
+                            //    typeof(INotificationHandler<>).MakeGenericType(
+                            //        typeof(DeletedDso<,>).MakeGenericType(store, entityType)),
+                            //    typeof(DeletedDsoHandler<,>).MakeGenericType(store, entityType));
 
-                            service.AddTransient(
-                                typeof(INotificationHandler<>).MakeGenericType(
-                                    typeof(UpsertedDso<,>).MakeGenericType(store, entityType)),
-                                typeof(UpsertedDsoHandler<,>).MakeGenericType(store, entityType));
+                            //service.AddTransient(
+                            //    typeof(INotificationHandler<>).MakeGenericType(
+                            //        typeof(UpsertedDso<,>).MakeGenericType(store, entityType)),
+                            //    typeof(UpsertedDsoHandler<,>).MakeGenericType(store, entityType));
 
-                            service.AddTransient(
-                                typeof(INotificationHandler<>).MakeGenericType(
-                                    typeof(UpdatedDso<,>).MakeGenericType(store, entityType)),
-                                typeof(UpdatedDsoHandler<,>).MakeGenericType(store, entityType));
+                            //service.AddTransient(
+                            //    typeof(INotificationHandler<>).MakeGenericType(
+                            //        typeof(UpdatedDso<,>).MakeGenericType(store, entityType)),
+                            //    typeof(UpdatedDsoHandler<,>).MakeGenericType(store, entityType));
                         }
                     }
                 }

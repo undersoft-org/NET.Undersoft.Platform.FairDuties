@@ -3,8 +3,6 @@ using System;
 
 namespace RadicalR
 {
-    #region Interfaces
-
     public interface IRepositoryContextFactory : IRepositoryContext, IAsyncDisposable, IDisposable
     {
         object CreateContext();
@@ -18,5 +16,4 @@ namespace RadicalR
         new TContext CreateContext();
     }
 
-    #endregion
 }

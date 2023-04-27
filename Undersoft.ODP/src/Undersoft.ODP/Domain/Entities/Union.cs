@@ -1,8 +1,6 @@
-using Microsoft.OData.Client;
 using RadicalR;
 using System.Runtime.Serialization;
 using System.Series;
-using System.Text.Json.Serialization;
 using Undersoft.AEP.Core;
 
 namespace Undersoft.ODP.Domain

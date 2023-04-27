@@ -38,7 +38,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Mappings
                     nameof(Profile.Properties),
                     ExpandSite.OnRight
                 )
-                .LinkSetToSet<Profile, Locale>(ExpandSite.OnRight)
+                .LinkSetToSet<Profile, Contact>(ExpandSite.OnRight)
                 .LinkSetToSet<Profile, Client>(ExpandSite.OnRight);
         }
     }

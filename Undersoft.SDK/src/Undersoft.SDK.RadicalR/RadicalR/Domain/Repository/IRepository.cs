@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.OData.Deltas;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -119,8 +118,6 @@ namespace RadicalR
         Task<bool> NotExist<TException>(Expression<Func<TEntity, bool>> predicate, string message) where TException : Exception;
         Task<bool> NotExist<TException>(object instance, string message) where TException : Exception;
 
-        Task<TEntity> Patch(Delta<TEntity> delta, params object[] key);
-        Task<TEntity> Patch(Delta<TEntity> delta, Func<TEntity, Expression<Func<TEntity, bool>>> predicate);
         IEnumerable<TEntity> Patch<TModel>(IEnumerable<TModel> entity, params Expression<Func<TEntity, object>>[] expanders) where TModel : class, IIdentifiable;
         IEnumerable<TEntity> Patch<TModel>(IEnumerable<TModel> entities, Func<TModel, Expression<Func<TEntity, bool>>> predicate, params Expression<Func<TEntity, object>>[] expanders) where TModel : class, IIdentifiable;
         Task<TEntity> Patch<TModel>(TModel delta) where TModel : class, IIdentifiable;

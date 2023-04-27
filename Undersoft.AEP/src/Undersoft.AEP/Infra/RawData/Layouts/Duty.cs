@@ -1,11 +1,12 @@
 ﻿using RadicalR;
 using System.Runtime.Serialization;
+using System.Uniques;
 using Undersoft.AEP.Core;
 
 namespace Undersoft.AEP.Raw
 {
     [DataContract]
-    public class Duty : Identifiable, IUsability
+    public class Duty : UniqueObject, IUsability
     {
         [DataMember(Order = 11)]
         public long VertexId { get; }

@@ -2698,7 +2698,9 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                         .HasColumnType("character varying(32)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("text");
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar");
 
                     b.Property<int>("Ordinal")
                         .ValueGeneratedOnAdd()
@@ -2730,7 +2732,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
 
                     b.HasIndex("Ordinal");
 
-                    b.ToTable("Options");
+                    b.ToTable("Options", "Local");
                 });
 
             modelBuilder.Entity("Undersoft.ODP.Domain.Profile", b =>
@@ -3383,7 +3385,7 @@ namespace Undersoft.ODP.Infra.Data.Base.Migrations.Entry
                     b.HasIndex("VectorId")
                         .IsUnique();
 
-                    b.ToTable("Schedules", "Local");
+                    b.ToTable("Vectors", "Local");
                 });
 
             modelBuilder.Entity("Undersoft.ODP.Domain.Vertex", b =>

@@ -6,8 +6,6 @@ namespace RadicalR
 {
     public class PagedSet<T> : IPagedSet<T>
     {
-        #region Constructors
-
         internal PagedSet() => Items = new T[0];
         internal PagedSet(IEnumerable<T> source, int pageIndex, int pageSize, int indexFrom)
         {
@@ -55,10 +53,6 @@ namespace RadicalR
             Items = source;
         }
 
-        #endregion
-
-        #region Properties
-
         public bool HasNextPage => PageIndex - IndexFrom + 1 < TotalPages;
 
         public bool HasPreviousPage => PageIndex - IndexFrom > 0;
@@ -75,24 +69,17 @@ namespace RadicalR
 
         public int TotalPages { get; set; }
 
-        #endregion
     }
 
     public static class PagedSet
     {
-        #region Methods
-
         public static IPagedSet<T> Empty<T>() => new PagedSet<T>();
 
         public static IPagedSet<TResult> From<TResult, TSource>(IPagedSet<TSource> source, Func<IEnumerable<TSource>, IEnumerable<TResult>> converter) => new PagedSet<TSource, TResult>(source, converter);
-
-        #endregion
     }
 
     internal class PagedSet<TSource, TResult> : IPagedSet<TResult>
     {
-        #region Constructors
-
         public PagedSet(IEnumerable<TSource> source, Func<IEnumerable<TSource>, IEnumerable<TResult>> converter, int pageIndex, int pageSize, int indexFrom)
         {
             if (indexFrom > pageIndex)
@@ -136,10 +123,6 @@ namespace RadicalR
             Items = new List<TResult>(converter(source.Items));
         }
 
-        #endregion
-
-        #region Properties
-
         public bool HasNextPage => PageIndex - IndexFrom + 1 < TotalPages;
 
         public bool HasPreviousPage => PageIndex - IndexFrom > 0;
@@ -156,6 +139,5 @@ namespace RadicalR
 
         public int TotalPages { get; }
 
-        #endregion
     }
 }

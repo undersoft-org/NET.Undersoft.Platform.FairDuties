@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OData.Edm;
 using System;
@@ -9,7 +8,7 @@ namespace RadicalR
 {
     public partial class AppSetup
     {
-        public static void AddRuntimeImplementations(IApplicationBuilder app)
+        public static void AddRuntimeImplementations()
         {
             IServiceManager sm = ServiceManager.GetManager();
             IServiceRegistry service = sm.Registry;
@@ -62,7 +61,7 @@ namespace RadicalR
                     }
                 }
             }
-            app.RebuildProviders();
+            //app.RebuildProviders();
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace RadicalR
 {
-    public interface IEntityLink<TLeft, TRight> : IIdentifiable, IGraphLink where TLeft : class, IIdentifiable where TRight : class, IIdentifiable
+    public interface IEntityLink<TLeft, TRight> : IIdentifiable where TLeft : class, IIdentifiable where TRight : class, IIdentifiable
     {
         [JsonIgnore]
         TLeft LeftEntity { get; set; }

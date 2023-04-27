@@ -1,6 +1,6 @@
-﻿using RadicalR;
-using System.Instant.Linking;
+﻿using System.Instant.Linking;
 using System.Series;
+using System.Uniques;
 
 namespace Undersoft.AEP.Core
 {
@@ -38,7 +38,7 @@ namespace Undersoft.AEP.Core
         }
     }
 
-    public class SourceProxy : Identifiable, ISource, ISourceProxy
+    public class SourceProxy : UniqueObject, ISource, ISourceProxy
     {
         private IDeck<IResource> _resources;
 

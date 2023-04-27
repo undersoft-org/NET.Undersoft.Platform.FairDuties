@@ -32,9 +32,6 @@ namespace RadicalR
                     if (request.Command.PublishMode == PublishMode.PropagateCommand)
                     {
                         TEntity result = null;
-                        if (request.Delta != null)
-                            result = await _repository.Patch(request.Delta, request.Predicate);
-                        else
                             result = await _repository.Patch(request.Command.Data, request.Predicate);
 
                         if (result == null)

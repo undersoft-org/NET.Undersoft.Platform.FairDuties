@@ -1,9 +1,3 @@
-//-----------------------------------------------------------------------
-// <copyright file="RepositoryEndpointOptions.cs" company="Undersoft">
-//     Author: Dariusz Hanc
-//     Copyright (c) Undersoft. All rights reserved.
-// </copyright>
-//-----------------------------------------------------------------------
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.DependencyInjection;

@@ -1,8 +1,8 @@
-﻿using RadicalR;
+﻿using System.Uniques;
 
 namespace Undersoft.AEP.Raw
 {
-    public class Liability : Identifiable
+    public class Liability : UniqueObject
     {
         public double Checksum { get; set; }
 

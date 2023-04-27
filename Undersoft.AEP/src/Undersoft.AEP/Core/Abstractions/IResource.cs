@@ -1,8 +1,8 @@
-﻿using RadicalR;
+﻿using System.Uniques;
 
 namespace Undersoft.AEP.Core
 {
-    public interface IResource : IIdentifiable
+    public interface IResource : IUniqueObject
     {
         IAsset Asset { get; set; }
 

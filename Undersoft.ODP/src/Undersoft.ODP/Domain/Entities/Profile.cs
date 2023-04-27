@@ -32,7 +32,7 @@ namespace Undersoft.ODP.Domain
 
         public virtual EntityOnSets<Property> Properties { get; set; }
 
-        public virtual EntityOnSets<Locale> Locales { get; set; }
+        public virtual EntityOnSets<Contact> Contacts { get; set; }
 
         public virtual EntityOnSets<Client> Clients { get; set; }
     }

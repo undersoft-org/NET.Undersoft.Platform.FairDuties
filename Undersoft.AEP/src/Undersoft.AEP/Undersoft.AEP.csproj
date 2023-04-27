@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Undersoft.SDK\src\Undersoft.SDK.RadicalR\Undersoft.SDK.RadicalR.csproj" />
+    <ProjectReference Include="..\..\..\Undersoft.SDK\src\Undersoft.SDK\Undersoft.SDK.csproj" />
   </ItemGroup>
 
 </Project>

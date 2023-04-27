@@ -1,8 +1,8 @@
-﻿using RadicalR;
+﻿using System.Uniques;
 
 namespace Undersoft.AEP.Raw
 {
-    public class Socket : Identifiable
+    public class Socket : UniqueObject
     {
         public Socket() { }
 

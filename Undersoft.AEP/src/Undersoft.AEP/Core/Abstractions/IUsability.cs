@@ -1,8 +1,9 @@
 ﻿using RadicalR;
+using System.Uniques;
 
 namespace Undersoft.AEP.Core
 {
-    public interface IUsability : IIdentifiable
+    public interface IUsability : IUniqueObject
     {
         long VertexId { get; }
 

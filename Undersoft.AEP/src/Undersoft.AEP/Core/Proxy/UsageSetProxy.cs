@@ -1,7 +1,7 @@
-﻿using RadicalR;
-using System.Instant;
+﻿using System.Instant;
 using System.Instant.Linking;
 using System.Series;
+using System.Uniques;
 
 namespace Undersoft.AEP.Core
 {
@@ -41,7 +41,7 @@ namespace Undersoft.AEP.Core
         }
     }
 
-    public class UsageSetProxy : Identifiable, IUsageSet, IUsageSetProxy
+    public class UsageSetProxy : UniqueObject, IUsageSet, IUsageSetProxy
     {
         private IDeck<ILiability> _claims;
         private IDeck<IResource> _resources;

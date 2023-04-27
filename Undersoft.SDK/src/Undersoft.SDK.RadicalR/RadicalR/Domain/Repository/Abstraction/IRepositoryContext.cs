@@ -2,15 +2,12 @@ using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace RadicalR
 {
-    #region Interfaces
-
     public interface IRepositoryContext : IResettableService, IUnique, IDisposable, IAsyncDisposable
     {
         DataSite Site { get; set; }
@@ -74,5 +71,4 @@ namespace RadicalR
         public virtual bool? AutoTransactionsEnabled { get; }
     }
 
-    #endregion
 }

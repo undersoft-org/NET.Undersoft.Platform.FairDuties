@@ -1,9 +1,9 @@
-﻿using RadicalR;
-using System.Instant.Linking;
+﻿using System.Instant.Linking;
+using System.Uniques;
 
 namespace Undersoft.AEP.Core
 {
-    public interface IEstimate : IIdentifiable
+    public interface IEstimate : IUniqueObject
     {
         double Rank { get; set; }
 

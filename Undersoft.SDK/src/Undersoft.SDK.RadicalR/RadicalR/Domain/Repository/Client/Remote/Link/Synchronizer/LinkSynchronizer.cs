@@ -1,11 +1,4 @@
-﻿//-----------------------------------------------------------------------
-// <copyright file="LinkSynchronizer.cs" company="Undersoft">
-//     Author: Dariusz Hanc
-//     Copyright (c) Undersoft. All rights reserved.
-// </copyright>
-//-----------------------------------------------------------------------
-
-using Microsoft.OData.Client;
+﻿using Microsoft.OData.Client;
 using System.Series;
 
 namespace RadicalR

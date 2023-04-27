@@ -58,7 +58,7 @@ namespace RadicalR
 
                             service.AddTransient(
                                 typeof(CommandValidatorBase<>).MakeGenericType(typeof(Command<>).MakeGenericType(dto)),
-                                typeof(CommandValidatorBase<>).MakeGenericType(dto));
+                                typeof(CommandValidator<>).MakeGenericType(dto));
                             foreach (Type store in stores)
                             {
                                 service.AddTransient(

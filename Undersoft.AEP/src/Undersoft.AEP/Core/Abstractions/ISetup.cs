@@ -1,9 +1,10 @@
 ﻿using RadicalR;
 using System.Series;
+using System.Uniques;
 
 namespace Undersoft.AEP.Core
 {
-    public interface ISetup : IIdentifiable
+    public interface ISetup : IUniqueObject
     {
         long VertexId { get; }
 

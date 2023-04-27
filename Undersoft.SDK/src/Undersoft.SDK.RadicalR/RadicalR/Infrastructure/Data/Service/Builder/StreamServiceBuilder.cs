@@ -1,5 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
+using System.Series;
 
 namespace RadicalR
 {
@@ -42,10 +43,10 @@ namespace RadicalR
                 var genTypes = controllerType.BaseType.GenericTypeArguments;
 
                 if (genTypes.Length > 4 && storeTypes.Contains(genTypes[1]) || storeTypes.Contains(genTypes[2]))
-                    ifaceType = typeof(IStreamController<,,>).MakeGenericType(new[] { genTypes[0], genTypes[3], genTypes[4] });
+                    ifaceType = typeof(IStreamDataService<>).MakeGenericType(new[] { genTypes[4] });
                 else if (genTypes.Length > 3)
                     if (genTypes[3].IsAssignableTo(typeof(IDto)) && storeTypes.Contains(genTypes[1]))
-                        ifaceType = typeof(IStreamController<,,>).MakeGenericType(new[] { genTypes[0], genTypes[2], genTypes[3] });
+                        ifaceType = typeof(IStreamDataService<>).MakeGenericType(new[] { genTypes[3] });
                     else
                         continue;
 

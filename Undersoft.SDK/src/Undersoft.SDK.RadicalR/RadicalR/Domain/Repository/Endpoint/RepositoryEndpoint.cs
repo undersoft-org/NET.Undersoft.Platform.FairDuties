@@ -1,9 +1,3 @@
-//-----------------------------------------------------------------------
-// <copyright file="RepositoryEndpoint.cs" company="Undersoft">
-//     Author: Dariusz Hanc
-//     Copyright (c) Undersoft. All rights reserved.
-// </copyright>
-//-----------------------------------------------------------------------
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Infrastructure;
