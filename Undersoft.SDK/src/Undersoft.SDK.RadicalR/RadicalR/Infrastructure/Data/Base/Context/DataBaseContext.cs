@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.OData.ModelBuilder;
+
 using System.Logs;
 
 namespace RadicalR
@@ -46,30 +46,6 @@ namespace RadicalR
         public object EntitySet(Type type)
         {
             return this.GetDbSet(type);
-        }
-
-        public TModel GetEdm<TModel>()
-        {
-            return BuildEdm<TModel>();
-        }
-
-        private TModel BuildEdm<TModel>()
-        {
-            var entityTypes = this.Model.GetEntityTypes();
-            var odataBuilder = new ODataConventionModelBuilder();
-
-            foreach (var entityType in entityTypes)
-            {
-                var type = entityType.ClrType;
-                var entitySetName = entityType.Name;
-                if (type.IsGenericType && type.IsAssignableTo(typeof(Identifier)))
-                    entitySetName = type.GetGenericArguments().FirstOrDefault().Name + "Identifier";
-                var etc = odataBuilder.AddEntityType(type);
-                etc.Name = entitySetName;
-                var ets = odataBuilder.AddEntitySet(entitySetName, etc);
-                ets.EntityType.HasKey(type.GetProperty("Id"));
-            }
-            return (TModel)odataBuilder.GetEdmModel();
         }
 
         public virtual Task<int> Save(bool asTransaction, CancellationToken token = default(CancellationToken))

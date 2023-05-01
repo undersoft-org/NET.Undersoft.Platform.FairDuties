@@ -1,4 +1,4 @@
-using RadicalR;
+using RadicalR.Server;
 
 namespace Undersoft.ODP.Admin
 {
@@ -15,7 +15,7 @@ namespace Undersoft.ODP.Admin
             builder.Services.AddHttpClient();
             builder.Services.AddBootstrapBlazor();
             builder.Services.AddServiceSetup()
-                     .ConfigureServices(false);
+                     .ConfigureServices();
 
 
             var app = builder.Build();

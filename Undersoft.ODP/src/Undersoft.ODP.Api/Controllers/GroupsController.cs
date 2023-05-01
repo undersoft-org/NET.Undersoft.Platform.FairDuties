@@ -1,30 +1,36 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using RadicalR;
+﻿using RadicalR;
+using RadicalR.Server;
 
-namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Entries
+namespace Undersoft.ODP.Api.Open.Data.Service.Controllers
 {
     using Domain;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.OData.Routing.Attributes;
 
-    //[Authorize(Roles = "Administrator, Leader, Manager")]
-    [Route("/teams")]
-    public class GroupsController : DtoCommandController<long, IEntryStore, Group, Api.Group>
+    [AllowAnonymous]
+    [ODataRouteComponent(StoreRoutes.Constant.OpenDataStore)]
+    public class GroupController : OpenDataController<long, IEntryStore, IReportStore, Group, Api.Group>
     {
-        public GroupsController(IRadicalr ultimatr) : base(ultimatr)
-        {
-        }
+        public GroupController(IRadicalr ultimatr) : base(ultimatr) { }
     }
 }
 
-namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Reports
+namespace Undersoft.ODP.Api.Crud.Data.Service.Controllers
 {
     using Domain;
 
-    //[Authorize]
-    [Route("/teams")]
-    public class TeamsController : DtoQueryController<long, IReportStore, Group, Api.Group>
+    public class GroupsController : CrudDataController<long, IEntryStore, IReportStore, Group, Api.Group>
     {
-        public TeamsController(IRadicalr ultimatr) : base(ultimatr)
-        {
-        }
+        public GroupsController(IRadicalr ultimatr) : base(ultimatr) { }
+    }
+}
+
+namespace Undersoft.ODP.Api.Stream.Data.Service.Controllers
+{
+    using Domain;
+
+    public class GroupStreamController : StreamDataController<long, IEntryStore, IReportStore, Group, Api.Group>, IStreamDataController<Api.Group>
+    {
+        public GroupStreamController() : base() { }
     }
 }

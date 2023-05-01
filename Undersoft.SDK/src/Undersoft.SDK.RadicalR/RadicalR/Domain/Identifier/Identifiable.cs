@@ -93,8 +93,8 @@ namespace RadicalR
         [FigureIdentity]
         [StringLength(32)]
         [ConcurrencyCheck]
-        [DataMember(Order = 255)]
-        [Column(Order = 255)]
+        [DataMember(Order = 199)]
+        [Column(Order = 199)]
         [FigureAs(UnmanagedType.ByValArray, SizeConst = 32)]
         public virtual string CodeNumber
         {

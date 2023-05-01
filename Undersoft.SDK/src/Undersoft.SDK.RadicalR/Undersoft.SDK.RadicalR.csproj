@@ -96,5 +96,9 @@
     <ProjectReference Include="..\Undersoft.SDK\Undersoft.SDK.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="RadicalR\Infrastructure\Data\Service\" />
+  </ItemGroup>
+
 
 </Project>

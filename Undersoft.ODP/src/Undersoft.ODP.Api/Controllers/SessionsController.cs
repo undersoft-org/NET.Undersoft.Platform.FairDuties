@@ -1,31 +1,37 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using RadicalR.Server;
 using RadicalR;
 
-namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Entries
+namespace Undersoft.ODP.Api.Open.Data.Service.Controllers
 {
     using Domain;
+    using Microsoft.AspNetCore.OData.Routing.Attributes;
 
-    [Authorize(Roles = "Administrator")]
-    [Route("/deviceSessions")]
-    public class SessionsController : DtoCommandController<long, IEntryStore, Session, Api.Session>
+    [AllowAnonymous]
+    [ODataRouteComponent(StoreRoutes.Constant.OpenDataStore)]
+    public class SessionController : OpenDataController<long, IEntryStore, IReportStore, Session, Api.Session>
     {
-        public SessionsController(IRadicalr uservice) : base(uservice)
-        {
-        }
+        public SessionController(IRadicalr ultimatr) : base(ultimatr) { }
     }
 }
 
-namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Reports
+namespace Undersoft.ODP.Api.Crud.Data.Service.Controllers
 {
     using Domain;
 
-    [Authorize(Roles = "Administrator")]
-    [Route("/deviceSessions")]
-    public class DeviceSessionsController : DtoQueryController<long, IReportStore, Session, Api.Session>
+    public class SessionsController : CrudDataController<long, IEntryStore, IReportStore, Session, Api.Session>
     {
-        public DeviceSessionsController(IRadicalr uservice) : base(uservice)
-        {
-        }
+        public SessionsController(IRadicalr ultimatr) : base(ultimatr) { }
+    }
+}
+
+namespace Undersoft.ODP.Api.Stream.Data.Service.Controllers
+{
+    using Domain;
+
+    public class SessionStreamController : StreamDataController<long, IEntryStore, IReportStore, Session, Api.Session>, IStreamDataController<Api.Session>
+    {
+        public SessionStreamController() : base() { }
     }
 }

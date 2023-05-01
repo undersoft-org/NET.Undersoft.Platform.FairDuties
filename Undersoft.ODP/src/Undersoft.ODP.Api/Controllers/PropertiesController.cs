@@ -1,31 +1,37 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using RadicalR.Server;
 using RadicalR;
 
-namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Entries
+namespace Undersoft.ODP.Api.Open.Data.Service.Controllers
 {
     using Domain;
+    using Microsoft.AspNetCore.OData.Routing.Attributes;
 
-    [Authorize(Roles = "Administrator, Leader, Manager")]
-    [Route("/attributes")]
-    public class PropertiesController : DtoCommandController<long, IEntryStore, Property, Api.Property>
+    [AllowAnonymous]
+    [ODataRouteComponent(StoreRoutes.Constant.OpenDataStore)]
+    public class PropertyController : OpenDataController<long, IEntryStore, IReportStore, Property, Api.Property>
     {
-        public PropertiesController(IRadicalr ultimatr) : base(ultimatr)
-        {
-        }
+        public PropertyController(IRadicalr ultimatr) : base(ultimatr) { }
     }
 }
 
-namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Reports
+namespace Undersoft.ODP.Api.Crud.Data.Service.Controllers
 {
     using Domain;
 
-    [Authorize]
-    [Route("/attributes")]
-    public class AttributesController : DtoQueryController<long, IReportStore, Property, Api.Property>
+    public class PropertiesController : CrudDataController<long, IEntryStore, IReportStore, Property, Api.Property>
     {
-        public AttributesController(IRadicalr ultimatr) : base(ultimatr)
-        {
-        }
+        public PropertiesController(IRadicalr ultimatr) : base(ultimatr) { }
+    }
+}
+
+namespace Undersoft.ODP.Api.Stream.Data.Service.Controllers
+{
+    using Domain;
+
+    public class PropertyStreamController : StreamDataController<long, IEntryStore, IReportStore, Property, Api.Property>, IStreamDataController<Api.Property>
+    {
+        public PropertyStreamController() : base() { }
     }
 }

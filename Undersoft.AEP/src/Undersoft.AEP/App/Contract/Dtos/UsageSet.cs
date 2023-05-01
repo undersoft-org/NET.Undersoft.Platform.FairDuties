@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System.Instant.Linking;
+using System.Runtime.Serialization;
 using System.Series;
 using Undersoft.AEP.Core;
 

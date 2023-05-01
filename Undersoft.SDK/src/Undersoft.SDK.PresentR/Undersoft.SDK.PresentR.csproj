@@ -1,39 +1,46 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>disable</Nullable>
+    <Nullable>enable</Nullable>
     <GenerateDocumentationFile>False</GenerateDocumentationFile>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Company>Undersoft</Company>
     <Authors>Dariusz Hanc</Authors>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <RepositoryUrl>https://github.com/undersoft-org/UltimatR</RepositoryUrl>
     <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
-    <IncludeSymbols>true</IncludeSymbols>
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <Version>2.2.0</Version>
     <NeutralLanguage>en-US</NeutralLanguage>
   </PropertyGroup>
-
+  
   <ItemGroup>
-    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="BuildBundlerMinifierPlus2022" Version="5.2.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="6.0" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="6.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="6.0" />
+    <PackageReference Include="Microsoft.Extensions.Localization" Version="6.0" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="6.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Content Include="Properties\nlog.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-  </ItemGroup>
-
+    <ItemGroup>
+    <Using Include="PresentR.Components" />
+    <Using Include="Microsoft.AspNetCore.Components" />
+    <Using Include="Microsoft.Extensions.Options" />
+    <Using Include="Microsoft.JSInterop" />
+    <Using Include="System.ComponentModel.DataAnnotations" />
+    <Using Include="System.Diagnostics.CodeAnalysis" />      
+    </ItemGroup>
+  
+    
   <ItemGroup>
     <ProjectReference Include="..\Undersoft.SDK.RadicalR\Undersoft.SDK.RadicalR.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="PresentR\Locales\de.json" />
+  </ItemGroup>
 
 </Project>

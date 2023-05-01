@@ -26,18 +26,12 @@
 
     public class Figures : IInstant
     {
-        #region Fields
-
         private Type compiledType;
         private Figure figure;
         private Sleeve sleeve;
         private ulong key;
         private bool safeThread;
         private FiguresMode mode;
-
-        #endregion
-
-        #region Constructors
 
         public Figures(
             Sleeve sleeveGenerator,
@@ -140,10 +134,6 @@
         ) : this(new Figure(figureModelType, figureTypeName, modeType), figuresTypeName, safeThread)
         { }
 
-        #endregion
-
-        #region Properties
-
         public Type BaseType { get; set; }
 
         public string Name { get; set; }
@@ -159,10 +149,6 @@
         }
 
         public Type Type { get; set; }
-
-        #endregion
-
-        #region Methods
 
         public IFigures Combine()
         {
@@ -238,6 +224,5 @@
             return newsleeves;
         }
 
-        #endregion
     }
 }

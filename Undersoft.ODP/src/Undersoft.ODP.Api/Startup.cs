@@ -1,5 +1,6 @@
-﻿using RadicalR;
-using Undersoft.ODP.Infra.Data.Base.Contexts;
+﻿using Undersoft.ODP.Infra.Data.Base.Contexts;
+using RadicalR.Server;
+using RadicalR;
 
 namespace Undersoft.ODP.Api
 {
@@ -15,8 +16,8 @@ namespace Undersoft.ODP.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services
-                .AddServiceSetup()
-                .ConfigureServices()
+                .AddServerSetup()
+                .ConfigureServices(true)
                 .AddDataServices<ICqrsStore>(
                     DataServiceTypes.All,
                     builder =>

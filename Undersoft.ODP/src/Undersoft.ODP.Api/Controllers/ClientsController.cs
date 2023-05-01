@@ -1,31 +1,37 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using RadicalR.Server;
 using RadicalR;
 
-namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Entries
+namespace Undersoft.ODP.Api.Open.Data.Service.Controllers
 {
     using Domain;
+    using Microsoft.AspNetCore.OData.Routing.Attributes;
 
-    [Authorize(Roles = "Administrator")]
-    [Route("/devices")]
-    public class ClientsController : DtoCommandController<long, IEntryStore, Client, Api.Client>
+    [AllowAnonymous]
+    [ODataRouteComponent(StoreRoutes.Constant.OpenDataStore)]
+    public class ClientController : OpenDataController<long, IEntryStore, IReportStore, Client, Api.Client>
     {
-        public ClientsController(IRadicalr uservice) : base(uservice)
-        {
-        }
+        public ClientController(IRadicalr ultimatr) : base(ultimatr) { }
     }
 }
 
-namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Reports
+namespace Undersoft.ODP.Api.Crud.Data.Service.Controllers
 {
     using Domain;
 
-    [Authorize(Roles = "Administrator")]
-    [Route("/devices")]
-    public class DevicesController : DtoQueryController<long, IReportStore, Client, Api.Client>
+    public class ClientsController : CrudDataController<long, IEntryStore, IReportStore, Client, Api.Client>
     {
-        public DevicesController(IRadicalr uservice) : base(uservice)
-        {
-        }
+        public ClientsController(IRadicalr ultimatr) : base(ultimatr) { }
+    }
+}
+
+namespace Undersoft.ODP.Api.Stream.Data.Service.Controllers
+{
+    using Domain;
+
+    public class ClientStreamController : StreamDataController<long, IEntryStore, IReportStore, Client, Api.Client>, IStreamDataController<Api.Client>
+    {
+        public ClientStreamController() : base() { }
     }
 }

@@ -1,31 +1,37 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using RadicalR.Server;
 using RadicalR;
 
-namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Entries
+namespace Undersoft.ODP.Api.Open.Data.Service.Controllers
 {
     using Domain;
+    using Microsoft.AspNetCore.OData.Routing.Attributes;
 
-    [Authorize(Roles = "Administrator, Manager")]
-    [Route("/userRoles")]
-    public class RolesController : DtoCommandController<long, IEntryStore, Role, Api.Role>
+    [AllowAnonymous]
+    [ODataRouteComponent(StoreRoutes.Constant.OpenDataStore)]
+    public class RoleController : OpenDataController<long, IEntryStore, IReportStore, Role, Api.Role>
     {
-        public RolesController(IRadicalr ultimatr) : base(ultimatr)
-        {
-        }
+        public RoleController(IRadicalr ultimatr) : base(ultimatr) { }
     }
 }
 
-namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Reports
+namespace Undersoft.ODP.Api.Crud.Data.Service.Controllers
 {
     using Domain;
 
-    [Authorize]
-    [Route("/userRoles")]
-    public class UserRolesController : DtoQueryController<long, IReportStore, Role, Api.Role>
+    public class RolesController : CrudDataController<long, IEntryStore, IReportStore, Role, Api.Role>
     {
-        public UserRolesController(IRadicalr ultimatr) : base(ultimatr)
-        {
-        }
+        public RolesController(IRadicalr ultimatr) : base(ultimatr) { }
+    }
+}
+
+namespace Undersoft.ODP.Api.Stream.Data.Service.Controllers
+{
+    using Domain;
+
+    public class RoleStreamController : StreamDataController<long, IEntryStore, IReportStore, Role, Api.Role>, IStreamDataController<Api.Role>
+    {
+        public RoleStreamController() : base() { }
     }
 }

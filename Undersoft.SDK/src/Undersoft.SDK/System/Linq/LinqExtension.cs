@@ -29,6 +29,12 @@ namespace System.Linq
             );
         }
 
+        public static IQueryable<T> ToQueryable<T>(this T entity)
+        {
+            return ((entity == null) ? new T[0] : new T[1] { entity }).AsQueryable();
+        }
+
+
         public static IEnumerable<T> Concentrate<T>(params IEnumerable<T>[] List)
         {
             foreach (IEnumerable<T> element in List)

@@ -1,5 +1,5 @@
 using ProtoBuf.Grpc.Server;
-using RadicalR;
+using RadicalR.Server;
 
 namespace Undersoft.AEP.Api
 {
@@ -25,7 +25,7 @@ namespace Undersoft.AEP.Api
             app.UseEndpoints(endpoints =>
             {
                 //endpoints.MapGrpcService<ICounter>();
-                endpoints.MapCodeFirstGrpcReflectionService();
+                //endpoints.MapCodeFirstGrpcReflectionService();
             });
         }
     }

@@ -545,20 +545,20 @@ namespace RadicalR
             return MapTo<TDto>(base.Find(predicate, selector, expanders));
         }
 
-        public virtual Task<UniqueOne<TDto>> FindOneAsync<TDto>(
+        public virtual IQueryable<TDto> FindOneAsync<TDto>(
         Expression<Func<TEntity, bool>> predicate,
         params Expression<Func<TEntity, object>>[] expanders
         ) where TDto : class, IUnique
         {
-            return UniqueOneMapAsyncTo<TDto>(base[predicate, expanders]);
+            return QueryMapTo<TDto>(base[predicate, expanders]);
         }
 
-        public virtual Task<UniqueOne<TDto>> FindOneAsync<TDto>(
+        public virtual IQueryable<TDto> FindOneAsync<TDto>(
             object[] keys,
             params Expression<Func<TEntity, object>>[] expanders
         ) where TDto : class, IUnique
         {
-            return UniqueOneMapAsyncTo<TDto>(this[keys, expanders].ToQueryable());
+            return QueryMapTo<TDto>(new[] { this[keys, expanders] }.AsQueryable());
         }
 
         public virtual Task<IList<TDto>> Get<TDto, TResult>(

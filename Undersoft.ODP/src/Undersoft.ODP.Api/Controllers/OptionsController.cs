@@ -1,31 +1,37 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using RadicalR.Server;
 using RadicalR;
 
-namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Entries
+namespace Undersoft.ODP.Api.Open.Data.Service.Controllers
 {
     using Domain;
+    using Microsoft.AspNetCore.OData.Routing.Attributes;
 
-    [Authorize(Roles = "Administrator, Leader, Manager")]
-    [Route("/settings")]
-    public class OptionsController : DtoCommandController<long, IEntryStore, Option, Api.Option>
+    [AllowAnonymous]
+    [ODataRouteComponent(StoreRoutes.Constant.OpenDataStore)]
+    public class OptionController : OpenDataController<long, IEntryStore, IReportStore, Option, Api.Option>
     {
-        public OptionsController(IRadicalr ultimatr) : base(ultimatr)
-        {
-        }
+        public OptionController(IRadicalr ultimatr) : base(ultimatr) { }
     }
 }
 
-namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Reports
+namespace Undersoft.ODP.Api.Crud.Data.Service.Controllers
 {
     using Domain;
 
-    [Authorize]
-    [Route("/settings")]
-    public class SettingsController : DtoQueryController<long, IReportStore, Option, Api.Option>
+    public class OptionsController : CrudDataController<long, IEntryStore, IReportStore, Option, Api.Option>
     {
-        public SettingsController(IRadicalr ultimatr) : base(ultimatr)
-        {
-        }
+        public OptionsController(IRadicalr ultimatr) : base(ultimatr) { }
+    }
+}
+
+namespace Undersoft.ODP.Api.Stream.Data.Service.Controllers
+{
+    using Domain;
+
+    public class OptionStreamController : StreamDataController<long, IEntryStore, IReportStore, Option, Api.Option>, IStreamDataController<Api.Option>
+    {
+        public OptionStreamController() : base() { }
     }
 }

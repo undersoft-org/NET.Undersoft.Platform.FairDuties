@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Undersoft.SDK\src\Undersoft.SDK.RadicalR.Server\Undersoft.SDK.RadicalR.Server.csproj" />
     <ProjectReference Include="..\Undersoft.ODP\Undersoft.ODP.csproj" />
   </ItemGroup>
 

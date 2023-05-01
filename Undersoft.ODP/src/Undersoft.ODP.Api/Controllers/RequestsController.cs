@@ -1,31 +1,36 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+using RadicalR.Server;
 using RadicalR;
 
-namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Entries
+namespace Undersoft.ODP.Api.Open.Data.Service.Controllers
 {
     using Domain;
+    using Microsoft.AspNetCore.OData.Routing.Attributes;
 
-    [Authorize]
-    [Route("/shiftRequests")]
-    public class RequestsController : DtoCommandController<long, IEntryStore, Request, Api.Request>
+    [AllowAnonymous]
+    [ODataRouteComponent(StoreRoutes.Constant.OpenDataStore)]
+    public class RequestController : OpenDataController<long, IEntryStore, IReportStore, Request, Api.Request>
     {
-        public RequestsController(IRadicalr ultimatr) : base(ultimatr)
-        {
-        }
+        public RequestController(IRadicalr ultimatr) : base(ultimatr) { }
     }
 }
 
-namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Reports
+namespace Undersoft.ODP.Api.Crud.Data.Service.Controllers
 {
     using Domain;
 
-    [Authorize]
-    [Route("/shiftRequests")]
-    public class ShiftRequestsController : DtoQueryController<long, IReportStore, Request, Api.Request>
+    public class RequestsController : CrudDataController<long, IEntryStore, IReportStore, Request, Api.Request>
     {
-        public ShiftRequestsController(IRadicalr ultimatr) : base(ultimatr)
-        {
-        }
+        public RequestsController(IRadicalr ultimatr) : base(ultimatr) { }
+    }
+}
+
+namespace Undersoft.ODP.Api.Stream.Data.Service.Controllers
+{
+    using Domain;
+
+    public class RequestStreamController : StreamDataController<long, IEntryStore, IReportStore, Request, Api.Request>, IStreamDataController<Api.Request>
+    {
+        public RequestStreamController() : base() { }
     }
 }

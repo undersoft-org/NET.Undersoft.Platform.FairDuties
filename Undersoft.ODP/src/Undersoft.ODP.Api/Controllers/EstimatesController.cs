@@ -1,31 +1,37 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using RadicalR.Server;
 using RadicalR;
 
-namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Entries
+namespace Undersoft.ODP.Api.Open.Data.Service.Controllers
 {
     using Domain;
+    using Microsoft.AspNetCore.OData.Routing.Attributes;
 
-    [Authorize(Roles = "Administrator, Leader, Manager")]
-    [Route("/shiftRates")]
-    public class EstimatesController : DtoCommandController<long, IEntryStore, Estimate, Api.Estimate>
+    [AllowAnonymous]
+    [ODataRouteComponent(StoreRoutes.Constant.OpenDataStore)]
+    public class EstimateController : OpenDataController<long, IEntryStore, IReportStore, Estimate, Api.Estimate>
     {
-        public EstimatesController(IRadicalr ultimatr) : base(ultimatr)
-        {
-        }
+        public EstimateController(IRadicalr ultimatr) : base(ultimatr) { }
     }
 }
 
-namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Reports
+namespace Undersoft.ODP.Api.Crud.Data.Service.Controllers
 {
     using Domain;
 
-    [Authorize]
-    [Route("/shiftRates")]
-    public class ShiftRatesController : DtoQueryController<long, IReportStore, Estimate, Api.Estimate>
+    public class EstimatesController : CrudDataController<long, IEntryStore, IReportStore, Estimate, Api.Estimate>
     {
-        public ShiftRatesController(IRadicalr ultimatr) : base(ultimatr)
-        {
-        }
+        public EstimatesController(IRadicalr ultimatr) : base(ultimatr) { }
+    }
+}
+
+namespace Undersoft.ODP.Api.Stream.Data.Service.Controllers
+{
+    using Domain;
+
+    public class EstimateStreamController : StreamDataController<long, IEntryStore, IReportStore, Estimate, Api.Estimate>, IStreamDataController<Api.Estimate>
+    {
+        public EstimateStreamController() : base() { }
     }
 }

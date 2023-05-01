@@ -149,25 +149,25 @@ namespace RadicalR
             return model.ForEachAsync(m => Mapper.Map<TDto, TEntity>(m));
         }
 
-        public virtual Task<UniqueOne<TDto>> UniqueOneMapAsyncTo<TDto>(IQueryable<TEntity> entity) where TDto : class, IUnique
-        {
-            return Task.Run(() => QueryMapTo<TDto>(entity).AsUniqueOne());
-        }
+        //public virtual Task<IUniqueOne<TDto>> UniqueOneMapAsyncTo<TDto>(IQueryable<TEntity> entity) where TDto : class, IUnique
+        //{
+        //    return Task.Run(() => QueryMapTo<TDto>(entity).AsQueryable());
+        //}
 
-        public virtual Task<UniqueOne<TEntity>> UniqueOneMapAsyncFrom<TDto>(IQueryable<TDto> model) where TDto : IUnique
-        {
-            return Task.Run(() => QueryMapFrom<TDto>(model).AsUniqueOne());
-        }
+        //public virtual Task<IUniqueOne<TEntity>> UniqueOneMapAsyncFrom<TDto>(IQueryable<TDto> model) where TDto : IUnique
+        //{
+        //    return Task.Run(() => QueryMapFrom<TDto>(model).AsUniqueOne());
+        //}
 
-        public virtual UniqueOne<TDto> UniqueOneMapTo<TDto>(IQueryable<TEntity> entity) where TDto : class, IUnique
-        {
-            return QueryMapTo<TDto>(entity).AsUniqueOne();
-        }
+        //public virtual IUniqueOne<TDto> UniqueOneMapTo<TDto>(IQueryable<TEntity> entity) where TDto : class, IUnique
+        //{
+        //    return QueryMapTo<TDto>(entity).AsUniqueOne();
+        //}
 
-        public virtual UniqueOne<TEntity> UniqueOneMapAFrom<TDto>(IQueryable<TDto> model) where TDto : IUnique
-        {
-            return QueryMapFrom<TDto>(model).AsUniqueOne();
-        }
+        //public virtual IUniqueOne<TEntity> UniqueOneMapAFrom<TDto>(IQueryable<TDto> model) where TDto : IUnique
+        //{
+        //    return QueryMapFrom<TDto>(model).AsUniqueOne();
+        //}
 
         #endregion
     }

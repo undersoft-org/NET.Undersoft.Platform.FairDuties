@@ -1,4 +1,4 @@
-﻿using BootstrapBlazor.Components;
+﻿using PresentR.Components;
 
 namespace PresentR
 {

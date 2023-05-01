@@ -3,7 +3,7 @@ using System.Uniques;
 
 namespace RadicalR
 {
-    public class FindQuery<TStore, TEntity, TDto> : Query<TStore, TEntity, UniqueOne<TDto>>
+    public class FindQuery<TStore, TEntity, TDto> : Query<TStore, TEntity, IQueryable<TDto>>
         where TEntity : Entity where TStore : IDataStore where TDto : class, IUnique
     {
         public FindQuery(params object[] keys) : base(keys) { }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.OData.Routing.Attributes;
+using RadicalR.Server;
 using RadicalR;
 
 namespace Undersoft.ODP.Api.Open.Data.Service.Controllers
@@ -29,7 +30,7 @@ namespace Undersoft.ODP.Api.Stream.Data.Service.Controllers
 {
     using Domain;
 
-    public class MemberStreamController : StreamDataController<long, IEntryStore, IReportStore, Member, BasicMember>, IStreamDataController<BasicMember>
+    public class MemberStreamController : StreamDataController<long, IEntryStore, IReportStore, Member, Api.Member>, IStreamDataController<Api.Member>
     {
         public MemberStreamController() : base() { }
     }

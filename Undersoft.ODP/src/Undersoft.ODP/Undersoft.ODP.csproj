@@ -37,7 +37,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Undersoft.AEP\src\Undersoft.AEP\Undersoft.AEP.csproj" />
-    <ProjectReference Include="..\..\..\Undersoft.SDK\src\Undersoft.SDK.RadicalR.Server\Undersoft.SDK.RadicalR.Server.csproj" />
+    <ProjectReference Include="..\..\..\Undersoft.SDK\src\Undersoft.SDK.RadicalR\Undersoft.SDK.RadicalR.csproj" />
   </ItemGroup>
 
 </Project>

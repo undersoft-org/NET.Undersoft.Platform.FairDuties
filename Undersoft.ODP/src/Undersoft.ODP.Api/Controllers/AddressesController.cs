@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.OData.Routing.Attributes;
+using RadicalR.Server;
 using RadicalR;
 
 namespace Undersoft.ODP.Api.Open.Data.Service.Controllers
@@ -18,7 +19,7 @@ namespace Undersoft.ODP.Api.Crud.Data.Service.Controllers
 {
     using Domain;
 
-    public class AddressesController : CrudDataController<long, IEntryStore, IReportStore, Member, Api.Address>
+    public class AddressesController : CrudDataController<long, IEntryStore, IReportStore, Address, Api.Address>
     {
         public AddressesController(IRadicalr ultimatr) : base(ultimatr) { }
     }

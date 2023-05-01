@@ -1,31 +1,37 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using RadicalR.Server;
 using RadicalR;
 
-namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Entries
+namespace Undersoft.ODP.Api.Open.Data.Service.Controllers
 {
     using Domain;
+    using Microsoft.AspNetCore.OData.Routing.Attributes;
 
-    [Authorize(Roles = "Administrator, Manager")]
-    [Route("/organizations")]
-    public class UnionsController : DtoCommandController<long, IEntryStore, Union, Api.Union>
+    [AllowAnonymous]
+    [ODataRouteComponent(StoreRoutes.Constant.OpenDataStore)]
+    public class UnionController : OpenDataController<long, IEntryStore, IReportStore, Union, Api.Union>
     {
-        public UnionsController(IRadicalr ultimatr) : base(ultimatr)
-        {
-        }
+        public UnionController(IRadicalr ultimatr) : base(ultimatr) { }
     }
 }
 
-namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Reports
+namespace Undersoft.ODP.Api.Crud.Data.Service.Controllers
 {
     using Domain;
 
-    [Authorize]
-    [Route("/organizations")]
-    public class OrganizationsController : DtoQueryController<long, IReportStore, Union, Api.Union>
+    public class UnionsController : CrudDataController<long, IEntryStore, IReportStore, Union, Api.Union>
     {
-        public OrganizationsController(IRadicalr ultimatr) : base(ultimatr)
-        {
-        }
+        public UnionsController(IRadicalr ultimatr) : base(ultimatr) { }
+    }
+}
+
+namespace Undersoft.ODP.Api.Stream.Data.Service.Controllers
+{
+    using Domain;
+
+    public class UnionStreamController : StreamDataController<long, IEntryStore, IReportStore, Union, Api.Union>, IStreamDataController<Api.Union>
+    {
+        public UnionStreamController() : base() { }
     }
 }

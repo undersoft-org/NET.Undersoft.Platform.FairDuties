@@ -1,31 +1,37 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using RadicalR.Server;
 using RadicalR;
 
-namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Entries
+namespace Undersoft.ODP.Api.Open.Data.Service.Controllers
 {
     using Domain;
+    using Microsoft.AspNetCore.OData.Routing.Attributes;
 
-    [Authorize(Roles = "Administrator, Leader, Manager")]
-    [Route("/configurations")]
-    public class SetupsController : DtoCommandController<long, IEntryStore, Setup, Api.Setup>
+    [AllowAnonymous]
+    [ODataRouteComponent(StoreRoutes.Constant.OpenDataStore)]
+    public class SetupController : OpenDataController<long, IEntryStore, IReportStore, Setup, Api.Setup>
     {
-        public SetupsController(IRadicalr ultimatr) : base(ultimatr)
-        {
-        }
+        public SetupController(IRadicalr ultimatr) : base(ultimatr) { }
     }
 }
 
-namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Reports
+namespace Undersoft.ODP.Api.Crud.Data.Service.Controllers
 {
     using Domain;
 
-    [Authorize]
-    [Route("/configurations")]
-    public class ConfigurationsController : DtoQueryController<long, IReportStore, Setup, Api.Setup>
+    public class SetupsController : CrudDataController<long, IEntryStore, IReportStore, Setup, Api.Setup>
     {
-        public ConfigurationsController(IRadicalr ultimatr) : base(ultimatr)
-        {
-        }
+        public SetupsController(IRadicalr ultimatr) : base(ultimatr) { }
+    }
+}
+
+namespace Undersoft.ODP.Api.Stream.Data.Service.Controllers
+{
+    using Domain;
+
+    public class SetupStreamController : StreamDataController<long, IEntryStore, IReportStore, Setup, Api.Setup>, IStreamDataController<Api.Setup>
+    {
+        public SetupStreamController() : base() { }
     }
 }

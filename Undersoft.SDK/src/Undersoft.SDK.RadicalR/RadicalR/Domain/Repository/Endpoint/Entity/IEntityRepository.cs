@@ -89,8 +89,8 @@ namespace RadicalR
         Task<TModel> Find<TModel>(Expression<Func<TEntity, bool>> predicate, bool reverse, params Expression<Func<TEntity, object>>[] expanders);
         Task<TModel> Find<TModel>(object[] keys, params Expression<Func<TEntity, object>>[] expanders);
         Task<TModel> Find<TModel>(params object[] keys);
-        Task<UniqueOne<TModel>> FindOneAsync<TModel>(object[] keys, params Expression<Func<TEntity, object>>[] expanders) where TModel : class, IUnique;
-        Task<UniqueOne<TModel>> FindOneAsync<TModel>(Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[] expanders) where TModel : class, IUnique;
+        IQueryable<TModel> FindOneAsync<TModel>(object[] keys, params Expression<Func<TEntity, object>>[] expanders) where TModel : class, IUnique;
+        IQueryable<TModel> FindOneAsync<TModel>(Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[] expanders) where TModel : class, IUnique;
 
         new Task<IPagedSet<TEntity>> Get(params Expression<Func<TEntity, object>>[] expanders);
         Task<IList<TModel>> Get<TModel, TResult>(Expression<Func<TEntity, TResult>> selector) where TResult : class;

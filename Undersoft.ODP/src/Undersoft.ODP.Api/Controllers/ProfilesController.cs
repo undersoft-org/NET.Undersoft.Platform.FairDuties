@@ -1,31 +1,37 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using RadicalR.Server;
 using RadicalR;
 
-namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Entries
+namespace Undersoft.ODP.Api.Open.Data.Service.Controllers
 {
     using Domain;
+    using Microsoft.AspNetCore.OData.Routing.Attributes;
 
-    [Authorize]
-    [Route("/personals")]
-    public class ProfilesController : DtoCommandController<long, IEntryStore, Profile, Api.Profile>
+    [AllowAnonymous]
+    [ODataRouteComponent(StoreRoutes.Constant.OpenDataStore)]
+    public class ProfileController : OpenDataController<long, IEntryStore, IReportStore, Profile, Api.Profile>
     {
-        public ProfilesController(IRadicalr ultimatr) : base(ultimatr)
-        {
-        }
+        public ProfileController(IRadicalr ultimatr) : base(ultimatr) { }
     }
 }
 
-namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Reports
+namespace Undersoft.ODP.Api.Crud.Data.Service.Controllers
 {
     using Domain;
 
-    [Authorize]
-    [Route("/personals")]
-    public class PersonalsController : DtoQueryController<long, IReportStore, Profile, Api.Profile>
+    public class ProfilesController : CrudDataController<long, IEntryStore, IReportStore, Profile, Api.Profile>
     {
-        public PersonalsController(IRadicalr ultimatr) : base(ultimatr)
-        {
-        }
+        public ProfilesController(IRadicalr ultimatr) : base(ultimatr) { }
+    }
+}
+
+namespace Undersoft.ODP.Api.Stream.Data.Service.Controllers
+{
+    using Domain;
+
+    public class ProfileStreamController : StreamDataController<long, IEntryStore, IReportStore, Profile, Api.Profile>, IStreamDataController<Api.Profile>
+    {
+        public ProfileStreamController() : base() { }
     }
 }

@@ -1,31 +1,37 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using RadicalR.Server;
 using RadicalR;
 
-namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Entries
+namespace Undersoft.ODP.Api.Open.Data.Service.Controllers
 {
     using Domain;
+    using Microsoft.AspNetCore.OData.Routing.Attributes;
 
-    [Authorize(Roles = "Administrator, Manager")]
-    [Route("/countryStates")]
-    public class CountryStatesController : DtoCommandController<long, IEntryStore, CountryState, Api.CountryState>
+    [AllowAnonymous]
+    [ODataRouteComponent(StoreRoutes.Constant.OpenDataStore)]
+    public class CountryStateController : OpenDataController<long, IEntryStore, IReportStore, CountryState, Api.CountryState>
     {
-        public CountryStatesController(IRadicalr ultimatr) : base(ultimatr)
-        {
-        }
+        public CountryStateController(IRadicalr ultimatr) : base(ultimatr) { }
     }
 }
 
-namespace Undersoft.ODP.Api.Data.Transfer.Operation.Controllers.Reports
+namespace Undersoft.ODP.Api.Crud.Data.Service.Controllers
 {
     using Domain;
 
-    [Authorize]
-    [Route("/countryStates")]
-    public class CountryStatesController : DtoQueryController<long, IReportStore, CountryState, Api.CountryState>
+    public class CountryStatesController : CrudDataController<long, IEntryStore, IReportStore, CountryState, Api.CountryState>
     {
-        public CountryStatesController(IRadicalr ultimatr) : base(ultimatr)
-        {
-        }
+        public CountryStatesController(IRadicalr ultimatr) : base(ultimatr) { }
+    }
+}
+
+namespace Undersoft.ODP.Api.Stream.Data.Service.Controllers
+{
+    using Domain;
+
+    public class CountryStateStreamController : StreamDataController<long, IEntryStore, IReportStore, CountryState, Api.CountryState>, IStreamDataController<Api.CountryState>
+    {
+        public CountryStateStreamController() : base() { }
     }
 }
