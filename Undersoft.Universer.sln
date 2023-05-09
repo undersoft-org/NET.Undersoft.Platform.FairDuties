@@ -115,9 +115,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Undersoft.UIP.Web.App.Clien
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Undersoft.UIP.Web.App.Server", "Undersoft.UIP\Undersoft.UIP.Web.App.Server\Undersoft.UIP.Web.App.Server.csproj", "{E147F4F9-C424-4FF5-B5C3-BEE26E3FED92}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Undersoft.AEP.Analitic", "Undersoft.AEP\src\Undersoft.AEP.HART\Undersoft.AEP.Analitic.csproj", "{1E041294-BA2B-40D0-9014-FA097FE76E82}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Undersoft.AEP.Analitic", "Undersoft.AEP\src\Undersoft.AEP.Analitic\Undersoft.AEP.Analitic.csproj", "{1E041294-BA2B-40D0-9014-FA097FE76E82}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Undersoft.AEP.Analitic.Api", "Undersoft.AEP\src\Undersoft.AEP.HART.Api\Undersoft.AEP.Analitic.Api.csproj", "{C9CD2339-6368-4B52-9EB6-9DF087C9A741}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Undersoft.AEP.Analitic.Api", "Undersoft.AEP\src\Undersoft.AEP.Analitic.Api\Undersoft.AEP.Analitic.Api.csproj", "{C9CD2339-6368-4B52-9EB6-9DF087C9A741}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Undersoft.AEP.Clustering", "Undersoft.AEP\src\Undersoft.AEP.Clustering\Undersoft.AEP.Clustering.csproj", "{54080A76-FE24-413C-B911-C6580DCD17AD}"
 EndProject
