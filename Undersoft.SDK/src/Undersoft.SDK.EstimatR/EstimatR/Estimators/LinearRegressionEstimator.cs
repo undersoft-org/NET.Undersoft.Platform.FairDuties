@@ -21,7 +21,7 @@ namespace EstimatR.Estimators
         private double parameterB = 0;
 
 
-        public override void Prepare(EstimatorInput<EstimatorObjectCollection, EstimatorObjectCollection> input)
+        public override void Prepare(EstimatorInput<EstimatorCollection, EstimatorCollection> input)
         {
             validInput = false;
 
@@ -35,9 +35,9 @@ namespace EstimatR.Estimators
             validInput = true;
         }
 
-        public override void Prepare(EstimatorObjectCollection x, EstimatorObjectCollection y)
+        public override void Prepare(EstimatorCollection x, EstimatorCollection y)
         {
-            Prepare(new EstimatorInput<EstimatorObjectCollection, EstimatorObjectCollection>(x, y));
+            Prepare(new EstimatorInput<EstimatorCollection, EstimatorCollection>(x, y));
         }
 
         public override void Create()
@@ -45,11 +45,11 @@ namespace EstimatR.Estimators
             if (!validInput) throw new StatisticsExceptions(StatisticsExceptionList.DataType);
 
             parameterN = Input.X.Count;
-            parameterSumX = Input.X.Sum(v => v.Item[0]);
-            parameterSumXX = Input.X.Sum(v => v.Item[0] * v.Item[0]);
-            parameterSumY = Input.Y.Sum(v => v.Item[0]);
-            parameterSumYY = Input.Y.Sum(v => v.Item[0] * v.Item[0]);
-            parameterSumXY = Input.X.Select((v, j) => v.Item[0] * Input.Y[j].Item[0]).Sum();
+            parameterSumX = Input.X.Sum(v => v.Vector[0]);
+            parameterSumXX = Input.X.Sum(v => v.Vector[0] * v.Vector[0]);
+            parameterSumY = Input.Y.Sum(v => v.Vector[0]);
+            parameterSumYY = Input.Y.Sum(v => v.Vector[0] * v.Vector[0]);
+            parameterSumXY = Input.X.Select((v, j) => v.Vector[0] * Input.Y[j].Vector[0]).Sum();
 
             double delta = parameterN * parameterSumXX - parameterSumX * parameterSumX;
 
@@ -58,12 +58,12 @@ namespace EstimatR.Estimators
             validParameters = true;
         }
 
-        public override EstimatorObject Evaluate(object x)
+        public override EstimatorItem Evaluate(object x)
         {
-            return Evaluate(new EstimatorObject(x));
+            return Evaluate(new EstimatorItem(x));
         }
 
-        public override EstimatorObject Evaluate(EstimatorObject x)
+        public override EstimatorItem Evaluate(EstimatorItem x)
         {
             if (validParameters == false)
             {
@@ -72,10 +72,10 @@ namespace EstimatR.Estimators
                 validParameters = true;
             }
 
-            return new EstimatorObject(parameterB + parameterA * x.Item[0]);
+            return new EstimatorItem(parameterB + parameterA * x.Vector[0]);
         }
 
-        public override void Update(EstimatorInput<EstimatorObjectCollection, EstimatorObjectCollection> input)
+        public override void Update(EstimatorInput<EstimatorCollection, EstimatorCollection> input)
         {
             if (input.X.Count > 0 && input.X[0].Mode != EstimatorObjectMode.Single ||
                 input.Y.Count > 0 && input.Y[0].Mode != EstimatorObjectMode.Single)
@@ -84,11 +84,11 @@ namespace EstimatR.Estimators
             }
 
             parameterN += input.X.Count;
-            parameterSumX += input.X.Sum(v => v.Item[0]);
-            parameterSumXX += input.X.Sum(v => v.Item[0] * v.Item[0]);
-            parameterSumY = input.Y.Sum(v => v.Item[0]);
-            parameterSumYY += input.Y.Sum(v => v.Item[0] * v.Item[0]);
-            parameterSumXY += input.X.Select((v, j) => v.Item[0] * Input.Y[j].Item[0]).Sum();
+            parameterSumX += input.X.Sum(v => v.Vector[0]);
+            parameterSumXX += input.X.Sum(v => v.Vector[0] * v.Vector[0]);
+            parameterSumY = input.Y.Sum(v => v.Vector[0]);
+            parameterSumYY += input.Y.Sum(v => v.Vector[0] * v.Vector[0]);
+            parameterSumXY += input.X.Select((v, j) => v.Vector[0] * Input.Y[j].Vector[0]).Sum();
 
             double delta = parameterN * parameterSumXX - parameterSumX * parameterSumX;
 
@@ -97,9 +97,9 @@ namespace EstimatR.Estimators
             validParameters = true;
         }
 
-        public override void Update(EstimatorObjectCollection x, EstimatorObjectCollection y)
+        public override void Update(EstimatorCollection x, EstimatorCollection y)
         {
-            Update(new EstimatorInput<EstimatorObjectCollection, EstimatorObjectCollection>(x, y));
+            Update(new EstimatorInput<EstimatorCollection, EstimatorCollection>(x, y));
         }
 
         public override double[][] GetParameters()

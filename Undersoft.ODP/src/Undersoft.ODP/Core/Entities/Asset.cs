@@ -15,7 +15,7 @@ namespace Undersoft.ODP.Domain
 
         public string Description { get; set; }
 
-        public UoM Unit { get; set; }
+        public UOM Unit { get; set; }
 
         public double Value { get; set; }
 
@@ -52,7 +52,7 @@ namespace Undersoft.ODP.Domain
         IEnumerable<ILink> IAsset.OptionalTo => OptionalTo.Select(i => new Link<Asset, Asset>("Optionals") { SourceId = Id, TargetId = i.Id });
     }
 
-    public enum UoM
+    public enum UOM
     {
         Piece = 0,  
         Kilogram = 1, 

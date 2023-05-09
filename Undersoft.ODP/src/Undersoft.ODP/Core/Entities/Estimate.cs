@@ -23,17 +23,7 @@ namespace Undersoft.ODP.Domain
 
         public double Total { get; set; }
 
-        public UoM Unit { get; set; }
-
-        public int Weekly { get; set; }
-
-        public int Monthly { get; set; }
-
-        public int Yearly { get; set; }
-
-        public int Weekends { get; set; }
-
-        public int Holidays { get; set; }
+        public UOM Unit { get; set; }
 
         public int OnDuties { get; set; }
 

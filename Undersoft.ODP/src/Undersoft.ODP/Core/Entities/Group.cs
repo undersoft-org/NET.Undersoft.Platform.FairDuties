@@ -18,7 +18,7 @@ namespace Undersoft.ODP.Domain
 
         public string Description { get; set; }
 
-        public DutyUnit Unit { get; set; } = DutyUnit.Day;
+        public UOM Unit { get; set; } = UOM.Day;
 
         public float BlockCapacity { get; set; } = 3;
 

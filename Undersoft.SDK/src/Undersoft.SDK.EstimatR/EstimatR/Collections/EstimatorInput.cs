@@ -4,17 +4,17 @@ using System.Text;
 
 namespace EstimatR
 {
-    public class EstimatorInput<A, B> where A : EstimatorObjectCollection where B : EstimatorObjectCollection
+    public class EstimatorInput<A, B> where A : EstimatorCollection where B : EstimatorCollection
     {
-        public EstimatorObjectCollection X;
-        public EstimatorObjectCollection Y;
+        public EstimatorCollection X;
+        public EstimatorCollection Y;
 
 
         //czy dawac pusty????
         public EstimatorInput()
         {
-            X = new EstimatorObjectCollection();
-            Y = new EstimatorObjectCollection();
+            X = new EstimatorCollection();
+            Y = new EstimatorCollection();
         }
 
         public EstimatorInput(A x, B y)

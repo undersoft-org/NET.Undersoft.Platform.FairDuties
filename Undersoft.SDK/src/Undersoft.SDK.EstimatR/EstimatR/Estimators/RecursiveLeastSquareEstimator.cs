@@ -15,7 +15,7 @@ namespace EstimatR
         private List<double> advancedParameters;
 
 
-        public override void Prepare(EstimatorInput<EstimatorObjectCollection, EstimatorObjectCollection> input)
+        public override void Prepare(EstimatorInput<EstimatorCollection, EstimatorCollection> input)
         {
             //verification etc....
             Input = input;
@@ -23,17 +23,17 @@ namespace EstimatR
             validParameters = false;
         }
 
-        public override void Prepare(EstimatorObjectCollection x, EstimatorObjectCollection y)
+        public override void Prepare(EstimatorCollection x, EstimatorCollection y)
         {
-            Prepare(new EstimatorInput<EstimatorObjectCollection, EstimatorObjectCollection>(x, y));
+            Prepare(new EstimatorInput<EstimatorCollection, EstimatorCollection>(x, y));
         }
 
-        public override EstimatorObject Evaluate(object x)
+        public override EstimatorItem Evaluate(object x)
         {
-            return Evaluate(new EstimatorObject(x));
+            return Evaluate(new EstimatorItem(x));
         }
 
-        public override EstimatorObject Evaluate(EstimatorObject x)
+        public override EstimatorItem Evaluate(EstimatorItem x)
         {
             if (validParameters == false) //to aviod recalculations of systemParameters
             {
@@ -42,7 +42,7 @@ namespace EstimatR
 
             //eval create, gdyz moga miec rozne rozmiary danych wejsciowych
 
-            return new EstimatorObject(MatrixOperations.MatrixVectorProduct(MatrixOperations.MatrixTranpose(parameterTheta), x.Item));
+            return new EstimatorItem(MatrixOperations.MatrixVectorProduct(MatrixOperations.MatrixTranpose(parameterTheta), x.Vector));
         }
 
         public override void Create()
@@ -74,8 +74,8 @@ namespace EstimatR
             }
 
             int m = Input.X.Count;
-            int nx = Input.X[0].Item.Length;
-            int ny = Input.Y[0].Item.Length;
+            int nx = Input.X[0].Vector.Length;
+            int ny = Input.Y[0].Vector.Length;
 
             double[][] xx = MatrixOperations.MatrixCreate(nx, 1);
             double[][] yy = MatrixOperations.MatrixCreate(1, ny);
@@ -105,9 +105,9 @@ namespace EstimatR
 
             for (int i = 0; i < m; i++)
             {
-                xx = MatrixOperations.MatrixCreateColumn(Input.X[i].Item, xx);
+                xx = MatrixOperations.MatrixCreateColumn(Input.X[i].Vector, xx);
                 xxT = MatrixOperations.MatrixTranpose(xx, xxT);
-                yy = MatrixOperations.MatrixCreateRow(Input.Y[i].Item, yy);
+                yy = MatrixOperations.MatrixCreateRow(Input.Y[i].Vector, yy);
                 P_XX = MatrixOperations.MatrixProduct(P, xx, P_XX);
                 XXT_P = MatrixOperations.MatrixProduct(xxT, P, XXT_P);
                 XXT_P_XX = MatrixOperations.MatrixProduct(XXT_P, xx, XXT_P_XX);
@@ -129,18 +129,18 @@ namespace EstimatR
             validParameters = true;
         }
 
-        public override void Update(EstimatorInput<EstimatorObjectCollection, EstimatorObjectCollection> input)
+        public override void Update(EstimatorInput<EstimatorCollection, EstimatorCollection> input)
         {
             if ((input == null || input.X.Count == 0 || input.X.Count == 0)
                 || (validParameters == true)
-                    && (input.X[0].Item.Length != parameterTheta.Length || input.Y[0].Item.Length != parameterTheta[0].Length))
+                    && (input.X[0].Vector.Length != parameterTheta.Length || input.Y[0].Vector.Length != parameterTheta[0].Length))
             {
                 throw new StatisticsExceptions(StatisticsExceptionList.InputParameterInconsistent);
             }
 
             int m = Input.X.Count;
-            int nx = Input.X[0].Item.Length;
-            int ny = Input.Y[0].Item.Length;
+            int nx = Input.X[0].Vector.Length;
+            int ny = Input.Y[0].Vector.Length;
 
             double[][] xx = MatrixOperations.MatrixCreate(nx, 1);
             double[][] yy = MatrixOperations.MatrixCreate(1, ny);
@@ -174,9 +174,9 @@ namespace EstimatR
 
             for (int i = 0; i < m; i++)
             {
-                xx = MatrixOperations.MatrixCreateColumn(Input.X[i].Item, xx);
+                xx = MatrixOperations.MatrixCreateColumn(Input.X[i].Vector, xx);
                 xxT = MatrixOperations.MatrixTranpose(xx, xxT);
-                yy = MatrixOperations.MatrixCreateRow(Input.Y[i].Item, yy);
+                yy = MatrixOperations.MatrixCreateRow(Input.Y[i].Vector, yy);
                 P_XX = MatrixOperations.MatrixProduct(P, xx, P_XX);
                 XXT_P = MatrixOperations.MatrixProduct(xxT, P, XXT_P);
                 XXT_P_XX = MatrixOperations.MatrixProduct(XXT_P, xx, XXT_P_XX);
@@ -199,9 +199,9 @@ namespace EstimatR
             validParameters = true;
         }
 
-        public override void Update(EstimatorObjectCollection x, EstimatorObjectCollection y)
+        public override void Update(EstimatorCollection x, EstimatorCollection y)
         {
-            Update(new EstimatorInput<EstimatorObjectCollection, EstimatorObjectCollection>(x, y));
+            Update(new EstimatorInput<EstimatorCollection, EstimatorCollection>(x, y));
         }
 
         public override void SetAdvancedParameters(IList<object> advParameters = null)

@@ -13,7 +13,7 @@ namespace EstimatR
 
         //konstruktor Statistics uzyty w IStatiscics -> implikuje zainicjowanie Input i (dodatkowo) określenie metody domyslnej estymowania
         //public Statistics(EstimatorInput<EstimatorObjectCollection, EstimatorObjectCollection> input, EstimatorMethod method = EstimatorMethod.Empty)
-        public Estimatr(EstimatorInput<EstimatorObjectCollection, EstimatorObjectCollection> input, EstimatorMethod method)
+        public Estimatr(EstimatorInput<EstimatorCollection, EstimatorCollection> input, EstimatorMethod method)
         {
             //try catch, czy input moze byc dla danej metody !!! - zapytac Darka
             estimator = resolveMethod(method);
@@ -23,7 +23,7 @@ namespace EstimatR
             //defaultowo ustawic Empty jak catch exception
         }
         //public Statistics(EstimatorObjectCollection x, EstimatorObjectCollection y, EstimatorMethod method = EstimatorMethod.Empty)
-        public Estimatr(EstimatorObjectCollection x, EstimatorObjectCollection y, EstimatorMethod method)
+        public Estimatr(EstimatorCollection x, EstimatorCollection y, EstimatorMethod method)
         {
             estimator = resolveMethod(method);
             defaultMethod = method;
@@ -31,7 +31,7 @@ namespace EstimatR
         }
 
         //wywolywane przez konstruktory
-        public override void Prepare(EstimatorInput<EstimatorObjectCollection, EstimatorObjectCollection> input)
+        public override void Prepare(EstimatorInput<EstimatorCollection, EstimatorCollection> input)
         {
             try
             {
@@ -44,10 +44,10 @@ namespace EstimatR
             }
         }
 
-        public override void Prepare(EstimatorObjectCollection x, EstimatorObjectCollection y)
+        public override void Prepare(EstimatorCollection x, EstimatorCollection y)
         {
-            EstimatorInput<EstimatorObjectCollection, EstimatorObjectCollection> _input =
-                new EstimatorInput<EstimatorObjectCollection, EstimatorObjectCollection>(x, y);
+            EstimatorInput<EstimatorCollection, EstimatorCollection> _input =
+                new EstimatorInput<EstimatorCollection, EstimatorCollection>(x, y);
 
             Prepare(_input);
         }
@@ -65,7 +65,7 @@ namespace EstimatR
             }
         }
 
-        public override void Update(EstimatorInput<EstimatorObjectCollection, EstimatorObjectCollection> input)
+        public override void Update(EstimatorInput<EstimatorCollection, EstimatorCollection> input)
         {
             try
             {
@@ -80,23 +80,23 @@ namespace EstimatR
 
         }
 
-        public override void Update(EstimatorObjectCollection x, EstimatorObjectCollection y)
+        public override void Update(EstimatorCollection x, EstimatorCollection y)
         {
-            EstimatorInput<EstimatorObjectCollection, EstimatorObjectCollection> _input =
-                new EstimatorInput<EstimatorObjectCollection, EstimatorObjectCollection>(x, y);
+            EstimatorInput<EstimatorCollection, EstimatorCollection> _input =
+                new EstimatorInput<EstimatorCollection, EstimatorCollection>(x, y);
 
             Update(_input);
         }
 
 
-        public override EstimatorObject Evaluate(EstimatorObject x)
+        public override EstimatorItem Evaluate(EstimatorItem x)
         {
             return estimator.Evaluate(x);
         }
 
-        public override EstimatorObject Evaluate(object x)
+        public override EstimatorItem Evaluate(object x)
         {
-            return estimator.Evaluate(new EstimatorObject(x));
+            return estimator.Evaluate(new EstimatorItem(x));
         }
 
         private Estimator resolveMethod(EstimatorMethod method)

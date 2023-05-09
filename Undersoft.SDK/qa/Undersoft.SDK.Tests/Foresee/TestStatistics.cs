@@ -17,7 +17,7 @@ namespace TestProject
 
         public Estimatr st;
 
-        private EstimatorInput<EstimatorObjectCollection, EstimatorObjectCollection> input;
+        private EstimatorInput<EstimatorCollection, EstimatorCollection> input;
 
         public TestStatistics(string resourceName = "data")
         {
@@ -91,11 +91,11 @@ namespace TestProject
             {
                 if (input == null)
                 {
-                    input = new EstimatorInput<EstimatorObjectCollection, EstimatorObjectCollection>(
-                                new EstimatorObjectCollection(SaleDataList.Select(s =>
-                                    new EstimatorObject(new List<double>() { s.product_price, s.lowest_product_comp_price, s.price_difference })).ToArray()),
-                                new EstimatorObjectCollection(SaleDataList.Select(s =>
-                                    new EstimatorObject(s.number_sold_products)).ToArray()));
+                    input = new EstimatorInput<EstimatorCollection, EstimatorCollection>(
+                                new EstimatorCollection(SaleDataList.Select(s =>
+                                    new EstimatorItem(new List<double>() { s.product_price, s.lowest_product_comp_price, s.price_difference })).ToArray()),
+                                new EstimatorCollection(SaleDataList.Select(s =>
+                                    new EstimatorItem(s.number_sold_products)).ToArray()));
                 }
             }
             else
@@ -132,7 +132,7 @@ namespace TestProject
                     SaleDataTestList[i].lowest_product_comp_price,
                     SaleDataTestList[i].price_difference};
                 double y = SaleDataTestList[i].number_sold_products;
-                double y_est = st.Evaluate(x).Item[0];
+                double y_est = st.Evaluate(x).Vector[0];
 
 
                 count++;

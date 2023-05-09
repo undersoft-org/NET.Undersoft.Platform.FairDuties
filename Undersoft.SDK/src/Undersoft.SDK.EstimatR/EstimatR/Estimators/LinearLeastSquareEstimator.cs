@@ -9,7 +9,7 @@ namespace EstimatR
         private bool validParameters;
         private double[][] parameterTheta;
 
-        public override void Prepare(EstimatorInput<EstimatorObjectCollection, EstimatorObjectCollection> input)
+        public override void Prepare(EstimatorInput<EstimatorCollection, EstimatorCollection> input)
         {
             //verify
             Input = input;
@@ -17,9 +17,9 @@ namespace EstimatR
             validParameters = false;
         }
 
-        public override void Prepare(EstimatorObjectCollection x, EstimatorObjectCollection y)
+        public override void Prepare(EstimatorCollection x, EstimatorCollection y)
         {
-            Prepare(new EstimatorInput<EstimatorObjectCollection, EstimatorObjectCollection>(x, y));
+            Prepare(new EstimatorInput<EstimatorCollection, EstimatorCollection>(x, y));
         }
 
         public override void Create()
@@ -51,27 +51,27 @@ namespace EstimatR
             parameterTheta = theta;
         }
 
-        public override EstimatorObject Evaluate(object x)
+        public override EstimatorItem Evaluate(object x)
         {
-            return Evaluate(new EstimatorObject(x));
+            return Evaluate(new EstimatorItem(x));
         }
 
-        public override EstimatorObject Evaluate(EstimatorObject x) //nazwe dac inna niz xValue
+        public override EstimatorItem Evaluate(EstimatorItem x) //nazwe dac inna niz xValue
         {
             if (validParameters == false) //to aviod recalculations of systemParameters
             {
                 Create();
             }
 
-            return new EstimatorObject(MatrixOperations.MatrixVectorProduct(MatrixOperations.MatrixTranpose(parameterTheta), x.Item));
+            return new EstimatorItem(MatrixOperations.MatrixVectorProduct(MatrixOperations.MatrixTranpose(parameterTheta), x.Vector));
         }
 
-        public override void Update(EstimatorInput<EstimatorObjectCollection, EstimatorObjectCollection> input)
+        public override void Update(EstimatorInput<EstimatorCollection, EstimatorCollection> input)
         {
             throw new StatisticsExceptions(StatisticsExceptionList.MethodCannotBeProceeded);
         }
 
-        public override void Update(EstimatorObjectCollection x, EstimatorObjectCollection y)
+        public override void Update(EstimatorCollection x, EstimatorCollection y)
         {
             throw new StatisticsExceptions(StatisticsExceptionList.MethodCannotBeProceeded);
         }

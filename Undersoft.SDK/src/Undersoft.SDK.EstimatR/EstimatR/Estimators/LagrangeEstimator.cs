@@ -7,24 +7,24 @@ namespace EstimatR
 {
     public class LagrangeEstimator : Estimator
     {
-        public override void Prepare(EstimatorInput<EstimatorObjectCollection, EstimatorObjectCollection> input)
+        public override void Prepare(EstimatorInput<EstimatorCollection, EstimatorCollection> input)
         {
             validInput = false;
             //only one dimension
-            if (input.X.Count > 0 && input.X[0].Item.Length > 1 ||
-                input.Y.Count > 0 && input.Y[0].Item.Length > 1) throw new StatisticsExceptions(StatisticsExceptionList.DataTypeSingle);
+            if (input.X.Count > 0 && input.X[0].Vector.Length > 1 ||
+                input.Y.Count > 0 && input.Y[0].Vector.Length > 1) throw new StatisticsExceptions(StatisticsExceptionList.DataTypeSingle);
             Input = input;
             validInput = true;
         }
 
-        public override void Prepare(EstimatorObjectCollection x, EstimatorObjectCollection y)
+        public override void Prepare(EstimatorCollection x, EstimatorCollection y)
         {
-            Prepare(new EstimatorInput<EstimatorObjectCollection, EstimatorObjectCollection>(x, y));
+            Prepare(new EstimatorInput<EstimatorCollection, EstimatorCollection>(x, y));
         }
 
-        public override EstimatorObject Evaluate(object x)
+        public override EstimatorItem Evaluate(object x)
         {
-            return Evaluate(new EstimatorObject(x));
+            return Evaluate(new EstimatorItem(x));
         }
 
         public override void Create()
@@ -32,7 +32,7 @@ namespace EstimatR
 
         }
 
-        public override EstimatorObject Evaluate(EstimatorObject x)
+        public override EstimatorItem Evaluate(EstimatorItem x)
         {
             if (!validInput) throw new StatisticsExceptions(StatisticsExceptionList.DataType);
 
@@ -48,22 +48,22 @@ namespace EstimatR
                 {
                     if (j != k)
                     {
-                        t = t * ((x.Item[0] - Input.X[j].Item[0]) / (Input.X[k].Item[0] - Input.X[j].Item[0]));
+                        t = t * ((x.Vector[0] - Input.X[j].Vector[0]) / (Input.X[k].Vector[0] - Input.X[j].Vector[0]));
                     }
                 }
 
-                y += t * Input.Y[k].Item[0];
+                y += t * Input.Y[k].Vector[0];
             }
 
-            return new EstimatorObject(y);
+            return new EstimatorItem(y);
         }
 
-        public override void Update(EstimatorInput<EstimatorObjectCollection, EstimatorObjectCollection> input)
+        public override void Update(EstimatorInput<EstimatorCollection, EstimatorCollection> input)
         {
             throw new StatisticsExceptions(StatisticsExceptionList.MethodCannotBeProceeded);
         }
 
-        public override void Update(EstimatorObjectCollection x, EstimatorObjectCollection y)
+        public override void Update(EstimatorCollection x, EstimatorCollection y)
         {
             throw new StatisticsExceptions(StatisticsExceptionList.MethodCannotBeProceeded);
         }

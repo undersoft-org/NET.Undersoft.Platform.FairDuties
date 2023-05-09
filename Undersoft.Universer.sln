@@ -119,13 +119,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Undersoft.AEP.Analitic", "U
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Undersoft.AEP.Analitic.Api", "Undersoft.AEP\src\Undersoft.AEP.HART.Api\Undersoft.AEP.Analitic.Api.csproj", "{C9CD2339-6368-4B52-9EB6-9DF087C9A741}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Undersoft.AEP.Clustering", "Undersoft.AEP\src\Undersoft.AEP.Clustering\Undersoft.AEP.Clustering.csproj", "{54080A76-FE24-413C-B911-C6580DCD17AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Undersoft.AEP.Clustering", "Undersoft.AEP\src\Undersoft.AEP.Clustering\Undersoft.AEP.Clustering.csproj", "{54080A76-FE24-413C-B911-C6580DCD17AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Undersoft.AEP.Clustering.Api", "Undersoft.AEP\src\Undersoft.AEP.Clustering.Api\Undersoft.AEP.Clustering.Api.csproj", "{3D77A667-9A6F-4DB5-A9F0-97054EB341C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Undersoft.AEP.Clustering.Api", "Undersoft.AEP\src\Undersoft.AEP.Clustering.Api\Undersoft.AEP.Clustering.Api.csproj", "{3D77A667-9A6F-4DB5-A9F0-97054EB341C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Undersoft.ODP.Exploitance", "Undersoft.ODP\src\Undersoft.ODP.Exploitance\Undersoft.ODP.Exploitance.csproj", "{99544D72-AD22-45BD-ADEA-1F5A0B2AF1AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Undersoft.ODP.Exploitance", "Undersoft.ODP\src\Undersoft.ODP.Exploitance\Undersoft.ODP.Exploitance.csproj", "{99544D72-AD22-45BD-ADEA-1F5A0B2AF1AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Undersoft.ODP.Exploitance.Api", "Undersoft.ODP.Exploitance.Api\Undersoft.ODP.Exploitance.Api.csproj", "{FEB3CBD5-D008-4AAC-BA84-9964B4EA7DFA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Undersoft.ODP.Exploitance.Api", "Undersoft.ODP\src\Undersoft.ODP.Exploitance.Api\Undersoft.ODP.Exploitance.Api.csproj", "{E94A8140-1789-4097-8275-998F2006F48E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -515,14 +515,14 @@ Global
 		{99544D72-AD22-45BD-ADEA-1F5A0B2AF1AE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{99544D72-AD22-45BD-ADEA-1F5A0B2AF1AE}.Release|x64.ActiveCfg = Release|Any CPU
 		{99544D72-AD22-45BD-ADEA-1F5A0B2AF1AE}.Release|x64.Build.0 = Release|Any CPU
-		{FEB3CBD5-D008-4AAC-BA84-9964B4EA7DFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FEB3CBD5-D008-4AAC-BA84-9964B4EA7DFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FEB3CBD5-D008-4AAC-BA84-9964B4EA7DFA}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{FEB3CBD5-D008-4AAC-BA84-9964B4EA7DFA}.Debug|x64.Build.0 = Debug|Any CPU
-		{FEB3CBD5-D008-4AAC-BA84-9964B4EA7DFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FEB3CBD5-D008-4AAC-BA84-9964B4EA7DFA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FEB3CBD5-D008-4AAC-BA84-9964B4EA7DFA}.Release|x64.ActiveCfg = Release|Any CPU
-		{FEB3CBD5-D008-4AAC-BA84-9964B4EA7DFA}.Release|x64.Build.0 = Release|Any CPU
+		{E94A8140-1789-4097-8275-998F2006F48E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E94A8140-1789-4097-8275-998F2006F48E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E94A8140-1789-4097-8275-998F2006F48E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E94A8140-1789-4097-8275-998F2006F48E}.Debug|x64.Build.0 = Debug|Any CPU
+		{E94A8140-1789-4097-8275-998F2006F48E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E94A8140-1789-4097-8275-998F2006F48E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E94A8140-1789-4097-8275-998F2006F48E}.Release|x64.ActiveCfg = Release|Any CPU
+		{E94A8140-1789-4097-8275-998F2006F48E}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -583,7 +583,7 @@ Global
 		{54080A76-FE24-413C-B911-C6580DCD17AD} = {9C6CD2A3-03DC-4820-AB20-5D8047B3291E}
 		{3D77A667-9A6F-4DB5-A9F0-97054EB341C2} = {9C6CD2A3-03DC-4820-AB20-5D8047B3291E}
 		{99544D72-AD22-45BD-ADEA-1F5A0B2AF1AE} = {E7586BF7-B49D-458B-8735-270A551C9E4D}
-		{FEB3CBD5-D008-4AAC-BA84-9964B4EA7DFA} = {E7586BF7-B49D-458B-8735-270A551C9E4D}
+		{E94A8140-1789-4097-8275-998F2006F48E} = {E7586BF7-B49D-458B-8735-270A551C9E4D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6E1DFCD7-FBE2-4D16-AA3D-9E07F97D7315}

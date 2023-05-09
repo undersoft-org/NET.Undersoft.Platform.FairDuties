@@ -6,14 +6,14 @@ namespace EstimatR
 {
     public class EmptyEstimator : Estimator
     {
-        public override void Prepare(EstimatorInput<EstimatorObjectCollection, EstimatorObjectCollection> input)
+        public override void Prepare(EstimatorInput<EstimatorCollection, EstimatorCollection> input)
         {
             Input = input;
         }
 
-        public override void Prepare(EstimatorObjectCollection x, EstimatorObjectCollection y)
+        public override void Prepare(EstimatorCollection x, EstimatorCollection y)
         {
-            Input = new EstimatorInput<EstimatorObjectCollection, EstimatorObjectCollection>(x, y);
+            Input = new EstimatorInput<EstimatorCollection, EstimatorCollection>(x, y);
         }
 
         public override void Create()
@@ -21,22 +21,22 @@ namespace EstimatR
 
         }
 
-        public override EstimatorObject Evaluate(object x)
+        public override EstimatorItem Evaluate(object x)
         {
-            return Evaluate(new EstimatorObject(x));
+            return Evaluate(new EstimatorItem(x));
         }
 
-        public override EstimatorObject Evaluate(EstimatorObject x)
+        public override EstimatorItem Evaluate(EstimatorItem x)
         {
-            return new EstimatorObject(x);
+            return new EstimatorItem(x);
         }
 
-        public override void Update(EstimatorInput<EstimatorObjectCollection, EstimatorObjectCollection> input)
+        public override void Update(EstimatorInput<EstimatorCollection, EstimatorCollection> input)
         {
             return;
         }
 
-        public override void Update(EstimatorObjectCollection x, EstimatorObjectCollection y)
+        public override void Update(EstimatorCollection x, EstimatorCollection y)
         {
             return;
         }
