@@ -1,0 +1,13 @@
+﻿{
+  "profiles": {
+    "Undersoft.AEP.Analitic.Api": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": false,
+      "applicationUrl": "http://localhost:5133;https://localhost:7076",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
